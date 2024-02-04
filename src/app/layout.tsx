@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
 import { M_PLUS_Rounded_1c } from "next/font/google";
 import "./globals.css";
-import { Reorder } from "@mui/icons-material";
+import SidebarComponent from "@/components/SidebarComponent";
+import HeaderCmponent from "@/components/HeaderCmponent";
 
-const m_plus_rounded_1c_bold = M_PLUS_Rounded_1c({
-  weight: "700",
-  subsets: ["latin"],
-})
 const m_plus_rounded_1c = M_PLUS_Rounded_1c({
   weight: "500",
   subsets: ["latin"],
@@ -24,13 +21,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <div className="header-bg-height bg-cyan-500 flex items-center pl-4 gap-4">
-        <Reorder />
-        <h1 className={` text-xl ${m_plus_rounded_1c_bold.className}`}>
-          Lingo Fill
-        </h1> 
+      <div className=" flex">
+        <SidebarComponent />
+        <div>
+          <HeaderCmponent />
+          {/* コンテンツの中身 */}
+          <div className={m_plus_rounded_1c.className}>{children}</div>
+        </div>
       </div>
-      <div className={m_plus_rounded_1c.className}>{children}</div>
     </html>
   );
 }
