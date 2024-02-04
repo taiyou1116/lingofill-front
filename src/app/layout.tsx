@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { M_PLUS_Rounded_1c } from "next/font/google";
 import "./globals.css";
+import { Reorder } from "@mui/icons-material";
 
-// const inter = Inter({ subsets: ["latin"] });
 const m_plus_rounded_1c_bold = M_PLUS_Rounded_1c({
   weight: "700",
   subsets: ["latin"],
@@ -24,8 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <div className="header-bg-height bg-cyan-500 flex items-center pl-4">
-        <h1 className={`text-lg ${m_plus_rounded_1c_bold.className}`}>
+      <div className="header-bg-height bg-cyan-500 flex items-center pl-4 gap-4">
+        <Reorder />
+        <h1 className={` text-xl ${m_plus_rounded_1c_bold.className}`}>
           Lingo Fill
         </h1> 
       </div>
