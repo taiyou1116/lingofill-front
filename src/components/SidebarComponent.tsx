@@ -1,9 +1,9 @@
 "use client"
 
-import React, { useState } from 'react'
+import { useStore } from '@/store/store';
 
 function SidebarComponent() {
-  const [showSidebar, onShowSidebar] = useState(true);
+  const showSidebar = useStore((store) => store.showSidebar);
 
   return (
     <div>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { M_PLUS_Rounded_1c } from "next/font/google";
 import "./globals.css";
 import SidebarComponent from "@/components/SidebarComponent";
-import HeaderCmponent from "@/components/HeaderCmponent";
+import HeaderCmponent from "@/components/HeaderComponent";
 
 const m_plus_rounded_1c = M_PLUS_Rounded_1c({
   weight: "500",
@@ -20,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <div>
       <div className=" flex">
         <SidebarComponent />
         <div>
@@ -29,6 +29,6 @@ export default function RootLayout({
           <div className={m_plus_rounded_1c.className}>{children}</div>
         </div>
       </div>
-    </html>
+    </div>
   );
 }
