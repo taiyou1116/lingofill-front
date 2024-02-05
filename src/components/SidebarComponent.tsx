@@ -4,21 +4,15 @@ import { useStore } from '@/store/store';
 
 function SidebarComponent() {
   const showSidebar = useStore((store) => store.showSidebar);
-
-  const sidebarContainerClass = `${showSidebar ? 'w-1/5' : ''}`;
+  const sidebarClass = showSidebar ? 'w-1/5 p-5 h-screen shadow-xl' : 'w-0 p-0';
 
   return (
-    <div className={`${sidebarContainerClass}`}>
-      { showSidebar 
-      ? 
-        <div className=" h-screen p-5 shadow-xl w-full">
-          SidebarComponent
-        </div>
-      : 
-        null
-      }
+    <div className={`${sidebarClass} transition-all duration-300`}>
+      <div className="">
+        SidebarComponent
+      </div>
     </div>
-  )
+  );
 }
 
 export default SidebarComponent

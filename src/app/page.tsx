@@ -4,13 +4,13 @@ import { useState } from "react";
 
 export default function Home() {
   // テスト
-  const allWords = "In the realm of software developmentddddddddddddddddddddddsfdfdfdfdfdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd";
+  const allWords = "In the realm of software developmentdddddjjj jjjjjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkdddddddddddddddddsfdfdfdfdfddddd dddddddddddddddddddddddddddddddddddd ddddddddddddd dddddddddddddddddddd";
   const words = allWords.split(" ");
   const [currentWords, setCurrentWords] = useState(words);
 
   const handleWordClick = (index: number) => {
     const arrayWords: string[] = [];
-    const newWords = currentWords.map((word, i) => {
+    currentWords.map((word, i) => {
       if (i === index) {
         arrayWords[i] = " ";
       } else {
@@ -22,7 +22,7 @@ export default function Home() {
 
   return (
     <main>
-      <div className=" p-5">
+      <div className=" p-5 break-all max-w-full w-full">
         {currentWords.map((word, index) => (
           <span key={index} onClick={() => handleWordClick(index)} style={{marginRight: '5px', cursor: 'pointer'}}>
             {word}

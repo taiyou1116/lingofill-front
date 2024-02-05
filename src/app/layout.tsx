@@ -21,9 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className=" flex w-screen h-screen">
-        <SidebarComponent/>
-        <div className="w-screen h-screen">
+      <body className=" flex w-screen h-screen scroll overflow-hidden">
+        <SidebarComponent />
+        <div className=" flex-grow h-screen w-auto">
           <HeaderCmponent />
           {/* コンテンツの中身 */}
           <div className={m_plus_rounded_1c.className}>{children}</div>
