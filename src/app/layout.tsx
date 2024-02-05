@@ -21,8 +21,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className=" flex">
-        <SidebarComponent />
+      <body className=" flex w-screen h-screen">
+        <SidebarComponent/>
         <div>
           <HeaderCmponent />
           {/* コンテンツの中身 */}
