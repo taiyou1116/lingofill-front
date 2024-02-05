@@ -2,13 +2,8 @@
 
 import React from 'react'
 import { Reorder } from "@mui/icons-material";
-import { M_PLUS_Rounded_1c } from "next/font/google";
 import { useStore } from '@/store/store';
-
-const m_plus_rounded_1c_bold = M_PLUS_Rounded_1c({
-  weight: "700",
-  subsets: ["latin"],
-})
+import { m_plus_rounded_1c_bold } from '@/store/fontStore';
 
 function HeaderCmponent() {
   const flipShowSidebar = useStore((store) => store.flipShowSidebar);

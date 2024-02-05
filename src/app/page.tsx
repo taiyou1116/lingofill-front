@@ -6,24 +6,27 @@ export default function Home() {
   // テスト
   const allWords = "In the realm of software developmentdddddjjj jjjjjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkdddddddddddddddddsfdfdfdfdfddddd dddddddddddddddddddddddddddddddddddd ddddddddddddd dddddddddddddddddddd";
   const words = allWords.split(" ");
-  const [currentWords, setCurrentWords] = useState(words);
+  // 透明な単語のインデックスを追跡するための状態
+  const [transparentIndexes, setTransparentIndexes] = useState<number[]>([]);
 
   const handleWordClick = (index: number) => {
-    const arrayWords: string[] = [];
-    currentWords.map((word, i) => {
-      if (i === index) {
-        arrayWords[i] = " ";
-      } else {
-        arrayWords[i] = word;
-      }
-    })
-    setCurrentWords(arrayWords);
+    // クリックされた単語のインデックスを透明なインデックスリストに追加
+    setTransparentIndexes(current => [...current, index]);
   }
 
   return (
     <div className=" p-5 break-all">
-      {currentWords.map((word, index) => (
-        <span key={index} onClick={() => handleWordClick(index)} style={{marginRight: '5px', cursor: 'pointer'}}>
+      {words.map((word, index) => (
+        <span 
+          key={index} 
+          onClick={() => handleWordClick(index)} 
+          style={{
+            marginRight: '5px', 
+            cursor: 'pointer',
+            // 透明な単語のスタイル適用
+            color: transparentIndexes.includes(index) ? 'transparent' : 'inherit'
+          }}
+        >
           {word}
         </span>
       ))}

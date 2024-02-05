@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
-import { M_PLUS_Rounded_1c } from "next/font/google";
+import { m_plus_rounded_1c } from "@/store/fontStore";
 import "./globals.css";
 import SidebarComponent from "@/components/SidebarComponent";
 import HeaderCmponent from "@/components/HeaderComponent";
-
-const m_plus_rounded_1c = M_PLUS_Rounded_1c({
-  weight: "500",
-  subsets: ["latin"],
-})
 
 export const metadata: Metadata = {
   title: "Ling Fill",
