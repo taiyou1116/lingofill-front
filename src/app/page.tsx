@@ -1,18 +1,33 @@
+"use client"
 
+import { useState } from "react";
 
 export default function Home() {
+  // テスト
+  const allWords = "In the realm of software developmentddddddddddddddddddddddsfdfdfdfdfdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd";
+  const words = allWords.split(" ");
+  const [currentWords, setCurrentWords] = useState(words);
+
+  const handleWordClick = (index: number) => {
+    const arrayWords: string[] = [];
+    const newWords = currentWords.map((word, i) => {
+      if (i === index) {
+        arrayWords[i] = " ";
+      } else {
+        arrayWords[i] = word;
+      }
+    })
+    setCurrentWords(arrayWords);
+  }
+
   return (
     <main>
       <div className=" p-5">
-        In the realm of software development, 
-        a significant paradigm shift has been observed towards embracing 
-        cloud-native technologies. This transition is not merely a trend 
-        but a strategic move to leverage the inherent scalability, resilience, 
-        and flexibility offered by cloud platforms. As organizations migrate 
-        their infrastructures and applications to the cloud, they unlock 
-        new avenues for innovation and efficiency. This evolution is pivotal 
-        for staying competitive in todays fast-paced digital landscape, where 
-        the ability to rapidly adapt and respond to market demands is crucial for success.
+        {currentWords.map((word, index) => (
+          <span key={index} onClick={() => handleWordClick(index)} style={{marginRight: '5px', cursor: 'pointer'}}>
+            {word}
+          </span>
+        ))}
       </div>
     </main>
   );

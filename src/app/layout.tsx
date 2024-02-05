@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className=" flex w-screen h-screen">
         <SidebarComponent/>
-        <div>
+        <div className="w-screen h-screen">
           <HeaderCmponent />
           {/* コンテンツの中身 */}
           <div className={m_plus_rounded_1c.className}>{children}</div>
