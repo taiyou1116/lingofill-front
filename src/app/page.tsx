@@ -21,14 +21,12 @@ export default function Home() {
   }
 
   return (
-    <main>
-      <div className=" p-5 break-all max-w-full w-full">
-        {currentWords.map((word, index) => (
-          <span key={index} onClick={() => handleWordClick(index)} style={{marginRight: '5px', cursor: 'pointer'}}>
-            {word}
-          </span>
-        ))}
-      </div>
-    </main>
+    <div className=" p-5 break-all">
+      {currentWords.map((word, index) => (
+        <span key={index} onClick={() => handleWordClick(index)} style={{marginRight: '5px', cursor: 'pointer'}}>
+          {word}
+        </span>
+      ))}
+    </div>
   );
 }

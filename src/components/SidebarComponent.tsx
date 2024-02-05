@@ -8,9 +8,14 @@ function SidebarComponent() {
 
   return (
     <div className={`${sidebarClass} transition-all duration-300`}>
-      <div className="">
-        SidebarComponent
-      </div>
+      { showSidebar
+       ? 
+        <div className=" break-all">
+          <h1>一覧</h1>
+        </div>
+       :
+        null
+      }
     </div>
   );
 }
