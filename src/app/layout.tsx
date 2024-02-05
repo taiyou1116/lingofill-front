@@ -20,15 +20,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div>
-      <div className=" flex">
+    <html lang="en">
+      <body className=" flex">
         <SidebarComponent />
         <div>
           <HeaderCmponent />
           {/* コンテンツの中身 */}
           <div className={m_plus_rounded_1c.className}>{children}</div>
         </div>
-      </div>
-    </div>
+      </body>
+    </html>
   );
 }

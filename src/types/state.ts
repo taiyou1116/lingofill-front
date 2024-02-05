@@ -1,4 +1,4 @@
 export type state = {
     showSidebar: boolean,
-    onShowSidebar: () => void,
+    flipShowSidebar: () => void,
 }
