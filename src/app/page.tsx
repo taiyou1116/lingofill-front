@@ -10,7 +10,7 @@ export default function Home() {
   const [selectedWords, setSelectedWords] = useState<number[]>([]);
 
   const [translations, setTranslations] = useState<translationObj[]>([]);
-  const [editIndex, setEditIndex] = useState<number | null>(null);
+  // const [editIndex, setEditIndex] = useState<number | null>(null);
 
   const handleInputChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
     const newTransition = event.target.value;
@@ -39,7 +39,9 @@ export default function Home() {
 
   const handleClick = (index: number) => {
     setSelectedWords(current => [...current, index]);
-    setEditIndex(index);
+    // setEditIndex(index);
+    console.log("www");
+    // ここでModalを開く => ModalでhandleInputChange関数実行
   };
 
   const handleMouseDown = () => {
@@ -71,7 +73,14 @@ export default function Home() {
             onMouseMove={() => handleMouseMove(index)}
             className={`p-0.5 cursor-pointer ${selectedWords.includes(index) ? "bg-yellow-200" : "bg-transparent"}`}
           >
-            { editIndex === index ? (
+            { translation 
+            ? 
+              translation.translationedText
+            : 
+              word 
+            }
+            {/* { editIndex === index ? (
+              // ここでModalWindowを開く
               <input 
                 type="text" 
                 defaultValue={translation ? translation.translationedText : word} 
@@ -81,7 +90,7 @@ export default function Home() {
               translation.translationedText
             ) : (
               word
-            )}
+            )} */}
           </span>
         );
       })}

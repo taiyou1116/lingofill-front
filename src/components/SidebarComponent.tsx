@@ -18,7 +18,7 @@ function SidebarComponent() {
         onClick={handleCloseSidebar}>
       </div>
       <div 
-        className={`fixed w-1/5 p-5 top-0 left-0 h-full bg-white shadow-xl transition-transform duration-300 transform ${showSidebar ? "translate-x-0" : "-translate-x-full"}`}
+        className={`fixed w-1/5 p-5 top-0 left-0 h-full bg-white shadow-2xl transition-transform duration-300 transform ${showSidebar ? "translate-x-0" : "-translate-x-full"}`}
         onClick={handleSidebarClick}
       >
         <div className=" break-all flex flex-col items-center gap-3">
