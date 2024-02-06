@@ -40,13 +40,7 @@ export default function Home() {
           key={index} 
           onClick={() => handleWordClick(index)} 
           onMouseMove={() => handleMouseMove(index)}
-          style={{
-            marginRight: '5px', 
-            cursor: 'pointer',
-            // 透明な単語のスタイル適用
-            // color: transparentIndexes.includes(index) ? 'transparent' : 'inherit'
-            backgroundColor: selectedWords.includes(index) ? 'yellow' : 'transparent',
-          }}
+          className={` p-0.5 cursor-pointer ${selectedWords.includes(index) ? 'bg-yellow-200' : ' bg-transparent'} `}
         >
           {word}
         </span>

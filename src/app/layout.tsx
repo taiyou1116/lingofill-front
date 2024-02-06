@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { m_plus_rounded_1c } from "@/store/fontStore";
 import "./globals.css";
 import SidebarComponent from "@/components/SidebarComponent";
-import HeaderCmponent from "@/components/HeaderComponent";
+import HeaderComponent from "@/components/HeaderComponent";
 
 export const metadata: Metadata = {
   title: "Ling Fill",
@@ -19,7 +19,7 @@ export default function RootLayout({
       <body className=" flex w-screen h-screen scroll overflow-hidden">
         <SidebarComponent />
         <div className=" flex-grow h-screen w-4/5">
-          <HeaderCmponent />
+          <HeaderComponent />
           {/* コンテンツの中身 */}
           <div className={m_plus_rounded_1c.className}>{children}</div>
         </div>
