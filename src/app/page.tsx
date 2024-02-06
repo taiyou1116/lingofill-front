@@ -1,4 +1,5 @@
 "use client"
+import { translationObj } from "@/types/types";
 import React, { useState } from "react";
 
 export default function Home() {
@@ -7,11 +8,6 @@ export default function Home() {
 
   const [isDragging, setIsDragging] = useState(false);
   const [selectedWords, setSelectedWords] = useState<number[]>([]);
-
-  type translationObj = {
-    indexes: number[];
-    translationedText: string;
-  };
 
   const [translations, setTranslations] = useState<translationObj[]>([]);
   const [editIndex, setEditIndex] = useState<number | null>(null);
@@ -38,8 +34,7 @@ export default function Home() {
         translationedText: newTransition,
       });
     }
-  
-    setTranslations(updatedTranslations); // 状態を更新
+    setTranslations(updatedTranslations);
   };
 
   const handleClick = (index: number) => {
