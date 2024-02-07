@@ -15,7 +15,7 @@ function SidebarComponent() {
   return (
     <div>
       <div 
-        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-75 ${showSidebar ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ${showSidebar ? "opacity-100" : "opacity-0 pointer-events-none"}`}
         onClick={handleCloseSidebar}>
       </div>
       <div 

@@ -21,17 +21,16 @@ export default function RootLayout({
       <Head>
         <link rel="icon" href="/favicon_2.ico" />
       </Head>
-      <body className=" flex w-screen h-screen">
+      <body className={` flex w-screen h-screen ${m_plus_rounded_1c.className}`}>
         <SidebarComponent />
         <div className=" h-screen w-screen">
           <HeaderComponent />
           {/* コンテンツの中身 */}
-          <div className={m_plus_rounded_1c.className}>{children}</div>
+          <div>{children}</div>
           <div>
           <ModalCenterComponent />
         </div>
-        </div>
-        
+      </div>  
       </body>
     </html>
   );
