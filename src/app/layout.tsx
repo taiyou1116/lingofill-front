@@ -27,9 +27,6 @@ export default function RootLayout({
           <HeaderComponent />
           {/* コンテンツの中身 */}
           <div>{children}</div>
-          <div>
-          <ModalCenterComponent />
-        </div>
       </div>  
       </body>
     </html>

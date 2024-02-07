@@ -1,4 +1,5 @@
 "use client"
+import ModalCenterComponent from "@/components/ModalCenterComponent";
 import { useStore } from "@/store/store";
 import { translationObj } from "@/types/types";
 import React, { useState } from "react";
@@ -8,8 +9,8 @@ export default function Home() {
   const words = allWords.split(" ");
 
   // store
-  const showCenterModal = useStore((store) => store.showCenterModal);
   const flipCenterModal = useStore((store) => store.flipCenterModal);
+  const setSelectedWordIndex = useStore((store) => store.setSelectedWordIndex);
 
   // 一時状態管理
   const [isDragging, setIsDragging] = useState(false);
@@ -17,10 +18,9 @@ export default function Home() {
 
   // 翻訳管理
   const [translations, setTranslations] = useState<translationObj[]>([]);
-  // const [editIndex, setEditIndex] = useState<number | null>(null);
 
-  const handleInputChange = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
-    const newTransition = event.target.value;
+  const handleTranslasiton = (index: number, event: string) => {
+    const newTransition = event;
   
     // translationsが未定義の場合は空の配列を使用
     let updatedTranslations = translations ? [...translations] : [];
@@ -47,10 +47,9 @@ export default function Home() {
   // 単語を編集(クリック)
   const handleClick = (index: number) => {
     setSelectedWords(current => [...current, index]);
-    // setEditIndex(index);
     // ここでModalを開く => ModalでhandleInputChange関数実行
     flipCenterModal();
-    console.log(showCenterModal);
+    setSelectedWordIndex(index);
   };
 
   const handleMouseDown = () => {
@@ -88,21 +87,14 @@ export default function Home() {
             : 
               word 
             }
-            {/* { editIndex === index ? (
-              // ここでModalWindowを開く
-              <input 
-                type="text" 
-                defaultValue={translation ? translation.translationedText : word} 
-                onChange={(e) => handleInputChange(index, e)} 
-              />
-            ) : translation ? (
-              translation.translationedText
-            ) : (
-              word
-            )} */}
           </span>
         );
       })}
+      <div>
+        <ModalCenterComponent 
+          onSaveTranslation={(index, translation) => handleTranslasiton(index, translation)}
+        />
+      </div>
     </div>
   );
 }

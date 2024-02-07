@@ -7,4 +7,6 @@ export type state = {
     // Modal
     showCenterModal: boolean,
     flipCenterModal: () => void,
+    selectedWordIndex: number | null,
+    setSelectedWordIndex: (index: number) => void,
 }

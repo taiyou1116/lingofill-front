@@ -4,14 +4,29 @@ import { useStore } from '@/store/store';
 import React from 'react'
 import "../app/globals.css";
 
-function ModalCenterComponent() {
+type ModalCenterProps = {
+  onSaveTranslation: (index: number, transition: any) => void,
+}
+
+function ModalCenterComponent(props: ModalCenterProps) {
+  const { onSaveTranslation } = props;
+
   // store
   const showCenterModal = useStore((store) => store.showCenterModal);
   const flipCenterModal = useStore((store) => store.flipCenterModal);
+  const selectedWordIndex = useStore((store) => store.selectedWordIndex);
 
   // 背景とサイドバーをクリックしたときの処理
   const handleCloseModal = () => flipCenterModal();
   const handleModalClick = (e: any) => e.stopPropagation();
+
+  const handleSave = () => {
+    // 選択された単語のインデックスと入力された翻訳をonSaveTranslationを通じて親コンポーネントに渡す
+    const translation = "inputから受け取る";
+    if (selectedWordIndex === null) return;
+    onSaveTranslation(selectedWordIndex, translation);
+    handleCloseModal();
+  }
 
   return (
     <div className={` fixed inset-0 flex items-center justify-center ${showCenterModal ? '' : ' pointer-events-none'}`}>
@@ -37,6 +52,12 @@ function ModalCenterComponent() {
           <div>メモ</div>
           <textarea placeholder='' className=' border p-1 w-full h-2/3 resize-none rounded-sm border-stone-900' />
         </div>
+        <button 
+          className=' bg-sky-400 px-4 py-2 rounded-md'
+          onClick={handleSave}
+        >
+          保存する
+        </button>
       </div>
     </div>
   )
