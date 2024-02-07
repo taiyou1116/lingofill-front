@@ -4,6 +4,7 @@ import { useStore } from '@/store/store';
 import { m_plus_rounded_1c } from '@/store/fontStore';
 
 function SidebarComponent() {
+  // store
   const showSidebar = useStore((store) => store.showSidebar);
   const flipShowSidebar = useStore((store) => store.flipShowSidebar);
 

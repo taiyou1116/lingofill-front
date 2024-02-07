@@ -7,6 +7,7 @@ import { m_plus_rounded_1c_bold } from '@/store/fontStore';
 import Image from 'next/image';
 
 function HeaderCmponent() {
+  // store
   const flipShowSidebar = useStore((store) => store.flipShowSidebar);
 
   return (

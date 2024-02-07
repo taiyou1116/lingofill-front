@@ -1,4 +1,5 @@
 "use client"
+import { useStore } from "@/store/store";
 import { translationObj } from "@/types/types";
 import React, { useState } from "react";
 
@@ -6,9 +7,15 @@ export default function Home() {
   const allWords = "In the realm of software development, a significant paradigm shift has been observed towards embracing cloud-native technologies. This transition is not merely a trend but a strategic move to leverage the inherent scalability, resilience, and flexibility offered by cloud platforms. As organizations migrate their infrastructures and applications to the cloud, they unlock new avenues for innovation and efficiency. This evolution is pivotal for staying competitive in today's fast-paced digital landscape, where the ability to rapidly adapt and respond to market demands is crucial for success.";
   const words = allWords.split(" ");
 
+  // store
+  const showCenterModal = useStore((store) => store.showCenterModal);
+  const flipCenterModal = useStore((store) => store.flipCenterModal);
+
+  // 一時状態管理
   const [isDragging, setIsDragging] = useState(false);
   const [selectedWords, setSelectedWords] = useState<number[]>([]);
 
+  // 翻訳管理
   const [translations, setTranslations] = useState<translationObj[]>([]);
   // const [editIndex, setEditIndex] = useState<number | null>(null);
 
@@ -37,11 +44,14 @@ export default function Home() {
     setTranslations(updatedTranslations);
   };
 
+  // 単語を編集(クリック)
   const handleClick = (index: number) => {
     setSelectedWords(current => [...current, index]);
     // setEditIndex(index);
-    console.log("www");
     // ここでModalを開く => ModalでhandleInputChange関数実行
+    flipCenterModal();
+    console.log("着てる");
+    console.log(showCenterModal);
   };
 
   const handleMouseDown = () => {

@@ -4,6 +4,7 @@ import "./globals.css";
 import SidebarComponent from "@/components/SidebarComponent";
 import HeaderComponent from "@/components/HeaderComponent";
 import Head from "next/head";
+import ModalCenterComponent from "@/components/ModalCenterComponent";
 
 export const metadata: Metadata = {
   title: "Ling Fill",
@@ -26,7 +27,11 @@ export default function RootLayout({
           <HeaderComponent />
           {/* コンテンツの中身 */}
           <div className={m_plus_rounded_1c.className}>{children}</div>
+          <div>
+          <ModalCenterComponent />
         </div>
+        </div>
+        
       </body>
     </html>
   );
