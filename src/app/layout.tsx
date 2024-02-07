@@ -3,6 +3,7 @@ import { m_plus_rounded_1c } from "@/store/fontStore";
 import "./globals.css";
 import SidebarComponent from "@/components/SidebarComponent";
 import HeaderComponent from "@/components/HeaderComponent";
+import Head from "next/head";
 
 export const metadata: Metadata = {
   title: "Ling Fill",
@@ -16,6 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <link rel="icon" href="/favicon_2.ico" />
+      </Head>
       <body className=" flex w-screen h-screen">
         <SidebarComponent />
         <div className=" h-screen w-screen">
