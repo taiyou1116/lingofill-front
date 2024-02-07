@@ -50,7 +50,6 @@ export default function Home() {
     // setEditIndex(index);
     // ここでModalを開く => ModalでhandleInputChange関数実行
     flipCenterModal();
-    console.log("着てる");
     console.log(showCenterModal);
   };
 
