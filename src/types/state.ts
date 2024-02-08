@@ -1,10 +1,10 @@
-// アプリの状態
+// アプリ全体で共有する状態の型
 export type state = {
     // サイドバー
     showSidebar: boolean,
     flipShowSidebar: () => void,
 
-    // Modal
+    // CenterModal
     showCenterModal: boolean,
     flipCenterModal: () => void,
 }

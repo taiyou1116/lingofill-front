@@ -1,3 +1,5 @@
+// アプリ全体で共有する状態を管理
+
 import { state } from "@/types/state";
 import { create } from "zustand";
 

@@ -4,7 +4,6 @@ import "./globals.css";
 import SidebarComponent from "@/components/SidebarComponent";
 import HeaderComponent from "@/components/HeaderComponent";
 import Head from "next/head";
-import ModalCenterComponent from "@/components/ModalCenterComponent";
 
 export const metadata: Metadata = {
   title: "Ling Fill",

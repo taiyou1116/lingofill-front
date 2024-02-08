@@ -1,9 +1,11 @@
-export type translationObj = {
+
+// 翻訳された状態
+export type TranslationObj = {
     indexes: number[];
-    translationedText: string;
+    translatedText: string;
 };
 
-// 単語
+// 単語、熟語を管理
 export type SelectedWord = {
     indexes: number[];
     text: string;

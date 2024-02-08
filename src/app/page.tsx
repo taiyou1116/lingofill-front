@@ -1,7 +1,7 @@
 "use client"
 import ModalCenterComponent from "@/components/ModalCenterComponent";
 import { useStore } from "@/store/store";
-import { translationObj, SelectedWord } from "@/types/types";
+import { TranslationObj, SelectedWord } from "@/types/types";
 import React, { useState } from "react";
 
 export default function Home() {
@@ -16,16 +16,13 @@ export default function Home() {
   const [isDragging, setIsDragging] = useState(false);
   const [selectedWords, setSelectedWords] = useState<number[]>([]);
   // 翻訳管理(日本語化された単語)
-  const [translations, setTranslations] = useState<translationObj[]>([]);
+  const [translations, setTranslations] = useState<TranslationObj[]>([]);
 
   const handleTranslasiton = (selectedWord: SelectedWord, userInput: string) => {
     const newTranslation = userInput;
   
     // translationsが未定義の場合は空の配列を使用
     let updatedTranslations = translations ? [...translations] : [];
-  
-    // 既存の訳を探す
-    // const existingTranslationIndex = updatedTranslations.findIndex(translation => translation.indexes.includes(selectedWord.index));
     
     // 複数のindexesに対応するために、既存の翻訳を検索するロジックを調整
     const existingTranslationIndexes = selectedWord.indexes.map(index => 
@@ -37,32 +34,19 @@ export default function Home() {
       const firstExistingIndex = existingTranslationIndexes[0];
       updatedTranslations[firstExistingIndex] = {
         ...updatedTranslations[firstExistingIndex],
-        translationedText: newTranslation,
+        translatedText: newTranslation,
       };
     } else {
       // 新しい翻訳を追加
       updatedTranslations.push({
         indexes: selectedWord.indexes,
-        translationedText: newTranslation,
+        translatedText: newTranslation,
       });
     }
-    // if (existingTranslationIndex !== -1) {
-    //   // 既存の訳を更新
-    //   updatedTranslations[existingTranslationIndex] = {
-    //     ...updatedTranslations[existingTranslationIndex],
-    //     translationedText: newTranslation,
-    //   };
-    // } else {
-    //   // 新しい訳を追加
-    //   updatedTranslations.push({
-    //     indexes: [selectedWord.index],
-    //     translationedText: newTranslation,
-    //   });
-    // }
     setTranslations(updatedTranslations);
   };
 
-  // 単語を編集(クリック)
+  // 単語をクリックして編集
   const handleClick = (index: number) => {
     setSelectedWords(current => [...current, index]);
     // ここでModalを開く
@@ -109,7 +93,7 @@ export default function Home() {
           >
             { translation 
             ? 
-              translation.translationedText
+              translation.translatedText
             : 
               word 
             }
