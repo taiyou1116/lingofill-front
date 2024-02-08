@@ -97,21 +97,32 @@ export default function Home() {
       {words.map((word, index) => {
         // すでに日本語訳されているか確認
         const translation = translations.find(translation => translation.indexes.includes(index));
-        return (
-          <span
-            key={index}
-            onClick={() => handleClick(index)}
-            onMouseMove={() => handleMouseMove(index)}
-            className={`p-0.5 cursor-pointer ${selectedWordsIndexes.includes(index) ? "bg-yellow-200" : "bg-transparent"}`}
-          >
-            { translation 
-            ? 
-              translation.translatedText
-            : 
-              word 
-            }
-          </span>
-        );
+
+        // 単語、熟語の一文字目か確認
+        if (translation && translation.indexes[0] === index) {
+          return (
+            <span
+              key={index}
+              onClick={() => handleClick(index)} // 熟語選択のロジックが必要
+              onMouseMove={() => handleMouseMove(index)}
+              className={`p-0.5 cursor-pointer ${translation.indexes.some(i => selectedWordsIndexes.includes(i)) ? "bg-yellow-200" : "bg-transparent"}`}
+            >
+              {translation.translatedText}
+            </span>
+          );
+        } else if (!translation) {
+          // 翻訳されていない単語、または熟語の2番目以降の単語をスキップ
+          return (
+            <span
+              key={index}
+              onClick={() => handleClick(index)}
+              onMouseMove={() => handleMouseMove(index)}
+              className={`p-0.5 cursor-pointer ${selectedWordsIndexes.includes(index) ? "bg-yellow-200" : "bg-transparent"}`}
+            >
+              {word}
+            </span>
+          );
+        }
       })}
       <div>
         <ModalCenterComponent 
