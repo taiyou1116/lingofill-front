@@ -5,6 +5,6 @@ export type translationObj = {
 
 // 単語
 export type SelectedWord = {
-    index: number;
+    indexes: number[];
     text: string;
-  };
+};

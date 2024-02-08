@@ -11,7 +11,7 @@ export default function Home() {
   // store
   const flipCenterModal = useStore((store) => store.flipCenterModal);
   // 一時保存
-  const [selectedWord, setSelectedWord] = useState<SelectedWord>({ index: 0, text: '' });
+  const [selectedWord, setSelectedWord] = useState<SelectedWord>({ indexes: [], text: '' });
   // ドラッグ処理(熟語処理)
   const [isDragging, setIsDragging] = useState(false);
   const [selectedWords, setSelectedWords] = useState<number[]>([]);
@@ -19,27 +19,46 @@ export default function Home() {
   const [translations, setTranslations] = useState<translationObj[]>([]);
 
   const handleTranslasiton = (selectedWord: SelectedWord, userInput: string) => {
-    const newTransition = userInput;
+    const newTranslation = userInput;
   
     // translationsが未定義の場合は空の配列を使用
     let updatedTranslations = translations ? [...translations] : [];
   
     // 既存の訳を探す
-    const existingTranslationIndex = updatedTranslations.findIndex(translation => translation.indexes.includes(selectedWord.index));
-  
-    if (existingTranslationIndex !== -1) {
-      // 既存の訳を更新
-      updatedTranslations[existingTranslationIndex] = {
-        ...updatedTranslations[existingTranslationIndex],
-        translationedText: newTransition,
+    // const existingTranslationIndex = updatedTranslations.findIndex(translation => translation.indexes.includes(selectedWord.index));
+    
+    // 複数のindexesに対応するために、既存の翻訳を検索するロジックを調整
+    const existingTranslationIndexes = selectedWord.indexes.map(index => 
+      updatedTranslations.findIndex(translation => translation.indexes.includes(index))
+    ).filter(index => index !== -1);
+
+    if (existingTranslationIndexes.length > 0) {
+      // 既存の翻訳を更新（複数のindexesが存在する場合は、最初に見つかったものを更新）
+      const firstExistingIndex = existingTranslationIndexes[0];
+      updatedTranslations[firstExistingIndex] = {
+        ...updatedTranslations[firstExistingIndex],
+        translationedText: newTranslation,
       };
     } else {
-      // 新しい訳を追加
+      // 新しい翻訳を追加
       updatedTranslations.push({
-        indexes: [selectedWord.index],
-        translationedText: newTransition,
+        indexes: selectedWord.indexes,
+        translationedText: newTranslation,
       });
     }
+    // if (existingTranslationIndex !== -1) {
+    //   // 既存の訳を更新
+    //   updatedTranslations[existingTranslationIndex] = {
+    //     ...updatedTranslations[existingTranslationIndex],
+    //     translationedText: newTranslation,
+    //   };
+    // } else {
+    //   // 新しい訳を追加
+    //   updatedTranslations.push({
+    //     indexes: [selectedWord.index],
+    //     translationedText: newTranslation,
+    //   });
+    // }
     setTranslations(updatedTranslations);
   };
 
@@ -49,7 +68,7 @@ export default function Home() {
     // ここでModalを開く
     flipCenterModal();
     const newSelectedWord: SelectedWord = {
-      index: index,
+      indexes: [index],
       text: words[index]
     }
     setSelectedWord(newSelectedWord);
