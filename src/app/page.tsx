@@ -1,7 +1,7 @@
 "use client"
 import ModalCenterComponent from "@/components/ModalCenterComponent";
 import { useStore } from "@/store/store";
-import { TranslationObj, SelectedWord } from "@/types/types";
+import { TranslationObj, SelectedOriginalWord } from "@/types/types";
 import React, { useState } from "react";
 
 export default function Home() {
@@ -11,14 +11,14 @@ export default function Home() {
   // store
   const flipCenterModal = useStore((store) => store.flipCenterModal);
   // 一時保存
-  const [selectedWord, setSelectedWord] = useState<SelectedWord>({ indexes: [], text: '' });
+  const [selectedOriginalWord, setSelectedOriginalWord] = useState<SelectedOriginalWord>({ indexes: [], text: '' });
   // ドラッグ処理(熟語処理)
   const [isDragging, setIsDragging] = useState(false);
-  const [selectedWords, setSelectedWords] = useState<number[]>([]);
+  const [selectedWordsIndexes, setSelectedWordsIndexes] = useState<number[]>([]);
   // 翻訳管理(日本語化された単語)
   const [translations, setTranslations] = useState<TranslationObj[]>([]);
 
-  const handleTranslasiton = (selectedWord: SelectedWord, userInput: string) => {
+  const handleTranslasiton = (selectedWord: SelectedOriginalWord, userInput: string) => {
     const newTranslation = userInput;
   
     // translationsが未定義の場合は空の配列を使用
@@ -43,29 +43,30 @@ export default function Home() {
         translatedText: newTranslation,
       });
     }
+    console.log(updatedTranslations);
     setTranslations(updatedTranslations);
   };
 
   // 単語をクリックして編集
   const handleClick = (index: number) => {
-    setSelectedWords(current => [...current, index]);
+    setSelectedWordsIndexes(current => [...current, index]);
     // ここでModalを開く
     flipCenterModal();
-    const newSelectedWord: SelectedWord = {
+    const newSelectedWord: SelectedOriginalWord = {
       indexes: [index],
       text: words[index]
     }
-    setSelectedWord(newSelectedWord);
+    setSelectedOriginalWord(newSelectedWord);
   };
 
   const handleMouseDown = () => {
     setIsDragging(true);
-    setSelectedWords([]);
+    setSelectedWordsIndexes([]);
   };
 
   const handleMouseMove = (index: number) => {
     if (!isDragging) return;
-    setSelectedWords((prev) => {
+    setSelectedWordsIndexes((prev) => {
       // 重複選択を避けるために新しいインデックスだけを追加
       return prev.includes(index) ? prev : [...prev, index];
     });
@@ -73,9 +74,21 @@ export default function Home() {
 
   const handleMouseUp = () => {
     setIsDragging(false);
-    if (selectedWords.length >= 2) {
+    if (selectedWordsIndexes.length >= 2) {
       // ここでModalを開く
       flipCenterModal();
+
+      // 単語を繋げて表示
+      let newSelectedWord: SelectedOriginalWord;
+      let newText: string = selectedWordsIndexes.map((index) => {
+        return words[index];
+      }).join(' ');
+      
+      newSelectedWord = {
+        indexes: selectedWordsIndexes,
+        text: newText,
+      }
+      setSelectedOriginalWord(newSelectedWord);
     }
   };
 
@@ -89,7 +102,7 @@ export default function Home() {
             key={index}
             onClick={() => handleClick(index)}
             onMouseMove={() => handleMouseMove(index)}
-            className={`p-0.5 cursor-pointer ${selectedWords.includes(index) ? "bg-yellow-200" : "bg-transparent"}`}
+            className={`p-0.5 cursor-pointer ${selectedWordsIndexes.includes(index) ? "bg-yellow-200" : "bg-transparent"}`}
           >
             { translation 
             ? 
@@ -102,7 +115,7 @@ export default function Home() {
       })}
       <div>
         <ModalCenterComponent 
-          selectedWord={selectedWord}
+          selectedWord={selectedOriginalWord}
           onSaveTranslation={handleTranslasiton}
         />
       </div>

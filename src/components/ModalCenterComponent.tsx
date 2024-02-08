@@ -3,12 +3,12 @@
 import { useStore } from '@/store/store';
 import React, { useState } from 'react'
 import "../app/globals.css";
-import { SelectedWord } from '@/types/types';
+import { SelectedOriginalWord } from '@/types/types';
 
 type ModalCenterProps = {
   // index, 英単語
-  selectedWord: SelectedWord,
-  onSaveTranslation: (selectedWord: SelectedWord, input: string) => void,
+  selectedWord: SelectedOriginalWord,
+  onSaveTranslation: (selectedWord: SelectedOriginalWord, input: string) => void,
 }
 
 function ModalCenterComponent(props: ModalCenterProps) {

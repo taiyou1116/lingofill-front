@@ -5,8 +5,8 @@ export type TranslationObj = {
     translatedText: string;
 };
 
-// 単語、熟語を管理
-export type SelectedWord = {
+// 元の単語、熟語
+export type SelectedOriginalWord = {
     indexes: number[];
     text: string;
 };
