@@ -8,17 +8,13 @@ export default function Home() {
   const allWords = "In the realm of software development, a significant paradigm shift has been observed towards embracing cloud-native technologies. This transition is not merely a trend but a strategic move to leverage the inherent scalability, resilience, and flexibility offered by cloud platforms. As organizations migrate their infrastructures and applications to the cloud, they unlock new avenues for innovation and efficiency. This evolution is pivotal for staying competitive in today's fast-paced digital landscape, where the ability to rapidly adapt and respond to market demands is crucial for success.";
   // 英単語s
   const words = allWords.split(" ");
-
   // store
   const flipCenterModal = useStore((store) => store.flipCenterModal);
-
-  // Modalに
+  // 一時保存
   const [selectedWord, setSelectedWord] = useState<SelectedWord>({ index: 0, text: '' });
-
   // ドラッグ処理(熟語処理)
   const [isDragging, setIsDragging] = useState(false);
   const [selectedWords, setSelectedWords] = useState<number[]>([]);
-
   // 翻訳管理(日本語化された単語)
   const [translations, setTranslations] = useState<translationObj[]>([]);
 
@@ -50,7 +46,6 @@ export default function Home() {
   // 単語を編集(クリック)
   const handleClick = (index: number) => {
     setSelectedWords(current => [...current, index]);
-
     // ここでModalを開く
     flipCenterModal();
     const newSelectedWord: SelectedWord = {
@@ -75,6 +70,10 @@ export default function Home() {
 
   const handleMouseUp = () => {
     setIsDragging(false);
+    if (selectedWords.length >= 2) {
+      // ここでModalを開く
+      flipCenterModal();
+    }
   };
 
   return (
