@@ -3,10 +3,12 @@
 import { useStore } from '@/store/store';
 import React, { useState } from 'react'
 import "../app/globals.css";
+import { SelectedWord } from '@/types/types';
 
 type ModalCenterProps = {
-  selectedWord: number,
-  onSaveTranslation: (index: number, transition: any) => void,
+  // index, 英単語
+  selectedWord: SelectedWord,
+  onSaveTranslation: (selectedWord: SelectedWord, input: string) => void,
 }
 
 function ModalCenterComponent(props: ModalCenterProps) {
@@ -22,6 +24,7 @@ function ModalCenterComponent(props: ModalCenterProps) {
   const handleCloseModal = () => flipCenterModal();
   const handleModalClick = (e: any) => e.stopPropagation();
 
+  // 日本語化
   const handleSave = () => {
     onSaveTranslation(selectedWord, userInput);
     handleCloseModal();
@@ -43,7 +46,7 @@ function ModalCenterComponent(props: ModalCenterProps) {
         <div className=' w-full'>
           <div>翻訳</div>
           <div className=' w-full flex justify-center items-center gap-3'>
-            <span>Study →</span>
+            <span>{selectedWord.text} →</span>
             <input 
               type='text' 
               placeholder='日本語' 

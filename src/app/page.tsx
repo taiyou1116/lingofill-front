@@ -1,32 +1,35 @@
 "use client"
 import ModalCenterComponent from "@/components/ModalCenterComponent";
 import { useStore } from "@/store/store";
-import { translationObj } from "@/types/types";
+import { translationObj, SelectedWord } from "@/types/types";
 import React, { useState } from "react";
 
 export default function Home() {
   const allWords = "In the realm of software development, a significant paradigm shift has been observed towards embracing cloud-native technologies. This transition is not merely a trend but a strategic move to leverage the inherent scalability, resilience, and flexibility offered by cloud platforms. As organizations migrate their infrastructures and applications to the cloud, they unlock new avenues for innovation and efficiency. This evolution is pivotal for staying competitive in today's fast-paced digital landscape, where the ability to rapidly adapt and respond to market demands is crucial for success.";
+  // 英単語s
   const words = allWords.split(" ");
 
   // store
   const flipCenterModal = useStore((store) => store.flipCenterModal);
 
-  // 一時状態管理
+  // Modalに
+  const [selectedWord, setSelectedWord] = useState<SelectedWord>({ index: 0, text: '' });
+
+  // ドラッグ処理(熟語処理)
   const [isDragging, setIsDragging] = useState(false);
-  const [selectedWord, setSelectedWord] = useState<number>(0);
   const [selectedWords, setSelectedWords] = useState<number[]>([]);
 
-  // 翻訳管理
+  // 翻訳管理(日本語化された単語)
   const [translations, setTranslations] = useState<translationObj[]>([]);
 
-  const handleTranslasiton = (index: number, event: string) => {
-    const newTransition = event;
+  const handleTranslasiton = (selectedWord: SelectedWord, userInput: string) => {
+    const newTransition = userInput;
   
     // translationsが未定義の場合は空の配列を使用
     let updatedTranslations = translations ? [...translations] : [];
   
     // 既存の訳を探す
-    const existingTranslationIndex = updatedTranslations.findIndex(translation => translation.indexes.includes(index));
+    const existingTranslationIndex = updatedTranslations.findIndex(translation => translation.indexes.includes(selectedWord.index));
   
     if (existingTranslationIndex !== -1) {
       // 既存の訳を更新
@@ -37,7 +40,7 @@ export default function Home() {
     } else {
       // 新しい訳を追加
       updatedTranslations.push({
-        indexes: [index],
+        indexes: [selectedWord.index],
         translationedText: newTransition,
       });
     }
@@ -47,9 +50,14 @@ export default function Home() {
   // 単語を編集(クリック)
   const handleClick = (index: number) => {
     setSelectedWords(current => [...current, index]);
-    // ここでModalを開く => ModalでhandleInputChange関数実行
+
+    // ここでModalを開く
     flipCenterModal();
-    setSelectedWord(index);
+    const newSelectedWord: SelectedWord = {
+      index: index,
+      text: words[index]
+    }
+    setSelectedWord(newSelectedWord);
   };
 
   const handleMouseDown = () => {

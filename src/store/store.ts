@@ -13,8 +13,4 @@ export const useStore = create<state>((set, get) => ({
     flipCenterModal: () => {
         set((state) => ({ showCenterModal: !state.showCenterModal }));
     },
-    selectedWordIndex: null,
-    setSelectedWordIndex: (index: number) => {
-        set((state) => ({ selectedWordIndex: index }))
-    }
 }))
