@@ -1,30 +1,29 @@
 "use client"
 
 import { useStore } from '@/store/store';
-import React from 'react'
+import React, { useState } from 'react'
 import "../app/globals.css";
 
 type ModalCenterProps = {
+  selectedWord: number,
   onSaveTranslation: (index: number, transition: any) => void,
 }
 
 function ModalCenterComponent(props: ModalCenterProps) {
-  const { onSaveTranslation } = props;
+  const { selectedWord, onSaveTranslation } = props;
 
   // store
   const showCenterModal = useStore((store) => store.showCenterModal);
   const flipCenterModal = useStore((store) => store.flipCenterModal);
-  const selectedWordIndex = useStore((store) => store.selectedWordIndex);
+
+  const [userInput, setUserInput] = useState('');
 
   // 背景とサイドバーをクリックしたときの処理
   const handleCloseModal = () => flipCenterModal();
   const handleModalClick = (e: any) => e.stopPropagation();
 
   const handleSave = () => {
-    // 選択された単語のインデックスと入力された翻訳をonSaveTranslationを通じて親コンポーネントに渡す
-    const translation = "inputから受け取る";
-    if (selectedWordIndex === null) return;
-    onSaveTranslation(selectedWordIndex, translation);
+    onSaveTranslation(selectedWord, userInput);
     handleCloseModal();
   }
 
@@ -45,12 +44,19 @@ function ModalCenterComponent(props: ModalCenterProps) {
           <div>翻訳</div>
           <div className=' w-full flex justify-center items-center gap-3'>
             <span>Study →</span>
-            <input type='text' placeholder='日本語' className=' border border-stone-900 p-1 rounded-sm w-1/3 modal-center-input'/>
+            <input 
+              type='text' 
+              placeholder='日本語' 
+              value={userInput}
+              onChange={(e) => setUserInput(e.target.value)}
+              className=' border border-stone-900 p-1 rounded-sm w-1/3 modal-center-input'/>
           </div>
         </div>
         <div className=' w-full h-full flex flex-col gap-1'>
           <div>メモ</div>
-          <textarea placeholder='' className=' border p-1 w-full h-2/3 resize-none rounded-sm border-stone-900' />
+          <textarea 
+            placeholder='' 
+            className=' border p-1 w-full h-2/3 resize-none rounded-sm border-stone-900' />
         </div>
         <button 
           className=' bg-sky-400 px-4 py-2 rounded-md'

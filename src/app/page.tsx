@@ -10,10 +10,10 @@ export default function Home() {
 
   // store
   const flipCenterModal = useStore((store) => store.flipCenterModal);
-  const setSelectedWordIndex = useStore((store) => store.setSelectedWordIndex);
 
   // 一時状態管理
   const [isDragging, setIsDragging] = useState(false);
+  const [selectedWord, setSelectedWord] = useState<number>(0);
   const [selectedWords, setSelectedWords] = useState<number[]>([]);
 
   // 翻訳管理
@@ -49,7 +49,7 @@ export default function Home() {
     setSelectedWords(current => [...current, index]);
     // ここでModalを開く => ModalでhandleInputChange関数実行
     flipCenterModal();
-    setSelectedWordIndex(index);
+    setSelectedWord(index);
   };
 
   const handleMouseDown = () => {
@@ -92,7 +92,8 @@ export default function Home() {
       })}
       <div>
         <ModalCenterComponent 
-          onSaveTranslation={(index, translation) => handleTranslasiton(index, translation)}
+          selectedWord={selectedWord}
+          onSaveTranslation={handleTranslasiton}
         />
       </div>
     </div>
