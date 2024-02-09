@@ -96,7 +96,7 @@ export default function Home() {
               key={index}
               onClick={() => handleClick(index)} // 熟語選択のロジックが必要
               onMouseMove={() => handleMouseMove(index)}
-              className={`py-0.5 px-2 cursor-pointer bg-slate-200 rounded-md ${translation.indexes.some(i => selectedWordsIndexes.includes(i)) ? "bg-yellow-200" : "bg-transparent"}`}
+              className={`py-0.5 px-2 cursor-pointer bg-slate-200 rounded-md`}
             >
               {translation.translatedText}
             </span>
