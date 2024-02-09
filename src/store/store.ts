@@ -15,4 +15,10 @@ export const useStore = create<state>((set, get) => ({
     flipCenterModal: () => {
         set((state) => ({ showCenterModal: !state.showCenterModal }));
     },
+
+    // 選択されているtext
+    text: '',
+    setText: (text: string) => {
+        set({ text: text })
+    }
 }))

@@ -7,4 +7,7 @@ export type state = {
     // CenterModal
     showCenterModal: boolean,
     flipCenterModal: () => void,
+
+    text: string,
+    setText: (text: string) => void,
 }

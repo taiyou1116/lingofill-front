@@ -11,6 +11,8 @@ function SidebarComponent() {
   // store
   const showSidebar = useStore((store) => store.showSidebar);
   const flipShowSidebar = useStore((store) => store.flipShowSidebar);
+  // const showSidebar = useStore((store) => store.showSidebar);
+  const setText = useStore((store) => store.setText);
 
   const [sentences, setSentences] = useState<Sentences[]>([
     {
@@ -52,6 +54,7 @@ function SidebarComponent() {
   };
 
   const openSentence = (index: number) => {
+    setText(sentences[index].text);
     console.log(sentences[index]);
   }
 
@@ -76,7 +79,7 @@ function SidebarComponent() {
           </div>
           
           {/* Sentences */}
-          { sentences.map((s, index) => {
+          { sentences.map((sentence, index) => {
             return (
               <div 
                 key={index} 
@@ -98,14 +101,14 @@ function SidebarComponent() {
                         setSentences(updatedSentences);
                       }}
                       onBlur={() => {
-                        finishEditing(index, s.title)} // 外側をクリックした時
+                        finishEditing(index, sentence.title)} // 外側をクリックした時
                       }
                       ref={inputRef}
                       className=' p-1'  
                     />
                   </div>
                 :
-                  s.title
+                  sentence.title
                 }
               </div>
             )
