@@ -14,7 +14,7 @@ function SidebarComponent() {
   const [sentences, setSentences] = useState<string[]>(["あいうえお", "かきくけこ"]);
 
   // どのSentenceが入力中か判定
-  const [inputNameIndex, setInputNameIndex] = useState<number>();
+  const [inputNameIndex, setInputNameIndex] = useState<number>(-1);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -28,6 +28,16 @@ function SidebarComponent() {
     setSentences(['', ...sentences]);
     setInputNameIndex(0);
   }
+
+  const finishEditing = (index: number, value: string) => {
+    // sentences配列を更新
+    const newSentences = [...sentences];
+    newSentences[index] = value;
+    setSentences(newSentences);
+
+    // 編集中のインデックスをリセット
+    setInputNameIndex(-1);
+  };
 
   const openSentence = (index: number) => {
     console.log(sentences[index]);
@@ -62,11 +72,22 @@ function SidebarComponent() {
                 className=' bg-slate-100 h-full w-full p-3 cursor-pointer hover:shadow-lg duration-100'>
                 { inputNameIndex === index
                 ?
-                <div>
-                  <input type='text' ref={inputRef}/>
-                </div>
+                  <div>
+                    <input 
+                      type='text' 
+                      value={sentences[0]}
+                      onChange={(e) => {
+                        // 最初の要素を更新し、残りの要素をそのまま配列に含める新しい配列を作成
+                        const updatedSentences = [e.target.value, ...sentences.slice(1)];
+                        setSentences(updatedSentences);
+                      }}
+                      onBlur={() => finishEditing(index, s)} // 外側をクリックした時
+                      ref={inputRef}
+                      className=' p-1'  
+                    />
+                  </div>
                 :
-                 s
+                  s
                 }
               </div>
             )
