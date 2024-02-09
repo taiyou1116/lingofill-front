@@ -48,7 +48,13 @@ export default function Home() {
   // 単語をクリックして編集
   const handleClick = (index: number) => {
     if (showCenterModal) return;
-    setSelectedWordsIndexes(current => [...current, index]);
+
+    const translation = translations.find(translation => translation.indexes.includes(index));
+    if (translation) {
+      setSelectedWordsIndexes(translation.indexes);
+    } else {
+      setSelectedWordsIndexes([index]);
+    }
     // ここでModalを開く
     flipCenterModal();
   };
