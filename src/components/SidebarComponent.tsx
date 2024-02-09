@@ -5,13 +5,23 @@ import { m_plus_rounded_1c } from '@/store/fontStore';
 import { EditNote } from '@mui/icons-material';
 import { useEffect, useRef, useState } from 'react';
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
+import { Sentences } from '@/types/types';
 
 function SidebarComponent() {
   // store
   const showSidebar = useStore((store) => store.showSidebar);
   const flipShowSidebar = useStore((store) => store.flipShowSidebar);
 
-  const [sentences, setSentences] = useState<string[]>(["あいうえお", "かきくけこ"]);
+  const [sentences, setSentences] = useState<Sentences[]>([
+    {
+      title: "english test1",
+      text: "In the realm of software development",
+    },
+    {
+      title: "english test2",
+      text: "In the realm of software development2",
+    }
+  ]);
 
   // どのSentenceが入力中か判定
   const [inputNameIndex, setInputNameIndex] = useState<number>(-1);
@@ -22,20 +32,22 @@ function SidebarComponent() {
     if (inputNameIndex === 0 && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [inputNameIndex, sentences]);
+  }, [inputNameIndex]);
 
   const createNewSentence = () => {
-    setSentences(['', ...sentences]);
+    setSentences([{
+      title: "",
+      text: "",
+    } , ...sentences]);
     setInputNameIndex(0);
   }
 
   const finishEditing = (index: number, value: string) => {
     // sentences配列を更新
     const newSentences = [...sentences];
-    newSentences[index] = value;
+    newSentences[index].title = value;
     setSentences(newSentences);
 
-    // 編集中のインデックスをリセット
     setInputNameIndex(-1);
   };
 
@@ -75,19 +87,25 @@ function SidebarComponent() {
                   <div>
                     <input 
                       type='text' 
-                      value={sentences[0]}
+                      value={sentences[0].title}
                       onChange={(e) => {
                         // 最初の要素を更新し、残りの要素をそのまま配列に含める新しい配列を作成
-                        const updatedSentences = [e.target.value, ...sentences.slice(1)];
+                        const updatedSentences = [{
+                          title: e.target.value,
+                          // 元々の値に戻す
+                          text: "",
+                        }, ...sentences.slice(1)];
                         setSentences(updatedSentences);
                       }}
-                      onBlur={() => finishEditing(index, s)} // 外側をクリックした時
+                      onBlur={() => {
+                        finishEditing(index, s.title)} // 外側をクリックした時
+                      }
                       ref={inputRef}
                       className=' p-1'  
                     />
                   </div>
                 :
-                  s
+                  s.title
                 }
               </div>
             )
