@@ -3,6 +3,7 @@
 import { useStore } from '@/store/store';
 import React, { useState } from 'react'
 import "../app/globals.css";
+import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
 
 type ModalCenterProps = {
   words: string[],
@@ -19,27 +20,23 @@ function ModalCenterComponent(props: ModalCenterProps) {
 
   const [userInput, setUserInput] = useState('');
 
-  // 背景とサイドバーをクリックしたときの処理
-  const handleCloseModal = () => flipCenterModal();
-  const handleModalClick = (e: any) => e.stopPropagation();
-
   // 日本語化
   const handleSave = () => {
     onSaveTranslation(selectedWordIndexes, userInput);
-    handleCloseModal();
+    handleCloseModal(flipCenterModal);
   }
 
   return (
     <div className={` fixed inset-0 flex items-center justify-center ${showCenterModal ? '' : ' pointer-events-none'}`}>
       {/* 背景 */}
       <div 
-        onClick={handleCloseModal} 
+        onClick={() => handleCloseModal(flipCenterModal)} 
         className={` fixed h-screen w-screen shadow-2lg bg-black/50 transition-opacity duration-300 ${ showCenterModal ? 'opacity-100' : 'opacity-0 pointer-events-none' }`}
       >
       </div>
       {/* ModalWindow */}
       <div 
-        onClick={handleModalClick} 
+        onClick={handleStopPropagation} 
         className={` fixed h-4/5 w-3/5 bg-white rounded-xl shadow-lg p-5 flex flex-col justify-start items-center gap-10 duration-300 ${ showCenterModal ? ' scale-100' : ' scale-0 pointer-events-none' }`}
       >
         <div className=' w-full'>
