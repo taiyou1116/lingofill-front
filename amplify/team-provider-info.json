@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-lingofill-dev-160603-authRole",
+      "UnauthRoleArn": "arn:aws:iam::490447595039:role/amplify-lingofill-dev-160603-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::490447595039:role/amplify-lingofill-dev-160603-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-lingofill-dev-160603-deployment",
+      "UnauthRoleName": "amplify-lingofill-dev-160603-unauthRole",
+      "StackName": "amplify-lingofill-dev-160603",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:490447595039:stack/amplify-lingofill-dev-160603/dc7b79c0-c7e2-11ee-b584-0a7e781c370b",
+      "AmplifyAppId": "d5yypxcoba5g4"
+    },
+    "categories": {
+      "auth": {
+        "lingofill36d8495a": {}
+      }
+    }
+  }
+}
