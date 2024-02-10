@@ -1,9 +1,16 @@
+"use client"
+
 import React from 'react'
 import { Authenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+import amplifyconfig from '../../amplifyconfiguration.json';
+import { Amplify } from "aws-amplify";
+
+Amplify.configure(amplifyconfig);
 
 function page() {
   return (
-    <div>
+    <div className=' py-5'>
       <Authenticator>
         {({ signOut, user }) => (
           <div>

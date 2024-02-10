@@ -5,6 +5,7 @@ import { AccountCircle, Reorder } from "@mui/icons-material";
 import { useStore } from '@/store/store';
 import { m_plus_rounded_1c_bold } from '@/store/fontStore';
 import Image from 'next/image';
+import Link from 'next/link';
 
 function HeaderComponent() {
   // store
@@ -23,8 +24,12 @@ function HeaderComponent() {
           </h1> 
         </div>
       </div>
-      <div className=' px-10'>
-        <AccountCircle style={{fontSize: 35}} />
+      <div 
+        className=' px-10'
+      >
+        <Link href={'/signIn'}>
+          <AccountCircle style={{fontSize: 35}} />
+        </Link>
       </div>
     </div>
   )
