@@ -6,6 +6,7 @@ import { useStore } from '@/store/store';
 import { m_plus_rounded_1c_bold } from '@/store/fontStore';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Tooltip } from './Tooltip';
 
 function HeaderComponent() {
   // store
@@ -28,8 +29,11 @@ function HeaderComponent() {
         className=' px-10'
       >
         <Link href={'/signIn'}>
-          <AccountCircle style={{fontSize: 35}} />
+          <Tooltip tooltipText="サインイン">
+            <AccountCircle style={{fontSize: 35}} />
+          </Tooltip>
         </Link>
+        
       </div>
     </div>
   )
