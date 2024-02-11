@@ -6,12 +6,12 @@ import { EditNote } from '@mui/icons-material';
 import { useEffect, useRef, useState } from 'react';
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
 import { Sentences } from '@/types/types';
+import { Tooltip } from './Tooltip';
 
 function SidebarComponent() {
   // store
   const showSidebar = useStore((store) => store.showSidebar);
   const flipShowSidebar = useStore((store) => store.flipShowSidebar);
-  // const showSidebar = useStore((store) => store.showSidebar);
   const setText = useStore((store) => store.setText);
 
   const [sentences, setSentences] = useState<Sentences[]>([
@@ -71,11 +71,14 @@ function SidebarComponent() {
         <div className=" break-all flex flex-col items-center gap-3">
           <div className=' flex justify-between w-full p-1'>
             <h1 className={`${m_plus_rounded_1c.className} text-lg`}>テキスト一覧</h1>
-            <button 
+            <Tooltip tooltipText='新規作成'>
+              <button 
               onClick={createNewSentence}
-              className=' border-2 rounded-lg p-0.5  hover:shadow-lg duration-100'>
+              className=' border-2 rounded-lg p-0.5  hover:border-slate-600 duration-150'>
               <EditNote style={{fontSize: 30}}/>
             </button>
+            </Tooltip>
+            
           </div>
           
           {/* Sentences */}

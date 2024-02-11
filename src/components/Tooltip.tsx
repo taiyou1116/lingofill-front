@@ -1,12 +1,10 @@
 import { memo, useRef, ReactNode } from "react";
 
-// ツールチップ内に表示するためのprops
 type Props = {
   tooltipText: string;
-  children: ReactNode; // childrenをPropsに追加
+  children: ReactNode;
 };
 
-// ツールチップ
 export const Tooltip: React.FC<Props> = memo((props) => {
   // ツールチップの文言自体のためのref
   const ref = useRef<HTMLDivElement>(null);

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .header-bg-height {
-  height: 8vh;
+  height:70px;
 }
 
 .modal-center-input {
