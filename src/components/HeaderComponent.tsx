@@ -28,8 +28,8 @@ function HeaderComponent() {
       <div 
         className=' px-10'
       >
-        <Link href={'/signIn'}>
-          <Tooltip tooltipText="サインイン">
+        <Link href={'/acount'}>
+          <Tooltip tooltipText="アカウント">
             <AccountCircle style={{fontSize: 35}} />
           </Tooltip>
         </Link>

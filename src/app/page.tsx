@@ -28,15 +28,7 @@ const MyApp = () => {
         <SentenceComponent />
       : 
         <div className=' py-5'>
-          <Authenticator>
-            {({ signOut, user }) => (
-              <div>
-                  <p>Welcome {user!.username}</p>
-                  
-                  <button onClick={signOut}>Sign out</button>
-              </div>
-            )}
-          </Authenticator>
+          <Authenticator />
         </div>
       }
     </div>

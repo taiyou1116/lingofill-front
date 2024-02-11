@@ -8,13 +8,14 @@ import { Amplify } from "aws-amplify";
 
 Amplify.configure(amplifyconfig);
 
-function SignIn() {
+function Acount() {
   return (
     <div className=' py-5'>
       <Authenticator>
         {({ signOut, user }) => (
           <div>
-              <p>Welcome {user!.username}</p>
+            {/* ユーザー詳細 */}
+              <p>Welcome {user!.signInDetails?.loginId}</p>
               
               <button onClick={signOut}>Sign out</button>
           </div>
@@ -24,4 +25,4 @@ function SignIn() {
   )
 }
 
-export default SignIn
+export default Acount
