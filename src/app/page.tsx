@@ -19,8 +19,6 @@ const App = () => {
 const MyApp = () => {
   const { route } = useAuthenticator((context) => [context.route]);
 
-  console.log(route);
-
   return (
     <div>
       { route === "authenticated"

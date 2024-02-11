@@ -18,12 +18,12 @@ function HeaderComponent() {
         <button onClick={flipShowSidebar}>
           <Reorder style={{fontSize: 35}} />
         </button>
-        <div className=' flex items-center cursor-pointer'>
+        <Link href={"/"} className=' flex items-center cursor-pointer'>
           <Image src="LF.svg" width="40" height="40" alt='ロゴ' />
           <h1 className={` text-xl ${m_plus_rounded_1c_bold.className}`}>
             Lingo Fill
           </h1> 
-        </div>
+        </Link>
       </div>
       <div 
         className=' px-10'

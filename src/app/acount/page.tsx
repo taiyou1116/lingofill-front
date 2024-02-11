@@ -13,11 +13,19 @@ function Acount() {
     <div className=' py-5'>
       <Authenticator>
         {({ signOut, user }) => (
-          <div>
-            {/* ユーザー詳細 */}
-              <p>Welcome {user!.signInDetails?.loginId}</p>
+          <div className=' flex items-center justify-center'>
+            <div>
+              {/* ユーザー詳細 */}
+              <p>email:  {user!.signInDetails?.loginId}</p>
+              <p>name:  { user!.username }</p>
               
-              <button onClick={signOut}>Sign out</button>
+              <button 
+                onClick={signOut}
+                className=' bg-red-500 py-2 px-4 rounded-lg'
+              >
+                Sign out
+              </button>
+            </div>
           </div>
         )}
       </Authenticator>
