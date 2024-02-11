@@ -73,10 +73,10 @@ function SidebarComponent() {
             <h1 className={`${m_plus_rounded_1c.className} text-lg`}>テキスト一覧</h1>
             <Tooltip tooltipText='新規作成'>
               <button 
-              onClick={createNewSentence}
-              className=' border-2 rounded-lg p-0.5  hover:border-slate-600 duration-150'>
-              <EditNote style={{fontSize: 30}}/>
-            </button>
+                onClick={createNewSentence}
+                className=' border-2 rounded-lg p-0.5  hover:border-slate-600 duration-150'>
+                <EditNote style={{fontSize: 30}}/>
+              </button>
             </Tooltip>
             
           </div>
