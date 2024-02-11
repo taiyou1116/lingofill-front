@@ -8,7 +8,7 @@ import { Amplify } from "aws-amplify";
 
 Amplify.configure(amplifyconfig);
 
-function page() {
+function SignIn() {
   return (
     <div className=' py-5'>
       <Authenticator>
@@ -19,9 +19,9 @@ function page() {
               <button onClick={signOut}>Sign out</button>
           </div>
         )}
-        </Authenticator>
+      </Authenticator>
     </div>
   )
 }
 
-export default page
+export default SignIn
