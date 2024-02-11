@@ -26,7 +26,7 @@ const MyApp = () => {
         <SentenceComponent />
       : 
         <div className=' py-5'>
-          <Authenticator />
+          <Authenticator socialProviders={['google']}/>
         </div>
       }
     </div>

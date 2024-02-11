@@ -11,7 +11,7 @@ Amplify.configure(amplifyconfig);
 function Acount() {
   return (
     <div className=' py-5'>
-      <Authenticator>
+      <Authenticator socialProviders={['google']}>
         {({ signOut, user }) => (
           <div className=' flex items-center justify-center'>
             <div>
