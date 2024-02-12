@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// export async function POST(req: NextRequest, res: NextResponse) {
-  
-// }
+export async function POST(req: NextRequest) {
+  const data = await req.json();
+  return NextResponse.json({ data })
+}
 
 // ユーザーリストを取得するAPI
-export function GET() {
+export async function GET() {
   return NextResponse.json([
     {
       id: 1,
@@ -17,3 +18,4 @@ export function GET() {
     },
   ]);
 }
+export const dynamic = 'force-static'

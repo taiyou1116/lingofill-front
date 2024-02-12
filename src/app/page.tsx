@@ -25,8 +25,8 @@ const MyApp = () => {
     <div>
       { route === "authenticated"
       ?
-        <GetTestData />
-        // <SendTestDataButton />
+        // <GetTestData />
+        <SendTestDataButton />
         // <SentenceComponent />
       : 
         <div className=' py-5'>
