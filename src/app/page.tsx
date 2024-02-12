@@ -6,6 +6,8 @@ import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { Amplify } from "aws-amplify";
 import awsExports from "../aws-exports";
+import SendTestDataButton from "@/components/SendTestDataButton";
+import GetTestData from "@/components/GetTestData";
 Amplify.configure(awsExports);
 
 const App = () => {
@@ -23,7 +25,9 @@ const MyApp = () => {
     <div>
       { route === "authenticated"
       ?
-        <SentenceComponent />
+        <GetTestData />
+        // <SendTestDataButton />
+        // <SentenceComponent />
       : 
         <div className=' py-5'>
           <Authenticator socialProviders={['google']}/>
