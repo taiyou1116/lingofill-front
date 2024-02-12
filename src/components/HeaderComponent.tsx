@@ -7,10 +7,12 @@ import { oswald } from '@/store/fontStore';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Tooltip } from './Tooltip';
+import SendTestDataButton from './SendTestDataButton';
 
 function HeaderComponent() {
   // store
   const flipShowSidebar = useStore((store) => store.flipShowSidebar);
+  const username = useStore((store) => store.username);
 
   return (
     <div className="header-bg-height bg-cyan-500 flex items-center justify-between shadow-xl">
@@ -26,8 +28,11 @@ function HeaderComponent() {
         </Link>
       </div>
       <div 
-        className=' px-10'
+        className=' flex px-10 gap-10'
       >
+        <SendTestDataButton 
+          username={username}
+        />
         <Link href={'/acount'}>
           <Tooltip tooltipText="アカウント">
             <AccountCircle style={{fontSize: 35}} />

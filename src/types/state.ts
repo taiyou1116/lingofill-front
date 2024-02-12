@@ -10,4 +10,8 @@ export type state = {
 
     text: string,
     setText: (text: string) => void,
+
+    // user情報
+    username: string,
+    setUsername: (username: string) => void,
 }

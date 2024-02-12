@@ -8,7 +8,7 @@ export async function GET() {
   console.log(data);
 }
 
-export async function POST() {
+export async function POST(username: string) {
   try {
     const response = await fetch("/api", {
       method: "POST",
@@ -16,7 +16,8 @@ export async function POST() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        pertition: 0,
+        pertition: username,
+        sort: Date.now().toString(),
       }),
     });
 

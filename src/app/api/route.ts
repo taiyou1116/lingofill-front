@@ -12,9 +12,9 @@ export async function POST(req: NextRequest) {
     TableName: "lingo-fill-db",
     Item: {
       // DynamoDBの属性定義に従ってアイテムを構成
-      "partitionKey": { N: data.pertition.toString() },
-      "sortKey": { N: data.pertition.toString() },
-      "test": { S: "テストだよん" },
+      "partitionKey": { S: data.pertition },
+      "sortKey": { S: data.sort },
+      "test": { S: "テストだよん2" },
     }
   };
 

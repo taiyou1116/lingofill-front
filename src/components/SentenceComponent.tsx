@@ -6,7 +6,6 @@ import React, { useState } from "react";
 
 function SentenceComponent() {
   const text = useStore((store) => store.text);
-  // const text = "In the realm of software development, a significant paradigm shift has been observed towards embracing cloud-native technologies. This transition is not merely a trend but a strategic move to leverage the inherent scalability, resilience, and flexibility offered by cloud platforms. As organizations migrate their infrastructures and applications to the cloud, they unlock new avenues for innovation and efficiency. This evolution is pivotal for staying competitive in today's fast-paced digital landscape, where the ability to rapidly adapt and respond to market demands is crucial for success.";
   // 英単語s
   const words = text.split(" ");
   // store
