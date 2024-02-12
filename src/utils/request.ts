@@ -15,7 +15,9 @@ export async function POST() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({body: "username"}),
+      body: JSON.stringify({
+        pertition: 0,
+      }),
     });
 
     if (!response.ok) {
