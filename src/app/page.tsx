@@ -6,7 +6,6 @@ import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { Amplify } from "aws-amplify";
 import awsExports from "../aws-exports";
-import SendTestDataButton from "@/components/SendTestDataButton";
 import GetTestData from "@/components/GetTestData";
 import { useStore } from "@/store/store";
 import { useEffect } from "react";

@@ -12,9 +12,9 @@ function SendTestDataButton(props: Props) {
   return ( 
     <button 
       onClick={() => POST(username)}
-      className=' bg-white rounded-lg py-2 px-4'
+      className=' bg-white rounded-lg py-2 px-4 hover:border border-slate-800'
     >
-      保存する
+      テキストを保存する
     </button>
   )
 }

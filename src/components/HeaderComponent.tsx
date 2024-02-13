@@ -1,3 +1,7 @@
+/** 上部ヘッダー 
+ * サイドバーの開閉, アカウント情報, textがあれば(ユーザーログイン & テキストを開いている)テキストの保存
+*/
+
 "use client"
 
 import React from 'react'
@@ -12,6 +16,7 @@ import SendTestDataButton from './SendTestDataButton';
 function HeaderComponent() {
   // store
   const flipShowSidebar = useStore((store) => store.flipShowSidebar);
+  const text = useStore((store) => store.text);
   const username = useStore((store) => store.username);
 
   return (
@@ -28,11 +33,18 @@ function HeaderComponent() {
         </Link>
       </div>
       <div 
-        className=' flex px-10 gap-10'
+        className=' flex px-10 gap-10 items-center'
       >
-        <SendTestDataButton 
-          username={username}
-        />
+        <div>
+        { text 
+          ?
+          <SendTestDataButton 
+            username={username}
+          />
+          :
+          ""
+        }
+        </div>
         <Link href={'/acount'}>
           <Tooltip tooltipText="アカウント">
             <AccountCircle style={{fontSize: 35}} />
