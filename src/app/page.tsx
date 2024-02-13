@@ -9,6 +9,7 @@ import awsExports from "../aws-exports";
 import GetTestData from "@/components/GetTestData";
 import { useStore } from "@/store/store";
 import { useEffect } from "react";
+import { GET } from "@/utils/request";
 Amplify.configure(awsExports);
 
 const App = () => {
@@ -20,13 +21,19 @@ const App = () => {
 };
 
 const MyApp = () => {
-  const { route, user } = useAuthenticator((context) => [context.route]);
+  const { route, user, } = useAuthenticator((context) => [context.route]);
 
   const setUsername = useStore((store) => store.setUsername);
 
   useEffect(() => {
     if (route === "authenticated") {
       setUsername(user.username);
+      
+      // texts更新(場所かえるかも)
+      const getTexts = async () => {
+        await GET();
+      }
+      getTexts();
     }
   }, [setUsername, route, user])
 

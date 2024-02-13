@@ -2,7 +2,7 @@
 
 import { useStore } from '@/store/store';
 import { m_plus_rounded_1c } from '@/store/fontStore';
-import { EditNote } from '@mui/icons-material';
+import { Autorenew, EditNote } from '@mui/icons-material';
 import { useEffect, useRef, useState } from 'react';
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
 import { Sentences } from '@/types/types';
@@ -69,8 +69,11 @@ function SidebarComponent() {
         onClick={handleStopPropagation}
       >
         <div className=" break-all flex flex-col items-center gap-3">
-          <div className=' flex justify-between w-full p-1'>
-            <h1 className={`${m_plus_rounded_1c.className} text-lg`}>テキスト一覧</h1>
+          <div className=' flex justify-between w-full p-1 items-center'>
+            <h1 className={`${m_plus_rounded_1c.className}`}>テキスト一覧</h1>
+            {/* <Tooltip tooltipText='テキストの更新'>
+              <Autorenew style={{fontSize: 20}}/>
+            </Tooltip> */}
             <Tooltip tooltipText='新規作成'>
               <button 
                 onClick={createNewSentence}
