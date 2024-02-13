@@ -1,14 +1,5 @@
-export async function GET() {
-  const res = await fetch('/api', {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-  const data = await res.json();
-  console.log(data);
-}
 
-export async function POST(username: string) {
+export async function postText(username: string) {
   try {
     const response = await fetch("/api", {
       method: "POST",
@@ -16,7 +7,7 @@ export async function POST(username: string) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        pertition: username,
+        partition: username,
         sort: Date.now().toString(),
       }),
     });
@@ -30,4 +21,21 @@ export async function POST(username: string) {
   } catch (error) {
     console.error(error);
   }
+}
+
+
+export async function getTexts(partition: string) {
+
+  // const url = new URL('/api', window.location.origin);
+  const baseUrl = 'http://localhost:3000/api'; // ここに適切なAPIエンドポイントを設定
+  const url = new URL(baseUrl);
+  url.searchParams.append('partition', partition);
+  
+  const res = await fetch(url.toString(), {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  const data = await res.json();
+  console.log(data);
 }

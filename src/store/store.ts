@@ -25,6 +25,5 @@ export const useStore = create<state>((set, get) => ({
     username: '',
     setUsername: (username: string) => {
         set({ username: username })
-        console.log(username);
     },
 }))

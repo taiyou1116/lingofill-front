@@ -1,5 +1,5 @@
 "use client"
-import { POST } from '@/utils/request';
+import { postText } from '@/utils/request';
 import React from 'react';
 
 type Props = {
@@ -11,7 +11,7 @@ function SendTestDataButton(props: Props) {
  
   return ( 
     <button 
-      onClick={() => POST(username)}
+      onClick={() => postText(username)}
       className=' bg-white rounded-lg py-2 px-4 hover:border border-slate-800'
     >
       テキストを保存する

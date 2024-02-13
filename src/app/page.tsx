@@ -6,10 +6,9 @@ import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { Amplify } from "aws-amplify";
 import awsExports from "../aws-exports";
-import GetTestData from "@/components/GetTestData";
 import { useStore } from "@/store/store";
 import { useEffect } from "react";
-import { GET } from "@/utils/request";
+import { getTexts } from "@/utils/request";
 Amplify.configure(awsExports);
 
 const App = () => {
@@ -30,10 +29,10 @@ const MyApp = () => {
       setUsername(user.username);
       
       // texts更新(場所かえるかも)
-      const getTexts = async () => {
-        await GET();
+      const getTextsAsync = async () => {
+        await getTexts(user.username);
       }
-      getTexts();
+      getTextsAsync();
     }
   }, [setUsername, route, user])
 
@@ -41,7 +40,6 @@ const MyApp = () => {
     <div>
       { route === "authenticated"
       ?
-        // <GetTestData />
         <SentenceComponent />
       : 
         <div className=' py-5'>
