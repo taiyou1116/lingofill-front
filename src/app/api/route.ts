@@ -40,6 +40,8 @@ export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
   const query = searchParams.get('partition');
   console.log(req.nextUrl);
+  // console.log(req.nextUrl.href);
+  // console.log(req.nextUrl.searchParams);
   console.log(query);
   if (!query) {
     return new Response(JSON.stringify({ error: "partitionKeyが必要です" }), {

@@ -25,13 +25,11 @@ export async function postText(username: string) {
 
 
 export async function getTexts(partition: string) {
-
-  // const url = new URL('/api', window.location.origin);
-  const baseUrl = 'http://localhost:3000/api'; // ここに適切なAPIエンドポイントを設定
+  const baseUrl = 'http://localhost:3000/api';
   const url = new URL(baseUrl);
-  url.searchParams.append('partition', partition);
+  url.searchParams.append('partition', 'test');
   
-  const res = await fetch(url.toString(), {
+  const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
     },
