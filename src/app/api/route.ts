@@ -49,35 +49,41 @@ export async function GET(req: NextRequest) {
       },
     });
   }
-
-  const params = {
-    TableName: "lingo-fill-db",
-    KeyConditionExpression: "#pk = :pk",
-    ExpressionAttributeNames: {
-      "#pk": "partitionKey",
+  return new Response(JSON.stringify({ message: query }), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json",
     },
-    ExpressionAttributeValues: {
-      ":pk": { S: query },
-    },
-  };
+  });
 
-  try {
-    const { Items } = await client.send(new QueryCommand(params));
-    return new Response(JSON.stringify(Items), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  } catch (error) {
-    console.error("DynamoDBからのアイテム取得中にエラーが発生しました:", error);
-    return new Response(JSON.stringify({ error: "サーバーエラー" }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
+  // const params = {
+  //   TableName: "lingo-fill-db",
+  //   KeyConditionExpression: "#pk = :pk",
+  //   ExpressionAttributeNames: {
+  //     "#pk": "partitionKey",
+  //   },
+  //   ExpressionAttributeValues: {
+  //     ":pk": { S: query },
+  //   },
+  // };
+
+  // try {
+  //   const { Items } = await client.send(new QueryCommand(params));
+  //   return new Response(JSON.stringify(Items), {
+  //     status: 200,
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+  // } catch (error) {
+  //   console.error("DynamoDBからのアイテム取得中にエラーが発生しました:", error);
+  //   return new Response(JSON.stringify({ error: "サーバーエラー" }), {
+  //     status: 500,
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+  // }
 }
 
 // export const dynamic = 'force-static'
