@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "lingofill36d8495a": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d5yypxcoba5g4",
+          "type": "cicd"
+        }
       }
     }
   }
