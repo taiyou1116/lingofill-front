@@ -27,7 +27,7 @@ export async function postText(username: string) {
 export async function getTexts(partition: string) {
   const baseUrl = 'http://localhost:3000/api';
   const url = new URL(baseUrl);
-  url.searchParams.append('partition', 'test');
+  url.searchParams.append('partition', partition);
   
   const res = await fetch(url, {
     headers: {
@@ -35,5 +35,5 @@ export async function getTexts(partition: string) {
     },
   });
   const data = await res.json();
-  console.log(data);
+  return data;
 }

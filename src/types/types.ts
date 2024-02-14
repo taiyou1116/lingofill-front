@@ -1,5 +1,5 @@
 // センテンスは題名と本文を含む
-export type Sentences = {
+export type Document = {
     title: string;
     text: string;
 };

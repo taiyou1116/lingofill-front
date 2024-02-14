@@ -1,3 +1,5 @@
+import { Document } from "./types"
+
 // アプリ全体で共有する状態の型
 export type state = {
     // サイドバー
@@ -14,4 +16,8 @@ export type state = {
     // user情報
     username: string,
     setUsername: (username: string) => void,
+
+    // 全てのセンテンス
+    documents: Document[],
+    setDocuments: (documents: Document[]) => void,
 }

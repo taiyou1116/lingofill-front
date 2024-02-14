@@ -9,6 +9,8 @@ import awsExports from "../aws-exports";
 import { useStore } from "@/store/store";
 import { useEffect } from "react";
 import { getTexts } from "@/utils/request";
+import { Document } from "@/types/types";
+
 Amplify.configure(awsExports);
 
 const App = () => {
@@ -19,10 +21,14 @@ const App = () => {
   );
 };
 
+export default App;
+
 const MyApp = () => {
   const { route, user, } = useAuthenticator((context) => [context.route]);
 
   const setUsername = useStore((store) => store.setUsername);
+  const documents = useStore((store) => store.documents);
+  const setDocuments = useStore((store) => store.setDocuments);
 
   useEffect(() => {
     if (route === "authenticated") {
@@ -30,11 +36,18 @@ const MyApp = () => {
       
       // texts更新(場所かえるかも)
       const getTextsAsync = async () => {
-        await getTexts(user.username);
+        const data = await getTexts(user.username);
+        const newDocuments: Document[] = data.map((d: any) => ({
+          title: d.test.S, // d.testの値をtitleに設定
+          text: "適当なテキスト", // textには固定の文字列または任意の値を設定
+        }));
+        
+        // setDocumentsを呼び出してdocuments状態を更新
+        setDocuments(newDocuments);
       }
       getTextsAsync();
     }
-  }, [setUsername, route, user])
+  }, [setUsername, route, user, setDocuments])
 
   return (
     <div>
@@ -49,5 +62,3 @@ const MyApp = () => {
     </div>
   )
 };
-
-export default App;

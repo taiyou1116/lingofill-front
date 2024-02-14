@@ -1,6 +1,7 @@
 // アプリ全体で共有する状態を管理
 
 import { state } from "@/types/state";
+import { Document } from "@/types/types";
 import { create } from "zustand";
 
 export const useStore = create<state>((set, get) => ({
@@ -26,4 +27,9 @@ export const useStore = create<state>((set, get) => ({
     setUsername: (username: string) => {
         set({ username: username })
     },
+
+    documents: [],
+    setDocuments: (documents: Document[]) => {
+        set({ documents: documents })
+    }
 }))
