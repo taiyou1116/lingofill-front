@@ -58,11 +58,11 @@ function SidebarComponent() {
   return (
     <div>
       <div 
-        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ${showSidebar ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        className={`fixed z-10 inset-0 bg-black bg-opacity-50 transition-opacity duration-300 ${showSidebar ? "opacity-100" : "opacity-0 pointer-events-none"}`}
         onClick={() => handleCloseModal(flipShowSidebar)}>
       </div>
       <div 
-        className={`fixed w-1/5 p-5 top-0 left-0 h-full bg-white shadow-2xl transition-transform duration-300 transform ${showSidebar ? "translate-x-0" : "-translate-x-full"}`}
+        className={`fixed z-10 w-1/5 p-5 top-0 left-0 h-full bg-white shadow-2xl transition-transform duration-300 transform ${showSidebar ? "translate-x-0" : "-translate-x-full"}`}
         onClick={handleStopPropagation}
       >
         <div className=" break-all flex flex-col items-center gap-3">

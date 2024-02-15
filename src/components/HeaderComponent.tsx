@@ -12,6 +12,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Tooltip } from './Tooltip';
 import SendDocumentDataButton from './SendDocumentDataButton';
+import ThreeWayToggle from './ThreeWayToggle';
 
 function HeaderComponent() {
   // store
@@ -31,6 +32,7 @@ function HeaderComponent() {
             Lingo Fill
           </h1> 
         </Link>
+        <ThreeWayToggle />
       </div>
       <div 
         className=' flex px-10 gap-10 items-center'

@@ -1,5 +1,7 @@
 実装
 
+textの入力
+- 編集モードの作成
 SidebarDocumentの作成
 suspenseでdocuments
 メモの追加
