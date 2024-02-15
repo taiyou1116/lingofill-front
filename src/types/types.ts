@@ -10,3 +10,6 @@ export type TranslationObj = {
     indexes: number[];
     translatedText: string;
 };
+
+// モード
+export type SelectedMode = 'preview' | 'edit' | 'input';

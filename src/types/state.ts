@@ -1,4 +1,4 @@
-import { Document } from "./types"
+import { Document, SelectedMode } from "./types"
 
 // アプリ全体で共有する状態の型
 export type state = {
@@ -21,4 +21,8 @@ export type state = {
     // 選択中のドキュメント
     document: Document | null,
     setDocument: (document: Document) => void,
+
+    // 選択中のモード
+    selectedmode: SelectedMode,
+    setSelectedMode: (select: SelectedMode) => void,
 }

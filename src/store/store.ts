@@ -1,7 +1,7 @@
 // アプリ全体で共有する状態を管理
 
 import { state } from "@/types/state";
-import { Document } from "@/types/types";
+import { Document, SelectedMode } from "@/types/types";
 import { create } from "zustand";
 
 export const useStore = create<state>((set, get) => ({
@@ -31,5 +31,10 @@ export const useStore = create<state>((set, get) => ({
     documents: [],
     setDocuments: (documents: Document[]) => {
         set({ documents: documents })
+    },
+
+    selectedmode: { selectedMode: 'preview' },
+    setSelectedMode: (seleltedmode: SelectedMode) => {
+        set({ selectedmode: seleltedmode })
     }
 }))

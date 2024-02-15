@@ -1,6 +1,6 @@
 "use client"
 
-import SentenceComponent from "@/components/SentenceComponent"
+import SentenceComponent from "@/components/document/DocumentComponent"
 import "./globals.css";
 import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
