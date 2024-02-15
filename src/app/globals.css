@@ -9,3 +9,9 @@
 .modal-center-input {
   height: 5vh;
 }
+
+::placeholder {
+	text-align: center;
+  /* height: 50px; */
+  font-size: 20px;
+}

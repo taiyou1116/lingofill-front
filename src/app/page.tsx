@@ -1,6 +1,6 @@
 "use client"
 
-import SentenceComponent from "@/components/document/DocumentComponent"
+import DocumentComponent from "@/components/document/DocumentComponent"
 import "./globals.css";
 import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
@@ -49,10 +49,10 @@ const MyApp = () => {
   }, [setUsername, route, user, setDocuments])
 
   return (
-    <div>
+    <div className=" h-full">
       { route === "authenticated"
       ?
-        <SentenceComponent />
+        <DocumentComponent />
       : 
         <div className=' py-5'>
           <Authenticator socialProviders={['google']}/>
