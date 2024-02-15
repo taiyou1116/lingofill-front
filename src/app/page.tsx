@@ -27,7 +27,6 @@ const MyApp = () => {
   const { route, user, } = useAuthenticator((context) => [context.route]);
 
   const setUsername = useStore((store) => store.setUsername);
-  const documents = useStore((store) => store.documents);
   const setDocuments = useStore((store) => store.setDocuments);
 
   useEffect(() => {
@@ -38,8 +37,8 @@ const MyApp = () => {
       const getTextsAsync = async () => {
         const data = await getTexts(user.username);
         const newDocuments: Document[] = data.map((d: any) => ({
-          title: d.test.S, // d.testの値をtitleに設定
-          text: "適当なテキスト", // textには固定の文字列または任意の値を設定
+          title: d.title.S, 
+          text: d.text.S,
         }));
         
         // setDocumentsを呼び出してdocuments状態を更新

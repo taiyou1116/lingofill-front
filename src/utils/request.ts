@@ -1,5 +1,5 @@
 
-export async function postText(username: string) {
+export async function postText(username: string, title: string, text: string) {
   try {
     const response = await fetch("/api", {
       method: "POST",
@@ -9,6 +9,8 @@ export async function postText(username: string) {
       body: JSON.stringify({
         partition: username,
         sort: Date.now().toString(),
+        title: title,
+        text: text,
       }),
     });
 

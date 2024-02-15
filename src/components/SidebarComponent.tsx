@@ -2,7 +2,7 @@
 
 import { useStore } from '@/store/store';
 import { m_plus_rounded_1c } from '@/store/fontStore';
-import { Autorenew, EditNote } from '@mui/icons-material';
+import { EditNote } from '@mui/icons-material';
 import { useEffect, useRef, useState } from 'react';
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
 import { Document } from '@/types/types';
@@ -12,7 +12,7 @@ function SidebarComponent() {
   // store
   const showSidebar = useStore((store) => store.showSidebar);
   const flipShowSidebar = useStore((store) => store.flipShowSidebar);
-  const setText = useStore((store) => store.setText);
+  const setDocument = useStore((store) => store.setDocument);
   const getDocuments = useStore((store) => store.documents);
 
   const [documents, setDocuments] = useState<Document[]>([]);
@@ -42,7 +42,7 @@ function SidebarComponent() {
   }
 
   const finishEditing = (index: number, value: string) => {
-    // sentences配列を更新
+    // documents配列を更新
     const newSentences = [...documents];
     newSentences[index].title = value;
     setDocuments(newSentences);
@@ -51,7 +51,7 @@ function SidebarComponent() {
   };
 
   const openSentence = (index: number) => {
-    setText(documents[index].text);
+    setDocument(documents[index]);
     console.log(documents[index]);
   }
 
@@ -78,7 +78,6 @@ function SidebarComponent() {
             
           </div>
           
-          {/* Sentences */}
           { documents.map((document, index) => {
             return (
               <div 

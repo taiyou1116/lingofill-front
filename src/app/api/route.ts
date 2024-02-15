@@ -14,7 +14,8 @@ export async function POST(req: NextRequest) {
       // DynamoDBの属性定義に従ってアイテムを構成
       "partitionKey": { S: data.partition },
       "sortKey": { S: data.sort },
-      "test": { S: "テストだよん2" },
+      "title": { S: data.title },
+      "text": { S: data.text },
     }
   };
 

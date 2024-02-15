@@ -11,12 +11,12 @@ import { oswald } from '@/store/fontStore';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Tooltip } from './Tooltip';
-import SendTestDataButton from './SendTestDataButton';
+import SendDocumentDataButton from './SendDocumentDataButton';
 
 function HeaderComponent() {
   // store
   const flipShowSidebar = useStore((store) => store.flipShowSidebar);
-  const text = useStore((store) => store.text);
+  const document = useStore((store) => store.document);
   const username = useStore((store) => store.username);
 
   return (
@@ -36,11 +36,13 @@ function HeaderComponent() {
         className=' flex px-10 gap-10 items-center'
       >
         <div>
-        { text 
+        { document 
           ?
-          <SendTestDataButton 
-            username={username}
-          />
+            <SendDocumentDataButton 
+              username={username}
+              title={document.title}
+              text={document.text}
+            />
           :
           ""
         }

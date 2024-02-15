@@ -10,14 +10,15 @@ export type state = {
     showCenterModal: boolean,
     flipCenterModal: () => void,
 
-    text: string,
-    setText: (text: string) => void,
-
     // user情報
     username: string,
     setUsername: (username: string) => void,
 
-    // 全てのセンテンス
+    // 全てのドキュメント
     documents: Document[],
     setDocuments: (documents: Document[]) => void,
+
+    // 選択中のドキュメント
+    document: Document | null,
+    setDocument: (document: Document) => void,
 }

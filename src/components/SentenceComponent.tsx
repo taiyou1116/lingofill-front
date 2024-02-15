@@ -5,9 +5,9 @@ import { TranslationObj } from "@/types/types";
 import React, { useState } from "react";
 
 function SentenceComponent() {
-  const text = useStore((store) => store.text);
+  const text = useStore((store) => store.document?.text);
   // 英単語s
-  const words = text.split(" ");
+  const words = text?.split(" ");
   // store
   const showCenterModal = useStore((store) => store.showCenterModal);
   const flipCenterModal = useStore((store) => store.flipCenterModal);
@@ -86,7 +86,7 @@ function SentenceComponent() {
 
   return (
     <div className="p-5 break-all" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
-      {words.map((word, index) => {
+      {words?.map((word, index) => {
         // すでに日本語訳されているか確認
         const translation = translations.find(translation => translation.indexes.includes(index));
 

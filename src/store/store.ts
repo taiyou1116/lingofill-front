@@ -18,9 +18,9 @@ export const useStore = create<state>((set, get) => ({
     },
 
     // 選択されているtext
-    text: '',
-    setText: (text: string) => {
-        set({ text: text })
+    document: null,
+    setDocument: (document: Document) => {
+        set({ document: document })
     },
 
     username: '',

@@ -6,7 +6,7 @@ import "../app/globals.css";
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
 
 type ModalCenterProps = {
-  words: string[],
+  words: string[] | undefined,
   selectedWordIndexes: number[],
   onSaveTranslation: (selectedWordIndexes: number[], input: string) => void,
 }
@@ -43,7 +43,7 @@ function ModalCenterComponent(props: ModalCenterProps) {
           <div>翻訳</div>
           <div className=' w-full flex justify-center items-center gap-3'>
             { selectedWordIndexes.map((index) => {
-              return <span key={index}>{words[index]}</span>
+              return <span key={index}>{words![index]}</span>
             }) } 
             →
             <input 
