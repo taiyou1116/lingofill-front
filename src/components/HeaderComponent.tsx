@@ -32,26 +32,18 @@ function HeaderComponent() {
             Lingo Fill
           </h1> 
         </Link>
-        { document 
-            ?
-              <ThreeWayToggle />
-            :
-            ""
-          }
+        { document ? <ThreeWayToggle /> : "" }
       </div>
       <div 
         className=' flex px-10 gap-10 items-center'
       >
         <div>
-          { document 
-            ?
-              <SendDocumentDataButton 
-                username={username}
-                title={document.title}
-                text={document.text}
-              />
-            :
-            ""
+          { document ?
+            <SendDocumentDataButton 
+              username={username}
+              title={document.title}
+              text={document.text}
+            /> : "" 
           }
         </div>
         <Link href={'/acount'}>

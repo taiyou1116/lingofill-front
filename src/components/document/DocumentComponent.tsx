@@ -2,7 +2,7 @@
 import ModalCenterComponent from "@/components/ModalCenterComponent";
 import { useStore } from "@/store/store";
 import { Document, TranslationObj } from "@/types/types";
-import React, { ChangeEventHandler, useState } from "react";
+import React, { useState } from "react";
 import TranslateDocument from "./TranslateDocument";
 
 function DocumentComponent() {

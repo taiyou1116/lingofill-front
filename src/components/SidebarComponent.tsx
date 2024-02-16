@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
 import { Document } from '@/types/types';
 import { Tooltip } from './Tooltip';
+import { Skeleton, Typography } from '@mui/material';
 
 function SidebarComponent() {
   // store
@@ -74,44 +75,56 @@ function SidebarComponent() {
                 className=' border-2 rounded-lg p-0.5  hover:border-slate-600 duration-150'>
                 <EditNote style={{fontSize: 30}}/>
               </button>
-            </Tooltip>
-            
+            </Tooltip> 
           </div>
-          
-          { documents.map((document, index) => {
-            return (
-              <div 
-                key={index} 
-                onClick={() => openSentence(index)}
-                className=' bg-slate-100 h-full w-full p-3 cursor-pointer hover:shadow-lg duration-100'>
-                { inputNameIndex === index
-                ?
-                  <div>
-                    <input 
-                      type='text' 
-                      value={documents[0].title}
-                      onChange={(e) => {
-                        // 最初の要素を更新し、残りの要素をそのまま配列に含める新しい配列を作成
-                        const updatedDocuments = [{
-                          title: e.target.value,
-                          // 元々の値に戻す
-                          text: "",
-                        }, ...documents.slice(1)];
-                        setDocuments(updatedDocuments);
-                      }}
-                      onBlur={() => {
-                        finishEditing(index, document.title)} // 外側をクリックした時
-                      }
-                      ref={inputRef}
-                      className=' p-1'  
-                    />
-                  </div>
-                :
-                document.title
-                }
-              </div>
-            )
-          }) }
+
+          {/* コンポーネントを分ける */}
+          { documents.length === 0
+          ?
+            <Typography 
+              variant="h3"
+              className=' w-full'
+            >
+              {<Skeleton />}
+              {<Skeleton />}
+              {<Skeleton />}
+            </Typography>
+          :
+            documents.map((document, index) => {
+              return (
+                <div 
+                  key={index} 
+                  onClick={() => openSentence(index)}
+                  className=' bg-slate-100 h-full w-full p-3 cursor-pointer hover:shadow-lg duration-100'>
+                  { inputNameIndex === index
+                  ?
+                    <div>
+                      <input 
+                        type='text' 
+                        value={documents[0].title}
+                        onChange={(e) => {
+                          // 最初の要素を更新し、残りの要素をそのまま配列に含める新しい配列を作成
+                          const updatedDocuments = [{
+                            title: e.target.value,
+                            // 元々の値に戻す
+                            text: "",
+                          }, ...documents.slice(1)];
+                          setDocuments(updatedDocuments);
+                        }}
+                        onBlur={() => {
+                          finishEditing(index, document.title)} // 外側をクリックした時
+                        }
+                        ref={inputRef}
+                        className=' p-1'  
+                      />
+                    </div>
+                  :
+                  document.title
+                  }
+                </div>
+              )
+            })
+          }
         </div>
       </div>
     </div>

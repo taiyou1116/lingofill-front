@@ -24,7 +24,6 @@ export default function RootLayout({
         <SidebarComponent />
         <div className=" h-screen w-screen">
           <HeaderComponent />
-          {/* コンテンツの中身 */}
           <div className=" h-5/6">{children}</div>
       </div>  
       </body>
