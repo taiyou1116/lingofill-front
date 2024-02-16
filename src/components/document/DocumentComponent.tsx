@@ -1,8 +1,8 @@
 "use client"
 import ModalCenterComponent from "@/components/ModalCenterComponent";
 import { useStore } from "@/store/store";
-import { TranslationObj } from "@/types/types";
-import React, { useState } from "react";
+import { Document, TranslationObj } from "@/types/types";
+import React, { ChangeEventHandler, useState } from "react";
 import TranslateDocument from "./TranslateDocument";
 
 function DocumentComponent() {
@@ -11,12 +11,24 @@ function DocumentComponent() {
   const words = text?.split(" ");
   // store
   const selectedmode = useStore((store) => store.selectedmode);
+  const document = useStore((store) => store.document);
+  const setDocument = useStore((store) => store.setDocument);
+
+  // 一回このcomponentで監視用documentを作る。保存の時にsetDocumentすればいいのかも
   
   // // ドラッグ処理(熟語処理)
-  // const [isDragging, setIsDragging] = useState(false);
   const [selectedWordsIndexes, setSelectedWordsIndexes] = useState<number[]>([]);
   // 翻訳管理(日本語化された単語)
   const [translations, setTranslations] = useState<TranslationObj[]>([]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const d: Document = {
+      title: document!.title,
+      text: e.target.value,
+    }
+    console.log(d.text);
+    setDocument(d);
+  }
 
   const handleTranslasiton = (selectedWordIndexes: number[], userInput: string) => {
     const newTranslation = userInput;
@@ -46,24 +58,48 @@ function DocumentComponent() {
     setTranslations(updatedTranslations);
   };
 
+  const renderContentByMode = () => {
+    if (document === null) {
+      return (
+        <div>テキストを選択もしくは作成してください。</div>
+      )
+    }
+
+    switch (selectedmode) {
+      case 'edit':
+        return (
+          <TranslateDocument 
+            words={words}
+            translations={translations}
+            selectedWordsIndexes={selectedWordsIndexes}
+            setSelectedWordsIndexes={setSelectedWordsIndexes}
+          />
+        );
+        case 'preview':
+        return (
+          <div className=" h-full">
+            preview
+          </div>
+        );
+      case 'input':
+        return (
+          <div className=" h-full">
+            <textarea
+              className=" resize-none h-full w-full p-1 border-2"
+              placeholder="原文をペースト (Ctrl + V)" 
+              value={document?.text}
+              onChange={handleChange}
+            />
+          </div>
+        );
+      default:
+        return <div>不明なモードです。</div>;
+    }
+  }
+
   return (
     <div className=" h-full p-5">
-      { selectedmode === 'edit' 
-      ?
-        <TranslateDocument 
-          words={words}
-          translations={translations}
-          selectedWordsIndexes={selectedWordsIndexes}
-          setSelectedWordsIndexes={setSelectedWordsIndexes}
-        />
-      :
-        <div className=" h-full">
-          <textarea
-            className=" resize-none h-full w-full p-1 border-2"
-            placeholder="原文を入力 Ctrl + V" 
-          />
-        </div>
-      }
+      { renderContentByMode() }
 
       <div>
         <ModalCenterComponent 

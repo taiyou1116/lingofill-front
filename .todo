@@ -2,6 +2,7 @@
 
 textの入力
 - 編集モードの作成
+最初からModeUIが表示されている問題
 SidebarDocumentの作成
 suspenseでdocuments
 メモの追加
