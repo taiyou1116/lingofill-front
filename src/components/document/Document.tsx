@@ -44,7 +44,7 @@ function DocumentComponent() {
         return (
           <div className=" h-full">
             <textarea
-              className=" resize-none h-full w-full p-1 border-2"
+              className=" resize-none h-full w-full p-1 border-2 origin-input"
               placeholder="原文をペースト (Ctrl + V)" 
               value={document?.text}
               onChange={inputOriginalText}

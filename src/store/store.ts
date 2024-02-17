@@ -33,7 +33,7 @@ export const useStore = create<state>((set, get) => ({
         set({ documents: documents })
     },
 
-    selectedmode: { selectedMode: 'preview' },
+    selectedmode: 'input',
     setSelectedMode: (seleltedmode: SelectedMode) => {
         set({ selectedmode: seleltedmode })
     }
