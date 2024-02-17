@@ -10,7 +10,7 @@ import { useStore } from '@/store/store';
 import { oswald } from '@/store/fontStore';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Tooltip } from './Tooltip';
+import { Tooltip } from '../Tooltip';
 import SendDocumentDataButton from './SendDocumentDataButton';
 import ThreeWayToggle from './ThreeWayToggle';
 

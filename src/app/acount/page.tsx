@@ -23,7 +23,7 @@ function Acount() {
                 onClick={signOut}
                 className=' bg-red-500 py-2 px-4 rounded-lg'
               >
-                Sign out
+                サインアウト
               </button>
             </div>
           </div>

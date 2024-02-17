@@ -1,24 +1,26 @@
 import React, { useState } from "react";
 import { useStore } from "@/store/store";
 import { TranslationObj } from "@/types/types";
+import ModalCenterComponent from "../ModalCenterComponent";
+import TranslateModal from "./TranslateModal";
 
 type TranslateDocumentType = {
-    words: string[] | undefined,
-    translations: TranslationObj[],
-    setSelectedWordsIndexes: React.Dispatch<React.SetStateAction<number[]>>,
-    selectedWordsIndexes: number[],
+  words: string[] | undefined,
 }
 
 function TranslateDocument(props: TranslateDocumentType) {
-  const { words, translations, selectedWordsIndexes, setSelectedWordsIndexes} = props;
-    // store
+  const { words } = props;
+  
   const showCenterModal = useStore((store) => store.showCenterModal);
   const flipCenterModal = useStore((store) => store.flipCenterModal);
+
+  // ドラッグ処理(熟語処理) // 翻訳管理(日本語化された単語)
+  const [selectedWordsIndexes, setSelectedWordsIndexes] = useState<number[]>([]);
+  const [translations, setTranslations] = useState<TranslationObj[]>([]);
   
-  // ドラッグ処理(熟語処理)
   const [isDragging, setIsDragging] = useState(false);
   
-    // 単語をクリックして編集
+  // 単語編集処理
   const handleClick = (index: number) => {
     if (showCenterModal) return;
 
@@ -28,33 +30,32 @@ function TranslateDocument(props: TranslateDocumentType) {
     } else {
       setSelectedWordsIndexes([index]);
     }
-    // ここでModalを開く
     flipCenterModal();
   };
 
-    const handleMouseDown = () => {
-        if (showCenterModal) return;
-        setIsDragging(true);
-        setSelectedWordsIndexes([]);
-      };
-    
-      const handleMouseMove = (index: number) => {
-        if (showCenterModal) return;
-        if (!isDragging) return;
-        setSelectedWordsIndexes((prev) => {
-          // 重複選択を避けるために新しいインデックスだけを追加
-          return prev.includes(index) ? prev : [...prev, index];
-        });
-      };
-    
-      const handleMouseUp = () => {
-        if (showCenterModal) return;
-        setIsDragging(false);
-        if (selectedWordsIndexes.length >= 2) {
-          // ここでModalを開く
-          flipCenterModal();
-        }
-      };
+  // 熟語編集処理(Down Move Up)
+  const handleMouseDown = () => {
+    if (showCenterModal) return;
+    setIsDragging(true);
+    setSelectedWordsIndexes([]);
+  };
+  
+  const handleMouseMove = (index: number) => {
+    if (showCenterModal) return;
+    if (!isDragging) return;
+    setSelectedWordsIndexes((prev) => {
+      // 重複選択を避けるために新しいインデックスだけを追加
+      return prev.includes(index) ? prev : [...prev, index];
+    });
+  };
+
+  const handleMouseUp = () => {
+    if (showCenterModal) return;
+    setIsDragging(false);
+    if (selectedWordsIndexes.length >= 2) {
+      flipCenterModal();
+    }
+  };
 
   return (
     <div className="break-all" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
@@ -62,12 +63,12 @@ function TranslateDocument(props: TranslateDocumentType) {
         // すでに日本語訳されているか確認
         const translation = translations.find(translation => translation.indexes.includes(index));
 
-        // 単語、熟語の一文字目か確認
+        // 単語 or 熟語の一文字目か確認
         if (translation && translation.indexes[0] === index) {
           return (
             <span
               key={index}
-              onClick={() => handleClick(index)} // 熟語選択のロジックが必要
+              onClick={() => handleClick(index)}
               onMouseMove={() => handleMouseMove(index)}
               className={`py-0.5 px-2 cursor-pointer bg-slate-200 rounded-md`}
             >
@@ -88,6 +89,15 @@ function TranslateDocument(props: TranslateDocumentType) {
           );
         }
       })}
+
+      <div>
+        <TranslateModal 
+          words={words}
+          selectedWordIndexes={selectedWordsIndexes}
+          translations={translations}
+          setTranslations={setTranslations}
+        />
+      </div>
     </div>
   )
 }
