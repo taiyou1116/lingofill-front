@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useStore } from "@/store/store";
 import { TranslationObj } from "@/types/types";
-import ModalCenterComponent from "../ModalCenterComponent";
 import TranslateModal from "./TranslateModal";
 
 type TranslateDocumentType = {

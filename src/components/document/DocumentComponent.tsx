@@ -1,7 +1,6 @@
 "use client"
 import { useStore } from "@/store/store";
 import { Document } from "@/types/types";
-import React from "react";
 import TranslateDocument from "./TranslateDocument";
 
 function DocumentComponent() {

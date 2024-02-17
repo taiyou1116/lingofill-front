@@ -1,6 +1,5 @@
 "use client"
 
-import React from 'react'
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 import amplifyconfig from '../../amplifyconfiguration.json';

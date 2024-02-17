@@ -4,7 +4,6 @@
 
 "use client"
 
-import React from 'react'
 import { AccountCircle, Reorder } from "@mui/icons-material";
 import { useStore } from '@/store/store';
 import { oswald } from '@/store/fontStore';

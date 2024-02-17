@@ -1,3 +1,5 @@
+"use client"
+
 import { memo, useRef, ReactNode } from "react";
 
 type Props = {

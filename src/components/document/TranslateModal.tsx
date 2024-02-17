@@ -3,7 +3,7 @@
 import { useStore } from '@/store/store';
 import React, { useState } from 'react'
 import "../../app/globals.css";
-import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
+import { handleCloseModal } from '@/utils/modal';
 import { TranslationObj } from '@/types/types';
 import ModalCenterComponent from '../ModalCenterComponent';
 
@@ -16,9 +16,7 @@ type ModalCenterProps = {
 
 function TranslateModal(props: ModalCenterProps) {
   const { words, selectedWordIndexes, translations, setTranslations } = props;
-
   const flipCenterModal = useStore((store) => store.flipCenterModal);
-
   const [userInput, setUserInput] = useState('');
 
   // 日本語化ボタン

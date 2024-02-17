@@ -1,6 +1,4 @@
-"use client"
 import { postText } from '@/utils/request';
-import React from 'react';
 
 type Props = {
   username: string,

@@ -1,7 +1,7 @@
 "use client"
 
 import { useStore } from '@/store/store';
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import "../app/globals.css";
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
 
