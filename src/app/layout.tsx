@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { m_plus_rounded_1c } from "@/store/fontStore";
 import "./globals.css";
-import SidebarComponent from "@/components/SidebarComponent";
-import HeaderComponent from "@/components/header/HeaderComponent";
+import SidebarComponent from "@/components/sidebar/Sidebar";
+import HeaderComponent from "@/components/header/Header";
 import Head from "next/head";
 
 export const metadata: Metadata = {

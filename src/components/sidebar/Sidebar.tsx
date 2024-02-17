@@ -6,7 +6,7 @@ import { EditNote } from '@mui/icons-material';
 import { useEffect, useRef, useState } from 'react';
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
 import { Document } from '@/types/types';
-import { Tooltip } from './Tooltip';
+import { Tooltip } from '../Tooltip';
 import { Skeleton, Typography } from '@mui/material';
 
 function SidebarComponent() {

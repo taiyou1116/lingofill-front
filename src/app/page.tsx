@@ -1,6 +1,6 @@
 "use client"
 
-import DocumentComponent from "@/components/document/DocumentComponent"
+import DocumentComponent from "@/components/document/Document"
 import "./globals.css";
 import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";

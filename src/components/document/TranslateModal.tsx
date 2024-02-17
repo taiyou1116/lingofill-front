@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import "../../app/globals.css";
 import { handleCloseModal } from '@/utils/modal';
 import { TranslationObj } from '@/types/types';
-import ModalCenterComponent from '../ModalCenterComponent';
+import ModalCenterComponent from '../ModalCenter';
 
 type ModalCenterProps = {
   words: string[] | undefined,
