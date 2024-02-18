@@ -15,16 +15,21 @@ function DocumentComponent() {
   const document = useStore((store) => store.document);
   const setDocument = useStore((store) => store.setDocument);
   const username = useStore((store) => store.username);
-
-  // inputModeでの入力処理
+  // const documents = useStore((store) => store.documents);
+  // const setDocuments = useStore((store) => store.setDocuments);
+  
   const inputOriginalText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const d: Document = {
-      sortKey: document!.sortKey,
-      title: document!.title,
-      text: e.target.value,
-    }
-    setDocument(d);
-  }
+    const updatedText = e.target.value;
+    updateDocumentLocally(updatedText);
+  };
+
+  const updateDocumentLocally = (updatedText: string) => {
+    const updatedDocument: Document = {
+      ...document!,
+      text: updatedText,
+    };
+    setDocument(updatedDocument);
+  };
 
   const renderContentByMode = () => {
     if (document === null) {
