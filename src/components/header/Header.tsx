@@ -12,6 +12,7 @@ import Link from 'next/link';
 import { Tooltip } from '../Tooltip';
 import SendDocumentDataButton from './SendDocumentDataButton';
 import ThreeWayToggle from './ThreeWayToggle';
+import { Toaster } from "react-hot-toast";
 
 function HeaderComponent() {
   // store
@@ -33,12 +34,11 @@ function HeaderComponent() {
         </Link>
         { document ? <ThreeWayToggle /> : "" }
       </div>
-      <div 
-        className=' flex px-10 gap-10 items-center'
-      >
+      <div className=' flex px-10 gap-10 items-center'>
         <div>
           { document ?
             <SendDocumentDataButton 
+              sortKey={document.sortKey}
               username={username}
               title={document.title}
               text={document.text}
@@ -51,6 +51,10 @@ function HeaderComponent() {
           </Tooltip>
         </Link>
       </div>
+      <Toaster 
+        position="top-center"
+        reverseOrder={false}
+      />
     </div>
   )
 }

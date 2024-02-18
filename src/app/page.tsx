@@ -37,6 +37,7 @@ const MyApp = () => {
       const getTextsAsync = async () => {
         const data = await getTexts(user.username);
         const newDocuments: Document[] = data.map((d: any) => ({
+          sortKey: d.sortKey.S,
           title: d.title.S, 
           text: d.text.S,
         }));

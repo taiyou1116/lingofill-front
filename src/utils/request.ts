@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 
 export async function postText(username: string, title: string, text: string) {
   try {
@@ -19,9 +20,37 @@ export async function postText(username: string, title: string, text: string) {
     }
 
     const data = await response.json();
-    console.log(data);
+    toast.success('テキストを保存しました。');
+    return data.sort;
   } catch (error) {
     console.error(error);
+  }
+}
+
+export async function updateText(partition: string, sort: string, title: string, text: string) {
+  try {
+    const response = await fetch(`/api`, {
+      method: "PUT", // または "PATCH"、バックエンドの設定による
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        partition: partition,
+        sort: sort,
+        title: title,
+        text: text,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Response is not OK");
+    }
+
+    const data = await response.json();
+    toast.success("テキストが更新されました。");
+  } catch (error) {
+    console.error(error);
+    toast.error("テキストの更新に失敗しました。");
   }
 }
 

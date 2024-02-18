@@ -1,7 +1,7 @@
 import { useStore } from '@/store/store';
 import { Document } from '@/types/types'
 import { handleStopPropagation } from '@/utils/modal';
-import { ModeEdit } from '@mui/icons-material';
+import { Delete, ModeEdit } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 
@@ -23,6 +23,8 @@ function SidebarDocuments(props: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [input, setInput] = useState<string>('');
 
+  // const [sidebarDocuments, setSidebarDocuments] = useState<Document[]>([]);
+
   useEffect(() => {
     if (inputNameIndex !== -1 && inputRef.current) {
       inputRef.current.focus();
@@ -38,7 +40,12 @@ function SidebarDocuments(props: Props) {
   const finishEditing = (index: number, value: string) => {
     // documents配列を更新
     const newSentences = [...documents];
-    newSentences[index].title = value;
+
+    if (!value) {
+      newSentences[index].title = 'テキスト ' + documents.length;
+    } else {
+      newSentences[index].title = value;
+    }
     setDocuments(newSentences);
 
     setInputNameIndex(-1);
@@ -47,6 +54,10 @@ function SidebarDocuments(props: Props) {
   const editTitle = (index: number) => {
     setInput(documents[index].title);
     setInputNameIndex(index);
+  }
+
+  const deleteText = () => {
+
   }
 
   return (
@@ -79,10 +90,15 @@ function SidebarDocuments(props: Props) {
               :
                 <div className=' flex justify-between'>
                   { document.title }
-                  <div onClick={handleStopPropagation}>
+                  <div onClick={handleStopPropagation} className=' flex gap-0.5 pl-1'>
                     <Tooltip title='テキスト名を変更'>
                       <button onClick={() => editTitle(index)}>
                         <ModeEdit style={{fontSize: 15}} />
+                      </button>
+                    </Tooltip>
+                    <Tooltip title='テキストを削除'>
+                      <button onClick={() => deleteText()}>
+                        <Delete style={{fontSize: 15}} color='error' />
                       </button>
                     </Tooltip>
                   </div>

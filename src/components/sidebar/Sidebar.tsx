@@ -27,6 +27,7 @@ function SidebarComponent() {
 
   const createNewSentence = () => {
     setDocuments([{
+      sortKey: "",
       title: "",
       text: "",
     } , ...documents]);

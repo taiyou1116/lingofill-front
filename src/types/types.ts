@@ -1,5 +1,6 @@
 // センテンスは題名と本文を含む
 export type Document = {
+    sortKey: string,
     title: string;
     text: string;
 };
