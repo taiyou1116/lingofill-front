@@ -1,36 +1,36 @@
 import toast from "react-hot-toast";
 
-export async function postText(username: string, title: string, text: string) {
-  try {
-    const response = await fetch("/api", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        partition: username,
-        sort: Date.now().toString(),
-        title: title,
-        text: text,
-      }),
-    });
+// export async function postText(username: string, title: string, text: string) {
+//   try {
+//     const response = await fetch("/api", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({
+//         partition: username,
+//         sort: Date.now().toString(),
+//         title: title,
+//         text: text,
+//       }),
+//     });
 
-    if (!response.ok) {
-      throw new Error("Response is not OK");
-    }
+//     if (!response.ok) {
+//       throw new Error("Response is not OK");
+//     }
 
-    const data = await response.json();
-    toast.success('テキストを保存しました。');
-    return data.sort;
-  } catch (error) {
-    console.error(error);
-  }
-}
+//     const data = await response.json();
+//     toast.success('テキストを保存しました。');
+//     return data.sort;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
 
 export async function updateText(partition: string, sort: string, title: string, text: string) {
   try {
     const response = await fetch(`/api`, {
-      method: "PUT", // または "PATCH"、バックエンドの設定による
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },

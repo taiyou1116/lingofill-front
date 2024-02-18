@@ -22,16 +22,11 @@ function SidebarComponent() {
     setDocuments(getDocuments);
   }, [getDocuments, setDocuments])
 
-  // どのSentenceが入力中か判定
-  const [inputNameIndex, setInputNameIndex] = useState<number>(-1);
+  const [createNewDocument, setCreateNewDocument] = useState<boolean>(false);
 
+  // documentの作成ではなく、inputのみ作成 -> titleが付けられた時点でdocumentsに格納
   const createNewSentence = () => {
-    setDocuments([{
-      sortKey: "",
-      title: "",
-      text: "",
-    } , ...documents]);
-    setInputNameIndex(0);
+    setCreateNewDocument(true);
   }
 
   return (
@@ -71,10 +66,10 @@ function SidebarComponent() {
           :
             <SidebarDocuments 
               documents={documents}
-              inputNameIndex={inputNameIndex}
-              setInputNameIndex={setInputNameIndex}
               setDocuments={setDocuments}
               flipShowSidebar={flipShowSidebar}
+              createNewDocument={createNewDocument}
+              setCreateNewDocument={setCreateNewDocument}
             />
           }
         </div>

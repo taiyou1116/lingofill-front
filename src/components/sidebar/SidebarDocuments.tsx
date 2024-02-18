@@ -7,34 +7,49 @@ import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 're
 
 type Props = {
   documents: Document[]
-  inputNameIndex: number,
   setDocuments: Dispatch<SetStateAction<Document[]>>,
-  setInputNameIndex: Dispatch<SetStateAction<number>>,
   flipShowSidebar: () => void,
+  createNewDocument: boolean,
+  setCreateNewDocument: Dispatch<SetStateAction<boolean>>,
 }
 
-// documentは選択中のドキュメントであり、名前編集中のdocumentと一致するとは限らない
-
 function SidebarDocuments(props: Props) {
-  const { documents, inputNameIndex, setInputNameIndex, setDocuments, flipShowSidebar } = props;
+  const { documents, setDocuments, flipShowSidebar, createNewDocument, setCreateNewDocument } = props;
 
   const setDocument = useStore((store) => store.setDocument);
 
+  const [inputNameIndex, setInputNameIndex] = useState<number>(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const [input, setInput] = useState<string>('');
-
-  // const [sidebarDocuments, setSidebarDocuments] = useState<Document[]>([]);
 
   useEffect(() => {
     if (inputNameIndex !== -1 && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [inputNameIndex]);
+    if (createNewDocument && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [inputNameIndex, createNewDocument]);
 
   const openSentence = (index: number) => {
     // Sidebarを閉じる処理追加
     flipShowSidebar();
     setDocument(documents[index]);
+  }
+
+  const createNewDocumentBlur = (input: string) => {
+    if (input === '') {
+      setCreateNewDocument(false);
+      return;
+    }
+    const newDocument: Document = {
+      title: input,
+      text: '',
+      sortKey: Date.now().toString(),
+    }
+    setDocuments([newDocument, ...documents]);
+
+    // ここでサーバーに送る
   }
 
   const finishEditing = (index: number, value: string) => {
@@ -47,7 +62,7 @@ function SidebarDocuments(props: Props) {
       newSentences[index].title = value;
     }
     setDocuments(newSentences);
-
+    setInput('');
     setInputNameIndex(-1);
   };
 
@@ -62,6 +77,24 @@ function SidebarDocuments(props: Props) {
 
   return (
     <div className=' break-all flex flex-col w-full gap-3'>
+      {/* 新規作成input */}
+      { createNewDocument 
+      ? 
+        <input className=' p-2'
+          placeholder='テキスト名を入力'
+          type='text' 
+          value={input}
+          defaultValue=''
+          onChange={(e) => {
+            setInput(e.target.value);
+          }}
+          onBlur={() => {
+            createNewDocumentBlur(input)}
+          }
+          ref={inputRef}
+        />
+      : '' }
+      
       { 
         documents.map((document, index) => {
           return (

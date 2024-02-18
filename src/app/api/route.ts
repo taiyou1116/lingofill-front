@@ -4,34 +4,34 @@ import { DynamoDBClient, PutItemCommand, QueryCommand } from "@aws-sdk/client-dy
 // DynamoDBクライアントの初期化
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
 
-export async function POST(req: NextRequest) {
-  const data = await req.json();
+// export async function POST(req: NextRequest) {
+//   const data = await req.json();
 
-  // DynamoDBに保存するアイテムの構成
-  const item = {
-    TableName: "lingo-fill-db",
-    Item: {
-      // DynamoDBの属性定義に従ってアイテムを構成
-      "partitionKey": { S: data.partition },
-      "sortKey": { S: data.sort },
-      "title": { S: data.title },
-      "text": { S: data.text },
-    }
-  };
+//   // DynamoDBに保存するアイテムの構成
+//   const item = {
+//     TableName: "lingo-fill-db",
+//     Item: {
+//       // DynamoDBの属性定義に従ってアイテムを構成
+//       "partitionKey": { S: data.partition },
+//       "sortKey": { S: data.sort },
+//       "title": { S: data.title },
+//       "text": { S: data.text },
+//     }
+//   };
 
-  try {
-    // DynamoDBにアイテムを保存
-    await client.send(new PutItemCommand(item));
-    return NextResponse.json(({ message: "アイテムを保存しました" }), {
-      status: 200,
-    });
-  } catch (error) {
-    console.error("DynamoDBへのアイテム保存中にエラーが発生しました:", error);
-    return NextResponse.json(({ error: "サーバーエラー" }), {
-      status: 500,
-    });
-  }
-}
+//   try {
+//     // DynamoDBにアイテムを保存
+//     await client.send(new PutItemCommand(item));
+//     return NextResponse.json(({ message: "アイテムを保存しました" }), {
+//       status: 200,
+//     });
+//   } catch (error) {
+//     console.error("DynamoDBへのアイテム保存中にエラーが発生しました:", error);
+//     return NextResponse.json(({ error: "サーバーエラー" }), {
+//       status: 500,
+//     });
+//   }
+// }
 
 export async function PUT(req: NextRequest) {
   const data = await req.json();
