@@ -17,6 +17,7 @@ function SidebarDocuments(props: Props) {
   const { documents, setDocuments, flipShowSidebar, createNewDocument, setCreateNewDocument } = props;
 
   const setDocument = useStore((store) => store.setDocument);
+  const documentPublic = useStore((store) => store.document);
 
   const [inputNameIndex, setInputNameIndex] = useState<number>(-1);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -48,7 +49,8 @@ function SidebarDocuments(props: Props) {
       sortKey: Date.now().toString(),
     }
     setDocuments([newDocument, ...documents]);
-
+    setInput('');
+    setCreateNewDocument(false);
     // ここでサーバーに送る
   }
 
@@ -101,7 +103,7 @@ function SidebarDocuments(props: Props) {
             <div 
               key={index} 
               onClick={() => openSentence(index)}
-              className=' bg-slate-100 h-full w-full p-3 cursor-pointer hover:shadow-lg duration-100'
+              className={`bg-slate-100 h-full w-full p-3 cursor-pointer hover:shadow-lg duration-100 ${ documentPublic === documents[index] ? " border-2 border-slate-700" : ""}`}
             >
               { inputNameIndex === index
               ?

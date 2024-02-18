@@ -1,7 +1,3 @@
-/** 上部ヘッダー 
- * サイドバーの開閉, アカウント情報, textがあれば(ユーザーログイン & テキストを開いている)テキストの保存
-*/
-
 "use client"
 
 import { AccountCircle, Reorder } from "@mui/icons-material";
@@ -10,15 +6,11 @@ import { oswald } from '@/store/fontStore';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Tooltip } from '../Tooltip';
-import SendDocumentDataButton from './SendDocumentDataButton';
-import ThreeWayToggle from './ThreeWayToggle';
 import { Toaster } from "react-hot-toast";
 
 function HeaderComponent() {
   // store
   const flipShowSidebar = useStore((store) => store.flipShowSidebar);
-  const document = useStore((store) => store.document);
-  const username = useStore((store) => store.username);
 
   return (
     <div className="header-bg-height bg-cyan-500 flex items-center justify-between shadow-xl">
@@ -32,19 +24,8 @@ function HeaderComponent() {
             Lingo Fill
           </h1> 
         </Link>
-        { document ? <ThreeWayToggle /> : "" }
       </div>
       <div className=' flex px-10 gap-10 items-center'>
-        <div>
-          { document ?
-            <SendDocumentDataButton 
-              sortKey={document.sortKey}
-              username={username}
-              title={document.title}
-              text={document.text}
-            /> : "" 
-          }
-        </div>
         <Link href={'/acount'}>
           <Tooltip tooltipText="アカウント">
             <AccountCircle style={{fontSize: 35}} />
