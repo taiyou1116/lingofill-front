@@ -2,24 +2,52 @@
 import { useStore } from "@/store/store";
 import { Document } from "@/types/types";
 import TranslateDocument from "./TranslateDocument";
-import ThreeWayToggle from "../header/ThreeWayToggle";
-import SendDocumentDataButton from "../header/SendDocumentDataButton";
+import ThreeWayToggle from "./ThreeWayToggle";
+import SendDocumentDataButton from "./SendDocumentDataButton";
 import { oswald } from "@/store/fontStore";
+import debounce from "lodash/debounce";
+import { useEffect, useState } from "react";
 
 function DocumentComponent() {
   const text = useStore((store) => store.document?.text);
   const words = text?.split(" ");
 
-  const selectedmode = useStore((store) => store.selectedmode);
-  const document = useStore((store) => store.document);
-  const setDocument = useStore((store) => store.setDocument);
+  const { document, setDocument, documents, setDocuments, selectedmode } = useStore((store) => ({
+    document: store.document,
+    setDocument: store.setDocument,
+    documents: store.documents,
+    setDocuments: store.setDocuments,
+    selectedmode: store.selectedmode,
+  }));
+
+  const [inputText, setInputText] = useState(document?.text || '');
+
+  // デバウンスされた関数を作成
+  const updateDocumentsDebounced = debounce(() => {
+    if (!document) return;
+
+    const updatedDocument = { ...document, 
+      text: inputText,
+      isSynced: false 
+    };
+    const updatedDocuments = documents.map((doc) =>
+      doc.sortKey === document.sortKey ? updatedDocument : doc
+    );
+    setDocuments(updatedDocuments);
+    console.log("kiteru");
+  }, 1000);
+
+  useEffect(() => {
+    updateDocumentsDebounced();
+
+    return () => {
+      updateDocumentsDebounced.cancel();
+    };
+  }, [inputText]);
   
   const inputOriginalText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInputText(e.target.value);
     const updatedText = e.target.value;
-    updateDocumentLocally(updatedText);
-  };
-
-  const updateDocumentLocally = (updatedText: string) => {
     const updatedDocument: Document = {
       ...document!,
       text: updatedText,

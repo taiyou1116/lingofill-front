@@ -1,6 +1,6 @@
 // アプリ全体で共有する状態を管理
 
-import { state } from "@/types/state";
+import { state } from "@/types/types";
 import { Document, SelectedMode } from "@/types/types";
 import { create } from "zustand";
 

@@ -20,10 +20,10 @@ export async function updateText(partition: string, sort: string, title: string,
     }
 
     const data = await response.json();
-    toast.success("テキストが更新されました。");
+    toast.success("テキストを保存しました。");
   } catch (error) {
     console.error(error);
-    toast.error("テキストの更新に失敗しました。");
+    toast.error("テキストの保存に失敗しました。");
   }
 }
 
