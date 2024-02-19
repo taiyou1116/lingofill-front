@@ -5,8 +5,8 @@ import { m_plus_rounded_1c } from '@/store/fontStore';
 import { EditNote } from '@mui/icons-material';
 import { useState } from 'react';
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
-import { Tooltip } from '../Tooltip';
-import { Skeleton, Typography } from '@mui/material';
+// import { Tooltip } from '../Tooltip';
+import { Skeleton, Tooltip, Typography } from '@mui/material';
 import SidebarDocuments from './SidebarDocuments';
 
 function SidebarComponent() {
@@ -36,7 +36,7 @@ function SidebarComponent() {
         <div className="flex flex-col gap-3">
           <div className=' flex justify-between w-full p-1 items-center'>
             <h1 className={`${m_plus_rounded_1c.className}`}>テキスト一覧</h1>
-            <Tooltip tooltipText='新規作成'>
+            <Tooltip title='新規作成'>
               <button 
                 onClick={createNewSentence}
                 className=' border-2 rounded-lg p-0.5  hover:border-slate-600 duration-150'>

@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { SelectedMode } from '@/types/types';
 import { useStore } from '@/store/store';
+import { Preview, Subtitles, TextSnippet, Translate, Visibility } from '@mui/icons-material';
 
 function ThreeWayToggle() {
   const [selectedMode, setSelectedModeLocal] = useState<SelectedMode>('input');
@@ -38,8 +39,8 @@ function ThreeWayToggle() {
               borderRadius: '0px', // 最初のボタン以外は角丸を無効化
             },
             '&:first-of-type': {
-              paddingLeft: '10px',
-              paddingRight: '10px',
+              paddingLeft: '12px',
+              paddingRight: '12px',
               borderTopLeftRadius: '16px', // 最初のボタンの左上の角を丸くする
               borderBottomLeftRadius: '16px', // 最初のボタンの左下の角を丸くする
             },
@@ -56,9 +57,9 @@ function ThreeWayToggle() {
           },'& .Mui-selected': {}
       }}
     >
-      <ToggleButton value="preview">プレビュー</ToggleButton>
-      <ToggleButton value="edit">翻訳</ToggleButton>
-      <ToggleButton value="input">原文入力</ToggleButton>
+      <ToggleButton value="preview"><Visibility style={{fontSize: 15}} /> プレビュー</ToggleButton>
+      <ToggleButton value="edit"><Translate style={{fontSize: 15}} /> 翻訳</ToggleButton>
+      <ToggleButton value="input"><TextSnippet style={{fontSize: 15}} /> 原文入力</ToggleButton>
     </ToggleButtonGroup>
   );
 }

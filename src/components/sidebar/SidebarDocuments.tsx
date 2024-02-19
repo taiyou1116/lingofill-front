@@ -113,7 +113,7 @@ function SidebarDocuments(props: Props) {
             <div 
               key={index} 
               onClick={() => openSentence(index)}
-              className={`bg-slate-100 h-full w-full p-3 cursor-pointer hover:shadow-lg duration-100 ${ documentPublic === documents[index] ? " border-2 border-slate-700" : ""}`}
+              className={`bg-slate-100 h-full w-full p-3 cursor-pointer hover:shadow-lg duration-100 ${ documentPublic?.sortKey === documents[index].sortKey ? " border-2 border-slate-700" : ""}`}
             >
               { inputNameIndex === index
               ?
