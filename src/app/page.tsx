@@ -40,6 +40,7 @@ const MyApp = () => {
           sortKey: d.sortKey.S,
           title: d.title.S, 
           text: d.text.S,
+          isSynced: true,
         }));
         
         setDocuments(newDocuments);

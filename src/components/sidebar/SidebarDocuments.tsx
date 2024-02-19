@@ -1,13 +1,14 @@
 import { useStore } from '@/store/store';
 import { Document } from '@/types/types'
 import { handleStopPropagation } from '@/utils/modal';
+import { updateText } from '@/utils/request';
 import { CloudUpload, Delete, ModeEdit } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 
 type Props = {
   documents: Document[]
-  setDocuments: Dispatch<SetStateAction<Document[]>>,
+  setDocuments: (documents: Document[]) => void,
   flipShowSidebar: () => void,
   createNewDocument: boolean,
   setCreateNewDocument: Dispatch<SetStateAction<boolean>>,
@@ -18,6 +19,7 @@ function SidebarDocuments(props: Props) {
 
   const setDocument = useStore((store) => store.setDocument);
   const documentPublic = useStore((store) => store.document);
+  const username = useStore((store) => store.username);
 
   const [inputNameIndex, setInputNameIndex] = useState<number>(-1);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -46,6 +48,7 @@ function SidebarDocuments(props: Props) {
       title: input,
       text: '',
       sortKey: Date.now().toString(),
+      isSynced: false,
     }
     setDocuments([newDocument, ...documents]);
     setInput('');
@@ -56,19 +59,28 @@ function SidebarDocuments(props: Props) {
     // documents配列を更新
     const newSentences = [...documents];
 
-    if (!value) {
-      newSentences[index].title = 'テキスト ' + documents.length;
-    } else {
-      newSentences[index].title = value;
-    }
-    setDocuments(newSentences);
     setInput('');
     setInputNameIndex(-1);
+
+    if (newSentences[index].title === value) {
+
+      return;
+    } 
+    newSentences[index].title = value;
+    newSentences[index].isSynced = false;
+    setDocuments(newSentences);
   };
 
   const editTitle = (index: number) => {
     setInput(documents[index].title);
     setInputNameIndex(index);
+  }
+
+  const uploadDocument = async (index: number) => {
+    await updateText(username, documents[index].sortKey, documents[index].title, documents[index].text);
+    const documentsLocal = [...documents];
+    documentsLocal[index].isSynced = true;
+    setDocuments(documentsLocal);
   }
 
   const deleteText = () => {
@@ -110,7 +122,7 @@ function SidebarDocuments(props: Props) {
                     placeholder='テキスト名を入力'
                     type='text' 
                     value={input}
-                    defaultValue={documents[index].title}
+                    defaultValue={document.title}
                     onChange={(e) => {
                       setInput(e.target.value);
                     }}
@@ -124,11 +136,13 @@ function SidebarDocuments(props: Props) {
                 <div className=' flex justify-between'>
                   { document.title }
                   <div onClick={handleStopPropagation} className=' flex gap-0.5 pl-1'>
-                    <Tooltip title='保存する'>
-                      <button onClick={() => deleteText()}>
-                        <CloudUpload style={{fontSize: 15}} />
-                      </button>
-                    </Tooltip>
+                    { document.isSynced ? '' : 
+                      <Tooltip title='変更を保存する'>
+                        <button onClick={() => uploadDocument(index)}>
+                          <CloudUpload style={{fontSize: 15}} />
+                        </button>
+                      </Tooltip>
+                    }
                     <Tooltip title='テキスト名を変更'>
                       <button onClick={() => editTitle(index)}>
                         <ModeEdit style={{fontSize: 15}} />

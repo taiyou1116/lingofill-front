@@ -3,9 +3,8 @@
 import { useStore } from '@/store/store';
 import { m_plus_rounded_1c } from '@/store/fontStore';
 import { EditNote } from '@mui/icons-material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
-import { Document } from '@/types/types';
 import { Tooltip } from '../Tooltip';
 import { Skeleton, Typography } from '@mui/material';
 import SidebarDocuments from './SidebarDocuments';
@@ -14,13 +13,8 @@ function SidebarComponent() {
   // store
   const showSidebar = useStore((store) => store.showSidebar);
   const flipShowSidebar = useStore((store) => store.flipShowSidebar);
-  const documentsPublic = useStore((store) => store.documents);
-
-  const [documents, setDocuments] = useState<Document[]>([]);
-
-  useEffect(() => {
-    setDocuments(documentsPublic);
-  }, [documentsPublic, setDocuments])
+  const documents = useStore((store) => store.documents);
+  const setDocuments = useStore((store) => store.setDocuments);
 
   const [createNewDocument, setCreateNewDocument] = useState<boolean>(false);
 

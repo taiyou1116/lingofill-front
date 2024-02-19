@@ -3,6 +3,7 @@ export type Document = {
     sortKey: string,
     title: string;
     text: string;
+    isSynced: boolean;
 };
 
 
