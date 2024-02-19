@@ -42,7 +42,6 @@ const MyApp = () => {
           text: d.text.S,
         }));
         
-        // setDocumentsを呼び出してdocuments状態を更新
         setDocuments(newDocuments);
       }
       getTextsAsync();

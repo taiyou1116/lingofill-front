@@ -10,13 +10,9 @@ function DocumentComponent() {
   const text = useStore((store) => store.document?.text);
   const words = text?.split(" ");
 
-  // 'document...選択中のdocument'
   const selectedmode = useStore((store) => store.selectedmode);
   const document = useStore((store) => store.document);
   const setDocument = useStore((store) => store.setDocument);
-  const username = useStore((store) => store.username);
-  // const documents = useStore((store) => store.documents);
-  // const setDocuments = useStore((store) => store.setDocuments);
   
   const inputOriginalText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const updatedText = e.target.value;
@@ -74,12 +70,7 @@ function DocumentComponent() {
       <div className=" flex gap-3 items-center">
         <h1 className={` ${oswald.className}`}>{ document.title }</h1>
         <ThreeWayToggle />
-        <SendDocumentDataButton 
-          sortKey={document!.sortKey}
-          username={username}
-          title={document!.title}
-          text={document!.text}
-        />
+        <SendDocumentDataButton />
       </div>
     )
   }

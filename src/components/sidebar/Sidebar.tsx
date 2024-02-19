@@ -14,13 +14,13 @@ function SidebarComponent() {
   // store
   const showSidebar = useStore((store) => store.showSidebar);
   const flipShowSidebar = useStore((store) => store.flipShowSidebar);
-  const getDocuments = useStore((store) => store.documents);
+  const documentsPublic = useStore((store) => store.documents);
 
   const [documents, setDocuments] = useState<Document[]>([]);
 
   useEffect(() => {
-    setDocuments(getDocuments);
-  }, [getDocuments, setDocuments])
+    setDocuments(documentsPublic);
+  }, [documentsPublic, setDocuments])
 
   const [createNewDocument, setCreateNewDocument] = useState<boolean>(false);
 

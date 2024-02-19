@@ -1,26 +1,19 @@
 import { useStore } from '@/store/store';
 import { updateText } from '@/utils/request';
 
-type Props = {
-  sortKey: string,
-  username: string,
-  title: string,
-  text: string,
-}
-
-function SendDocumentDataButton(props: Props) {
-  const { sortKey, username, title, text } = props;
-
+function SendDocumentDataButton() {
+  
   const setDocuments = useStore((store) => store.setDocuments);
   const document = useStore((store) => store.document);
   const documents = useStore((store) => store.documents);
+  const username = useStore((store) => store.username);
 
   const updateDocuments = async () => {
     const documentIndex = documents.findIndex((d) => d.sortKey === document!.sortKey);
     const newDocuments = [...documents];
     newDocuments[documentIndex] = document!;
     setDocuments(newDocuments);
-    await updateText(username, sortKey, title, text)
+    await updateText(username, document!.sortKey, document!.title, document!.text);
   }
 
   const changeSendDataButton = () => {

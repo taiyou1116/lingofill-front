@@ -1,7 +1,7 @@
 import { useStore } from '@/store/store';
 import { Document } from '@/types/types'
 import { handleStopPropagation } from '@/utils/modal';
-import { Delete, ModeEdit } from '@mui/icons-material';
+import { CloudUpload, Delete, ModeEdit } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 
@@ -33,7 +33,6 @@ function SidebarDocuments(props: Props) {
   }, [inputNameIndex, createNewDocument]);
 
   const openSentence = (index: number) => {
-    // Sidebarを閉じる処理追加
     flipShowSidebar();
     setDocument(documents[index]);
   }
@@ -51,7 +50,6 @@ function SidebarDocuments(props: Props) {
     setDocuments([newDocument, ...documents]);
     setInput('');
     setCreateNewDocument(false);
-    // ここでサーバーに送る
   }
 
   const finishEditing = (index: number, value: string) => {
@@ -126,6 +124,11 @@ function SidebarDocuments(props: Props) {
                 <div className=' flex justify-between'>
                   { document.title }
                   <div onClick={handleStopPropagation} className=' flex gap-0.5 pl-1'>
+                    <Tooltip title='保存する'>
+                      <button onClick={() => deleteText()}>
+                        <CloudUpload style={{fontSize: 15}} />
+                      </button>
+                    </Tooltip>
                     <Tooltip title='テキスト名を変更'>
                       <button onClick={() => editTitle(index)}>
                         <ModeEdit style={{fontSize: 15}} />
