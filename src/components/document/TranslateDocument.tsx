@@ -10,8 +10,10 @@ type TranslateDocumentType = {
 function TranslateDocument(props: TranslateDocumentType) {
   const { words } = props;
   
-  const showCenterModal = useStore((store) => store.showCenterModal);
-  const flipCenterModal = useStore((store) => store.flipCenterModal);
+  const {showCenterModal, flipCenterModal} = useStore((store) => ({
+    showCenterModal: store.showCenterModal,
+    flipCenterModal: store.flipCenterModal,
+  }));
 
   // ドラッグ処理(熟語処理) // 翻訳管理(日本語化された単語)
   const [selectedWordsIndexes, setSelectedWordsIndexes] = useState<number[]>([]);

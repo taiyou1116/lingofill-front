@@ -5,16 +5,16 @@ import { m_plus_rounded_1c } from '@/store/fontStore';
 import { EditNote } from '@mui/icons-material';
 import { useState } from 'react';
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
-// import { Tooltip } from '../Tooltip';
 import { Skeleton, Tooltip, Typography } from '@mui/material';
 import SidebarDocuments from './SidebarDocuments';
 
 function SidebarComponent() {
-  // store
-  const showSidebar = useStore((store) => store.showSidebar);
-  const flipShowSidebar = useStore((store) => store.flipShowSidebar);
-  const documents = useStore((store) => store.documents);
-  const setDocuments = useStore((store) => store.setDocuments);
+  const { showSidebar, flipShowSidebar, documents, setDocuments } = useStore((store) => ({
+    showSidebar: store.showSidebar,
+    flipShowSidebar: store.flipShowSidebar,
+    documents: store.documents,
+    setDocuments: store.setDocuments,
+  }));
 
   const [createNewDocument, setCreateNewDocument] = useState<boolean>(false);
 

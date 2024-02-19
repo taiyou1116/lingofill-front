@@ -3,11 +3,13 @@ import { updateText } from '@/utils/request';
 import { CloudUpload } from '@mui/icons-material';
 
 function SendDocumentDataButton() {
-  
-  const setDocuments = useStore((store) => store.setDocuments);
-  const document = useStore((store) => store.document);
-  const documents = useStore((store) => store.documents);
-  const username = useStore((store) => store.username);
+
+  const {setDocuments, document, documents, username} = useStore((store) => ({
+    setDocuments: store.setDocuments,
+    document: store.document,
+    documents: store.documents,
+    username: store.username,
+  }));
 
   const updateDocuments = async () => {
     const documentIndex = documents.findIndex((d) => d.sortKey === document!.sortKey);

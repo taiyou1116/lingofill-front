@@ -26,8 +26,10 @@ export default App;
 const MyApp = () => {
   const { route, user, } = useAuthenticator((context) => [context.route]);
 
-  const setUsername = useStore((store) => store.setUsername);
-  const setDocuments = useStore((store) => store.setDocuments);
+  const {setUsername,setDocuments} = useStore((store) => ({
+    setUsername: store.setUsername,
+    setDocuments: store.setDocuments,
+  }));
 
   useEffect(() => {
     if (route === "authenticated") {

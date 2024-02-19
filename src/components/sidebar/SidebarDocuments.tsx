@@ -17,9 +17,11 @@ type Props = {
 function SidebarDocuments(props: Props) {
   const { documents, setDocuments, flipShowSidebar, createNewDocument, setCreateNewDocument } = props;
 
-  const setDocument = useStore((store) => store.setDocument);
-  const documentPublic = useStore((store) => store.document);
-  const username = useStore((store) => store.username);
+  const { setDocument, documentPublic, username } = useStore((store) => ({
+    setDocument: store.setDocument,
+    documentPublic: store.document,
+    username: store.username,
+  }));
 
   const [inputNameIndex, setInputNameIndex] = useState<number>(-1);
   const inputRef = useRef<HTMLInputElement>(null);
