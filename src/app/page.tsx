@@ -9,7 +9,6 @@ import awsExports from "../aws-exports";
 import { useStore } from "@/store/store";
 import { useEffect } from "react";
 import { getTexts } from "@/utils/request";
-import { Document } from "@/types/types";
 
 Amplify.configure(awsExports);
 
@@ -38,15 +37,19 @@ const MyApp = () => {
       // texts更新(場所かえるかも)
       const getTextsAsync = async () => {
         const data = await getTexts(user.username);
-        const newDocuments: Document[] = data.map((d: any) => ({
-          sortKey: d.sortKey.S,
-          title: d.title.S, 
-          text: d.text.S,
-          isSynced: true,
-          translations: d.translations,
-        }));
+        // const newDocuments: Document[] = data.map((d: any) => ({
+        //   sortKey: d.sortKey.S,
+        //   title: d.title.S, 
+        //   text: d.text.S,
+        //   isSynced: true,
+        //   // translations: d.translations,
+        //   translations: d.translations.L.map((t: any) => ({
+        //     indexes: t.M.indexes.L.map((index: any) => parseInt(index.N, 10)),
+        //     translatedText: t.M.translatedText.S,
+        //   })),
+        // }));
         
-        setDocuments(newDocuments);
+        setDocuments(data);
       }
       getTextsAsync();
     }

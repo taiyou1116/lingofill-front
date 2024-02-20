@@ -1,5 +1,8 @@
 実装
 
+サーバーからのtranslationsの結果を確かめる
+translationsを変更した後に、documentのtranslationsを見ているから反映されていない。 -> translationsから取得するように変更
+
 translationsはpublicで管理(サーバーにも)
 バグ修正
 テキストupdate

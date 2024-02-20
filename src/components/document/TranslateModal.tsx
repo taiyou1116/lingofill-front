@@ -57,10 +57,12 @@ function TranslateModal(props: ModalCenterProps) {
     // documentを変更する
     // とりま汚いけど、あとで直す
     if (!document) return;
+
     const updatedDocument: Document = { ...document, 
       translations: updatedTranslations,
       isSynced: false 
     };
+    console.log(updatedTranslations);
     const updatedDocuments: Document[] = documents.map((doc) =>
       doc.sortKey === document!.sortKey ? updatedDocument : doc
     );

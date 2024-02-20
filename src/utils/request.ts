@@ -1,4 +1,4 @@
-import { TranslationObj } from "@/types/types";
+import { Document, TranslationObj } from "@/types/types";
 import toast from "react-hot-toast";
 
 export async function updateText(partition: string, sort: string, title: string, text: string, translations: TranslationObj[]) {
@@ -41,5 +41,26 @@ export async function getTexts(partition: string) {
     },
   });
   const data = await res.json();
-  return data;
+  // console.log(data);
+  const newDocuments: Document[] = data.map((d: any) => {
+    // translationsが存在し、期待される構造を持っているか確認
+    const translations = d.translations && Array.isArray(d.translations.L) 
+      ? d.translations.L.map((t: any) => ({
+          indexes: t.M.indexes && Array.isArray(t.M.indexes.L)
+            ? t.M.indexes.L.map((index: any) => parseInt(index.N, 10))
+            : [],
+          translatedText: t.M.translatedText ? t.M.translatedText.S : "",
+        }))
+      : [];
+
+    return {
+      sortKey: d.sortKey.S,
+      title: d.title.S, 
+      text: d.text.S,
+      isSynced: true,
+      translations: translations,
+    };
+  });
+  return newDocuments;
+  // return data;
 }
