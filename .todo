@@ -1,22 +1,17 @@
 実装
 
-サーバーからのtranslationsの結果を確かめる
-translationsを変更した後に、documentのtranslationsを見ているから反映されていない。 -> translationsから取得するように変更
+titleのみ取得
+input押すだけで、issync = falseになる
+documentを削除
 
-translationsはpublicで管理(サーバーにも)
 バグ修正
 テキストupdate
 - うまくアップできなかった時は、UI消さない
 - 自動保存ON, OFF
 - タイトルだけ取得して、その後本文を取得に変えてもOK
 - 説明のdoc
-textの入力
-- 編集モードの作成
-最初からModeUIが表示されている問題
-SidebarDocumentの作成
-suspenseでdocuments
-メモの追加
-題名が空欄の場合、中身がなければそのまま消す。あれば前回の名前を残す
+
+
 
 AIで詳細を記入できたらおもろいかも
 Shift で飛んで選択できるように

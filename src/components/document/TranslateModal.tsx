@@ -17,8 +17,9 @@ function TranslateModal(props: TranslateModalProps) {
 
   const flipCenterModal = useStore((store) => store.flipCenterModal);
   const setDocuments = useStore((store) => store.setDocuments);
-  const document = useStore((store) => store.document);
   const documents = useStore((store) => store.documents);
+  const setDocument = useStore((store) => store.setDocument);
+  const document = useStore((store) => store.document);
   
   const [userInput, setUserInput] = useState('');
 
@@ -62,11 +63,11 @@ function TranslateModal(props: TranslateModalProps) {
       translations: updatedTranslations,
       isSynced: false 
     };
-    console.log(updatedTranslations);
     const updatedDocuments: Document[] = documents.map((doc) =>
       doc.sortKey === document!.sortKey ? updatedDocument : doc
     );
     setDocuments(updatedDocuments);
+    setDocument(updatedDocument);
   };
 
   return (
