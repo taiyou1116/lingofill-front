@@ -5,8 +5,15 @@ import ThreeWayToggle from "./ThreeWayToggle";
 import SendDocumentDataButton from "./SendDocumentDataButton";
 import { oswald } from "@/store/fontStore";
 import InputDocument from "./InputDocument";
+import { useState } from "react";
+import { TranslationObj } from "@/types/types";
+import PreviewDocument from "./PreviewDocument";
 
 function DocumentComponent() {
+  // 一時的にdocumentに置く
+  // textと同様にdocumentから取得する。(documentにTranslationObjを含める)
+  const [translations, setTranslations] = useState<TranslationObj[]>([]);
+
   const text = useStore((store) => store.document?.text);
   const words = text?.split(" ");
 
@@ -26,12 +33,17 @@ function DocumentComponent() {
         return (
           <TranslateDocument 
             words={words}
+            translations={translations}
+            setTranslations={setTranslations}
           />
         );
       case 'preview':
         return (
           <div className=" h-full">
-            preview
+            <PreviewDocument 
+              words={words}
+              translations={translations}
+            />
           </div>
         );
       case 'input':

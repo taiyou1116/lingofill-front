@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { useStore } from "@/store/store";
 import { TranslationObj } from "@/types/types";
 import TranslateModal from "./TranslateModal";
 
 type TranslateDocumentType = {
   words: string[] | undefined,
+  translations: TranslationObj[],
+  setTranslations: Dispatch<SetStateAction<TranslationObj[]>>,
 }
 
 function TranslateDocument(props: TranslateDocumentType) {
-  const { words } = props;
+  const { words, translations, setTranslations } = props;
   
   const {showCenterModal, flipCenterModal} = useStore((store) => ({
     showCenterModal: store.showCenterModal,
@@ -17,7 +19,7 @@ function TranslateDocument(props: TranslateDocumentType) {
 
   // ドラッグ処理(熟語処理) // 翻訳管理(日本語化された単語)
   const [selectedWordsIndexes, setSelectedWordsIndexes] = useState<number[]>([]);
-  const [translations, setTranslations] = useState<TranslationObj[]>([]);
+  // const [translations, setTranslations] = useState<TranslationObj[]>([]);
   
   const [isDragging, setIsDragging] = useState(false);
   

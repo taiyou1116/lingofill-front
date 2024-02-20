@@ -17,6 +17,7 @@ function Acount() {
               {/* ユーザー詳細 */}
               <p>email:  {user!.signInDetails?.loginId}</p>
               <p>name:  { user!.username }</p>
+              {/* お気に入り */}
               
               <button 
                 onClick={signOut}

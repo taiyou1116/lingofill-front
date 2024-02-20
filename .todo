@@ -1,5 +1,6 @@
 実装
 
+translationsはpublicで管理(サーバーにも)
 バグ修正
 テキストupdate
 - うまくアップできなかった時は、UI消さない
