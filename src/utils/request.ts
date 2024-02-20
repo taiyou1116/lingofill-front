@@ -1,6 +1,7 @@
+import { TranslationObj } from "@/types/types";
 import toast from "react-hot-toast";
 
-export async function updateText(partition: string, sort: string, title: string, text: string) {
+export async function updateText(partition: string, sort: string, title: string, text: string, translations: TranslationObj[]) {
   try {
     const response = await fetch(`/api`, {
       method: "PUT",
@@ -12,6 +13,7 @@ export async function updateText(partition: string, sort: string, title: string,
         sort: sort,
         title: title,
         text: text,
+        translations: translations,
       }),
     });
 

@@ -1,11 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { DynamoDBClient, PutItemCommand, QueryCommand } from "@aws-sdk/client-dynamodb";
+import { TranslationObj } from "@/types/types";
 
 // DynamoDBクライアントの初期化
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
 
 export async function PUT(req: NextRequest) {
   const data = await req.json();
+  console.log(data);
   
   // DynamoDBに保存するアイテムの構成
   const item = {
@@ -16,6 +18,14 @@ export async function PUT(req: NextRequest) {
       "sortKey": { S: data.sort },
       "title": { S: data.title },
       "text": { S: data.text },
+      "translations": {
+        L: data.translations.map((translation: TranslationObj) => ({
+          M: {
+            indexes: { L: translation.indexes.map(index => ({ N: index.toString() })) },
+            translatedText: { S: translation.translatedText }
+          }
+        }))
+      }
     }
   };
 

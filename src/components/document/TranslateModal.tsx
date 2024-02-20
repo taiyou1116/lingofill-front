@@ -4,19 +4,22 @@ import { useStore } from '@/store/store';
 import React, { useState } from 'react'
 import "../../app/globals.css";
 import { handleCloseModal } from '@/utils/modal';
-import { TranslationObj } from '@/types/types';
+import { Document } from '@/types/types';
 import ModalCenterComponent from '../ModalCenter';
 
 type ModalCenterProps = {
   words: string[] | undefined,
   selectedWordIndexes: number[],
-  translations: TranslationObj[],
-  setTranslations: React.Dispatch<React.SetStateAction<TranslationObj[]>>,
 }
 
 function TranslateModal(props: ModalCenterProps) {
-  const { words, selectedWordIndexes, translations, setTranslations } = props;
+  const { words, selectedWordIndexes } = props;
+
   const flipCenterModal = useStore((store) => store.flipCenterModal);
+  const setDocuments = useStore((store) => store.setDocuments);
+  const document = useStore((store) => store.document);
+  const documents = useStore((store) => store.documents);
+  
   const [userInput, setUserInput] = useState('');
 
   // 日本語化ボタン
@@ -29,7 +32,7 @@ function TranslateModal(props: ModalCenterProps) {
     const newTranslation = userInput;
   
     // translationsが未定義の場合は空の配列を使用
-    let updatedTranslations = translations ? [...translations] : [];
+    let updatedTranslations = document!.translations ? [...document!.translations] : [];
     
     // 複数のindexesに対応するために、既存の翻訳を検索するロジックを調整
     const existingTranslationIndexes = selectedWordIndexes.map(index => 
@@ -50,7 +53,18 @@ function TranslateModal(props: ModalCenterProps) {
         translatedText: newTranslation,
       });
     }
-    setTranslations(updatedTranslations);
+
+    // documentを変更する
+    // とりま汚いけど、あとで直す
+    if (!document) return;
+    const updatedDocument: Document = { ...document, 
+      translations: updatedTranslations,
+      isSynced: false 
+    };
+    const updatedDocuments: Document[] = documents.map((doc) =>
+      doc.sortKey === document!.sortKey ? updatedDocument : doc
+    );
+    setDocuments(updatedDocuments);
   };
 
   return (

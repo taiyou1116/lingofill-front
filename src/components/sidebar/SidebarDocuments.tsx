@@ -51,6 +51,7 @@ function SidebarDocuments(props: Props) {
       text: '',
       sortKey: Date.now().toString(),
       isSynced: false,
+      translations: [],
     }
     setDocuments([newDocument, ...documents]);
     setInput('');
@@ -79,7 +80,7 @@ function SidebarDocuments(props: Props) {
   }
 
   const uploadDocument = async (index: number) => {
-    await updateText(username, documents[index].sortKey, documents[index].title, documents[index].text);
+    await updateText(username, documents[index].sortKey, documents[index].title, documents[index].text, documents[index].translations);
     const documentsLocal = [...documents];
     documentsLocal[index].isSynced = true;
     setDocuments(documentsLocal);

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { SelectedMode } from '@/types/types';
 import { useStore } from '@/store/store';
-import { Preview, Subtitles, TextSnippet, Translate, Visibility } from '@mui/icons-material';
+import { TextSnippet, Translate, Visibility } from '@mui/icons-material';
 
 function ThreeWayToggle() {
   const [selectedMode, setSelectedModeLocal] = useState<SelectedMode>('input');

@@ -16,7 +16,7 @@ function SendDocumentDataButton() {
     const newDocuments = [...documents];
     newDocuments[documentIndex] = document!;
     setDocuments(newDocuments);
-    await updateText(username, document!.sortKey, document!.title, document!.text);
+    await updateText(username, document!.sortKey, document!.title, document!.text, document!.translations);
   }
 
   const changeSendDataButton = () => {

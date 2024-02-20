@@ -4,7 +4,7 @@ import { state } from "@/types/types";
 import { Document, SelectedMode } from "@/types/types";
 import { create } from "zustand";
 
-export const useStore = create<state>((set, get) => ({
+export const useStore = create<state>((set) => ({
     // サイドバー
     showSidebar: false,
     flipShowSidebar: () => {

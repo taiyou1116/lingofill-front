@@ -1,25 +1,22 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { useStore } from "@/store/store";
-import { TranslationObj } from "@/types/types";
 import TranslateModal from "./TranslateModal";
 
 type TranslateDocumentType = {
   words: string[] | undefined,
-  translations: TranslationObj[],
-  setTranslations: Dispatch<SetStateAction<TranslationObj[]>>,
 }
 
 function TranslateDocument(props: TranslateDocumentType) {
-  const { words, translations, setTranslations } = props;
+  const { words } = props;
   
-  const {showCenterModal, flipCenterModal} = useStore((store) => ({
+  const {showCenterModal, flipCenterModal, document} = useStore((store) => ({
     showCenterModal: store.showCenterModal,
     flipCenterModal: store.flipCenterModal,
+    document: store.document,
   }));
 
   // ドラッグ処理(熟語処理) // 翻訳管理(日本語化された単語)
   const [selectedWordsIndexes, setSelectedWordsIndexes] = useState<number[]>([]);
-  // const [translations, setTranslations] = useState<TranslationObj[]>([]);
   
   const [isDragging, setIsDragging] = useState(false);
   
@@ -27,7 +24,7 @@ function TranslateDocument(props: TranslateDocumentType) {
   const handleClick = (index: number) => {
     if (showCenterModal) return;
 
-    const translation = translations.find(translation => translation.indexes.includes(index));
+    const translation = document!.translations.find(translation => translation.indexes.includes(index));
     if (translation) {
       setSelectedWordsIndexes(translation.indexes);
     } else {
@@ -64,7 +61,7 @@ function TranslateDocument(props: TranslateDocumentType) {
     <div className="break-all" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
       {words?.map((word, index) => {
         // すでに日本語訳されているか確認
-        const translation = translations.find(translation => translation.indexes.includes(index));
+        const translation = document!.translations.find(translation => translation.indexes.includes(index));
 
         // 単語 or 熟語の一文字目か確認
         if (translation && translation.indexes[0] === index) {
@@ -97,8 +94,6 @@ function TranslateDocument(props: TranslateDocumentType) {
         <TranslateModal 
           words={words}
           selectedWordIndexes={selectedWordsIndexes}
-          translations={translations}
-          setTranslations={setTranslations}
         />
       </div>
     </div>

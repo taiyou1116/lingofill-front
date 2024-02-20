@@ -43,6 +43,7 @@ const MyApp = () => {
           title: d.title.S, 
           text: d.text.S,
           isSynced: true,
+          translations: d.translations,
         }));
         
         setDocuments(newDocuments);
