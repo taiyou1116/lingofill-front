@@ -7,12 +7,12 @@ import { handleCloseModal } from '@/utils/modal';
 import { Document } from '@/types/types';
 import ModalCenterComponent from '../ModalCenter';
 
-type ModalCenterProps = {
+type TranslateModalProps = {
   words: string[] | undefined,
   selectedWordIndexes: number[],
 }
 
-function TranslateModal(props: ModalCenterProps) {
+function TranslateModal(props: TranslateModalProps) {
   const { words, selectedWordIndexes } = props;
 
   const flipCenterModal = useStore((store) => store.flipCenterModal);

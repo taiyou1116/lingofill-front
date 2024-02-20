@@ -1,5 +1,4 @@
 import { TranslationObj } from '@/types/types';
-import React from 'react'
 
 type Props = {
   words: string[] | undefined,

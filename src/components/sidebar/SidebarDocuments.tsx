@@ -7,20 +7,20 @@ import { Tooltip } from '@mui/material';
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 
 type Props = {
-  documents: Document[]
-  setDocuments: (documents: Document[]) => void,
-  flipShowSidebar: () => void,
   createNewDocument: boolean,
   setCreateNewDocument: Dispatch<SetStateAction<boolean>>,
 }
 
 function SidebarDocuments(props: Props) {
-  const { documents, setDocuments, flipShowSidebar, createNewDocument, setCreateNewDocument } = props;
+  const { createNewDocument, setCreateNewDocument } = props;
 
-  const { setDocument, documentPublic, username } = useStore((store) => ({
+  const { setDocument, documentPublic, username, documents, setDocuments, flipShowSidebar } = useStore((store) => ({
     setDocument: store.setDocument,
     documentPublic: store.document,
     username: store.username,
+    documents: store.documents,
+    setDocuments: store.setDocuments,
+    flipShowSidebar: store.flipShowSidebar,
   }));
 
   const [inputNameIndex, setInputNameIndex] = useState<number>(-1);

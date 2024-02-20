@@ -9,11 +9,10 @@ import { Skeleton, Tooltip, Typography } from '@mui/material';
 import SidebarDocuments from './SidebarDocuments';
 
 function SidebarComponent() {
-  const { showSidebar, flipShowSidebar, documents, setDocuments } = useStore((store) => ({
+  const { showSidebar, flipShowSidebar, documents } = useStore((store) => ({
     showSidebar: store.showSidebar,
     flipShowSidebar: store.flipShowSidebar,
     documents: store.documents,
-    setDocuments: store.setDocuments,
   }));
 
   const [createNewDocument, setCreateNewDocument] = useState<boolean>(false);
@@ -59,9 +58,6 @@ function SidebarComponent() {
             </Typography>
           :
             <SidebarDocuments 
-              documents={documents}
-              setDocuments={setDocuments}
-              flipShowSidebar={flipShowSidebar}
               createNewDocument={createNewDocument}
               setCreateNewDocument={setCreateNewDocument}
             />

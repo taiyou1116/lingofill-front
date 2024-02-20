@@ -41,7 +41,7 @@ export async function getTexts(partition: string) {
     },
   });
   const data = await res.json();
-  // console.log(data);
+
   const newDocuments: Document[] = data.map((d: any) => {
     // translationsが存在し、期待される構造を持っているか確認
     const translations = d.translations && Array.isArray(d.translations.L) 
@@ -62,5 +62,4 @@ export async function getTexts(partition: string) {
     };
   });
   return newDocuments;
-  // return data;
 }

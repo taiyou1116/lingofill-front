@@ -25,7 +25,6 @@ function InputDocument() {
       doc.sortKey === document.sortKey ? updatedDocument : doc
     );
     setDocuments(updatedDocuments);
-    console.log("kiteru");
   }, 1000);
 
   useEffect(() => {
