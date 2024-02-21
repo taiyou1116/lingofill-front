@@ -37,10 +37,12 @@ function SidebarDocuments(props: Props) {
     }
   }, [inputNameIndex, createNewDocument]);
 
+
+  // 新規作成時はサーバーから取得しない。
   const openSentence = async (index: number) => {
     flipShowSidebar();
     // 1回目だけサーバーから取得 -> textがないとき
-    if (documents[index].text !== '') {
+    if (documents[index].text !== '' || documents[index].isNew === true) {
       setDocument(documents[index]);
       return;
     }
@@ -72,6 +74,7 @@ function SidebarDocuments(props: Props) {
       text: '',
       sortKey: Date.now().toString(),
       isSynced: false,
+      isNew: true,
       translations: [],
     }
     setDocuments([newDocument, ...documents]);
@@ -111,7 +114,7 @@ function SidebarDocuments(props: Props) {
   }
 
   return (
-    <div className=' break-all flex flex-col w-full gap-3'>
+    <div className=' break-all flex flex-col w-full gap-3 overflow-y-auto' style={{ maxHeight: '90vh', overflowY: 'auto' }}>
       {/* 新規作成input */}
       { createNewDocument 
       ? 

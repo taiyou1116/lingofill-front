@@ -4,6 +4,7 @@ export type Document = {
     title: string;
     text: string;
     isSynced: boolean;
+    isNew: boolean,
     translations: TranslationObj[],
 };
 

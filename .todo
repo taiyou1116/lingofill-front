@@ -1,19 +1,11 @@
 実装
 
-titleのみ取得する方法でいく
-- title, sortKeyを取得 -> Documentsのtitleに格納
-- titleをタップ -> sortKeyにあった残りの要素(text, translations)を取得
-
-
-
-input押すだけで、issync = falseになる
 documentを削除
 
 バグ修正
 テキストupdate
 - うまくアップできなかった時は、UI消さない
 - 自動保存ON, OFF
-- タイトルだけ取得して、その後本文を取得に変えてもOK
 - 説明のdoc
 
 

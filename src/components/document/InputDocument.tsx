@@ -51,7 +51,7 @@ function InputDocument() {
   return (
     <div className=" h-full">
       <textarea
-        className=" resize-none h-full w-full p-1 border-2 origin-input"
+        className=" resize-none h-full w-full p-1 border-2 border-slate-500 origin-input"
         placeholder="原文をペースト (Command + V)" 
         value={document?.text}
         onChange={inputOriginalText}

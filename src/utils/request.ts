@@ -75,6 +75,7 @@ export async function getText(partition: string, sortKey: string) {
     title: data.title.S,
     text: data.text.S,
     isSynced: true,
+    isNew: false,
     translations: data.translations && Array.isArray(data.translations.L) 
       ? data.translations.L.map((t: any) => ({
           indexes: t.M.indexes && Array.isArray(t.M.indexes.L)
