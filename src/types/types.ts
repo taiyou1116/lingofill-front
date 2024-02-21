@@ -1,4 +1,4 @@
-// センテンスは題名と本文を含む
+
 export type Document = {
     sortKey: string,
     title: string;
@@ -9,7 +9,7 @@ export type Document = {
 };
 
 
-// 翻訳された状態
+// 元の単語のindexと翻訳
 export type TranslationObj = {
     indexes: number[];
     translatedText: string;
@@ -20,19 +20,15 @@ export type SelectedMode = 'preview' | 'edit' | 'input';
 
 // アプリ全体で共有する状態の型
 export type state = {
-    // サイドバー
     showSidebar: boolean,
     flipShowSidebar: () => void,
 
-    // CenterModal
     showCenterModal: boolean,
     flipCenterModal: () => void,
 
-    // user情報
     username: string,
     setUsername: (username: string) => void,
 
-    // 全てのドキュメント
     documents: Document[],
     setDocuments: (documents: Document[]) => void,
 
@@ -44,7 +40,7 @@ export type state = {
     selectedmode: SelectedMode,
     setSelectedMode: (select: SelectedMode) => void,
 
-    //
+    // サーバーからの取得状態
     isLoading: boolean,
     setIsLoading: (state: boolean) => void,
 }

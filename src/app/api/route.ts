@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { DynamoDBClient, PutItemCommand, QueryCommand } from "@aws-sdk/client-dynamodb";
+import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
 import { TranslationObj } from "@/types/types";
 
 // DynamoDBクライアントの初期化
@@ -44,45 +44,45 @@ export async function PUT(req: NextRequest) {
 
 
 // ユーザーテキストを取得するAPI
-export async function GET(req: NextRequest) {
-  // クエリパラメータからpartitionKeyを取得
-  const searchParams = req.nextUrl.searchParams;
-  const query = searchParams.get('partition');
-  if (!query) {
-    return new Response(JSON.stringify({ error: "partitionKeyが必要です" }), {
-      status: 400,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
+// export async function GET(req: NextRequest) {
+//   // クエリパラメータからpartitionKeyを取得
+//   const searchParams = req.nextUrl.searchParams;
+//   const query = searchParams.get('partition');
+//   if (!query) {
+//     return new Response(JSON.stringify({ error: "partitionKeyが必要です" }), {
+//       status: 400,
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+//   }
 
-  const params = {
-    TableName: "lingo-fill-db",
-    KeyConditionExpression: "#pk = :pk",
-    ExpressionAttributeNames: {
-      "#pk": "partitionKey",
-    },
-    ExpressionAttributeValues: {
-      ":pk": { S: query },
-    },
-  };
+//   const params = {
+//     TableName: "lingo-fill-db",
+//     KeyConditionExpression: "#pk = :pk",
+//     ExpressionAttributeNames: {
+//       "#pk": "partitionKey",
+//     },
+//     ExpressionAttributeValues: {
+//       ":pk": { S: query },
+//     },
+//   };
 
-  try {
-    const { Items } = await client.send(new QueryCommand(params));
-    return new Response(JSON.stringify(Items), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  } catch (error) {
-    console.error("DynamoDBからのアイテム取得中にエラーが発生しました:", error);
-    return new Response(JSON.stringify({ error: "サーバーエラー" }), {
-      status: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
-}
+//   try {
+//     const { Items } = await client.send(new QueryCommand(params));
+//     return new Response(JSON.stringify(Items), {
+//       status: 200,
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+//   } catch (error) {
+//     console.error("DynamoDBからのアイテム取得中にエラーが発生しました:", error);
+//     return new Response(JSON.stringify({ error: "サーバーエラー" }), {
+//       status: 500,
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+//   }
+// }
