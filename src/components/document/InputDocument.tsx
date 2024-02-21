@@ -11,11 +11,14 @@ function InputDocument() {
     setDocuments: store.setDocuments,
   }));
 
-  const [inputText, setInputText] = useState(document?.text || '');
+  const [inputText, setInputText] = useState(document!.text);
 
   // デバウンスされた関数を作成
   const updateDocumentsDebounced = debounce(() => {
     if (!document) return;
+
+    const existingDocument = documents.find(d => d.sortKey === document.sortKey);
+    if (existingDocument && existingDocument.text === inputText) return;
 
     const updatedDocument = { ...document, 
       text: inputText,

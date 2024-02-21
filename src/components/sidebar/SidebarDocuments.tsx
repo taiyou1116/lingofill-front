@@ -14,14 +14,13 @@ type Props = {
 function SidebarDocuments(props: Props) {
   const { createNewDocument, setCreateNewDocument } = props;
 
-  const { setDocument, documentPublic, username, documents, setDocuments, flipShowSidebar, isLoading, setIsLoading } = useStore((store) => ({
+  const { setDocument, documentPublic, username, documents, setDocuments, flipShowSidebar, setIsLoading } = useStore((store) => ({
     setDocument: store.setDocument,
     documentPublic: store.document,
     username: store.username,
     documents: store.documents,
     setDocuments: store.setDocuments,
     flipShowSidebar: store.flipShowSidebar,
-    isLoading: store.isLoading,
     setIsLoading: store.setIsLoading,
   }));
 
@@ -88,7 +87,6 @@ function SidebarDocuments(props: Props) {
     setInputNameIndex(-1);
 
     if (newSentences[index].title === value) {
-
       return;
     } 
     newSentences[index].title = value;
