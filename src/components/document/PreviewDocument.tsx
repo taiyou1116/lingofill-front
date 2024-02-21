@@ -1,4 +1,5 @@
 import { TranslationObj } from '@/types/types';
+import { Tooltip } from '@mui/material';
 
 type Props = {
   words: string[] | undefined,
@@ -17,12 +18,20 @@ function PreviewDocument(props: Props) {
         // 単語 or 熟語の一文字目か確認
         if (translation && translation.indexes[0] === index) {
           return (
-            <span
-              key={index}
-              className={`py-0.5 px-2 cursor-pointer bg-slate-200 rounded-md`}
+            <Tooltip 
+              key={index} 
+              arrow
+              title={
+                <div>
+                  <div>{translation.indexes.map(i => words[i] + ' ')}</div>
+                  <div className="mt-2">translationaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+                </div>
+              }
             >
-              {translation.translatedText}
-            </span>
+              <span className={`py-0.5 px-2 cursor-pointer bg-slate-200 rounded-md`}>
+                {translation.translatedText}
+              </span>
+            </Tooltip>
           );
         } else if (!translation) {
           // 翻訳されていない単語、または熟語の2番目以降の単語をスキップ

@@ -1,6 +1,9 @@
 実装
 
-documentを削除
+documentを新しい順で表示する
+編集したら上に表示する
+delete機能
+previewでのtooltip
 
 バグ修正
 テキストupdate
