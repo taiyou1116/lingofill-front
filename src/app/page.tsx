@@ -8,7 +8,7 @@ import { Amplify } from "aws-amplify";
 import awsExports from "../aws-exports";
 import { useStore } from "@/store/store";
 import { useEffect } from "react";
-import { getTexts } from "@/utils/request";
+import { getTitles } from "@/utils/request";
 
 Amplify.configure(awsExports);
 
@@ -34,12 +34,12 @@ const MyApp = () => {
     if (route === "authenticated") {
       setUsername(user.username);
       
-      // texts更新(場所かえるかも)
+      // title, sortKey取得(場所かえるかも)
       const getTextsAsync = async () => {
-        const data = await getTexts(user.username);
+        const data = await getTitles(user.username);
         setDocuments(data);
       }
-      getTextsAsync();
+      getTextsAsync(); 
     }
   }, [setUsername, route, user, setDocuments])
 

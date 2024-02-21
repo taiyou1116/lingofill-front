@@ -1,6 +1,11 @@
 実装
 
-titleのみ取得
+titleのみ取得する方法でいく
+- title, sortKeyを取得 -> Documentsのtitleに格納
+- titleをタップ -> sortKeyにあった残りの要素(text, translations)を取得
+
+
+
 input押すだけで、issync = falseになる
 documentを削除
 
@@ -34,7 +39,7 @@ Shift で飛んで選択できるように
   インフラ
 - S3
 - Lambda
-- Firebase(Auth)
+- Amplify, Cognito(Auth)
 
 利点
 

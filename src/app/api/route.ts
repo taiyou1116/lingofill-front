@@ -7,7 +7,6 @@ const client = new DynamoDBClient({ region: "ap-northeast-1" });
 
 export async function PUT(req: NextRequest) {
   const data = await req.json();
-  console.log(data);
   
   // DynamoDBに保存するアイテムの構成
   const item = {
@@ -49,7 +48,6 @@ export async function GET(req: NextRequest) {
   // クエリパラメータからpartitionKeyを取得
   const searchParams = req.nextUrl.searchParams;
   const query = searchParams.get('partition');
-  console.log(query);
   if (!query) {
     return new Response(JSON.stringify({ error: "partitionKeyが必要です" }), {
       status: 400,

@@ -1,7 +1,7 @@
 import { useStore } from '@/store/store';
 import { Document } from '@/types/types'
 import { handleStopPropagation } from '@/utils/modal';
-import { updateText } from '@/utils/request';
+import { getText, updateText } from '@/utils/request';
 import { CloudUpload, Delete, ModeEdit } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
@@ -36,9 +36,29 @@ function SidebarDocuments(props: Props) {
     }
   }, [inputNameIndex, createNewDocument]);
 
-  const openSentence = (index: number) => {
+  const openSentence = async (index: number) => {
     flipShowSidebar();
-    setDocument(documents[index]);
+    // 1回目だけサーバーから取得 -> textがないとき
+    if (documents[index].text !== '') {
+      setDocument(documents[index]);
+      return;
+    }
+    
+    const data = await getText(username, documents[index].sortKey);
+
+    const updateDocuments = documents.map((document) => {
+      if (document.sortKey === data.sortKey) {
+        return {
+          ...document,
+          text: data.text,
+          translations: data.translations,
+        }
+      }
+      return document;
+    })
+
+    setDocuments(updateDocuments);
+    setDocument(updateDocuments[index]);
   }
 
   const createNewDocumentBlur = (input: string) => {

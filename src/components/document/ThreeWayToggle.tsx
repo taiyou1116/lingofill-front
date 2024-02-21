@@ -14,10 +14,9 @@ function ThreeWayToggle() {
     event: React.MouseEvent<HTMLElement>,
     newMode: SelectedMode,
   ) => {
-    setSelectedModeLocal(newMode); // ローカルステートを更新
+    setSelectedModeLocal(newMode);
     if (newMode) {
-      console.log(newMode);
-      setSelectedModeGlobal(newMode); // グローバルステートを更新
+      setSelectedModeGlobal(newMode);
     }
   };
   
