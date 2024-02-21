@@ -36,5 +36,11 @@ export const useStore = create<state>((set) => ({
     selectedmode: 'input',
     setSelectedMode: (seleltedmode: SelectedMode) => {
         set({ selectedmode: seleltedmode })
-    }
+    },
+
+    // CenterModal
+    isLoading: false,
+    setIsLoading: (state: boolean) => {
+        set({ isLoading: state })
+    },
 }))

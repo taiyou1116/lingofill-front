@@ -14,13 +14,15 @@ type Props = {
 function SidebarDocuments(props: Props) {
   const { createNewDocument, setCreateNewDocument } = props;
 
-  const { setDocument, documentPublic, username, documents, setDocuments, flipShowSidebar } = useStore((store) => ({
+  const { setDocument, documentPublic, username, documents, setDocuments, flipShowSidebar, isLoading, setIsLoading } = useStore((store) => ({
     setDocument: store.setDocument,
     documentPublic: store.document,
     username: store.username,
     documents: store.documents,
     setDocuments: store.setDocuments,
     flipShowSidebar: store.flipShowSidebar,
+    isLoading: store.isLoading,
+    setIsLoading: store.setIsLoading,
   }));
 
   const [inputNameIndex, setInputNameIndex] = useState<number>(-1);
@@ -43,9 +45,9 @@ function SidebarDocuments(props: Props) {
       setDocument(documents[index]);
       return;
     }
-    
+    setIsLoading(true);
     const data = await getText(username, documents[index].sortKey);
-
+    setIsLoading(false);
     const updateDocuments = documents.map((document) => {
       if (document.sortKey === data.sortKey) {
         return {

@@ -6,21 +6,37 @@ import SendDocumentDataButton from "./SendDocumentDataButton";
 import { oswald } from "@/store/fontStore";
 import InputDocument from "./InputDocument";
 import PreviewDocument from "./PreviewDocument";
+import { Skeleton, Typography } from "@mui/material";
 
 function DocumentComponent() {
 
   const text = useStore((store) => store.document?.text);
   const words = text?.split(" ");
 
-  const { document, selectedmode } = useStore((store) => ({
+  const { document, selectedmode, isLoading } = useStore((store) => ({
     document: store.document,
     selectedmode: store.selectedmode,
+    isLoading: store.isLoading,
   }));
 
   const renderContentByMode = () => {
     if (document === null) {
       return (
         <div>テキストを選択もしくは作成してください。</div>
+      )
+    }
+    if (isLoading) {
+      return (
+        <Typography
+            variant="h3"
+            className=' w-full'
+          >
+            {<Skeleton />}
+            {<Skeleton />}
+            {<Skeleton />}
+            {<Skeleton />}
+            {<Skeleton />}
+          </Typography>
       )
     }
     switch (selectedmode) {

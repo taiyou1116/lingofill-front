@@ -42,4 +42,8 @@ export type state = {
     // 選択中のモード
     selectedmode: SelectedMode,
     setSelectedMode: (select: SelectedMode) => void,
+
+    //
+    isLoading: boolean,
+    setIsLoading: (state: boolean) => void,
 }
