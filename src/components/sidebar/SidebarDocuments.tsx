@@ -43,25 +43,31 @@ function SidebarDocuments(props: Props) {
     flipShowSidebar();
     // 1回目だけサーバーから取得 -> textがないとき
     if (documents[index].text !== '' || documents[index].isNew === true) {
+      setIsLoading(false);
       setDocument(documents[index]);
       return;
     }
     setIsLoading(true);
-    const data = await getText(username, documents[index].sortKey);
-    setIsLoading(false);
-    const updateDocuments = documents.map((document) => {
-      if (document.sortKey === data.sortKey) {
-        return {
-          ...document,
-          text: data.text,
-          translations: data.translations,
-        }
-      }
-      return document;
-    })
 
-    setDocuments(updateDocuments);
-    setDocument(updateDocuments[index]);
+    try {
+      const data = await getText(username, documents[index].sortKey);
+      setIsLoading(false);
+      const updateDocuments = documents.map((document) => {
+        if (document.sortKey === data.sortKey) {
+          return {
+            ...document,
+            text: data.text,
+            translations: data.translations,
+          }
+        }
+        return document;
+      })
+      setDocuments(updateDocuments);
+      setDocument(updateDocuments[index]);
+
+    } catch(error) {
+      console.log(error);
+    }
   }
 
   const createNewDocumentBlur = (input: string) => {
