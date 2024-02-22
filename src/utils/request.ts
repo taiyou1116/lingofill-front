@@ -21,11 +21,12 @@ export async function updateText(partition: string, sort: string, title: string,
       throw new Error("Response is not OK");
     }
 
-    const data = await response.json();
+    // const data = await response.json();
     toast.success("テキストを保存しました。");
   } catch (error) {
     console.error(error);
-    toast.error("テキストの保存に失敗しました。");
+    toast.error("テキストの保存に失敗しました。インターネット環境を確かめて再度保存してください。");
+    throw error;
   }
 }
 
@@ -94,8 +95,6 @@ export async function getText(partition: string, sortKey: string) {
 }
 
 export function createDate(timestamp: string) {
-  console.log(timestamp);
   const date = new Date(Number(timestamp));
-  const a: string = date.toLocaleString();
-  return a;
+  return date.toLocaleString();
 }

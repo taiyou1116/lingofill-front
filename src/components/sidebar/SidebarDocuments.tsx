@@ -103,10 +103,14 @@ function SidebarDocuments(props: Props) {
   }
 
   const uploadDocument = async (index: number) => {
-    await updateText(username, documents[index].sortKey, documents[index].title, documents[index].text, documents[index].translations);
-    const documentsLocal = [...documents];
-    documentsLocal[index].isSynced = true;
-    setDocuments(documentsLocal);
+    try {
+      await updateText(username, documents[index].sortKey, documents[index].title, documents[index].text, documents[index].translations);
+      const documentsLocal = [...documents];
+      documentsLocal[index].isSynced = true;
+      setDocuments(documentsLocal);
+    } catch(error) {
+      console.error(error);
+    }
   }
 
   const deleteText = () => {

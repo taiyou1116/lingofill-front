@@ -14,13 +14,17 @@ function SendDocumentDataButton() {
   const updateDocuments = async () => {
     const documentIndex = documents.findIndex((d) => d.sortKey === document!.sortKey);
     const newDocuments = [...documents];
+    newDocuments[documentIndex] = document!;
 
-    newDocuments[documentIndex] = {
-      ...document!,
-      isSynced: true,
-    };
-    setDocuments(newDocuments);
-    await updateText(username, document!.sortKey, document!.title, document!.text, document!.translations);
+    try {
+      await updateText(username, document!.sortKey, document!.title, document!.text, document!.translations);
+      newDocuments[documentIndex].isSynced = true;
+    } catch(error) {
+      console.error(error);
+      newDocuments[documentIndex].isSynced = false;
+    } finally {
+      setDocuments(newDocuments);
+    }
   }
 
   const changeSendDataButton = () => {
