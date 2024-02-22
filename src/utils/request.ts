@@ -41,7 +41,6 @@ export async function getTitles(partition: string) {
     },
   });
   const data = await res.json();
-  console.log(data);
 
   const newDocuments: Document[] = data.map((d: any) => {
     return {
@@ -52,8 +51,12 @@ export async function getTitles(partition: string) {
       translations: [],
     }
   });
+  // sortKeyの大きい順に配列をソート
+  const sortedDocuments = newDocuments.sort((a, b) => {
+    return b.sortKey.localeCompare(a.sortKey);
+  });
 
-  return newDocuments;
+  return sortedDocuments;
 }
 
 export async function getText(partition: string, sortKey: string) {
@@ -87,4 +90,11 @@ export async function getText(partition: string, sortKey: string) {
   };
 
   return document;
+}
+
+export function createDate(timestamp: string) {
+  console.log(timestamp);
+  const date = new Date(Number(timestamp));
+  const a: string = date.toLocaleString();
+  return a;
 }

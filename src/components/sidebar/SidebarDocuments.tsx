@@ -1,7 +1,7 @@
 import { useStore } from '@/store/store';
 import { Document } from '@/types/types'
 import { handleStopPropagation } from '@/utils/modal';
-import { getText, updateText } from '@/utils/request';
+import { createDate, getText, updateText } from '@/utils/request';
 import { CloudUpload, Delete, ModeEdit } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
@@ -160,7 +160,15 @@ function SidebarDocuments(props: Props) {
                 </div>
               :
                 <div className=' flex justify-between'>
-                  { document.title }
+                  <div className=' flex flex-col gap-0.5'>
+                    <div>
+                      { document.title }
+                    </div>
+                    <div className=' text-xs text-slate-500'>
+                      { createDate(document.sortKey) }
+                    </div>
+                  </div>
+                  
                   <div onClick={handleStopPropagation} className=' flex gap-0.5 pl-1'>
                     { document.isSynced ? '' : 
                       <Tooltip title='変更を保存する'>

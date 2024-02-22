@@ -1,9 +1,12 @@
 実装
 
 documentを新しい順で表示する
+- Dateが大きい順に表示
+- 編集したらsortKeyを更新
+
 編集したら上に表示する
 delete機能
-previewでのtooltip
+previewでのtooltip ... 途中まで
 
 バグ修正
 テキストupdate
