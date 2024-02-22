@@ -14,7 +14,11 @@ function SendDocumentDataButton() {
   const updateDocuments = async () => {
     const documentIndex = documents.findIndex((d) => d.sortKey === document!.sortKey);
     const newDocuments = [...documents];
-    newDocuments[documentIndex] = document!;
+
+    newDocuments[documentIndex] = {
+      ...document!,
+      isSynced: true,
+    };
     setDocuments(newDocuments);
     await updateText(username, document!.sortKey, document!.title, document!.text, document!.translations);
   }
