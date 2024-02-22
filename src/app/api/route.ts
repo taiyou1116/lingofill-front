@@ -21,7 +21,8 @@ export async function PUT(req: NextRequest) {
         L: data.translations.map((translation: TranslationObj) => ({
           M: {
             indexes: { L: translation.indexes.map(index => ({ N: index.toString() })) },
-            translatedText: { S: translation.translatedText }
+            translatedText: { S: translation.translatedText },
+            memo: { S: translation.memo }
           }
         }))
       }

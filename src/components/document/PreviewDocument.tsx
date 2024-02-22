@@ -10,7 +10,7 @@ function PreviewDocument(props: Props) {
   const { words, translations } = props;
 
   return (
-    <div>
+    <div className="break-all" >
       {words?.map((word, index) => {
         // すでに日本語訳されているか確認
         const translation = translations.find(translation => translation.indexes.includes(index));
@@ -24,7 +24,7 @@ function PreviewDocument(props: Props) {
               title={
                 <div>
                   <div>{translation.indexes.map(i => words[i] + ' ')}</div>
-                  <div className="mt-2">translationaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</div>
+                  <div className="mt-2 text-xl">{ translation.memo }</div>
                 </div>
               }
             >

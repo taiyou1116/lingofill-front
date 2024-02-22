@@ -13,6 +13,7 @@ export type Document = {
 export type TranslationObj = {
     indexes: number[];
     translatedText: string;
+    memo: string,
 };
 
 // モード

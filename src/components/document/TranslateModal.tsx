@@ -21,16 +21,18 @@ function TranslateModal(props: TranslateModalProps) {
   const setDocument = useStore((store) => store.setDocument);
   const document = useStore((store) => store.document);
   
-  const [userInput, setUserInput] = useState('');
+  const [userInputTranslation, setUserInputTranslation] = useState('');
+  const [userInputMemo, setUserInputMemo] = useState('');
 
   // 日本語化ボタン
   const handleSaveButton = () => {
-    handleTranslation(selectedWordIndexes, userInput);
+    handleTranslation(selectedWordIndexes, userInputTranslation, userInputMemo);
     handleCloseModal(flipCenterModal);
   }
 
-  const handleTranslation = (selectedWordIndexes: number[], userInput: string) => {
+  const handleTranslation = (selectedWordIndexes: number[], userInput: string, userInputMemo: string) => {
     const newTranslation = userInput;
+    const newMemo = userInputMemo;
   
     // translationsが未定義の場合は空の配列を使用
     let updatedTranslations = document!.translations ? [...document!.translations] : [];
@@ -46,12 +48,14 @@ function TranslateModal(props: TranslateModalProps) {
       updatedTranslations[firstExistingIndex] = {
         ...updatedTranslations[firstExistingIndex],
         translatedText: newTranslation,
+        memo: newMemo,
       };
     } else {
       // 新しい翻訳を追加
       updatedTranslations.push({
         indexes: selectedWordIndexes,
         translatedText: newTranslation,
+        memo: newMemo,
       });
     }
 
@@ -82,8 +86,8 @@ function TranslateModal(props: TranslateModalProps) {
             <input 
               type='text' 
               placeholder='日本語' 
-              value={userInput}
-              onChange={(e) => setUserInput(e.target.value)}
+              value={userInputTranslation}
+              onChange={(e) => setUserInputTranslation(e.target.value)}
               className=' border border-stone-900 p-1 rounded-sm w-1/3 modal-center-input'/>
           </div>
         </div>
@@ -91,7 +95,10 @@ function TranslateModal(props: TranslateModalProps) {
           <div>メモ</div>
           <textarea 
             placeholder='' 
-            className=' border p-1 w-full h-2/3 resize-none rounded-sm border-stone-900' />
+            className=' border p-1 w-full h-2/3 resize-none rounded-sm border-stone-900' 
+            value={userInputMemo}
+            onChange={(e) => setUserInputMemo(e.target.value)}
+          />
         </div>
         <button 
           className=' bg-sky-400 px-4 py-2 rounded-md'
