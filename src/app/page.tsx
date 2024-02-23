@@ -26,7 +26,7 @@ const MyApp = () => {
   const { route, user, } = useAuthenticator((context) => [context.route]);
 
   const {setUsername,setDocuments} = useStore((store) => ({
-    setUsername: store.setUsername,
+    setUsername:  store.setUsername,
     setDocuments: store.setDocuments,
   }));
 

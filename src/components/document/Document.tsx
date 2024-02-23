@@ -14,9 +14,9 @@ function DocumentComponent() {
   const words = text?.split(" ");
 
   const { document, selectedmode, isLoading } = useStore((store) => ({
-    document: store.document,
+    document:     store.document,
     selectedmode: store.selectedmode,
-    isLoading: store.isLoading,
+    isLoading:    store.isLoading,
   }));
 
   const renderContentByMode = () => {
@@ -28,15 +28,15 @@ function DocumentComponent() {
     if (isLoading) {
       return (
         <Typography
-            variant="h3"
-            className=' w-full'
-          >
-            {<Skeleton />}
-            {<Skeleton />}
-            {<Skeleton />}
-            {<Skeleton />}
-            {<Skeleton />}
-          </Typography>
+          variant="h3"
+          className=' w-full'
+        >
+          {<Skeleton />}
+          {<Skeleton />}
+          {<Skeleton />}
+          {<Skeleton />}
+          {<Skeleton />}
+        </Typography>
       )
     }
     switch (selectedmode) {

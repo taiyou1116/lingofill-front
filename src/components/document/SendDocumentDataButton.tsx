@@ -1,14 +1,14 @@
 import { useStore } from '@/store/store';
 import { updateText } from '@/utils/request';
-import { CloudUpload } from '@mui/icons-material';
+import { CheckCircle, CloudUpload } from '@mui/icons-material';
 
 function SendDocumentDataButton() {
 
   const {setDocuments, document, documents, username} = useStore((store) => ({
     setDocuments: store.setDocuments,
-    document: store.document,
-    documents: store.documents,
-    username: store.username,
+    document:     store.document,
+    documents:    store.documents,
+    username:     store.username,
   }));
 
   const updateDocuments = async () => {
@@ -45,7 +45,8 @@ function SendDocumentDataButton() {
     <div>
       { document?.isSynced 
       ? 
-       <div className=' bg-slate-300 rounded-lg py-2 px-4 flex gap-1 items-center'>
+       <div className=' bg-none py-2 px-4 flex gap-1 items-center'>
+        <CheckCircle style={{fontSize: 20}} />
         テキスト保存済み
        </div>
       : changeSendDataButton() }

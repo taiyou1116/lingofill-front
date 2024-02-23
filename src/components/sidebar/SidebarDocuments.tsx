@@ -15,13 +15,13 @@ function SidebarDocuments(props: Props) {
   const { createNewDocument, setCreateNewDocument } = props;
 
   const { setDocument, documentPublic, username, documents, setDocuments, flipShowSidebar, setIsLoading } = useStore((store) => ({
-    setDocument: store.setDocument,
-    documentPublic: store.document,
-    username: store.username,
-    documents: store.documents,
-    setDocuments: store.setDocuments,
+    setDocument:     store.setDocument,
+    documentPublic:  store.document,
+    username:        store.username,
+    documents:       store.documents,
+    setDocuments:    store.setDocuments,
     flipShowSidebar: store.flipShowSidebar,
-    setIsLoading: store.setIsLoading,
+    setIsLoading:    store.setIsLoading,
   }));
 
   const [inputNameIndex, setInputNameIndex] = useState<number>(-1);

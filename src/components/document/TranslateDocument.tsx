@@ -12,12 +12,11 @@ function TranslateDocument(props: TranslateDocumentType) {
   const {showCenterModal, flipCenterModal, document} = useStore((store) => ({
     showCenterModal: store.showCenterModal,
     flipCenterModal: store.flipCenterModal,
-    document: store.document,
+    document:        store.document,
   }));
 
-  // ドラッグ処理(熟語処理) // 翻訳管理(日本語化された単語)
+  // ドラッグ処理(熟語処理)
   const [selectedWordsIndexes, setSelectedWordsIndexes] = useState<number[]>([]);
-  
   const [isDragging, setIsDragging] = useState(false);
   
   // 単語編集処理
@@ -41,11 +40,19 @@ function TranslateDocument(props: TranslateDocumentType) {
   };
   
   const handleMouseMove = (index: number) => {
-    if (showCenterModal) return;
-    if (!isDragging) return;
+    if (showCenterModal || !isDragging) return;
+
     setSelectedWordsIndexes((prev) => {
-      // 重複選択を避けるために新しいインデックスだけを追加
-      return prev.includes(index) ? prev : [...prev, index];
+      if (prev.includes(index)) return prev;
+
+      const firstSelectedIndex = prev[0];
+      const lastSelectedIndex = prev[prev.length - 1];
+
+      // 選択されている単語があり、新しいインデックスが隣接していない場合は何も変更しない
+      if (prev.length > 0 && Math.abs(lastSelectedIndex - index) !== 1 && Math.abs(firstSelectedIndex - index) !== 1) {
+        return prev;
+      }
+      return firstSelectedIndex > index ? [index, ...prev] : [...prev, index];
     });
   };
 
@@ -58,7 +65,7 @@ function TranslateDocument(props: TranslateDocumentType) {
   };
 
   return (
-    <div className="break-all" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+    <div className="break-all select-none" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
       {words?.map((word, index) => {
         // すでに日本語訳されているか確認
         const translation = document!.translations.find(translation => translation.indexes.includes(index));

@@ -15,11 +15,13 @@ type TranslateModalProps = {
 function TranslateModal(props: TranslateModalProps) {
   const { words, selectedWordIndexes } = props;
 
-  const flipCenterModal = useStore((store) => store.flipCenterModal);
-  const setDocuments = useStore((store) => store.setDocuments);
-  const documents = useStore((store) => store.documents);
-  const setDocument = useStore((store) => store.setDocument);
-  const document = useStore((store) => store.document);
+  const {flipCenterModal, document, setDocuments, documents, setDocument} = useStore((store) => ({
+    flipCenterModal: store.flipCenterModal,
+    document:        store.document,
+    setDocuments:    store.setDocuments,
+    documents:       store.documents,
+    setDocument:     store.setDocument,
+  }));
   
   const [userInputTranslation, setUserInputTranslation] = useState('');
   const [userInputMemo, setUserInputMemo] = useState('');

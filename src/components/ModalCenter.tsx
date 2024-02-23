@@ -12,8 +12,10 @@ type ModalCenterProps = {
 function ModalCenterComponent(props: ModalCenterProps) {
   const { children} = props;
 
-  const showCenterModal = useStore((store) => store.showCenterModal);
-  const flipCenterModal = useStore((store) => store.flipCenterModal);
+  const { showCenterModal, flipCenterModal } = useStore((store) => ({
+    showCenterModal: store.showCenterModal,
+    flipCenterModal: store.flipCenterModal,
+  }))
 
   return (
     <div className={` fixed inset-0 flex items-center justify-center ${showCenterModal ? '' : ' pointer-events-none'}`}>

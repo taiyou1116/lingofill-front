@@ -5,9 +5,9 @@ import { useStore } from '@/store/store';
 
 function InputDocument() {
   const { document, setDocument, documents, setDocuments } = useStore((store) => ({
-    document: store.document,
-    setDocument: store.setDocument,
-    documents: store.documents,
+    document:     store.document,
+    setDocument:  store.setDocument,
+    documents:    store.documents,
     setDocuments: store.setDocuments,
   }));
 

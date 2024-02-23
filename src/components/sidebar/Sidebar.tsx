@@ -10,9 +10,9 @@ import SidebarDocuments from './SidebarDocuments';
 
 function SidebarComponent() {
   const { showSidebar, flipShowSidebar, documents } = useStore((store) => ({
-    showSidebar: store.showSidebar,
+    showSidebar:     store.showSidebar,
     flipShowSidebar: store.flipShowSidebar,
-    documents: store.documents,
+    documents:       store.documents,
   }));
 
   const [createNewDocument, setCreateNewDocument] = useState<boolean>(false);

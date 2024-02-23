@@ -1,6 +1,6 @@
 "use client"
 
-import { AccountCircle, Reorder } from "@mui/icons-material";
+import { AccountCircle, Reorder, Settings } from "@mui/icons-material";
 import { useStore } from '@/store/store';
 import { oswald } from '@/store/fontStore';
 import Image from 'next/image';
@@ -9,7 +9,6 @@ import { Toaster } from "react-hot-toast";
 import { Tooltip } from "@mui/material";
 
 function HeaderComponent() {
-  // store
   const flipShowSidebar = useStore((store) => store.flipShowSidebar);
 
   return (
@@ -27,7 +26,7 @@ function HeaderComponent() {
           </h1> 
         </Link>
       </div>
-      <div className=' flex px-10 gap-10 items-center'>
+      <div className=' flex px-10 items-center'>
         <Link href={'/acount'}>
           <Tooltip title="アカウント">
             <AccountCircle style={{fontSize: 35}} />
