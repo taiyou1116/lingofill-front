@@ -105,24 +105,24 @@ export function createDate(timestamp: string) {
   return date.toLocaleString();
 }
 
-// import { Predictions } from "@aws-amplify/predictions";
+import { Predictions } from "@aws-amplify/predictions";
 
-// export async function translateText(text: string) {
-//     try {
-//         const result = await Predictions.convert({
-//             translateText: {
-//                 source: {
-//                     text: text,
-//                     language: "en" // ソース言語
-//                 },
-//                 targetLanguage: "ja" // ターゲット言語
-//             }
-//         });
+export async function translateText(text: string) {
+  try {
+    const result = await Predictions.convert({
+      translateText: {
+        source: {
+          text: text,
+          language: "en" // ソース言語
+        },
+        targetLanguage: "ja" // ターゲット言語
+      }
+    });
 
-//         console.log(result.text); // 翻訳結果を表示
-//         return result.text;
-//     } catch (err) {
-//         console.error(err);
-//         return err;
-//     }
-// }
+    console.log(result.text); // 翻訳結果を表示
+    return result.text;
+  } catch (err) {
+    console.error(err);
+    return err;
+  }
+}
