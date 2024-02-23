@@ -6,10 +6,12 @@ import { oswald } from '@/store/fontStore';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Toaster } from "react-hot-toast";
-import { Tooltip } from "@mui/material";
+import { Menu, MenuItem, Tooltip } from "@mui/material";
+import { useState } from "react";
 
 function HeaderComponent() {
   const flipShowSidebar = useStore((store) => store.flipShowSidebar);
+  const [anchorEl, setAnchorEl] = useState<boolean>(false);
 
   return (
     <div className="header-bg-height bg-cyan-500 flex items-center justify-between shadow-xl">
@@ -27,11 +29,31 @@ function HeaderComponent() {
         </Link>
       </div>
       <div className=' flex px-10 items-center'>
-        <Link href={'/acount'}>
-          <Tooltip title="アカウント">
+        <div onClick={() => setAnchorEl(true)} className=" cursor-pointer">
+          <Tooltip title="アカウント設定">
             <AccountCircle style={{fontSize: 35}} />
           </Tooltip>
-        </Link>
+        </div>
+        <Menu
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
+          keepMounted
+          transformOrigin={{
+            vertical: 'bottom',
+            horizontal: 'right',
+          }}
+          open={anchorEl}
+          onClose={() => setAnchorEl(false)}
+        >
+          <MenuItem onClick={() => setAnchorEl(false)}>
+            <Link href={'/acount'}>
+              アカウント
+            </Link>
+          </MenuItem>
+          <MenuItem>設定</MenuItem>
+        </Menu>
       </div>
       <Toaster 
         position="top-center"
