@@ -129,7 +129,7 @@ function SidebarDocuments(props: Props) {
       { createNewDocument 
       ? 
         <input className=' p-2'
-          placeholder='テキスト名を入力'
+          placeholder='新規テキスト名を入力'
           type='text' 
           value={input}
           defaultValue=''

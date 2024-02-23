@@ -23,8 +23,8 @@ function PreviewDocument(props: Props) {
               arrow
               title={
                 <div>
-                  <div>{translation.indexes.map(i => words[i] + ' ')}</div>
-                  <div className="mt-2 text-xl">{ translation.memo }</div>
+                  <div className=" text-lg underline underline-offset-8">{translation.indexes.map(i => words[i] + ' ')}</div>
+                  <div className=" mt-2 text-lg">{ translation.memo }</div>
                 </div>
               }
             >

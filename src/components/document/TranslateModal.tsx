@@ -77,7 +77,7 @@ function TranslateModal(props: TranslateModalProps) {
   return (
     <ModalCenterComponent>
         <div className=' w-full'>
-          <div>翻訳</div>
+          <div>編集</div>
           <div className=' w-full flex justify-center items-center gap-3'>
             { selectedWordIndexes.map((index) => {
               return <span key={index}>{words![index]}</span>
@@ -85,7 +85,7 @@ function TranslateModal(props: TranslateModalProps) {
             →
             <input 
               type='text' 
-              placeholder='日本語' 
+              placeholder='表示' 
               value={userInputTranslation}
               onChange={(e) => setUserInputTranslation(e.target.value)}
               className=' border border-stone-900 p-1 rounded-sm w-1/3 modal-center-input'/>
@@ -94,7 +94,7 @@ function TranslateModal(props: TranslateModalProps) {
         <div className=' w-full h-full flex flex-col gap-1'>
           <div>メモ</div>
           <textarea 
-            placeholder='' 
+            placeholder='動詞 ->  名詞 ->  形容詞 -> '
             className=' border p-1 w-full h-2/3 resize-none rounded-sm border-stone-900' 
             value={userInputMemo}
             onChange={(e) => setUserInputMemo(e.target.value)}

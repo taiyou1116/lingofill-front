@@ -57,7 +57,7 @@ function ThreeWayToggle() {
       }}
     >
       <ToggleButton value="preview"><Visibility style={{fontSize: 15}} /> プレビュー</ToggleButton>
-      <ToggleButton value="edit"><Translate style={{fontSize: 15}} /> 翻訳</ToggleButton>
+      <ToggleButton value="edit"><Translate style={{fontSize: 15}} /> 編集</ToggleButton>
       <ToggleButton value="input"><TextSnippet style={{fontSize: 15}} /> 原文入力</ToggleButton>
     </ToggleButtonGroup>
   );

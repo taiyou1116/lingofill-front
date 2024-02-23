@@ -44,6 +44,7 @@ function InputDocument() {
     const updatedDocument: Document = {
       ...document!,
       text: updatedText,
+      isSynced: false,
     };
     setDocument(updatedDocument);
   };

@@ -32,7 +32,7 @@ function SendDocumentDataButton() {
       return (
         <button 
           onClick={() => updateDocuments()}
-          className=' bg-white rounded-lg py-2 px-4 border border-slate-800 hover:bg-slate-100 flex gap-1 items-center'
+          className=' bg-lime-400 rounded-lg py-2 px-4 hover:bg-lime-500 flex gap-1 items-center'
         >
           <CloudUpload style={{fontSize: 20}} />
           テキストを保存する
@@ -43,7 +43,12 @@ function SendDocumentDataButton() {
  
   return ( 
     <div>
-      { changeSendDataButton() }
+      { document?.isSynced 
+      ? 
+       <div className=' bg-slate-300 rounded-lg py-2 px-4 flex gap-1 items-center'>
+        テキスト保存済み
+       </div>
+      : changeSendDataButton() }
     </div>
   )
 }

@@ -69,9 +69,11 @@ function DocumentComponent() {
       return;
     }
     return (
-      <div className=" flex gap-3 items-center">
-        <h1 className={` ${oswald.className}`}>{ document.title }</h1>
-        <ThreeWayToggle />
+      <div className=" flex items-center justify-between">
+        <div className=" flex gap-3 items-center">
+          <h1 className={` ${oswald.className}`}>{ document.title }</h1>
+          <ThreeWayToggle />
+        </div>
         <SendDocumentDataButton />
       </div>
     )
