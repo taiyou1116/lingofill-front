@@ -38,6 +38,8 @@ const MyApp = () => {
       const getTextsAsync = async () => {
         const data = await getTitles(user.username);
         setDocuments(data);
+        // 使用例
+        // translateText("Hello, world!");
       }
       getTextsAsync(); 
     }

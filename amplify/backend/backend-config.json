@@ -51,5 +51,12 @@
         }
       ]
     }
+  },
+  "predictions": {
+    "translateText73a2d4ed": {
+      "convertType": "translateText",
+      "providerPlugin": "awscloudformation",
+      "service": "Translate"
+    }
   }
 }

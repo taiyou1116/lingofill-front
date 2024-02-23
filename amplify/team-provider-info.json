@@ -20,6 +20,9 @@
           "appId": "d5yypxcoba5g4",
           "type": "cicd"
         }
+      },
+      "predictions": {
+        "translateText73a2d4ed": {}
       }
     }
   }
