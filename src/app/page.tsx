@@ -25,9 +25,10 @@ export default App;
 const MyApp = () => {
   const { route, user, } = useAuthenticator((context) => [context.route]);
 
-  const {setUsername,setDocuments} = useStore((store) => ({
+  const {setUsername, setDocuments, setTheme} = useStore((store) => ({
     setUsername:  store.setUsername,
     setDocuments: store.setDocuments,
+    setTheme:     store.setTheme,
   }));
 
   useEffect(() => {
@@ -42,6 +43,19 @@ const MyApp = () => {
       getTextsAsync(); 
     }
   }, [setUsername, route, user, setDocuments])
+
+  // テーマを決める
+  useEffect(() => {
+    const getTheme = () => {
+      const theme = localStorage.getItem('theme');
+      if (theme === null) {
+        localStorage.setItem('theme', 'light');
+        return;
+      }
+      setTheme(theme);
+    }
+    getTheme();
+  }, [setTheme])
 
   return (
     <div className=" h-full">

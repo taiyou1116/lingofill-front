@@ -44,4 +44,7 @@ export type state = {
     // サーバーからの取得状態
     isLoading: boolean,
     setIsLoading: (state: boolean) => void,
+
+    theme: string,
+    setTheme: (theme: string) => void,
 }
