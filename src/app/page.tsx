@@ -8,7 +8,7 @@ import { Amplify } from "aws-amplify";
 import awsExports from "../aws-exports";
 import { useStore } from "@/store/store";
 import { useEffect } from "react";
-import { getTitles, translateText } from "@/utils/request";
+import { getTitles } from "@/utils/request";
 
 Amplify.configure(awsExports);
 
@@ -38,8 +38,6 @@ const MyApp = () => {
       const getTextsAsync = async () => {
         const data = await getTitles(user.username);
         setDocuments(data);
-        // 使用例
-        translateText("buriburizaemon is here!");
       }
       getTextsAsync(); 
     }

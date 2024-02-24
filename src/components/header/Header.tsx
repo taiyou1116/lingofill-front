@@ -11,10 +11,18 @@ import { useState } from "react";
 
 function HeaderComponent() {
   const flipShowSidebar = useStore((store) => store.flipShowSidebar);
-  const [anchorEl, setAnchorEl] = useState<boolean>(false);
+  
+  const [anchorEl, setAnchorEl] = useState(null);
+  const handleClick = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
-    <div className="header-bg-height bg-cyan-500 flex items-center justify-between shadow-xl">
+    <div className="header-bg-height bg-cyan-500 flex items-center justify-between shadow-md">
       <div className='flex items-center pl-4 gap-5'>
         <Tooltip title="テキスト一覧">
           <button onClick={flipShowSidebar}>
@@ -29,30 +37,34 @@ function HeaderComponent() {
         </Link>
       </div>
       <div className=' flex px-10 items-center'>
-        <div onClick={() => setAnchorEl(true)} className=" cursor-pointer">
+        <div onClick={handleClick} className=" cursor-pointer">
           <Tooltip title="アカウント設定">
             <AccountCircle style={{fontSize: 35}} />
           </Tooltip>
         </div>
         <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleClose}
           anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'right',
-          }}
-          keepMounted
-          transformOrigin={{
             vertical: 'bottom',
             horizontal: 'right',
           }}
-          open={anchorEl}
-          onClose={() => setAnchorEl(false)}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'right',
+          }}
         >
-          <MenuItem onClick={() => setAnchorEl(false)}>
-            <Link href={'/acount'}>
+          <MenuItem onClick={handleClose}>
+            <Link href='/acount'>
               アカウント
             </Link>
           </MenuItem>
-          <MenuItem>設定</MenuItem>
+          <MenuItem onClick={handleClose}>
+            <Link href='/setting'>
+              設定
+            </Link>
+          </MenuItem>
         </Menu>
       </div>
       <Toaster 
