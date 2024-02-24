@@ -1,3 +1,5 @@
+amplify-auth -> https://docs.amplify.aws/javascript/build-a-backend/auth/manage-user-session/
+
 実装
 
 - Google 自動翻訳 ... 高
@@ -13,10 +15,10 @@ documentを新しい順で表示する
 - 編集したらsortKeyを更新
 - 編集したら上に表示する
 
-- 説明のdoc
-初回表示時はdocを出す。2回目はアプリ画面 + Headerに使い方
-localStorage
-layoutを変えたい -> ルートを変える
+説明のdoc
+- Authenticatorでログイン情報を管理しないように
+- urlはできればそのまま
+- ログイン後のルートでdocが表示されるバグ
 
 バグ修正
 - たくさん選択でModalがぐちゃぐちゃに

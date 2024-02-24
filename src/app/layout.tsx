@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { m_plus_rounded_1c } from "@/store/fontStore";
 import "./globals.css";
-import SidebarComponent from "@/components/sidebar/Sidebar";
-import HeaderComponent from "@/components/header/Header";
 import Head from "next/head";
 
 export const metadata: Metadata = {
@@ -20,12 +18,8 @@ export default function RootLayout({
       <Head>
         <link rel="icon" href="/favicon_2.ico" />
       </Head>
-      <body className={` flex w-screen h-screen ${m_plus_rounded_1c.className}`}>
-        {/* <SidebarComponent /> */}
-        <div className=" h-screen w-screen">
-          {/* <HeaderComponent /> */}
-          <div className=" h-5/6">{children}</div>
-        </div>  
+      <body className={` ${m_plus_rounded_1c.className}`}>
+        {children}
       </body>
     </html>
   );

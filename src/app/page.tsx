@@ -1,40 +1,61 @@
 "use client"
 
 import "./globals.css";
-import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { Amplify } from "aws-amplify";
 import awsExports from "../aws-exports";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { autoSignIn, getCurrentUser } from "aws-amplify/auth";
+import { useStore } from "@/store/store";
 
 Amplify.configure(awsExports);
 
-const App = () => {
-  return (
-    <Authenticator.Provider>
-      <MyApp />
-    </Authenticator.Provider>
-  );
-};
-
-export default App;
-
 const MyApp = () => {
-  const { route } = useAuthenticator((context) => [context.route]);
   const router = useRouter();
+  const {setUsername, setTheme} = useStore((store) => ({
+    setUsername:  store.setUsername,
+    setTheme:     store.setTheme,
+  }));
+
+  async function currentAuthenticatedUser() {
+    try {
+      const { username } = await getCurrentUser();
+      console.log(`The username: ${username}`);
+      return username;
+    } catch (err) {
+      console.log("getCurrentUserエラー" + err);
+    }
+  }
+
+  async function handleAutoSignInn() {
+    try {
+      const signInOutput = await autoSignIn();
+      // handle sign-in steps
+    } catch (error) {
+      console.log("エラ〜" + error);
+    }
+  }
 
   useEffect(() => {
-    if (route === "authenticated") {
-      router.push('/home');
-    } else {
-      router.push('/doc');
+    async function handleAutoSignIn() {
+      try {
+        // await handleAutoSignInn();
+        const username = await currentAuthenticatedUser();
+        if (username !== undefined) {
+          setUsername(username);
+          router.push('/home');
+        } else {
+          router.push('/doc');
+        }
+      } catch (error) {
+        console.log("エラー" + error);
+      }
     }
-  }, [route, router])
 
-  return (
-    <div className=" h-full">
-      <Authenticator socialProviders={['google']}/>
-    </div>
-  )
+    handleAutoSignIn();
+  }, []);
+
+  return null;
 };
+export default MyApp;

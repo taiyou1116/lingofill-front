@@ -10,7 +10,9 @@ Amplify.configure(amplifyconfig);
 function Login() {
   return (
     <div className=' py-5'>
-      <Authenticator socialProviders={['google']} />
+      <Authenticator socialProviders={['google']} >
+        
+      </Authenticator>
     </div>
   )
 }
