@@ -29,7 +29,7 @@ function HeaderComponent() {
             <Reorder style={{fontSize: 35}} />
           </button>
         </Tooltip>
-        <Link href={"/"} className=' flex items-center cursor-pointer border-2 border-black rounded-lg pr-3'>
+        <Link href={"/home"} className=' flex items-center cursor-pointer border-2 border-black rounded-lg pr-3'>
           <Image src="LF.svg" width="40" height="40" alt='ロゴ' />
           <h1 className={` text-xl ${oswald.className}`}>
             Lingo Fill
@@ -56,12 +56,12 @@ function HeaderComponent() {
           }}
         >
           <MenuItem onClick={handleClose}>
-            <Link href='/acount'>
+            <Link href='/home/acount'>
               アカウント
             </Link>
           </MenuItem>
           <MenuItem onClick={handleClose}>
-            <Link href='/setting'>
+            <Link href='/home/setting'>
               設定
             </Link>
           </MenuItem>

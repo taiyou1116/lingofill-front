@@ -1,9 +1,16 @@
-import React from 'react'
+"use client"
 
-function DOC() {
+import Link from "next/link";
+import "../globals.css";
+
+function Doc() {
   return (
-    <div>DOC</div>
+    <div>
+     <Link href='/login'>
+        使ってみる
+     </Link>
+    </div>
   )
 }
 
-export default DOC
+export default Doc

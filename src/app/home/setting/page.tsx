@@ -3,7 +3,7 @@ import React from 'react'
 function Setting() {
   
   return (
-    <div></div>
+    <div>設定</div>
   )
 }
 

@@ -1,14 +1,11 @@
 "use client"
 
-import DocumentComponent from "@/components/document/Document"
 import "./globals.css";
 import { Authenticator, useAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { Amplify } from "aws-amplify";
 import awsExports from "../aws-exports";
-import { useStore } from "@/store/store";
 import { useEffect } from "react";
-import { getTitles } from "@/utils/request";
 import { useRouter } from "next/navigation";
 
 Amplify.configure(awsExports);

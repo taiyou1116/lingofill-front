@@ -62,6 +62,7 @@ const Home = () => {
         <DocumentComponent />
       : 
         <div className=' py-5'>
+          {/*  Authenticatorがuser情報を持つ */}
           <Authenticator socialProviders={['google']}/>
         </div>
       }
