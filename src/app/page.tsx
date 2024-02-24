@@ -9,6 +9,7 @@ import awsExports from "../aws-exports";
 import { useStore } from "@/store/store";
 import { useEffect } from "react";
 import { getTitles } from "@/utils/request";
+import { useRouter } from "next/navigation";
 
 Amplify.configure(awsExports);
 
@@ -23,50 +24,20 @@ const App = () => {
 export default App;
 
 const MyApp = () => {
-  const { route, user, } = useAuthenticator((context) => [context.route]);
-
-  const {setUsername, setDocuments, setTheme} = useStore((store) => ({
-    setUsername:  store.setUsername,
-    setDocuments: store.setDocuments,
-    setTheme:     store.setTheme,
-  }));
+  const { route } = useAuthenticator((context) => [context.route]);
+  const router = useRouter();
 
   useEffect(() => {
     if (route === "authenticated") {
-      setUsername(user.username);
-      
-      // title, sortKey取得(場所かえるかも)
-      const getTextsAsync = async () => {
-        const data = await getTitles(user.username);
-        setDocuments(data);
-      }
-      getTextsAsync(); 
+      router.push('/home');
+    } else {
+      router.push('/doc');
     }
-  }, [setUsername, route, user, setDocuments])
-
-  // テーマを決める
-  useEffect(() => {
-    const getTheme = () => {
-      const theme = localStorage.getItem('theme');
-      if (theme === null) {
-        localStorage.setItem('theme', 'light');
-        return;
-      }
-      setTheme(theme);
-    }
-    getTheme();
-  }, [setTheme])
+  }, [route, router])
 
   return (
     <div className=" h-full">
-      { route === "authenticated"
-      ?
-        <DocumentComponent />
-      : 
-        <div className=' py-5'>
-          <Authenticator socialProviders={['google']}/>
-        </div>
-      }
+      <Authenticator socialProviders={['google']}/>
     </div>
   )
 };
