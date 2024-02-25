@@ -6,7 +6,7 @@ import { Amplify } from "aws-amplify";
 import awsExports from "../aws-exports";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { autoSignIn, getCurrentUser } from "aws-amplify/auth";
+import { getCurrentUser } from "aws-amplify/auth";
 import { useStore } from "@/store/store";
 
 Amplify.configure(awsExports);
@@ -21,32 +21,21 @@ const MyApp = () => {
   async function currentAuthenticatedUser() {
     try {
       const { username } = await getCurrentUser();
-      console.log(`The username: ${username}`);
       return username;
     } catch (err) {
-      console.log("getCurrentUserエラー" + err);
-    }
-  }
-
-  async function handleAutoSignInn() {
-    try {
-      const signInOutput = await autoSignIn();
-      // handle sign-in steps
-    } catch (error) {
-      console.log("エラ〜" + error);
+      console.log("getCurrentUserエラー: " + err);
     }
   }
 
   useEffect(() => {
     async function handleAutoSignIn() {
       try {
-        // await handleAutoSignInn();
         const username = await currentAuthenticatedUser();
         if (username !== undefined) {
           setUsername(username);
-          router.push('/home');
+          router.replace('/home');
         } else {
-          router.push('/doc');
+          router.replace('/doc');
         }
       } catch (error) {
         console.log("エラー" + error);
@@ -54,8 +43,10 @@ const MyApp = () => {
     }
 
     handleAutoSignIn();
-  }, []);
+  }, [setUsername, router]);
 
-  return null;
+  return (
+    <div>リダイレクト中...</div>
+  )
 };
 export default MyApp;

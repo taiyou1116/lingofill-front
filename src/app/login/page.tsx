@@ -2,17 +2,15 @@
 
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
-import amplifyconfig from '../../amplifyconfiguration.json';
-import { Amplify } from "aws-amplify";
+// import amplifyconfig from '../../amplifyconfiguration.json';
+// import { Amplify } from "aws-amplify";
 
-Amplify.configure(amplifyconfig);
+// Amplify.configure(amplifyconfig);
 
 function Login() {
   return (
     <div className=' py-5'>
-      <Authenticator socialProviders={['google']} >
-        
-      </Authenticator>
+      <Authenticator socialProviders={['google']} />
     </div>
   )
 }

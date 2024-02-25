@@ -1,14 +1,15 @@
 "use client"
 
-import Link from "next/link";
 import "../globals.css";
+import { Authenticator } from "@aws-amplify/ui-react";
+// import { Amplify } from "aws-amplify";
+// import amplifyconfig from '../../amplifyconfiguration.json';
 
+// Amplify.configure(amplifyconfig);
 function Doc() {
   return (
     <div>
-     <Link href='/login'>
-        使ってみる
-     </Link>
+     <Authenticator socialProviders={['google']} />
     </div>
   )
 }

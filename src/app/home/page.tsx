@@ -17,24 +17,20 @@ const Home = () => {
     setDocuments: store.setDocuments,
     setTheme:     store.setTheme,
     username:     store.username,
-    setUsername:     store.setUsername,
+    setUsername:  store.setUsername,
   }));
 
   useEffect(() => {
-    // usernameを取得していない場合
-    if (username === '') {
-      const getNewName = async () => {
-        const name = await currentAuthenticatedUser();
-        setUsername(name!);
+    const fetchData = async () => {
+      if (username === '') {
+        const user = await getCurrentUser();
+        setUsername(user.username);
+      } else {
+        const data = await getTitles(username);
+        setDocuments(data);
       }
-      getNewName();
-    }
-
-    const getTextsAsync = async () => {
-      const data = await getTitles(username);
-      setDocuments(data);
-    }
-    getTextsAsync(); 
+    };
+    fetchData();
   }, [setDocuments, username, setUsername])
 
   // テーマを決める
@@ -49,17 +45,6 @@ const Home = () => {
     }
     getTheme();
   }, [setTheme])
-
-  // utilsへ
-  async function currentAuthenticatedUser() {
-    try {
-      const { username } = await getCurrentUser();
-      console.log(`The username: ${username}`);
-      return username;
-    } catch (err) {
-      console.log(err);
-    }
-  }
 
   return (
     <div className=" h-full">
