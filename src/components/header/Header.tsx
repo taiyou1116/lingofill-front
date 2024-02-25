@@ -6,7 +6,7 @@ import { oswald } from '@/store/fontStore';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Toaster } from "react-hot-toast";
-import { Menu, MenuItem, Tooltip } from "@mui/material";
+import { AppBar, Box, Menu, MenuItem, Toolbar, Tooltip } from "@mui/material";
 import { useState } from "react";
 
 function HeaderComponent() {
@@ -22,11 +22,11 @@ function HeaderComponent() {
   };
 
   return (
-    <div className="header-bg-height bg-cyan-500 flex items-center justify-between shadow-md">
+    <div className="header-bg-height bg-slate-200 flex items-center justify-between shadow-md dark:bg-slate-600">
       <div className='flex items-center pl-4 gap-5'>
         <Tooltip title="テキスト一覧">
           <button onClick={flipShowSidebar}>
-            <Reorder style={{fontSize: 35}} />
+            <Reorder className=" size-10 dark:text-slate-100" />
           </button>
         </Tooltip>
         <Link href={"/home"} className=' flex items-center cursor-pointer border-2 border-black rounded-lg pr-3'>
@@ -39,7 +39,7 @@ function HeaderComponent() {
       <div className=' flex px-10 items-center gap-1'>
         <div onClick={handleClick} className=" cursor-pointer">
           <Tooltip title="アカウント設定">
-            <AccountCircle style={{fontSize: 35}} />
+            <AccountCircle className=" size-10 dark:text-slate-100" />
           </Tooltip>
         </div>
         <Menu

@@ -80,10 +80,10 @@ function DocumentComponent() {
   }
 
   return (
-    <div className=" h-full p-5">
+    <div className="h-full p-5 bg-slate-800">
       { showToggle() }
       
-      <div className=" h-full p-5">
+      <div className=" h-5/6 pt-5">
       { renderContentByMode() }
       </div>
     </div>

@@ -10,7 +10,7 @@ export default function Layout({
     <div>
         <div className=" h-screen w-screen">
           <SettingHeaderComponent />
-          <div className=" h-5/6">{children}</div>
+          <div className=" h-full">{children}</div>
         </div>  
     </div>
   );

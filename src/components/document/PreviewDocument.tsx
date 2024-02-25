@@ -10,7 +10,7 @@ function PreviewDocument(props: Props) {
   const { words, translations } = props;
 
   return (
-    <div className="break-all" >
+    <div className="break-all overflow-y-auto max-h-[calc(100vh-200px)] p-5 dark:bg-slate-600 dark:text-slate-400" >
       {words?.map((word, index) => {
         // すでに日本語訳されているか確認
         const translation = translations.find(translation => translation.indexes.includes(index));

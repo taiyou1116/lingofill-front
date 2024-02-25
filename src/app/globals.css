@@ -6,6 +6,11 @@
   height:70px;
 }
 
+.content {
+  height: calc(100vh - 70px); /* ビューポートの高さからヘッダーの高さを差し引く */
+  overflow: hidden; 
+}
+
 .modal-center-input {
   height: 5vh;
 }

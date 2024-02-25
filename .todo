@@ -1,33 +1,25 @@
 amplify-auth -> https://docs.amplify.aws/javascript/build-a-backend/auth/manage-user-session/
 
 
-メモ
-英語selectedWordsをModalに渡す
-Modalで翻訳して表示
-
-
 実装
 
 - 設定 ... 高
-- homeをRoute Groupにしてlayoutが改善するかも ... 中
 - ダークモード ... 中
 - 強調表示(下線等) ... 中
 - delete機能 ... 中
 - 単語、熟語集(問題も) ... 中
-- ModalをReactNodeから消す
 - お気に入り登録 ... 低
 - Shift + クリックで離れていても選択 ... 低
 - 翻訳の形式(丁寧語) ... 低
+- 説明のdoc
+- documentを新しい順で表示する
 
-documentを新しい順で表示する
-- Dateが大きい順に表示 ... ok
-- 編集したらsortKeyを更新
-- 編集したら上に表示する
-
-説明のdoc
 
 バグ修正
 - たくさん選択でModalがぐちゃぐちゃに
+
+効率
+- layoutがくしゃくしゃ
 
 追加案
 - 自動保存ON, OFF

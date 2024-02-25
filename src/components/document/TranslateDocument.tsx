@@ -69,7 +69,7 @@ function TranslateDocument(props: TranslateDocumentType) {
   };
 
   return (
-    <div className="break-all select-none" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+    <div className="break-all overflow-y-auto max-h-[calc(100vh-200px)] p-5 select-none dark:bg-slate-600 dark:text-slate-400" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
       {words?.map((word, index) => {
         // すでに日本語訳されているか確認
         const translation = document!.translations.find(translation => translation.indexes.includes(index));

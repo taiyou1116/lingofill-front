@@ -13,7 +13,7 @@ export default function Layout({
         <SidebarComponent />
         <div className=" h-screen w-screen">
           <HeaderComponent />
-          <div className=" h-5/6">{children}</div>
+          <div className=" content">{children}</div>
         </div>  
       </div>
     </div>
