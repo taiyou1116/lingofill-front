@@ -57,12 +57,12 @@ function HeaderComponent() {
           }}
         >
           <MenuItem>
-            <Link href='/home/acount'>
+            <Link href='/acount'>
               <AccountCircle style={{fontSize: 20}} /> アカウント
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link href='/home/setting'>
+            <Link href='/setting'>
               <Settings style={{fontSize: 20}} /> 設定
             </Link>
           </MenuItem>

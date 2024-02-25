@@ -1,9 +1,9 @@
 "use client"
 
-import "./globals.css";
+import "../globals.css";
 import "@aws-amplify/ui-react/styles.css";
 import { Amplify } from "aws-amplify";
-import awsExports from "../aws-exports";
+import awsExports from "../../aws-exports";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { getCurrentUser } from "aws-amplify/auth";
