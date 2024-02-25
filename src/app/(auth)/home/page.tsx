@@ -1,5 +1,6 @@
 "use client"
 
+import React from 'react';
 import DocumentComponent from "@/components/document/Document"
 import "../../globals.css";
 import "@aws-amplify/ui-react/styles.css";
@@ -12,7 +13,7 @@ import { getCurrentUser } from "aws-amplify/auth";
 
 Amplify.configure(awsExports);
 
-const Home = () => {
+function Home() {
   const {setDocuments, setTheme, username, setUsername} = useStore((store) => ({
     setDocuments: store.setDocuments,
     setTheme:     store.setTheme,
