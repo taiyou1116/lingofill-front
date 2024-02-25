@@ -1,19 +1,22 @@
+// defaultValueの追加
+
 "use client"
 
 import { useStore } from '@/store/store';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../../app/globals.css";
 import { handleCloseModal } from '@/utils/modal';
 import { Document } from '@/types/types';
 import ModalCenterComponent from '../ModalCenter';
+import { translateText } from '@/utils/request';
 
 type TranslateModalProps = {
-  words: string[] | undefined,
-  selectedWordIndexes: number[],
+  selectedWordsIndexes: number[],
+  selectedWords: string,
 }
 
 function TranslateModal(props: TranslateModalProps) {
-  const { words, selectedWordIndexes } = props;
+  const { selectedWordsIndexes, selectedWords } = props;
 
   const {flipCenterModal, document, setDocuments, documents, setDocument} = useStore((store) => ({
     flipCenterModal: store.flipCenterModal,
@@ -25,10 +28,19 @@ function TranslateModal(props: TranslateModalProps) {
   
   const [userInputTranslation, setUserInputTranslation] = useState('');
   const [userInputMemo, setUserInputMemo] = useState('');
+  const [translatedWords, setTranslatedWords] = useState('');
+
+  useEffect(() => {
+    const translateTextAsync = async () => {
+      const ward = await translateText(selectedWords);
+      setTranslatedWords(ward!);
+    }
+    translateTextAsync();
+  }, [selectedWords])
 
   // 日本語化ボタン
   const handleSaveButton = () => {
-    handleTranslation(selectedWordIndexes, userInputTranslation, userInputMemo);
+    handleTranslation(selectedWordsIndexes, userInputTranslation, userInputMemo);
     handleCloseModal(flipCenterModal);
   }
 
@@ -81,9 +93,8 @@ function TranslateModal(props: TranslateModalProps) {
         <div className=' w-full'>
           <div>編集</div>
           <div className=' w-full flex justify-center items-center gap-3'>
-            { selectedWordIndexes.map((index) => {
-              return <span key={index}>{words![index]}</span>
-            }) } 
+            { selectedWords }
+            { translatedWords }
             →
             <input 
               type='text' 

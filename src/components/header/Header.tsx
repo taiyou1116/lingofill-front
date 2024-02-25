@@ -1,6 +1,6 @@
 "use client"
 
-import { AccountCircle, Reorder, Settings } from "@mui/icons-material";
+import { AccountCircle, Help, Reorder, Settings } from "@mui/icons-material";
 import { useStore } from '@/store/store';
 import { oswald } from '@/store/fontStore';
 import Image from 'next/image';
@@ -43,6 +43,7 @@ function HeaderComponent() {
           </Tooltip>
         </div>
         <Menu
+          autoFocus={false}
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
           onClose={handleClose}
@@ -55,14 +56,19 @@ function HeaderComponent() {
             horizontal: 'right',
           }}
         >
-          <MenuItem onClick={handleClose}>
+          <MenuItem>
             <Link href='/home/acount'>
-              アカウント
+              <AccountCircle style={{fontSize: 20}} /> アカウント
             </Link>
           </MenuItem>
-          <MenuItem onClick={handleClose}>
+          <MenuItem>
             <Link href='/home/setting'>
-              設定
+              <Settings style={{fontSize: 20}} /> 設定
+            </Link>
+          </MenuItem>
+          <MenuItem>
+            <Link href='/doc'>
+              <Help style={{fontSize: 20}} /> 使い方
             </Link>
           </MenuItem>
         </Menu>

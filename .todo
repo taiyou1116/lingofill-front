@@ -1,13 +1,21 @@
 amplify-auth -> https://docs.amplify.aws/javascript/build-a-backend/auth/manage-user-session/
 
+
+メモ
+英語selectedWordsをModalに渡す
+Modalで翻訳して表示
+
+
 実装
 
 - Google 自動翻訳 ... 高
 - 設定 ... 高
+- homeをRoute Groupにしてlayoutが改善するかも ... 中
 - ダークモード ... 中
 - 強調表示(下線等) ... 中
 - delete機能 ... 中
 - 単語、熟語集(問題も) ... 中
+- お気に入り登録
 - Shift + クリックで離れていても選択 ... 低
 
 documentを新しい順で表示する
@@ -16,9 +24,6 @@ documentを新しい順で表示する
 - 編集したら上に表示する
 
 説明のdoc
-- Authenticatorでログイン情報を管理しないように
-- urlはできればそのまま
-- ログイン後のルートでdocが表示されるバグ
 
 バグ修正
 - たくさん選択でModalがぐちゃぐちゃに

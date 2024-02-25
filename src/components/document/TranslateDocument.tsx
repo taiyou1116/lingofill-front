@@ -18,6 +18,7 @@ function TranslateDocument(props: TranslateDocumentType) {
   // ドラッグ処理(熟語処理)
   const [selectedWordsIndexes, setSelectedWordsIndexes] = useState<number[]>([]);
   const [isDragging, setIsDragging] = useState(false);
+  const [selectedWords, setSelectedWords] = useState('hello');
   
   // 単語編集処理
   const handleClick = (index: number) => {
@@ -26,8 +27,10 @@ function TranslateDocument(props: TranslateDocumentType) {
     const translation = document!.translations.find(translation => translation.indexes.includes(index));
     if (translation) {
       setSelectedWordsIndexes(translation.indexes);
+      setSelectedWords(translation.indexes.map((i) => words![i]).join(' '));
     } else {
       setSelectedWordsIndexes([index]);
+      setSelectedWords( words![index]);
     }
     flipCenterModal();
   };
@@ -61,6 +64,7 @@ function TranslateDocument(props: TranslateDocumentType) {
     setIsDragging(false);
     if (selectedWordsIndexes.length >= 2) {
       flipCenterModal();
+      setSelectedWords(selectedWordsIndexes.map((i) => words![i]).join(' '));
     }
   };
 
@@ -99,8 +103,8 @@ function TranslateDocument(props: TranslateDocumentType) {
 
       <div>
         <TranslateModal 
-          words={words}
-          selectedWordIndexes={selectedWordsIndexes}
+          selectedWordsIndexes={selectedWordsIndexes}
+          selectedWords={selectedWords}
         />
       </div>
     </div>

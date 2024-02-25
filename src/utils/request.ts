@@ -123,6 +123,6 @@ export async function translateText(text: string) {
     return result.text;
   } catch (err) {
     console.error(err);
-    return err;
+    // return err;
   }
 }
