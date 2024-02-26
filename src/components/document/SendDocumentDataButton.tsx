@@ -46,7 +46,7 @@ function SendDocumentDataButton() {
       { document?.isSynced 
       ? 
        <div className=' bg-none py-2 px-4 flex gap-1 items-center'>
-        <CheckCircle className=' size-1 dark:text-slate-100' />
+        <CheckCircle className=' dark:text-slate-100' />
         <span className=' dark:text-slate-100'>テキスト保存済み</span>
        </div>
       : changeSendDataButton() }
