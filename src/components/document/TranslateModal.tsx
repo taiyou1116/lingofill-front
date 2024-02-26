@@ -9,6 +9,7 @@ import { handleCloseModal } from '@/utils/modal';
 import { Document } from '@/types/types';
 import ModalCenterComponent from '../ModalCenter';
 import { translateText } from '@/utils/request';
+import { Translate } from '@mui/icons-material';
 
 type TranslateModalProps = {
   selectedWordsIndexes: number[],
@@ -91,24 +92,32 @@ function TranslateModal(props: TranslateModalProps) {
   return (
     <ModalCenterComponent>
         <div className=' w-full'>
-          <div>編集</div>
-          <div className=' w-full flex justify-center items-center gap-3'>
-            { selectedWords }
-            { translatedWords }
-            →
-            <input 
+          {/* <div>編集</div> */}
+          <div className=' w-full flex flex-col justify-center items-center gap-3'>
+            <div className=' flex gap-3 items-center'>
+              <span>{ selectedWords }</span>
+              <span className=' bg-gray-200 dark:bg-gray-900 p-1'><Translate style={{fontSize: 20}}/> { translatedWords }</span>
+            </div>
+            ↓
+            <div className=' flex w-full gap-3 justify-center'>
+              <input 
               type='text' 
-              placeholder='表示' 
+              placeholder='どのように表示する？' 
               value={userInputTranslation}
               onChange={(e) => setUserInputTranslation(e.target.value)}
-              className=' border border-stone-900 p-1 w-1/3 modal-center-input rounded-md dark:bg-gray-800 dark:border-gray-400 dark:text-slate-100'/>
+              className=' border border-gray-900 p-1 w-1/3 modal-center-input rounded-md dark:bg-gray-800 dark:border-gray-400 dark:text-gray-100'
+            />
+              <button className=' text-xs bg-gray-900 text-gray-300 dark:bg-gray-200 rounded-md px-1 dark:text-gray-800'>
+                日本語訳をペースト
+              </button>
+            </div>
           </div>
         </div>
         <div className=' w-full h-full flex flex-col gap-1'>
           <div>メモ</div>
           <textarea 
-            placeholder='動詞 ->  名詞 ->  形容詞 -> '
-            className=' border p-1 w-full h-2/3 resize-none rounded-sm border-stone-900 dark:bg-gray-500 dark:text-slate-100' 
+            placeholder='メモをここに入力（例：文脈、用法など）'
+            className=' border p-1 h-full w-full resize-none rounded-md border-stone-900 dark:bg-gray-500 dark:text-slate-100' 
             value={userInputMemo}
             onChange={(e) => setUserInputMemo(e.target.value)}
           />
