@@ -9,7 +9,8 @@ import { handleCloseModal } from '@/utils/modal';
 import { Document } from '@/types/types';
 import ModalCenterComponent from '../ModalCenter';
 import { translateText } from '@/utils/request';
-import { Translate } from '@mui/icons-material';
+import { StarBorder, Translate } from '@mui/icons-material';
+import { Tooltip } from '@mui/material';
 
 type TranslateModalProps = {
   selectedWordsIndexes: number[],
@@ -99,7 +100,7 @@ function TranslateModal(props: TranslateModalProps) {
               <span className=' bg-gray-200 dark:bg-gray-900 p-1'><Translate style={{fontSize: 20}}/> { translatedWords }</span>
             </div>
             ↓
-            <div className=' flex w-full gap-3 justify-center'>
+            <div className=' flex w-full gap-3 justify-center items-center'>
               <input 
               type='text' 
               placeholder='どのように表示する？' 
@@ -107,9 +108,15 @@ function TranslateModal(props: TranslateModalProps) {
               onChange={(e) => setUserInputTranslation(e.target.value)}
               className=' border border-gray-900 p-1 w-1/3 modal-center-input rounded-md dark:bg-gray-800 dark:border-gray-400 dark:text-gray-100'
             />
-              <button className=' text-xs bg-gray-900 text-gray-300 dark:bg-gray-200 rounded-md px-1 dark:text-gray-800'>
+              <button className=' text-xs bg-gray-900 text-gray-300 dark:bg-gray-200 rounded-md px-1 py-2 dark:text-gray-800'>
                 日本語訳をペースト
               </button>
+              <button className=' text-xs bg-gray-900 text-gray-300 dark:bg-gray-200 rounded-md px-1 py-2 dark:text-gray-800'>
+                原文をペースト
+              </button>
+              <Tooltip title='お気に入り登録'>
+                <StarBorder className=' cursor-pointer'/>
+              </Tooltip>
             </div>
           </div>
         </div>
@@ -117,7 +124,7 @@ function TranslateModal(props: TranslateModalProps) {
           <div>メモ</div>
           <textarea 
             placeholder='メモをここに入力（例：文脈、用法など）'
-            className=' border p-1 h-full w-full resize-none rounded-md border-stone-900 dark:bg-gray-500 dark:text-slate-100' 
+            className=' border p-1 h-full w-full resize-none rounded-md border-stone-900 dark:bg-gray-800 dark:border-gray-400 dark:text-gray-100' 
             value={userInputMemo}
             onChange={(e) => setUserInputMemo(e.target.value)}
           />

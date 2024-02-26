@@ -81,7 +81,7 @@ function TranslateDocument(props: TranslateDocumentType) {
               key={index}
               onClick={() => handleClick(index)}
               onMouseMove={() => handleMouseMove(index)}
-              className={`py-0.5 px-2 cursor-pointer rounded-md bg-slate-200 dark:bg-slate-900`}
+              className={`py-0.5 px-2 cursor-pointer rounded-md bg-slate-200 dark:bg-slate-900 text-sm`}
             >
               {translation.translatedText}
             </span>
@@ -93,7 +93,7 @@ function TranslateDocument(props: TranslateDocumentType) {
               key={index}
               onClick={() => handleClick(index)}
               onMouseMove={() => handleMouseMove(index)}
-              className={`p-0.5 cursor-pointer ${selectedWordsIndexes.includes(index) ? "bg-yellow-200" : "bg-transparent"}`}
+              className={`p-0.5 cursor-pointer ${selectedWordsIndexes.includes(index) ? "bg-blue-300 dark:bg-blue-500" : "bg-transparent"}`}
             >
               {word}
             </span>

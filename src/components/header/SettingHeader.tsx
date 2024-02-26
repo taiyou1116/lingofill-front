@@ -20,7 +20,7 @@ function SettingHeaderComponent() {
   };
 
   return (
-    <div className="header-bg-height bg-slate-200 flex items-center justify-between shadow-md dark:bg-slate-600">
+    <div className="header-bg-height bg-white flex items-center justify-between shadow-md dark:bg-gray-600">
       <div className='flex items-center pl-4 gap-5'>
         <Link href={"/home"} className=' flex items-center cursor-pointer border-2 border-black rounded-lg pr-3'>
           <Image src="LF.svg" width="40" height="40" alt='ロゴ' />

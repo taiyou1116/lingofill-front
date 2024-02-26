@@ -28,7 +28,7 @@ function PreviewDocument(props: Props) {
                 </div>
               }
             >
-              <span className={`py-0.5 px-2 cursor-pointer bg-slate-200 rounded-md dark:bg-slate-900`}>
+              <span className={`py-0.5 px-2 cursor-pointer bg-slate-200 rounded-md dark:bg-slate-900 text-sm`}>
                 {translation.translatedText}
               </span>
             </Tooltip>
