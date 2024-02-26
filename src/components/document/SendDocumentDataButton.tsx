@@ -32,10 +32,10 @@ function SendDocumentDataButton() {
       return (
         <button 
           onClick={() => updateDocuments()}
-          className=' bg-lime-400 rounded-lg py-2 px-4 hover:bg-lime-500 flex gap-1 items-center'
+          className=' bg-lime-400 dark:bg-lime-600 rounded-lg py-2 px-4 hover:bg-lime-500 dark:hover:bg-lime-700 flex gap-1 items-center'
         >
           <CloudUpload style={{fontSize: 20}} />
-          <span className=' dark:text-slate-100'>テキストを保存する</span>
+          <span className=' dark:text-slate-300'>テキストを保存する</span>
         </button>
       )
     }

@@ -93,11 +93,12 @@ function TranslateModal(props: TranslateModalProps) {
   return (
     <ModalCenterComponent>
         <div className=' w-full'>
-          {/* <div>編集</div> */}
           <div className=' w-full flex flex-col justify-center items-center gap-3'>
             <div className=' flex gap-3 items-center'>
-              <span>{ selectedWords }</span>
-              <span className=' bg-gray-200 dark:bg-gray-900 p-1'><Translate style={{fontSize: 20}}/> { translatedWords }</span>
+              <span className='selectedWordsContainer'>{ selectedWords }</span>
+              <span className='selectedWordsContainer bg-gray-200 dark:bg-gray-900 p-1'>
+                <Translate style={{fontSize: 20}}/> { translatedWords }
+              </span>
             </div>
             ↓
             <div className=' flex w-full gap-3 justify-center items-center'>

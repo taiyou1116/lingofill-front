@@ -3,11 +3,10 @@ amplify-auth -> https://docs.amplify.aws/javascript/build-a-backend/auth/manage-
 
 実装
 
-- 設定 ... 高
 - 強調表示(下線等) ... 中
-- 上下スクロールでも選択できるように ... 中
-- 読み上げ
-- Modalでたくさん選択したとき
+- 他のところ推したら青の選択を消す
+- 読み上げ -> amazon polly
+
 - delete機能 ... 中
 - 単語、熟語集(問題も) ... 中
 - お気に入り登録 ... 低
@@ -18,7 +17,6 @@ amplify-auth -> https://docs.amplify.aws/javascript/build-a-backend/auth/manage-
 
 
 バグ修正
-- たくさん選択でModalがぐちゃぐちゃに
 - memoの文字フォント
 
 効率

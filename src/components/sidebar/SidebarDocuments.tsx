@@ -149,7 +149,7 @@ function SidebarDocuments(props: Props) {
             <div 
               key={index} 
               onClick={() => openSentence(index)}
-              className={`border-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-500 dark:hover:bg-gray-900 border-b-2 h-full w-full p-4 cursor-pointer duration-100 ${ documentPublic?.sortKey === documents[index].sortKey ? " border-2 border-gray-900 dark:border-gray-500" : ""}`}
+              className={`border-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-500 dark:hover:bg-gray-900 border-b-2 h-full w-full py-4 px-2 cursor-pointer duration-100 ${ documentPublic?.sortKey === documents[index].sortKey ? " border-2 border-gray-900 dark:border-gray-500" : ""}`}
             >
               { inputNameIndex === index
               ?
@@ -183,7 +183,7 @@ function SidebarDocuments(props: Props) {
                     { document.isSynced ? '' : 
                       <Tooltip title='変更を保存する'>
                         <button onClick={() => uploadDocument(index)}>
-                          <CloudUpload style={{fontSize: 15}} />
+                          <CloudUpload style={{fontSize: 15}} className=' dark:text-gray-100' />
                         </button>
                       </Tooltip>
                     }

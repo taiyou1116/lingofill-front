@@ -19,6 +19,7 @@ function TranslateDocument(props: TranslateDocumentType) {
   const [selectedWordsIndexes, setSelectedWordsIndexes] = useState<number[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const [selectedWords, setSelectedWords] = useState('hello');
+  const [startDragIndex, setStartDragIndex] = useState<number | null>(null); // ドラッグ開始インデックス
   
   // 単語編集処理
   const handleClick = (index: number) => {
@@ -35,7 +36,6 @@ function TranslateDocument(props: TranslateDocumentType) {
     flipCenterModal();
   };
 
-  // 熟語編集処理(Down Move Up)
   const handleMouseDown = () => {
     if (showCenterModal) return;
     setIsDragging(true);
@@ -45,31 +45,33 @@ function TranslateDocument(props: TranslateDocumentType) {
   const handleMouseMove = (index: number) => {
     if (showCenterModal || !isDragging) return;
 
-    setSelectedWordsIndexes((prev) => {
-      if (prev.includes(index)) return prev;
-
-      const firstSelectedIndex = prev[0];
-      const lastSelectedIndex = prev[prev.length - 1];
-
-      // 選択されている単語があり、新しいインデックスが隣接していない場合は何も変更しない
-      if (prev.length > 0 && Math.abs(lastSelectedIndex - index) !== 1 && Math.abs(firstSelectedIndex - index) !== 1) {
-        return prev;
-      }
-      return firstSelectedIndex > index ? [index, ...prev] : [...prev, index];
-    });
+    if (startDragIndex === null) {
+      setStartDragIndex(index); // ドラッグ開始インデックスを設定
+    } else {
+      setSelectedWordsIndexes((prev) => {
+        const newIndexes = [];
+        const minIndex = Math.min(startDragIndex, index);
+        const maxIndex = Math.max(startDragIndex, index);
+        for (let i = minIndex; i <= maxIndex; i++) {
+          newIndexes.push(i);
+        }
+        return newIndexes;
+      });
+    }
   };
 
   const handleMouseUp = () => {
     if (showCenterModal) return;
     setIsDragging(false);
-    if (selectedWordsIndexes.length >= 2) {
+    setStartDragIndex(null); // ドラッグ開始インデックスをリセット
+    if (selectedWordsIndexes.length > 0) {
       flipCenterModal();
       setSelectedWords(selectedWordsIndexes.map((i) => words![i]).join(' '));
     }
   };
 
   return (
-    <div className="break-all overflow-y-auto max-h-[calc(100vh-200px)] p-3 rounded-md select-none bg-white dark:bg-slate-600 dark:text-slate-300" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+    <div className="break-all overflow-y-auto max-h-[calc(100vh-200px)] p-3 rounded-md bg-white dark:bg-slate-600 dark:text-slate-300" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
       {words?.map((word, index) => {
         // すでに日本語訳されているか確認
         const translation = document!.translations.find(translation => translation.indexes.includes(index));
@@ -81,7 +83,7 @@ function TranslateDocument(props: TranslateDocumentType) {
               key={index}
               onClick={() => handleClick(index)}
               onMouseMove={() => handleMouseMove(index)}
-              className={`py-0.5 px-2 cursor-pointer rounded-md bg-slate-200 dark:bg-slate-900 text-sm`}
+              className={`select-none py-0.5 px-2 cursor-pointer rounded-md bg-slate-200 dark:bg-slate-900 text-sm`}
             >
               {translation.translatedText}
             </span>
@@ -93,7 +95,7 @@ function TranslateDocument(props: TranslateDocumentType) {
               key={index}
               onClick={() => handleClick(index)}
               onMouseMove={() => handleMouseMove(index)}
-              className={`p-0.5 cursor-pointer ${selectedWordsIndexes.includes(index) ? "bg-blue-300 dark:bg-blue-500" : "bg-transparent"}`}
+              className={`select-none p-0.5 cursor-pointer ${selectedWordsIndexes.includes(index) ? "bg-blue-300 dark:bg-blue-500" : "bg-transparent"}`}
             >
               {word}
             </span>

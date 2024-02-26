@@ -1,3 +1,4 @@
+import { m_plus_rounded_1c } from '@/store/fontStore';
 import { TranslationObj } from '@/types/types';
 import { Tooltip } from '@mui/material';
 
@@ -23,8 +24,8 @@ function PreviewDocument(props: Props) {
               arrow
               title={
                 <div>
-                  <div className=" text-lg underline underline-offset-8">{translation.indexes.map(i => words[i] + ' ')}</div>
-                  <div className=" mt-2 text-lg">{ translation.memo }</div>
+                  <div className={` text-base bg-gray-800 p-0.5 rounded-md ${m_plus_rounded_1c.className}`}>{translation.indexes.map(i => words[i] + ' ')}</div>
+                  <div className={` text-sm ${m_plus_rounded_1c.className}`}>{ translation.memo }</div>
                 </div>
               }
             >
