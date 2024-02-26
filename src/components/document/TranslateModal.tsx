@@ -9,7 +9,7 @@ import { handleCloseModal } from '@/utils/modal';
 import { Document } from '@/types/types';
 import ModalCenterComponent from '../ModalCenter';
 import { translateText } from '@/utils/request';
-import { StarBorder, Translate } from '@mui/icons-material';
+import { StarBorder, Translate, VolumeUp } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 
 type TranslateModalProps = {
@@ -94,8 +94,13 @@ function TranslateModal(props: TranslateModalProps) {
     <ModalCenterComponent>
         <div className=' w-full'>
           <div className=' w-full flex flex-col justify-center items-center gap-3'>
-            <div className=' flex gap-3 items-center'>
-              <span className='selectedWordsContainer'>{ selectedWords }</span>
+            <div className=' flex gap-3 items-center justify-center'>
+              <span className='selectedWordsContainer'>
+                <Tooltip title='読み上げ' className=' mr-2'>
+                  <VolumeUp style={{fontSize: 20}} className=' cursor-pointer'/>
+                </Tooltip>
+                { selectedWords }
+              </span>
               <span className='selectedWordsContainer bg-gray-200 dark:bg-gray-900 p-1'>
                 <Translate style={{fontSize: 20}}/> { translatedWords }
               </span>
