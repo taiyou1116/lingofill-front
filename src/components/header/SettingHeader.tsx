@@ -32,7 +32,7 @@ function SettingHeaderComponent() {
       <div className=' flex px-10 items-center gap-1'>
         <div onClick={handleClick} className=" cursor-pointer">
           <Tooltip title="アカウント設定">
-            <AccountCircle className="dark:text-slate-100" />
+            <AccountCircle style={{fontSize: 35}} className="dark:text-slate-100" />
           </Tooltip>
         </div>
         <Menu

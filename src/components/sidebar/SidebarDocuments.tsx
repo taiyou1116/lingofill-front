@@ -149,7 +149,7 @@ function SidebarDocuments(props: Props) {
             <div 
               key={index} 
               onClick={() => openSentence(index)}
-              className={`bg-slate-100 dark:bg-slate-300 border-b-2 h-full w-full p-3 cursor-pointer hover:shadow-lg duration-100 ${ documentPublic?.sortKey === documents[index].sortKey ? " border-2 border-slate-700" : ""}`}
+              className={`bg-slate-100 dark:bg-gray-800 border-b-2 dark:border-gray-300 h-full w-full p-3 cursor-pointer hover:shadow-lg duration-100 ${ documentPublic?.sortKey === documents[index].sortKey ? " border-2 border-slate-700" : ""}`}
             >
               { inputNameIndex === index
               ?
@@ -171,7 +171,7 @@ function SidebarDocuments(props: Props) {
               :
                 <div className=' flex justify-between'>
                   <div className=' flex flex-col gap-0.5'>
-                    <div>
+                    <div className=' dark:text-gray-100'>
                       { document.title }
                     </div>
                     <div className=' text-xs text-slate-500'>
@@ -189,7 +189,7 @@ function SidebarDocuments(props: Props) {
                     }
                     <Tooltip title='テキスト名を変更'>
                       <button onClick={() => editTitle(index)}>
-                        <ModeEdit style={{fontSize: 15}} />
+                        <ModeEdit style={{fontSize: 15}} className=' dark:text-gray-100' />
                       </button>
                     </Tooltip>
                     <Tooltip title='テキストを削除'>
