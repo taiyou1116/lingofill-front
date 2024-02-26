@@ -1,12 +1,25 @@
 "use client"
 
 import React, { useState } from 'react';
-import { ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { ThemeProvider, ToggleButton, ToggleButtonGroup, createTheme, useMediaQuery, useTheme } from '@mui/material';
 import { SelectedMode } from '@/types/types';
 import { useStore } from '@/store/store';
 import { TextSnippet, Translate, Visibility } from '@mui/icons-material';
 
 function ThreeWayToggle() {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  // ダークモードまたはライトモードのテーマを動的に生成
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: prefersDarkMode ? 'dark' : 'light',
+        },
+      }),
+    [prefersDarkMode]
+  );
+
   const [selectedMode, setSelectedModeLocal] = useState<SelectedMode>('input');
   const setSelectedModeGlobal = useStore((store) => store.setSelectedMode);
 
@@ -21,6 +34,7 @@ function ThreeWayToggle() {
   };
   
   return (
+    <ThemeProvider theme={theme}>
     <ToggleButtonGroup
       color="standard"
       value={selectedMode}
@@ -33,7 +47,7 @@ function ThreeWayToggle() {
         borderRadius: '16px', // ToggleButtonGroup全体の角を丸くする
         height: '35px',
           '& .MuiToggleButtonGroup-grouped': {
-            color: 'black',
+            color: theme.palette.text.primary,
             '&:not(:first-of-type)': {
               borderRadius: '0px', // 最初のボタン以外は角丸を無効化
             },
@@ -60,6 +74,7 @@ function ThreeWayToggle() {
       <ToggleButton value="edit"><Translate style={{fontSize: 15}} /> 編集</ToggleButton>
       <ToggleButton value="input"><TextSnippet style={{fontSize: 15}} /> 原文入力</ToggleButton>
     </ToggleButtonGroup>
+    </ThemeProvider>
   );
 }
 

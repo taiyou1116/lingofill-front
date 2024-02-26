@@ -29,16 +29,16 @@ function SidebarComponent() {
         onClick={() => handleCloseModal(flipShowSidebar)}>
       </div>
       <div 
-        className={`fixed z-10 w-1/5 p-5 top-0 left-0 h-full bg-white shadow-2xl transition-transform duration-300 transform ${showSidebar ? "translate-x-0" : "-translate-x-full"}`}
+        className={`fixed z-10 w-1/5 top-0 left-0 h-full bg-white dark:bg-gray-800 shadow-2xl transition-transform duration-300 transform ${showSidebar ? "translate-x-0" : "-translate-x-full"}`}
         onClick={handleStopPropagation}
       >
         <div className="flex flex-col gap-3">
-          <div className=' flex justify-between w-full p-1 items-center'>
-            <h1 className={`${m_plus_rounded_1c.className}`}>テキスト一覧</h1>
-            <Tooltip title='テキスト新規作成'>
+          <div className=' flex justify-between w-full p-5 items-center'>
+            <h1 className={`dark:text-gray-300 ${m_plus_rounded_1c.className}`}>テキスト一覧</h1>
+            <Tooltip title='テキスト新規作成' className=' dark:text-gray-300'>
               <button 
                 onClick={createNewSentence}
-                className=' border-2 rounded-lg p-0.5  hover:border-slate-600 duration-150'>
+                className=' border-2 rounded-lg p-0.5 dark:border-gray-400  hover:border-slate-600 duration-150'>
                 <EditNote style={{fontSize: 30}}/>
               </button>
             </Tooltip> 

@@ -22,7 +22,7 @@ function DocumentComponent() {
   const renderContentByMode = () => {
     if (document === null) {
       return (
-        <div>テキストを選択もしくは作成してください。</div>
+        <div className=" dark:text-gray-300">テキストを選択もしくは作成してください。</div>
       )
     }
     if (isLoading) {
@@ -71,7 +71,7 @@ function DocumentComponent() {
     return (
       <div className=" flex items-center justify-between">
         <div className=" flex gap-3 items-center">
-          <h1 className={` ${oswald.className}`}>{ document.title }</h1>
+          <h1 className={` dark:text-slate-100 ${oswald.className}`}>{ document.title }</h1>
           <ThreeWayToggle />
         </div>
         <SendDocumentDataButton />
@@ -80,7 +80,7 @@ function DocumentComponent() {
   }
 
   return (
-    <div className="h-full p-5 bg-slate-800">
+    <div className="h-full p-5 bg-gray-100 dark:bg-gray-800">
       { showToggle() }
       
       <div className=" h-5/6 pt-5">

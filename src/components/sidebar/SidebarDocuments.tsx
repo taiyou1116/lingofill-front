@@ -124,7 +124,7 @@ function SidebarDocuments(props: Props) {
   }
 
   return (
-    <div className=' break-all flex flex-col w-full gap-3 overflow-y-auto' style={{ maxHeight: '90vh', overflowY: 'auto' }}>
+    <div className=' break-all flex flex-col w-full overflow-y-auto' style={{ maxHeight: '90vh', overflowY: 'auto' }}>
       {/* 新規作成input */}
       { createNewDocument 
       ? 
@@ -149,7 +149,7 @@ function SidebarDocuments(props: Props) {
             <div 
               key={index} 
               onClick={() => openSentence(index)}
-              className={`bg-slate-100 h-full w-full p-3 cursor-pointer hover:shadow-lg duration-100 ${ documentPublic?.sortKey === documents[index].sortKey ? " border-2 border-slate-700" : ""}`}
+              className={`bg-slate-100 dark:bg-slate-300 border-b-2 h-full w-full p-3 cursor-pointer hover:shadow-lg duration-100 ${ documentPublic?.sortKey === documents[index].sortKey ? " border-2 border-slate-700" : ""}`}
             >
               { inputNameIndex === index
               ?

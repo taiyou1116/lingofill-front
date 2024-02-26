@@ -28,7 +28,7 @@ function ModalCenterComponent(props: ModalCenterProps) {
       {/* ModalWindow */}
       <div 
         onClick={handleStopPropagation} 
-        className={` fixed h-4/5 w-3/5 bg-white rounded-xl shadow-lg p-5 flex flex-col justify-start items-center gap-10 duration-300 ${ showCenterModal ? ' scale-100' : ' scale-0 pointer-events-none' }`}
+        className={` fixed h-4/5 w-3/5 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-5 flex flex-col justify-start items-center gap-10 duration-300 ${ showCenterModal ? ' scale-100' : ' scale-0 pointer-events-none' }`}
       >
         { children }
       </div>

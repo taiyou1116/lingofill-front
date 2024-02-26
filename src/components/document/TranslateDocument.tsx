@@ -69,7 +69,7 @@ function TranslateDocument(props: TranslateDocumentType) {
   };
 
   return (
-    <div className="break-all overflow-y-auto max-h-[calc(100vh-200px)] p-5 select-none dark:bg-slate-600 dark:text-slate-400" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+    <div className="break-all overflow-y-auto max-h-[calc(100vh-200px)] p-3 rounded-md select-none bg-white dark:bg-slate-600 dark:text-slate-300" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
       {words?.map((word, index) => {
         // すでに日本語訳されているか確認
         const translation = document!.translations.find(translation => translation.indexes.includes(index));
@@ -81,7 +81,7 @@ function TranslateDocument(props: TranslateDocumentType) {
               key={index}
               onClick={() => handleClick(index)}
               onMouseMove={() => handleMouseMove(index)}
-              className={`py-0.5 px-2 cursor-pointer bg-slate-200 rounded-md`}
+              className={`py-0.5 px-2 cursor-pointer rounded-md bg-slate-200 dark:bg-slate-900`}
             >
               {translation.translatedText}
             </span>

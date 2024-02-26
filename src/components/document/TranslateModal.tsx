@@ -101,20 +101,20 @@ function TranslateModal(props: TranslateModalProps) {
               placeholder='表示' 
               value={userInputTranslation}
               onChange={(e) => setUserInputTranslation(e.target.value)}
-              className=' border border-stone-900 p-1 rounded-sm w-1/3 modal-center-input'/>
+              className=' border border-stone-900 p-1 w-1/3 modal-center-input rounded-md dark:bg-gray-800 dark:border-gray-400 dark:text-slate-100'/>
           </div>
         </div>
         <div className=' w-full h-full flex flex-col gap-1'>
           <div>メモ</div>
           <textarea 
             placeholder='動詞 ->  名詞 ->  形容詞 -> '
-            className=' border p-1 w-full h-2/3 resize-none rounded-sm border-stone-900' 
+            className=' border p-1 w-full h-2/3 resize-none rounded-sm border-stone-900 dark:bg-gray-500 dark:text-slate-100' 
             value={userInputMemo}
             onChange={(e) => setUserInputMemo(e.target.value)}
           />
         </div>
         <button 
-          className=' bg-sky-400 px-4 py-2 rounded-md'
+          className=' bg-sky-400 px-4 py-2 rounded-md dark:bg-white dark:text-black'
           onClick={handleSaveButton}
         >
           保存する
