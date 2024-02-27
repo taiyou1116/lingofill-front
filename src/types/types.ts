@@ -1,18 +1,19 @@
 
 export type Document = {
     sortKey: string,
-    title: string;
-    text: string;
-    isSynced: boolean;
+    title: string,
+    text: string,
+    isSynced: boolean,
     isNew: boolean,
+    isDelete: boolean,
     translations: TranslationObj[],
 };
 
 
 // 元の単語のindexと翻訳
 export type TranslationObj = {
-    indexes: number[];
-    translatedText: string;
+    indexes: number[],
+    translatedText: string,
     memo: string,
 };
 

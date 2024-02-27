@@ -1,7 +1,7 @@
 import { useStore } from '@/store/store';
 import { Document } from '@/types/types'
 import { handleStopPropagation } from '@/utils/modal';
-import { createDate, getText, updateText } from '@/utils/request';
+import { createDate, deleteText, getText, updateText } from '@/utils/request';
 import { CloudUpload, Delete, ModeEdit } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
@@ -81,6 +81,7 @@ function SidebarDocuments(props: Props) {
       sortKey: Date.now().toString(),
       isSynced: false,
       isNew: true,
+      isDelete: false,
       translations: [],
     }
     setDocuments([newDocument, ...documents]);
@@ -119,8 +120,8 @@ function SidebarDocuments(props: Props) {
     }
   }
 
-  const deleteText = () => {
-
+  const deleteTextButton = async (index: number) => {
+    await deleteText(username, documents[index].sortKey);
   }
 
   return (
@@ -132,7 +133,7 @@ function SidebarDocuments(props: Props) {
           placeholder='新規テキスト名を入力'
           type='text' 
           value={input}
-          defaultValue=''
+          // defaultValue=''
           onChange={(e) => {
             setInput(e.target.value);
           }}
@@ -193,7 +194,7 @@ function SidebarDocuments(props: Props) {
                       </button>
                     </Tooltip>
                     <Tooltip title='テキストを削除'>
-                      <button onClick={() => deleteText()}>
+                      <button onClick={() => deleteTextButton(index)}>
                         <Delete style={{fontSize: 15}} color='error' />
                       </button>
                     </Tooltip>

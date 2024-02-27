@@ -14,6 +14,7 @@ export async function updateText(partition: string, sort: string, title: string,
         sort: sort,
         title: title,
         text: text,
+        isDelete: false,
         translations: translations,
       }),
     });
@@ -82,6 +83,7 @@ export async function getText(partition: string, sortKey: string) {
       text: data.text.S,
       isSynced: true,
       isNew: false,
+      isDelete: false,
       translations: data.translations && Array.isArray(data.translations.L) 
         ? data.translations.L.map((t: any) => ({
             indexes: t.M.indexes && Array.isArray(t.M.indexes.L)
@@ -98,6 +100,32 @@ export async function getText(partition: string, sortKey: string) {
   } catch(error) {
     toast.error("テキストの取得に失敗しました。インターネット環境を確かめて再度テキストを開いてください。");
     throw error;
+  }
+}
+
+export async function deleteText(partition: string, sort: string) {
+  try {
+    const response = await fetch(`/api/text`, {
+      method: "DELETE", // HTTPメソッドをDELETEに変更
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        partition: partition,
+        sort: sort,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Response is not OK");
+    }
+
+    // 成功時の処理（応答データの使用がない場合、コメントアウトされた部分は不要）
+    toast.success("テキストを削除しました。");
+  } catch (error) {
+    console.error(error);
+    toast.error("テキストの削除に失敗しました。インターネット環境を確かめて再度試してください。");
+    throw error; // エラーを再投げする場合、呼び出し元でキャッチする必要がある
   }
 }
 

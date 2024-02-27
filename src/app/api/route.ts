@@ -5,6 +5,7 @@ import { TranslationObj } from "@/types/types";
 // DynamoDBクライアントの初期化
 const client = new DynamoDBClient({ region: "ap-northeast-1" });
 
+// 変更内容ををサーバーへ
 export async function PUT(req: NextRequest) {
   const data = await req.json();
   
@@ -17,6 +18,7 @@ export async function PUT(req: NextRequest) {
       "sortKey": { S: data.sort },
       "title": { S: data.title },
       "text": { S: data.text },
+      "isDelete": { BOOL: false },
       "translations": {
         L: data.translations.map((translation: TranslationObj) => ({
           M: {
