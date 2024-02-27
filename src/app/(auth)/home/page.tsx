@@ -14,11 +14,14 @@ import { getCurrentUser } from "aws-amplify/auth";
 Amplify.configure(awsExports);
 
 function Home() {
-  const {setDocuments, setTheme, username, setUsername} = useStore((store) => ({
+  const {setDocuments, setTheme, username, setUsername, selectedWordsIndexes, setSelectedWordsIndexes, showCenterModal} = useStore((store) => ({
     setDocuments: store.setDocuments,
     setTheme:     store.setTheme,
     username:     store.username,
     setUsername:  store.setUsername,
+    selectedWordsIndexes: store.selectedWordsIndexes,
+    setSelectedWordsIndexes: store.setSelectedWordsIndexes,
+    showCenterModal: store.showCenterModal,
   }));
 
   useEffect(() => {
@@ -47,8 +50,16 @@ function Home() {
     getTheme();
   }, [setTheme])
 
+  // 翻訳indexをリセット
+  const resetSelectedWordsIndexes = () => {
+    if (showCenterModal) return;
+    if (selectedWordsIndexes.length !== 0) {
+      setSelectedWordsIndexes([]);
+    }
+  }
+
   return (
-    <div className=" h-full">
+    <div className=" h-full" onMouseDown={resetSelectedWordsIndexes} >
       <DocumentComponent />
     </div>
   )

@@ -9,17 +9,18 @@ type TranslateDocumentType = {
 function TranslateDocument(props: TranslateDocumentType) {
   const { words } = props;
   
-  const {showCenterModal, flipCenterModal, document} = useStore((store) => ({
+  const {showCenterModal, flipCenterModal, document, selectedWordsIndexes, setSelectedWordsIndexes} = useStore((store) => ({
     showCenterModal: store.showCenterModal,
     flipCenterModal: store.flipCenterModal,
     document:        store.document,
+    selectedWordsIndexes: store.selectedWordsIndexes,
+    setSelectedWordsIndexes: store.setSelectedWordsIndexes,
   }));
 
   // ドラッグ処理(熟語処理)
-  const [selectedWordsIndexes, setSelectedWordsIndexes] = useState<number[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const [selectedWords, setSelectedWords] = useState('hello');
-  const [startDragIndex, setStartDragIndex] = useState<number | null>(null); // ドラッグ開始インデックス
+  const [startDragIndex, setStartDragIndex] = useState<number | null>(null); // ドラッグ開始インデックス 
   
   // 単語編集処理
   const handleClick = (index: number) => {
@@ -46,24 +47,22 @@ function TranslateDocument(props: TranslateDocumentType) {
     if (showCenterModal || !isDragging) return;
 
     if (startDragIndex === null) {
-      setStartDragIndex(index); // ドラッグ開始インデックスを設定
+      setStartDragIndex(index);
     } else {
-      setSelectedWordsIndexes((prev) => {
-        const newIndexes = [];
-        const minIndex = Math.min(startDragIndex, index);
-        const maxIndex = Math.max(startDragIndex, index);
-        for (let i = minIndex; i <= maxIndex; i++) {
-          newIndexes.push(i);
-        }
-        return newIndexes;
-      });
+      const newIndexes = [];
+      const minIndex = Math.min(startDragIndex, index);
+      const maxIndex = Math.max(startDragIndex, index);
+      for (let i = minIndex; i <= maxIndex; i++) {
+        newIndexes.push(i);
+      }
+      setSelectedWordsIndexes(newIndexes);
     }
   };
 
   const handleMouseUp = () => {
     if (showCenterModal) return;
     setIsDragging(false);
-    setStartDragIndex(null); // ドラッグ開始インデックスをリセット
+    setStartDragIndex(null);
     if (selectedWordsIndexes.length > 0) {
       flipCenterModal();
       setSelectedWords(selectedWordsIndexes.map((i) => words![i]).join(' '));

@@ -8,7 +8,7 @@ import "../../app/globals.css";
 import { handleCloseModal } from '@/utils/modal';
 import { Document } from '@/types/types';
 import ModalCenterComponent from '../ModalCenter';
-import { translateText } from '@/utils/request';
+import { convertTextToSpeech, translateText } from '@/utils/request';
 import { StarBorder, Translate, VolumeUp } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 
@@ -44,6 +44,21 @@ function TranslateModal(props: TranslateModalProps) {
   const handleSaveButton = () => {
     handleTranslation(selectedWordsIndexes, userInputTranslation, userInputMemo);
     handleCloseModal(flipCenterModal);
+  }
+
+  let audio: undefined | HTMLAudioElement;
+
+  // 読み上げ
+  const listenText = async (text: string) => {
+    try {
+      if (audio !== undefined) {
+        audio.pause();
+        audio.currentTime = 0;
+      }
+      audio = await convertTextToSpeech(text);
+    } catch(err) {
+      console.error(err);
+    }
   }
 
   const handleTranslation = (selectedWordIndexes: number[], userInput: string, userInputMemo: string) => {
@@ -96,8 +111,8 @@ function TranslateModal(props: TranslateModalProps) {
           <div className=' w-full flex flex-col justify-center items-center gap-3'>
             <div className=' flex gap-3 items-center justify-center'>
               <span className='selectedWordsContainer'>
-                <Tooltip title='読み上げ' className=' mr-2'>
-                  <VolumeUp style={{fontSize: 20}} className=' cursor-pointer'/>
+                <Tooltip title='読み上げ' className=' mr-2 cursor-pointer' onClick={() => listenText(selectedWords)}>
+                  <VolumeUp style={{fontSize: 20}}/>
                 </Tooltip>
                 { selectedWords }
               </span>

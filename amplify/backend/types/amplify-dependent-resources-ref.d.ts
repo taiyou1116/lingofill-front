@@ -13,6 +13,11 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "predictions": {
+    "speechGenerator9a8dde72": {
+      "language": "string",
+      "region": "string",
+      "voice": "string"
+    },
     "translateText73a2d4ed": {
       "region": "string",
       "sourceLang": "string",

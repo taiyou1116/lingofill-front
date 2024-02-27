@@ -1,5 +1,6 @@
 import { Document, TranslationObj } from "@/types/types";
 import toast from "react-hot-toast";
+import { Predictions } from "@aws-amplify/predictions";
 
 export async function updateText(partition: string, sort: string, title: string, text: string, translations: TranslationObj[]) {
   try {
@@ -105,24 +106,40 @@ export function createDate(timestamp: string) {
   return date.toLocaleString();
 }
 
-import { Predictions } from "@aws-amplify/predictions";
-
 export async function translateText(text: string) {
   try {
     const result = await Predictions.convert({
       translateText: {
         source: {
           text: text,
-          language: "en" // ソース言語
+          language: "en"
         },
-        targetLanguage: "ja" // ターゲット言語
+        targetLanguage: "ja"
       }
     });
 
-    console.log(result.text); // 翻訳結果を表示
+    console.log(result.text);
     return result.text;
   } catch (err) {
     console.error(err);
-    // return err;
+  }
+}
+
+export async function convertTextToSpeech(text: string) {
+  try {
+    const result = await Predictions.convert({
+      textToSpeech: {
+        source: {
+          text,
+        },
+        voiceId: 'Salli' // 声の種類を指定
+      }
+    });
+    const audio = new Audio(result.speech.url);
+    audio.play();
+    return audio;
+  } catch (err) {
+    console.error(err);
+    throw err;
   }
 }

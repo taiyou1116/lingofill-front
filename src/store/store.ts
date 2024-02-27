@@ -33,6 +33,11 @@ export const useStore = create<state>((set) => ({
         set({ documents: documents })
     },
 
+    selectedWordsIndexes: [],
+    setSelectedWordsIndexes: (selectedWordsIndexes: number[]) => {
+        set({ selectedWordsIndexes: selectedWordsIndexes})
+    },
+
     selectedmode: 'input',
     setSelectedMode: (seleltedmode: SelectedMode) => {
         set({ selectedmode: seleltedmode })

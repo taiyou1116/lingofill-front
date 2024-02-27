@@ -22,7 +22,8 @@
         }
       },
       "predictions": {
-        "translateText73a2d4ed": {}
+        "translateText73a2d4ed": {},
+        "speechGenerator9a8dde72": {}
       }
     }
   }

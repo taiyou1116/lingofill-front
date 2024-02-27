@@ -53,6 +53,11 @@
     }
   },
   "predictions": {
+    "speechGenerator9a8dde72": {
+      "convertType": "speechGenerator",
+      "providerPlugin": "awscloudformation",
+      "service": "Polly"
+    },
     "translateText73a2d4ed": {
       "convertType": "translateText",
       "providerPlugin": "awscloudformation",

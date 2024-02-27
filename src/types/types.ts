@@ -37,6 +37,9 @@ export type state = {
     document: Document | null,
     setDocument: (document: Document) => void,
 
+    selectedWordsIndexes: number[],
+    setSelectedWordsIndexes: (selectedWordsIndexes: number[]) => void,
+
     // 選択中のモード
     selectedmode: SelectedMode,
     setSelectedMode: (select: SelectedMode) => void,
