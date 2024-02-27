@@ -36,7 +36,7 @@ export type state = {
 
     // 選択中のドキュメント
     document: Document | null,
-    setDocument: (document: Document) => void,
+    setDocument: (document: Document | null) => void,
 
     selectedWordsIndexes: number[],
     setSelectedWordsIndexes: (selectedWordsIndexes: number[]) => void,

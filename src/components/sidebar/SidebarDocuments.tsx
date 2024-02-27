@@ -14,7 +14,8 @@ type Props = {
 function SidebarDocuments(props: Props) {
   const { createNewDocument, setCreateNewDocument } = props;
 
-  const { setDocument, documentPublic, username, documents, setDocuments, flipShowSidebar, setIsLoading } = useStore((store) => ({
+  const {document, setDocument, documentPublic, username, documents, setDocuments, flipShowSidebar, setIsLoading } = useStore((store) => ({
+    document:     store.document,
     setDocument:     store.setDocument,
     documentPublic:  store.document,
     username:        store.username,
@@ -121,7 +122,16 @@ function SidebarDocuments(props: Props) {
   }
 
   const deleteTextButton = async (index: number) => {
-    await deleteText(username, documents[index].sortKey);
+    try {
+      await deleteText(username, documents[index].sortKey);
+      const filterDoc = documents.filter((doc) => doc !== documents[index]);
+      if (documents[index] === document) {
+        setDocument(null);
+      }
+      setDocuments(filterDoc);
+    } catch(error) {
+      console.error(error);
+    }
   }
 
   return (
