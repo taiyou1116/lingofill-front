@@ -1,5 +1,6 @@
 import { m_plus_rounded_1c } from '@/store/fontStore';
 import { TranslationObj } from '@/types/types';
+import { VolumeUp } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 
 type Props = {
@@ -23,13 +24,12 @@ function PreviewDocument(props: Props) {
               key={index} 
               arrow
               title={
-                <div>
-                  <div className={` text-base bg-gray-800 p-0.5 rounded-md ${m_plus_rounded_1c.className}`}>{translation.indexes.map(i => words[i] + ' ')}</div>
-                  <div className={` text-sm ${m_plus_rounded_1c.className}`}>{ translation.memo }</div>
-                </div>
-              }
+              <div className={` text-sm ${m_plus_rounded_1c.className}`}>
+                {/* <div><VolumeUp style={{fontSize: 20}}/> </div> */}
+                <div className=' memo-output'>{ translation.memo }</div>
+              </div>}
             >
-              <span className={`py-0.5 px-2 cursor-pointer bg-slate-200 rounded-md dark:bg-slate-900 text-sm`}>
+              <span className={`py-0.5 px-1 mx-0.5 cursor-pointer bg-slate-200 rounded-md dark:bg-slate-900 text-sm`}>
                 {translation.translatedText}
               </span>
             </Tooltip>

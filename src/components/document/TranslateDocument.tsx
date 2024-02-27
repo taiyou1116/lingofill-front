@@ -82,7 +82,7 @@ function TranslateDocument(props: TranslateDocumentType) {
               key={index}
               onClick={() => handleClick(index)}
               onMouseMove={() => handleMouseMove(index)}
-              className={`select-none py-0.5 px-2 cursor-pointer rounded-md bg-slate-200 dark:bg-slate-900 text-sm`}
+              className={`select-none py-0.5 px-1 mx-0.5 cursor-pointer rounded-md bg-slate-200 dark:bg-slate-900 text-sm`}
             >
               {translation.translatedText}
             </span>

@@ -9,7 +9,7 @@ import { handleCloseModal } from '@/utils/modal';
 import { Document } from '@/types/types';
 import ModalCenterComponent from '../ModalCenter';
 import { convertTextToSpeech, translateText } from '@/utils/request';
-import { StarBorder, Translate, VolumeUp } from '@mui/icons-material';
+import { ContentPaste, StarBorder, Translate, VolumeUp } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 
 type TranslateModalProps = {
@@ -129,11 +129,11 @@ function TranslateModal(props: TranslateModalProps) {
               onChange={(e) => setUserInputTranslation(e.target.value)}
               className=' border border-gray-900 p-1 w-1/3 modal-center-input rounded-md dark:bg-gray-800 dark:border-gray-400 dark:text-gray-100'
             />
-              <button className=' text-xs bg-gray-900 text-gray-300 dark:bg-gray-200 rounded-md px-1 py-2 dark:text-gray-800'>
-                日本語訳をペースト
+              <button onClick={() => setUserInputTranslation(selectedWords)} className=' flex items-center text-xs bg-gray-900 text-gray-300 dark:bg-gray-200 rounded-md px-1 py-1 dark:text-gray-800'>
+                <ContentPaste />原文
               </button>
-              <button className=' text-xs bg-gray-900 text-gray-300 dark:bg-gray-200 rounded-md px-1 py-2 dark:text-gray-800'>
-                原文をペースト
+              <button onClick={() => setUserInputTranslation(translatedWords)}  className=' flex items-center text-xs bg-gray-900 text-gray-300 dark:bg-gray-200 rounded-md px-1 py-1 dark:text-gray-800'>
+                <ContentPaste />翻訳
               </button>
               <Tooltip title='お気に入り登録'>
                 <StarBorder className=' cursor-pointer'/>
@@ -142,9 +142,16 @@ function TranslateModal(props: TranslateModalProps) {
           </div>
         </div>
         <div className=' w-full h-full flex flex-col gap-1'>
-          <div>メモ</div>
+          <div className=' flex gap-1 items-center'>
+            <button onClick={() => setUserInputMemo(selectedWords)} className=' flex items-center text-xs bg-gray-900 text-gray-300 dark:bg-gray-200 rounded-md px-0.5 py-0.5 dark:text-gray-800'>
+              <ContentPaste />原文をメモに
+            </button>
+            <button onClick={() => setUserInputMemo(translatedWords)}  className=' flex items-center text-xs bg-gray-900 text-gray-300 dark:bg-gray-200 rounded-md px-0.5 py-0.5 dark:text-gray-800'>
+              <ContentPaste />翻訳をメモに
+            </button>
+          </div>
           <textarea 
-            placeholder='メモをここに入力（例：文脈、用法など）'
+            placeholder='メモをここに入力（例：文脈、用法、訳文など）'
             className=' border p-1 h-full w-full resize-none rounded-md border-stone-900 dark:bg-gray-800 dark:border-gray-400 dark:text-gray-100' 
             value={userInputMemo}
             onChange={(e) => setUserInputMemo(e.target.value)}

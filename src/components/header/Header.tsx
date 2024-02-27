@@ -56,21 +56,21 @@ function HeaderComponent() {
             horizontal: 'right',
           }}
         >
-          <MenuItem>
-            <Link href='/acount' className=" flex items-center gap-1">
+          <Link href='/acount'>
+            <MenuItem className=" flex items-center gap-1">
               <AccountCircle style={{fontSize: 20}} /> アカウント
-            </Link>
-          </MenuItem>
-          <MenuItem>
-            <Link href='/setting' className=" flex items-center gap-1">
+            </MenuItem>
+          </Link>
+          <Link href='/setting'>
+            <MenuItem className=" flex items-center gap-1">
               <Settings style={{fontSize: 20}} /> 設定
-            </Link>
-          </MenuItem>
-          <MenuItem>
-            <Link href='/doc' className=" flex items-center gap-1">
+            </MenuItem>
+          </Link>
+          <Link href='/doc'>
+            <MenuItem className=" flex items-center gap-1">
               <Help style={{fontSize: 20}} /> 使い方
-            </Link>
-          </MenuItem>
+            </MenuItem>
+          </Link>
         </Menu>
       </div>
       <Toaster 
