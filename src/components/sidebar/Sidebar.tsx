@@ -2,7 +2,7 @@
 
 import { useStore } from '@/store/store';
 import { m_plus_rounded_1c } from '@/store/fontStore';
-import { EditNote } from '@mui/icons-material';
+import { EditNote, FolderDelete } from '@mui/icons-material';
 import { useState } from 'react';
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
 import { Skeleton, Tooltip, Typography } from '@mui/material';
@@ -35,13 +35,26 @@ function SidebarComponent() {
         <div className="flex flex-col gap-3">
           <div className=' flex justify-between w-full p-5 items-center'>
             <h1 className={`dark:text-gray-300 ${m_plus_rounded_1c.className}`}>テキスト一覧</h1>
-            <Tooltip title='テキスト新規作成' className=' dark:text-gray-300'>
-              <button 
-                onClick={createNewSentence}
-                className=' border-2 rounded-lg p-0.5 dark:border-gray-400  hover:border-slate-600 duration-150'>
-                <EditNote style={{fontSize: 30}}/>
-              </button>
-            </Tooltip> 
+            <div className=' flex gap-1 items-center'>
+              <Tooltip 
+                title='削除したテキスト' 
+                className=' dark:text-gray-300'>
+                <button 
+                  // onClick={createNewSentence}
+                  className=' rounded-lg p-0.5 duration-150'>
+                  <FolderDelete style={{fontSize: 25}}/>
+                </button>
+              </Tooltip> 
+              <Tooltip 
+                title='テキスト新規作成' 
+                className=' dark:text-gray-300'>
+                <button 
+                  onClick={createNewSentence}
+                  className=' border-2 rounded-lg p-0.5 dark:border-gray-400  hover:border-slate-600 duration-150'>
+                  <EditNote style={{fontSize: 25}}/>
+                </button>
+              </Tooltip> 
+            </div>
           </div>
 
           { documents.length === 0

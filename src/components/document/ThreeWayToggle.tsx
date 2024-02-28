@@ -44,7 +44,6 @@ function ThreeWayToggle() {
       size='small'
       sx={{
         zIndex: 0,
-        borderRadius: '16px', // ToggleButtonGroup全体の角を丸くする
         height: '35px',
           '& .MuiToggleButtonGroup-grouped': {
             color: theme.palette.text.primary,

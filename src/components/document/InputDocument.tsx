@@ -50,14 +50,12 @@ function InputDocument() {
   };
 
   return (
-    <div className=" h-full">
-      <textarea
-        className=" resize-none h-full w-full p-3 origin-input rounded-md dark:bg-slate-600 dark:text-slate-300"
-        placeholder="原文をペースト (Command⌘ + V)" 
-        value={document?.text}
-        onChange={inputOriginalText}
-      />
-    </div>
+    <textarea
+      className=" resize-none h-screen max-h-[calc(100vh-200px)] w-full p-3 origin-input rounded-md dark:bg-slate-600 dark:text-slate-300"
+      placeholder="原文をペースト (Command⌘ + V)" 
+      value={document?.text}
+      onChange={inputOriginalText}
+    />
   )
 }
 
