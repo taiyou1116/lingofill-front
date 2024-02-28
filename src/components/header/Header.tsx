@@ -26,11 +26,11 @@ function HeaderComponent() {
       <div className='flex items-center pl-4 gap-5'>
         <Tooltip title="テキスト一覧">
           <button onClick={flipShowSidebar}>
-            <Reorder style={{fontSize: 35}} className=" dark:text-gray-100" />
+            <Reorder style={{fontSize: 35}} className=" dark:text-gray-200" />
           </button>
         </Tooltip>
-        <Link href={"/home"} className=' flex items-center cursor-pointer border-2 border-black rounded-lg pr-3'>
-          <Image src="LF.svg" width="40" height="40" alt='ロゴ' color="white" />
+        <Link href={"/home"} className=' flex items-center cursor-pointer hover:bg-gray-200 dark:bg-gray-500 dark:hover:bg-gray-600 border-2 border-black rounded-lg pr-3'>
+          <Image src="LF.svg" width="40" height="40" alt='ロゴ' />
           <h1 className={` text-xl ${oswald.className}`}>
             Lingo Fill
           </h1> 
@@ -39,7 +39,7 @@ function HeaderComponent() {
       <div className=' flex px-10 items-center gap-1'>
         <div onClick={handleClick} className=" cursor-pointer">
           <Tooltip title="アカウント設定">
-            <AccountCircle style={{fontSize: 35}} className=" dark:text-gray-100" />
+            <AccountCircle style={{fontSize: 35}} className=" dark:text-gray-200" />
           </Tooltip>
         </div>
         <Menu

@@ -145,8 +145,7 @@ export async function translateText(text: string) {
         targetLanguage: "ja"
       }
     });
-
-    console.log(result.text);
+    
     return result.text;
   } catch (err) {
     console.error(err);

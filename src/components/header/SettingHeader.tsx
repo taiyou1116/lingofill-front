@@ -22,7 +22,7 @@ function SettingHeaderComponent() {
   return (
     <div className="header-bg-height bg-white flex items-center justify-between shadow-md dark:bg-gray-600">
       <div className='flex items-center pl-4 gap-5'>
-        <Link href={"/home"} className=' flex items-center cursor-pointer border-2 border-black rounded-lg pr-3'>
+        <Link href={"/home"} className=' flex items-center cursor-pointer border-2 dark:bg-gray-500 border-black rounded-lg pr-3'>
           <Image src="LF.svg" width="40" height="40" alt='ロゴ' />
           <h1 className={` text-xl ${oswald.className}`}>
             Lingo Fill
@@ -32,7 +32,7 @@ function SettingHeaderComponent() {
       <div className=' flex px-10 items-center gap-1'>
         <div onClick={handleClick} className=" cursor-pointer">
           <Tooltip title="アカウント設定">
-            <AccountCircle style={{fontSize: 35}} className="dark:text-slate-100" />
+            <AccountCircle style={{fontSize: 35}} className="dark:text-slate-200" />
           </Tooltip>
         </div>
         <Menu

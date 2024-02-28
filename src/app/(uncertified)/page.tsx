@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { getCurrentUser } from "aws-amplify/auth";
 import { useStore } from "@/store/store";
+import { Box, LinearProgress } from "@mui/material";
 
 Amplify.configure(awsExports);
 
@@ -46,7 +47,12 @@ const MyApp = () => {
   }, [setUsername, router]);
 
   return (
-    <div>リダイレクト中...</div>
+    <div className=" w-full h-screen flex flex-col items-center justify-center gap-2">
+      <div className=" dark:text-gray-200">Loading</div>
+      <Box sx={{ width: '30%' }}>
+          <LinearProgress />
+      </Box>
+    </div>
   )
 };
 export default MyApp;

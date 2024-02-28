@@ -1,5 +1,3 @@
-// defaultValueの追加
-
 "use client"
 
 import { useStore } from '@/store/store';
@@ -36,6 +34,13 @@ function TranslateModal(props: TranslateModalProps) {
     const translateTextAsync = async () => {
       const ward = await translateText(selectedWords);
       setTranslatedWords(ward!);
+
+      // 表示, memoがあれば最初から入れておく
+      const translation = document!.translations.find(translation => translation.indexes.includes(selectedWordsIndexes[0]));
+      if (translation !== undefined) {
+        setUserInputTranslation(translation.translatedText);
+        setUserInputMemo(translation.memo);
+      }
     }
     translateTextAsync();
   }, [selectedWords])
@@ -129,11 +134,11 @@ function TranslateModal(props: TranslateModalProps) {
               onChange={(e) => setUserInputTranslation(e.target.value)}
               className=' border border-gray-900 p-1 w-1/3 modal-center-input rounded-md dark:bg-gray-800 dark:border-gray-400 dark:text-gray-100'
             />
-              <button onClick={() => setUserInputTranslation(selectedWords)} className=' flex items-center text-xs bg-gray-900 text-gray-300 dark:bg-gray-200 rounded-md px-1 py-1 dark:text-gray-800'>
-                <ContentPaste />原文
+              <button onClick={() => setUserInputTranslation(selectedWords)} className=' flex items-center text-xs bg-gray-800 text-gray-300 dark:bg-gray-200 rounded-md px-1 py-1 dark:text-gray-800'>
+                <ContentPaste style={{fontSize: 20}} />原文
               </button>
-              <button onClick={() => setUserInputTranslation(translatedWords)}  className=' flex items-center text-xs bg-gray-900 text-gray-300 dark:bg-gray-200 rounded-md px-1 py-1 dark:text-gray-800'>
-                <ContentPaste />翻訳
+              <button onClick={() => setUserInputTranslation(translatedWords)}  className=' flex items-center text-xs bg-gray-800 text-gray-300 dark:bg-gray-200 rounded-md px-1 py-1 dark:text-gray-800'>
+                <ContentPaste style={{fontSize: 20}} />翻訳
               </button>
               <Tooltip title='お気に入り登録'>
                 <StarBorder className=' cursor-pointer'/>
@@ -143,11 +148,11 @@ function TranslateModal(props: TranslateModalProps) {
         </div>
         <div className=' w-full h-full flex flex-col gap-1'>
           <div className=' flex gap-1 items-center'>
-            <button onClick={() => setUserInputMemo(selectedWords)} className=' flex items-center text-xs bg-gray-900 text-gray-300 dark:bg-gray-200 rounded-md px-0.5 py-0.5 dark:text-gray-800'>
-              <ContentPaste />原文をメモに
+            <button onClick={() => setUserInputMemo(selectedWords)} className=' flex items-center text-xs bg-gray-800 text-gray-300 dark:bg-gray-200 rounded-md px-1 py-1 dark:text-gray-800'>
+              <ContentPaste style={{fontSize: 20}} />原文をメモに
             </button>
-            <button onClick={() => setUserInputMemo(translatedWords)}  className=' flex items-center text-xs bg-gray-900 text-gray-300 dark:bg-gray-200 rounded-md px-0.5 py-0.5 dark:text-gray-800'>
-              <ContentPaste />翻訳をメモに
+            <button onClick={() => setUserInputMemo(translatedWords)}  className=' flex items-center text-xs bg-gray-800 text-gray-300 dark:bg-gray-200 rounded-md px-1 py-1 dark:text-gray-800'>
+              <ContentPaste style={{fontSize: 20}} />翻訳をメモに
             </button>
           </div>
           <textarea 
@@ -158,7 +163,7 @@ function TranslateModal(props: TranslateModalProps) {
           />
         </div>
         <button 
-          className=' bg-sky-400 px-4 py-2 rounded-md dark:bg-white dark:text-black'
+          className='px-4 py-2 bg-gray-800 text-gray-200 rounded-md dark:bg-white dark:text-black'
           onClick={handleSaveButton}
         >
           保存する
