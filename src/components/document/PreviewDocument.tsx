@@ -22,10 +22,8 @@ function PreviewDocument(props: Props) {
           return (
             <Tooltip 
               key={index} 
-              arrow
               title={
               <div className={` text-sm ${m_plus_rounded_1c.className}`}>
-                {/* <div><VolumeUp style={{fontSize: 20}}/> </div> */}
                 <div className=' memo-output'>{ translation.memo }</div>
               </div>}
             >

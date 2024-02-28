@@ -48,6 +48,10 @@ function ThreeWayToggle() {
         height: '35px',
           '& .MuiToggleButtonGroup-grouped': {
             color: theme.palette.text.primary,
+            fontSize: '0.875rem', // デフォルトフォントサイズ
+            '@media (max-width:600px)': {
+              fontSize: '0.4rem', // モバイルデバイスのフォントサイズを小さくする
+            },
             '&:not(:first-of-type)': {
               borderRadius: '0px', // 最初のボタン以外は角丸を無効化
             },

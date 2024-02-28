@@ -35,7 +35,7 @@ function SendDocumentDataButton() {
           className=' bg-lime-400 dark:bg-lime-600 rounded-lg py-2 px-4 hover:bg-lime-500 dark:hover:bg-lime-700 flex gap-1 items-center'
         >
           <CloudUpload style={{fontSize: 20}} />
-          <span className=' dark:text-slate-300'>テキストを保存する</span>
+          <span className=' dark:text-gray-300 text-xxs'>テキストを保存する</span>
         </button>
       )
     }
@@ -46,8 +46,8 @@ function SendDocumentDataButton() {
       { document?.isSynced 
       ? 
        <div className=' bg-none py-2 px-4 flex gap-1 items-center'>
-        <CheckCircle className=' dark:text-slate-100' />
-        <span className=' dark:text-slate-100'>テキスト保存済み</span>
+        <CheckCircle className=' dark:text-gray-100' />
+        <span className=' dark:text-gray-100  text-xxs'>テキスト保存済み</span>
        </div>
       : changeSendDataButton() }
     </div>

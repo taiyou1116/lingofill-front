@@ -37,7 +37,10 @@ function TranslateModal(props: TranslateModalProps) {
 
       // 表示, memoがあれば最初から入れておく
       const translation = document!.translations.find(translation => translation.indexes.includes(selectedWordsIndexes[0]));
-      if (translation !== undefined) {
+      if (translation === undefined) {
+        setUserInputTranslation('');
+        setUserInputMemo('');
+      } else {
         setUserInputTranslation(translation.translatedText);
         setUserInputMemo(translation.memo);
       }
@@ -163,7 +166,7 @@ function TranslateModal(props: TranslateModalProps) {
           />
         </div>
         <button 
-          className='px-4 py-2 bg-gray-800 text-gray-200 rounded-md dark:bg-white dark:text-black'
+          className='px-2 py-1 md:px-4 md:py-2 bg-gray-800 text-gray-200 rounded-md dark:bg-white dark:text-black'
           onClick={handleSaveButton}
         >
           保存する
