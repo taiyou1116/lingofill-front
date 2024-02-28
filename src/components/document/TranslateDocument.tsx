@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useStore } from "@/store/store";
 import TranslateModal from "./TranslateModal";
+import { Tooltip } from "@mui/material";
+import { m_plus_rounded_1c } from "@/store/fontStore";
 
 type TranslateDocumentType = {
   words: string[] | undefined,
@@ -84,7 +86,18 @@ function TranslateDocument(props: TranslateDocumentType) {
               onMouseMove={() => handleMouseMove(index)}
               className={`select-none py-0.5 px-1 mx-0.5 cursor-pointer rounded-md bg-slate-200 dark:bg-slate-900 text-sm`}
             >
-              {translation.translatedText}
+              {/* {translation.translatedText} */}
+              <Tooltip
+              key={index} 
+              title={
+              <div className={` text-sm ${m_plus_rounded_1c.className}`}>
+                <div className=' memo-output'>{ translation.memo }</div>
+              </div>}
+            >
+              <span>
+                {translation.translatedText}
+              </span>
+            </Tooltip>
             </span>
           );
         } else if (!translation) {

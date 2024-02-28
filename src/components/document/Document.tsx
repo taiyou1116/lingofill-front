@@ -5,7 +5,6 @@ import ThreeWayToggle from "./ThreeWayToggle";
 import SendDocumentDataButton from "./SendDocumentDataButton";
 import { oswald } from "@/store/fontStore";
 import InputDocument from "./InputDocument";
-import PreviewDocument from "./PreviewDocument";
 import { Skeleton, Typography } from "@mui/material";
 
 function DocumentComponent() {
@@ -46,15 +45,6 @@ function DocumentComponent() {
             words={words}
           />
         );
-      case 'preview':
-        return (
-          <div className=" h-full">
-            <PreviewDocument 
-              words={words}
-              translations={document.translations}
-            />
-          </div>
-        );
       case 'input':
         return (
           <InputDocument />
@@ -70,7 +60,7 @@ function DocumentComponent() {
     }
     return (
       <div className=" flex items-center justify-between">
-        <div className=" flex gap-3 items-center">
+        <div className=" flex gap-5 items-center">
           <h1 className={` dark:text-gray-100 text-xxs  ${oswald.className}`}>{ document.title }</h1>
           <ThreeWayToggle />
         </div>

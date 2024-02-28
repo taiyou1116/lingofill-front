@@ -52,18 +52,11 @@ function ThreeWayToggle() {
             '@media (max-width:600px)': {
               fontSize: '0.4rem', // モバイルデバイスのフォントサイズを小さくする
             },
-            '&:not(:first-of-type)': {
-              borderRadius: '0px', // 最初のボタン以外は角丸を無効化
-            },
             '&:first-of-type': {
-              paddingLeft: '12px',
-              paddingRight: '12px',
+              paddingLeft: '20px',
+              paddingRight: '20px',
               borderTopLeftRadius: '16px', // 最初のボタンの左上の角を丸くする
               borderBottomLeftRadius: '16px', // 最初のボタンの左下の角を丸くする
-            },
-            '&:nth-of-type(2)': {
-              paddingLeft: '30px',
-              paddingRight: '30px',
             },
             '&:last-of-type': {
               paddingLeft: '20px',
@@ -74,9 +67,8 @@ function ThreeWayToggle() {
           },'& .Mui-selected': {}
       }}
     >
-      <ToggleButton value="preview"><Visibility style={{fontSize: 15}} /> プレビュー</ToggleButton>
       <ToggleButton value="edit"><Translate style={{fontSize: 15}} /> 編集</ToggleButton>
-      <ToggleButton value="input"><TextSnippet style={{fontSize: 15}} /> 原文入力</ToggleButton>
+      <ToggleButton value="input"><TextSnippet style={{fontSize: 15}} /> 入力</ToggleButton>
     </ToggleButtonGroup>
     </ThemeProvider>
   );
