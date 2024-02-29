@@ -166,7 +166,6 @@ export async function convertTextToSpeech(text: string) {
       }
     });
     const audio = new Audio(result.speech.url);
-    audio.play();
     return audio;
   } catch (err) {
     console.error(err);

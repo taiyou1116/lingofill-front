@@ -1,7 +1,7 @@
 "use client"
 
 import { useStore } from '@/store/store';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "../../app/globals.css";
 import { handleCloseModal } from '@/utils/modal';
 import { Document } from '@/types/types';
@@ -29,106 +29,107 @@ function TranslateModal(props: TranslateModalProps) {
   const [userInputTranslation, setUserInputTranslation] = useState('');
   const [userInputMemo, setUserInputMemo] = useState('');
   const [translatedWords, setTranslatedWords] = useState('');
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  /* selectedWordsが更新されたら
+    - 選んだワードの翻訳 
+    - ブロック、メモがすでにある場合は格納 
+  */
   useEffect(() => {
+    if (document === null) return;
     const translateTextAsync = async () => {
-      const ward = await translateText(selectedWords);
-      setTranslatedWords(ward!);
-
-      // 表示, memoがあれば最初から入れておく
-      const translation = document!.translations.find(translation => translation.indexes.includes(selectedWordsIndexes[0]));
-      if (translation === undefined) {
-        setUserInputTranslation('');
-        setUserInputMemo('');
-      } else {
-        setUserInputTranslation(translation.translatedText);
-        setUserInputMemo(translation.memo);
-      }
+      const translatedText = await translateText(selectedWords);
+      if (translatedText === undefined) return;
+      setTranslatedWords(translatedText);
+    }
+    
+    const translation = document.translations.find(translation => translation.indexes.includes(selectedWordsIndexes[0]));
+    if (translation === undefined) {
+      setUserInputTranslation('');
+      setUserInputMemo('');
+    } else {
+      setUserInputTranslation(translation.translatedText);
+      setUserInputMemo(translation.memo);
     }
     translateTextAsync();
   }, [selectedWords])
 
-  // 日本語化ボタン
-  const handleSaveButton = () => {
-    handleTranslation(selectedWordsIndexes, userInputTranslation, userInputMemo);
-    handleCloseModal(flipCenterModal);
-  }
-
-  let audio: undefined | HTMLAudioElement;
-
-  // 読み上げ
+  // amazon Pollyで読み上げ
   const listenText = async (text: string) => {
     try {
-      if (audio !== undefined) {
-        audio.pause();
-        audio.currentTime = 0;
+      if (audioRef.current !== null) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
       }
-      audio = await convertTextToSpeech(text);
+      audioRef.current = await convertTextToSpeech(text);
+      audioRef.current.play();
     } catch(err) {
       console.error(err);
     }
   }
 
-  const cancelBlock = () => {
-    // translationsから要素削除
-    let updatedTranslations = document!.translations;
-    const obj = updatedTranslations.filter((t) => {
-      if (!t.indexes.includes(selectedWordsIndexes[0])) {
-        return t;
-      }
-    });
+  const deleteBlock = () => {
     if (!document) return;
-    const updatedDocument: Document = { ...document, 
-      translations: obj,
-      isSynced: false 
+
+    // 選択された単語のインデックスを含まない翻訳をフィルタリング
+    const updatedTranslations = document.translations.filter(
+      (translation) => !translation.indexes.includes(selectedWordsIndexes[0])
+    );
+    const updatedDocument = {
+      ...document,
+      translations: updatedTranslations,
+      isSynced: false,
     };
-    const updatedDocuments: Document[] = documents.map((doc) =>
+    const updatedDocuments = documents.map((doc) =>
       doc.sortKey === document!.sortKey ? updatedDocument : doc
     );
     setDocuments(updatedDocuments);
     setDocument(updatedDocument);
   }
 
-  const handleTranslation = (selectedWordIndexes: number[], userInput: string, userInputMemo: string) => {
-    const newTranslation = userInput;
-    const newMemo = userInputMemo;
-  
-    // translationsが未定義の場合は空の配列を使用
-    let updatedTranslations = document!.translations ? [...document!.translations] : [];
-    
-    // 複数のindexesに対応するために、既存の翻訳を検索するロジックを調整
-    const existingTranslationIndexes = selectedWordIndexes.map(index => 
-      updatedTranslations.findIndex(translation => translation.indexes.includes(index))
-    ).filter(index => index !== -1);
+  const handleSaveButton = () => {
+    handleTranslation(selectedWordsIndexes, userInputTranslation, userInputMemo);
+    handleCloseModal(flipCenterModal);
+  }
 
-    if (existingTranslationIndexes.length > 0) {
-      // 既存の翻訳を更新（複数のindexesが存在する場合は、最初に見つかったものを更新）
-      const firstExistingIndex = existingTranslationIndexes[0];
-      updatedTranslations[firstExistingIndex] = {
-        ...updatedTranslations[firstExistingIndex],
-        translatedText: newTranslation,
-        memo: newMemo,
+  const handleTranslation = (selectedWordIndexes: number[], userInput: string, userInputMemo: string) => {
+    if (!document) return;
+    // translationsのコピーを作成（不変性を保持）
+    let updatedTranslations = [...(document.translations ?? [])];
+
+    // 選択された単語のインデックスに基づく既存の翻訳を検索
+    const existingTranslationIndex = updatedTranslations.findIndex(translation =>
+      selectedWordIndexes.some(index => translation.indexes.includes(index))
+    );
+
+    if (existingTranslationIndex !== -1) {
+      // 既存の翻訳を更新
+      updatedTranslations[existingTranslationIndex] = {
+        ...updatedTranslations[existingTranslationIndex],
+        translatedText: userInput,
+        memo: userInputMemo,
       };
     } else {
       // 新しい翻訳を追加
       updatedTranslations.push({
         indexes: selectedWordIndexes,
-        translatedText: newTranslation,
-        memo: newMemo,
+        translatedText: userInput,
+        memo: userInputMemo,
       });
     }
 
-    // documentを変更する
-    // とりま汚いけど、あとで直す
-    if (!document) return;
-
-    const updatedDocument: Document = { ...document, 
+    // 更新されたドキュメントオブジェクトを作成
+    const updatedDocument: Document = {
+      ...document,
       translations: updatedTranslations,
-      isSynced: false 
+      isSynced: false,
     };
-    const updatedDocuments: Document[] = documents.map((doc) =>
-      doc.sortKey === document!.sortKey ? updatedDocument : doc
+
+    // documents 配列を更新
+    const updatedDocuments = documents.map(doc =>
+      doc.sortKey === document.sortKey ? updatedDocument : doc
     );
+
     setDocuments(updatedDocuments);
     setDocument(updatedDocument);
   };
@@ -194,7 +195,7 @@ function TranslateModal(props: TranslateModalProps) {
           </button>
           <button 
             className=' text-gray-400 rounded-md '
-            onClick={cancelBlock}
+            onClick={deleteBlock}
           >
             ブロックを取り消す
           </button>
