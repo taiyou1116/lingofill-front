@@ -15,10 +15,12 @@ function SendDocumentDataButton() {
     const documentIndex = documents.findIndex((d) => d.sortKey === document!.sortKey);
     const newDocuments = [...documents];
     newDocuments[documentIndex] = document!;
-
     try {
-      await updateText(username, document!.sortKey, document!.title, document!.text, document!.translations);
+      const now = Date.now().toString();
+      await updateText(username, document!.sortKey, document!.title, document!.text, document!.translations, now);
       newDocuments[documentIndex].isSynced = true;
+      newDocuments[documentIndex].updatedAt = now;
+      newDocuments.sort((a, b) => parseInt(b.updatedAt) - parseInt(a.updatedAt));
     } catch(error) {
       console.error(error);
       newDocuments[documentIndex].isSynced = false;

@@ -26,13 +26,14 @@ export async function GET(req: NextRequest) {
     },
     FilterExpression: "#isDelete = :isDeleteFalse",
     // titleとsortKeyのみを取得するようにProjectionExpressionを指定
-    ProjectionExpression: "#title, #sortKey",
+    ProjectionExpression: "#title, #sortKey, #updatedAt",
     // ProjectionExpressionで使用する属性名のエイリアスを定義
     ExpressionAttributeNames: {
       "#pk": "partitionKey",
       "#title": "title",
       "#sortKey": "sortKey",
       "#isDelete": "isDelete",
+      "#updatedAt": "updatedAt",
     },
   };
 

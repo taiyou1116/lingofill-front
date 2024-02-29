@@ -7,6 +7,7 @@ export type Document = {
     isNew: boolean,
     isDelete: boolean,
     translations: TranslationObj[],
+    updatedAt: string,
 };
 
 

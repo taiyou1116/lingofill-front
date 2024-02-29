@@ -76,14 +76,16 @@ function SidebarDocuments(props: Props) {
       setCreateNewDocument(false);
       return;
     }
+    const now = Date.now().toString();
     const newDocument: Document = {
       title: input,
       text: '',
-      sortKey: Date.now().toString(),
+      sortKey: now,
       isSynced: false,
       isNew: true,
       isDelete: false,
       translations: [],
+      updatedAt: now,
     }
     setDocuments([newDocument, ...documents]);
     setInput('');
@@ -112,9 +114,13 @@ function SidebarDocuments(props: Props) {
 
   const uploadDocument = async (index: number) => {
     try {
-      await updateText(username, documents[index].sortKey, documents[index].title, documents[index].text, documents[index].translations);
+      const now = Date.now().toString();
+      await updateText(username, documents[index].sortKey, documents[index].title, documents[index].text, documents[index].translations, now);
       const documentsLocal = [...documents];
       documentsLocal[index].isSynced = true;
+      documentsLocal[index].updatedAt = now;
+      
+      documentsLocal.sort((a, b) => parseInt(b.updatedAt) - parseInt(a.updatedAt));
       setDocuments(documentsLocal);
     } catch(error) {
       console.error(error);
@@ -186,7 +192,7 @@ function SidebarDocuments(props: Props) {
                       { document.title }
                     </div>
                     <div className=' text-xs text-slate-500'>
-                      { createDate(document.sortKey) }
+                      { createDate(document.updatedAt) }
                     </div>
                   </div>
                   

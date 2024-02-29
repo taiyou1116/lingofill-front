@@ -2,7 +2,7 @@ import { Document, TranslationObj } from "@/types/types";
 import toast from "react-hot-toast";
 import { Predictions } from "@aws-amplify/predictions";
 
-export async function updateText(partition: string, sort: string, title: string, text: string, translations: TranslationObj[]) {
+export async function updateText(partition: string, sort: string, title: string, text: string, translations: TranslationObj[], updatedAt: string) {
   try {
     const response = await fetch(`/api`, {
       method: "PUT",
@@ -16,6 +16,7 @@ export async function updateText(partition: string, sort: string, title: string,
         text: text,
         isDelete: false,
         translations: translations,
+        updatedAt: updatedAt,
       }),
     });
 
@@ -52,11 +53,12 @@ export async function getTitles(partition: string) {
       text: '',
       isSynced: true,
       translations: [],
+      updatedAt: d.updatedAt.S,
     }
   });
   // sortKeyの大きい順に配列をソート
   const sortedDocuments = newDocuments.sort((a, b) => {
-    return b.sortKey.localeCompare(a.sortKey);
+    return b.updatedAt.localeCompare(a.updatedAt);
   });
 
   return sortedDocuments;
@@ -93,6 +95,7 @@ export async function getText(partition: string, sortKey: string) {
             memo: t.M.memo ? t.M.memo.S : "",
           }))
         : [],
+      updatedAt: data.updatedAt.S,
     };
 
     return document;

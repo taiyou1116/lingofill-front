@@ -27,7 +27,8 @@ export async function PUT(req: NextRequest) {
             memo: { S: translation.memo }
           }
         }))
-      }
+      },
+      "updatedAt": { S: data.updatedAt },
     }
   };
 
