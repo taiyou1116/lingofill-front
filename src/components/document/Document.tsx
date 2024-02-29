@@ -5,7 +5,7 @@ import ThreeWayToggle from "./ThreeWayToggle";
 import SendDocumentDataButton from "./SendDocumentDataButton";
 import { oswald } from "@/store/fontStore";
 import InputDocument from "./InputDocument";
-import { Skeleton, Typography } from "@mui/material";
+import { Box, LinearProgress } from "@mui/material";
 
 function DocumentComponent() {
 
@@ -26,16 +26,11 @@ function DocumentComponent() {
     }
     if (isLoading) {
       return (
-        <Typography
-          variant="h3"
-          className=' w-full'
-        >
-          {<Skeleton />}
-          {<Skeleton />}
-          {<Skeleton />}
-          {<Skeleton />}
-          {<Skeleton />}
-        </Typography>
+        <div className=" flex h-full items-center justify-center">
+          <Box sx={{ width: '30%' }}>
+            <LinearProgress />
+          </Box>
+        </div>
       )
     }
     switch (selectedmode) {

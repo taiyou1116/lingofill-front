@@ -7,7 +7,7 @@ import { handleCloseModal } from '@/utils/modal';
 import { Document } from '@/types/types';
 import ModalCenterComponent from '../ModalCenter';
 import { convertTextToSpeech, translateText } from '@/utils/request';
-import { ContentPaste, StarBorder, Translate, VolumeUp } from '@mui/icons-material';
+import { ContentPaste, Save, StarBorder, Translate, VolumeUp } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 
 type TranslateModalProps = {
@@ -67,6 +67,26 @@ function TranslateModal(props: TranslateModalProps) {
     } catch(err) {
       console.error(err);
     }
+  }
+
+  const cancelBlock = () => {
+    // translationsから要素削除
+    let updatedTranslations = document!.translations;
+    const obj = updatedTranslations.filter((t) => {
+      if (!t.indexes.includes(selectedWordsIndexes[0])) {
+        return t;
+      }
+    });
+    if (!document) return;
+    const updatedDocument: Document = { ...document, 
+      translations: obj,
+      isSynced: false 
+    };
+    const updatedDocuments: Document[] = documents.map((doc) =>
+      doc.sortKey === document!.sortKey ? updatedDocument : doc
+    );
+    setDocuments(updatedDocuments);
+    setDocument(updatedDocument);
   }
 
   const handleTranslation = (selectedWordIndexes: number[], userInput: string, userInputMemo: string) => {
@@ -132,7 +152,7 @@ function TranslateModal(props: TranslateModalProps) {
             <div className=' flex w-full gap-3 justify-center items-center'>
               <input 
               type='text' 
-              placeholder='どのように表示する？' 
+              placeholder='ブロックの表示' 
               value={userInputTranslation}
               onChange={(e) => setUserInputTranslation(e.target.value)}
               className=' border border-gray-900 p-1 w-1/3 modal-center-input rounded-md dark:bg-gray-800 dark:border-gray-400 dark:text-gray-100'
@@ -165,12 +185,20 @@ function TranslateModal(props: TranslateModalProps) {
             onChange={(e) => setUserInputMemo(e.target.value)}
           />
         </div>
-        <button 
-          className='px-2 py-1 md:px-4 md:py-2 bg-gray-800 text-gray-200 rounded-md dark:bg-white dark:text-black'
-          onClick={handleSaveButton}
-        >
-          保存する
-        </button>
+        <div className=' flex gap-3'>
+          <button 
+            className='px-4 py-1 md:px-4 md:py-2 bg-gray-800 text-gray-200 rounded-md dark:bg-white dark:text-black'
+            onClick={handleSaveButton}
+          >
+            <div className=' flex gap-1 items-center'><Save />保存する</div>
+          </button>
+          <button 
+            className=' text-gray-400 rounded-md '
+            onClick={cancelBlock}
+          >
+            ブロックを取り消す
+          </button>
+        </div>
     </ModalCenterComponent>
   )
 }
