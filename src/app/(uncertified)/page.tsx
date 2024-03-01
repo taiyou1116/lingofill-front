@@ -40,6 +40,7 @@ const MyApp = () => {
         }
       } catch (error) {
         console.log("エラー" + error);
+        router.replace('/');
       }
     }
 
