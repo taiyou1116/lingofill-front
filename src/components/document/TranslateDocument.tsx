@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { useStore } from "@/store/store";
-import TranslateModal from "./TranslateModal";
 import { Tooltip } from "@mui/material";
 import { m_plus_rounded_1c } from "@/store/fontStore";
+import { Document } from "@/types/types";
+import TranslateModalMemo from "./TranslateModal";
 
-type TranslateDocumentType = {
+const MemoizedDocumentComponent = memo(TranslateDocument);
+
+type Props = {
   words: string[] | undefined,
 }
 
-function TranslateDocument(props: TranslateDocumentType) {
+function TranslateDocumentMemo(props: Props) {
   const { words } = props;
-  
+
   const {showCenterModal, flipCenterModal, document, selectedWordsIndexes, setSelectedWordsIndexes} = useStore((store) => ({
     showCenterModal: store.showCenterModal,
     flipCenterModal: store.flipCenterModal,
@@ -18,6 +21,34 @@ function TranslateDocument(props: TranslateDocumentType) {
     selectedWordsIndexes: store.selectedWordsIndexes,
     setSelectedWordsIndexes: store.setSelectedWordsIndexes,
   }));
+
+  return (
+    <div>
+      <MemoizedDocumentComponent 
+        words={words}
+        showCenterModal={showCenterModal}
+        flipCenterModal={flipCenterModal}
+        document={document}
+        selectedWordsIndexes={selectedWordsIndexes}
+        setSelectedWordsIndexes={setSelectedWordsIndexes}
+      />
+    </div>
+  );
+}
+
+export default TranslateDocumentMemo;
+
+type TranslateDocumentType = {
+  words: string[] | undefined,
+  showCenterModal: boolean,
+  flipCenterModal: () => void,
+  document: Document | null,
+  selectedWordsIndexes: number[],
+  setSelectedWordsIndexes: (selectedWordsIndexes: number[]) => void,
+}
+
+function TranslateDocument(props: TranslateDocumentType) {
+  const { words, showCenterModal, flipCenterModal, document, selectedWordsIndexes, setSelectedWordsIndexes } = props;
 
   // ドラッグ処理(熟語処理)
   const [isDragging, setIsDragging] = useState(false);
@@ -113,7 +144,7 @@ function TranslateDocument(props: TranslateDocumentType) {
       })}
 
       <div>
-        <TranslateModal 
+        <TranslateModalMemo
           selectedWordsIndexes={selectedWordsIndexes}
           selectedWords={selectedWords}
         />
@@ -121,5 +152,3 @@ function TranslateDocument(props: TranslateDocumentType) {
     </div>
   )
 }
-
-export default TranslateDocument

@@ -1,21 +1,45 @@
 "use client"
 
 import { useStore } from '@/store/store';
-import { ReactNode } from 'react'
+import { ReactNode, memo } from 'react'
 import "../app/globals.css";
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
 
-type ModalCenterProps = {
+const MemoizedDocumentComponent = memo(ModalCenterComponent);
+
+type Props = {
   children: ReactNode,
 }
 
-function ModalCenterComponent(props: ModalCenterProps) {
-  const { children} = props;
-
+function ModalCenterMemo(props: Props) {
+  const  { children } = props;
   const { showCenterModal, flipCenterModal } = useStore((store) => ({
     showCenterModal: store.showCenterModal,
     flipCenterModal: store.flipCenterModal,
   }))
+
+  return (
+    <div>
+      <MemoizedDocumentComponent 
+        showCenterModal={showCenterModal}
+        flipCenterModal={flipCenterModal}
+      >
+        { children }
+      </MemoizedDocumentComponent>
+    </div>
+  );
+}
+
+export default ModalCenterMemo;
+
+type ModalCenterProps = {
+  children: ReactNode,
+  showCenterModal: boolean,
+  flipCenterModal: () => void,
+}
+
+function ModalCenterComponent(props: ModalCenterProps) {
+  const { children, showCenterModal, flipCenterModal } = props;
 
   return (
     <div className={` fixed inset-0 flex items-center justify-center ${showCenterModal ? '' : ' pointer-events-none'}`}>
@@ -35,5 +59,3 @@ function ModalCenterComponent(props: ModalCenterProps) {
     </div>
   )
 }
-
-export default ModalCenterComponent

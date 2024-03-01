@@ -1,22 +1,47 @@
 "use client"
 import { useStore } from "@/store/store";
-import TranslateDocument from "./TranslateDocument";
-import ThreeWayToggle from "./ThreeWayToggle";
 import SendDocumentDataButton from "./SendDocumentDataButton";
 import { oswald } from "@/store/fontStore";
-import InputDocument from "./InputDocument";
 import { Box, LinearProgress } from "@mui/material";
+import { memo } from "react";
+import { Document, SelectedMode } from "@/types/types";
+import ThreeWayToggleMemo from "./ThreeWayToggle";
+import TranslateDocumentMemo from "./TranslateDocument";
+import InputMemo from "./InputDocument";
 
-function DocumentComponent() {
+const MemoizedDocumentComponent = memo(DocumentComponent);
 
-  const text = useStore((store) => store.document?.text);
-  const words = text?.split(" ");
-
+function DocumentMemoComponent() {
   const { document, selectedmode, isLoading } = useStore((store) => ({
     document:     store.document,
     selectedmode: store.selectedmode,
     isLoading:    store.isLoading,
   }));
+
+  return (
+    <div>
+      <MemoizedDocumentComponent 
+        document={document}
+        selectedmode={selectedmode}
+        isLoading={isLoading} 
+      />
+    </div>
+  );
+}
+
+export default DocumentMemoComponent;
+
+type Props = {
+  document: Document | null,
+  selectedmode: SelectedMode,
+  isLoading: boolean,
+}
+
+function DocumentComponent(props: Props) {
+  const { document, selectedmode, isLoading } = props;
+
+  const text = document?.text;
+  const words = text?.split(" ");
 
   const renderContentByMode = () => {
     if (document === null) {
@@ -36,13 +61,13 @@ function DocumentComponent() {
     switch (selectedmode) {
       case 'edit':
         return (
-          <TranslateDocument 
+          <TranslateDocumentMemo
             words={words}
           />
         );
       case 'input':
         return (
-          <InputDocument />
+          <InputMemo />
         );
       default:
         return <div>不明なモードです。</div>;
@@ -57,7 +82,7 @@ function DocumentComponent() {
       <div className=" flex items-center justify-between">
         <div className=" flex gap-5 items-center">
           <h1 className={` dark:text-gray-100 text-xxs  ${oswald.className}`}>{ document.title }</h1>
-          <ThreeWayToggle />
+          <ThreeWayToggleMemo />
         </div>
         <SendDocumentDataButton />
       </div>
@@ -74,5 +99,3 @@ function DocumentComponent() {
     </div>
   );
 }
-
-export default DocumentComponent

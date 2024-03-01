@@ -1,35 +1,69 @@
 "use client"
 
 import { useStore } from '@/store/store';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { memo, useEffect, useRef, useState } from 'react'
 import "../../app/globals.css";
 import { handleCloseModal } from '@/utils/modal';
 import { Document } from '@/types/types';
-import ModalCenterComponent from '../ModalCenter';
 import { convertTextToSpeech, translateText } from '@/utils/request';
 import { ContentPaste, Save, StarBorder, Translate, VolumeUp } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
+import ModalCenterMemo from '../ModalCenter';
 
-type TranslateModalProps = {
+const MemoizedDocumentComponent = memo(TranslateModal);
+
+type Props = {
   selectedWordsIndexes: number[],
   selectedWords: string,
 }
 
-function TranslateModal(props: TranslateModalProps) {
+function TranslateModalMemo(props: Props) {
   const { selectedWordsIndexes, selectedWords } = props;
-
   const {flipCenterModal, document, setDocuments, documents, setDocument} = useStore((store) => ({
     flipCenterModal: store.flipCenterModal,
     document:        store.document,
-    setDocuments:    store.setDocuments,
-    documents:       store.documents,
     setDocument:     store.setDocument,
+    documents:       store.documents,
+    setDocuments:    store.setDocuments,
   }));
+
+  return (
+    <div>
+      <MemoizedDocumentComponent 
+        selectedWordsIndexes={selectedWordsIndexes}
+        selectedWords={selectedWords}
+        flipCenterModal={flipCenterModal}
+        document={document}
+        setDocument={setDocument}
+        documents={documents}
+        setDocuments={setDocuments}
+      />
+    </div>
+  );
+}
+
+export default TranslateModalMemo;
+
+type TranslateModalProps = {
+  selectedWordsIndexes: number[],
+  selectedWords: string,
+  flipCenterModal: () => void,
+  document: Document | null,
+  setDocument: (document: Document | null) => void,
+  documents: Document[],
+  setDocuments: (documents: Document[]) => void,
+}
+
+function TranslateModal(props: TranslateModalProps) {
+  console.log("rrr");
+  const { selectedWordsIndexes, selectedWords, flipCenterModal, document, setDocument, documents, setDocuments } = props;
   
   const [userInputTranslation, setUserInputTranslation] = useState('');
   const [userInputMemo, setUserInputMemo] = useState('');
   const [translatedWords, setTranslatedWords] = useState('');
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  
 
   /* selectedWordsが更新されたら
     - 選んだワードの翻訳 
@@ -135,7 +169,7 @@ function TranslateModal(props: TranslateModalProps) {
   };
 
   return (
-    <ModalCenterComponent>
+    <ModalCenterMemo>
         <div className=' w-full'>
           <div className=' w-full flex flex-col justify-center items-center gap-3'>
             <div className=' flex gap-3 items-center justify-center'>
@@ -200,8 +234,6 @@ function TranslateModal(props: TranslateModalProps) {
             ブロックを取り消す
           </button>
         </div>
-    </ModalCenterComponent>
+    </ModalCenterMemo>
   )
 }
-
-export default TranslateModal

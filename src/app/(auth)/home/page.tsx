@@ -1,7 +1,6 @@
 "use client"
 
 import React from 'react';
-import DocumentComponent from "@/components/document/Document"
 import "../../globals.css";
 import "@aws-amplify/ui-react/styles.css";
 import { Amplify } from "aws-amplify";
@@ -10,20 +9,22 @@ import { useStore } from "@/store/store";
 import { useEffect } from "react";
 import { getTitles } from "@/utils/request";
 import { getCurrentUser } from "aws-amplify/auth";
+import DocumentMemoComponent from '@/components/document/Document';
 
 Amplify.configure(awsExports);
 
 function Home() {
   const {setDocuments, setTheme, username, setUsername, selectedWordsIndexes, setSelectedWordsIndexes, showCenterModal} = useStore((store) => ({
-    setDocuments: store.setDocuments,
-    setTheme:     store.setTheme,
-    username:     store.username,
-    setUsername:  store.setUsername,
-    selectedWordsIndexes: store.selectedWordsIndexes,
+    setDocuments:            store.setDocuments,
+    setTheme:                store.setTheme,
+    username:                store.username,
+    setUsername:             store.setUsername,
+    selectedWordsIndexes:    store.selectedWordsIndexes,
     setSelectedWordsIndexes: store.setSelectedWordsIndexes,
-    showCenterModal: store.showCenterModal,
+    showCenterModal:         store.showCenterModal,
   }));
 
+  // '/home'でリロードしたときにgetCurrentUserでログイン処理
   useEffect(() => {
     const fetchData = async () => {
       if (username === '') {
@@ -60,7 +61,7 @@ function Home() {
 
   return (
     <div className=" h-full" onMouseDown={resetSelectedWordsIndexes} >
-      <DocumentComponent />
+      <DocumentMemoComponent />
     </div>
   )
 };

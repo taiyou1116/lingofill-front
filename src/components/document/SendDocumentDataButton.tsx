@@ -1,15 +1,42 @@
 import { useStore } from '@/store/store';
+import { Document } from '@/types/types';
 import { updateText } from '@/utils/request';
 import { CheckCircle, CloudUpload } from '@mui/icons-material';
+import { memo } from 'react';
 
-function SendDocumentDataButton() {
+const MemoizedDocumentComponent = memo(SendDocumentDataButton);
 
+function SendDocumentButtonMemo() {
   const {setDocuments, document, documents, username} = useStore((store) => ({
     setDocuments: store.setDocuments,
     document:     store.document,
     documents:    store.documents,
     username:     store.username,
   }));
+
+  return (
+    <div>
+      <MemoizedDocumentComponent 
+        document={document}
+        documents={documents}
+        setDocuments={setDocuments}
+        username={username}
+      />
+    </div>
+  );
+}
+
+export default SendDocumentButtonMemo;
+
+type Props = {
+  document: Document | null,
+  documents: Document[],
+  setDocuments: (documents: Document[]) => void,
+  username: string,
+}
+
+function SendDocumentDataButton(props: Props) {
+  const { document, documents, setDocuments, username } = props;
 
   const updateDocuments = async () => {
     const documentIndex = documents.findIndex((d) => d.sortKey === document!.sortKey);
@@ -55,5 +82,3 @@ function SendDocumentDataButton() {
     </div>
   )
 }
-
-export default SendDocumentDataButton;

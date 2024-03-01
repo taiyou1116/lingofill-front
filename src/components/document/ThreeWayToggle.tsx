@@ -1,12 +1,33 @@
 "use client"
 
-import React, { useState } from 'react';
-import { ThemeProvider, ToggleButton, ToggleButtonGroup, createTheme, useMediaQuery, useTheme } from '@mui/material';
+import React, { memo, useState } from 'react';
+import { ThemeProvider, ToggleButton, ToggleButtonGroup, createTheme, useMediaQuery } from '@mui/material';
 import { SelectedMode } from '@/types/types';
 import { useStore } from '@/store/store';
-import { TextSnippet, Translate, Visibility } from '@mui/icons-material';
+import { TextSnippet, Translate } from '@mui/icons-material';
 
-function ThreeWayToggle() {
+const MemoizedDocumentComponent = memo(ThreeWayToggle);
+
+function ThreeWayToggleMemo() {
+  const setSelectedModeGlobal = useStore((store) => store.setSelectedMode);
+
+  return (
+    <div>
+      <MemoizedDocumentComponent 
+        setSelectedModeGlobal={setSelectedModeGlobal}
+      />
+    </div>
+  );
+}
+
+export default ThreeWayToggleMemo;
+
+type Props = {
+  setSelectedModeGlobal: (select: SelectedMode) => void,
+}
+
+function ThreeWayToggle(props: Props) {
+  const { setSelectedModeGlobal } = props;
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
   // ダークモードまたはライトモードのテーマを動的に生成
@@ -21,7 +42,6 @@ function ThreeWayToggle() {
   );
 
   const [selectedMode, setSelectedModeLocal] = useState<SelectedMode>('input');
-  const setSelectedModeGlobal = useStore((store) => store.setSelectedMode);
 
   const handleModeChange = (
     event: React.MouseEvent<HTMLElement>,
@@ -72,5 +92,3 @@ function ThreeWayToggle() {
     </ThemeProvider>
   );
 }
-
-export default ThreeWayToggle;

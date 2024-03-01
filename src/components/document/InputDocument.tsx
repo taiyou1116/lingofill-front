@@ -1,15 +1,41 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import debounce from "lodash/debounce";
 import { Document } from '@/types/types';
 import { useStore } from '@/store/store';
 
-function InputDocument() {
+const MemoizedDocumentComponent = memo(InputDocument);
+
+function InputMemo() {
   const { document, setDocument, documents, setDocuments } = useStore((store) => ({
     document:     store.document,
     setDocument:  store.setDocument,
     documents:    store.documents,
     setDocuments: store.setDocuments,
   }));
+
+  return (
+    <div>
+      <MemoizedDocumentComponent 
+        document={document}
+        setDocument={setDocument}
+        documents={documents}
+        setDocuments={setDocuments}
+      />
+    </div>
+  );
+}
+
+export default InputMemo;
+
+type Props = {
+  document: Document | null,
+  setDocument: (document: Document | null) => void,
+  documents: Document[],
+  setDocuments: (documents: Document[]) => void,
+}
+
+function InputDocument(props: Props) {
+  const { document, setDocument, documents, setDocuments } = props;
 
   const [inputText, setInputText] = useState(document!.text);
 
@@ -58,5 +84,3 @@ function InputDocument() {
     />
   )
 }
-
-export default InputDocument
