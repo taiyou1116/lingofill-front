@@ -26,7 +26,7 @@ React.memo調べる
 バグ修正
 
 効率
-- documentフォルダ見てる
+- translateModal -> UIなどを細かく分けて少しでもレンダリングを抑える
 - layoutがくしゃくしゃ
 
 追加案

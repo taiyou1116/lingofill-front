@@ -55,15 +55,12 @@ type TranslateModalProps = {
 }
 
 function TranslateModal(props: TranslateModalProps) {
-  console.log("rrr");
   const { selectedWordsIndexes, selectedWords, flipCenterModal, document, setDocument, documents, setDocuments } = props;
   
   const [userInputTranslation, setUserInputTranslation] = useState('');
   const [userInputMemo, setUserInputMemo] = useState('');
   const [translatedWords, setTranslatedWords] = useState('');
   const audioRef = useRef<HTMLAudioElement | null>(null);
-
-  
 
   /* selectedWordsが更新されたら
     - 選んだワードの翻訳 

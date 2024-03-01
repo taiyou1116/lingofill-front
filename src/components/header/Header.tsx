@@ -6,7 +6,7 @@ import { oswald } from '@/store/fontStore';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Toaster } from "react-hot-toast";
-import { AppBar, Box, Menu, MenuItem, Toolbar, Tooltip } from "@mui/material";
+import { Menu, MenuItem, Tooltip } from "@mui/material";
 import { useState } from "react";
 
 function HeaderComponent() {

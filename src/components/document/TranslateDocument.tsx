@@ -144,10 +144,15 @@ function TranslateDocument(props: TranslateDocumentType) {
       })}
 
       <div>
-        <TranslateModalMemo
-          selectedWordsIndexes={selectedWordsIndexes}
-          selectedWords={selectedWords}
-        />
+        {/* { showCenterModal 
+        ? */}
+          <TranslateModalMemo
+            selectedWordsIndexes={selectedWordsIndexes}
+            selectedWords={selectedWords}
+          />
+        {/* : 
+          null
+        } */}
       </div>
     </div>
   )
