@@ -85,7 +85,17 @@ function TranslateDocument(props: TranslateDocumentType) {
       const newIndexes = [];
       const minIndex = Math.min(startDragIndex, index);
       const maxIndex = Math.max(startDragIndex, index);
+
       for (let i = minIndex; i <= maxIndex; i++) {
+        /* 
+        translationでスクロールしてもClick操作同様に振る舞う 
+        ブロックに触れたらその時点でhandleMouseUp
+        */
+        const translation = document!.translations.find(translation => translation.indexes.includes(i));
+        if (translation) {
+          handleMouseUp();
+          return;
+        }
         newIndexes.push(i);
       }
       setSelectedWordsIndexes(newIndexes);

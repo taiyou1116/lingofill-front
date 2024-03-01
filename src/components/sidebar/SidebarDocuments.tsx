@@ -4,18 +4,18 @@ import { handleStopPropagation } from '@/utils/modal';
 import { createDate, deleteText, getText, updateText } from '@/utils/request';
 import { CloudUpload, Delete, ModeEdit } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
-import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
+import React, { Dispatch, SetStateAction, memo, useEffect, useRef, useState } from 'react'
 
-type Props = {
+const MemoizedDocumentComponent = memo(SidebarDocuments);
+
+type Prop = {
   createNewDocument: boolean,
   setCreateNewDocument: Dispatch<SetStateAction<boolean>>,
 }
 
-function SidebarDocuments(props: Props) {
+function SidebarDocumentsMemo(props: Prop) {
   const { createNewDocument, setCreateNewDocument } = props;
-
-  const {document, setDocument, documentPublic, username, documents, setDocuments, flipShowSidebar, setIsLoading } = useStore((store) => ({
-    document:     store.document,
+  const {setDocument, documentPublic, username, documents, setDocuments, flipShowSidebar, setIsLoading } = useStore((store) => ({
     setDocument:     store.setDocument,
     documentPublic:  store.document,
     username:        store.username,
@@ -24,6 +24,40 @@ function SidebarDocuments(props: Props) {
     flipShowSidebar: store.flipShowSidebar,
     setIsLoading:    store.setIsLoading,
   }));
+
+  return (
+    <div>
+      <MemoizedDocumentComponent 
+        createNewDocument={createNewDocument}
+        setCreateNewDocument={setCreateNewDocument}
+        setDocument={setDocument}
+        documentPublic={documentPublic}
+        username={username}
+        documents={documents}
+        setDocuments={setDocuments}
+        flipShowSidebar={flipShowSidebar}
+        setIsLoading={setIsLoading}
+      />
+    </div>
+  );
+}
+
+export default SidebarDocumentsMemo;
+
+type Props = {
+  createNewDocument: boolean,
+  setCreateNewDocument: Dispatch<SetStateAction<boolean>>,
+  setDocument:     (document: Document | null) => void,
+  documentPublic:  Document | null,
+  username:        string,
+  documents:       Document[],
+  setDocuments:    (documents: Document[]) => void,
+  flipShowSidebar: () => void,
+  setIsLoading:    (state: boolean) => void,
+}
+
+function SidebarDocuments(props: Props) {
+  const { createNewDocument, setCreateNewDocument, setDocument, documentPublic, username, documents, setDocuments, flipShowSidebar, setIsLoading } = props;
 
   const [inputNameIndex, setInputNameIndex] = useState<number>(-1);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -131,7 +165,7 @@ function SidebarDocuments(props: Props) {
     try {
       await deleteText(username, documents[index].sortKey);
       const filterDoc = documents.filter((doc) => doc !== documents[index]);
-      if (documents[index] === document) {
+      if (documents[index] === documentPublic) {
         setDocument(null);
       }
       setDocuments(filterDoc);
@@ -224,5 +258,3 @@ function SidebarDocuments(props: Props) {
     </div>
   )
 }
-
-export default SidebarDocuments

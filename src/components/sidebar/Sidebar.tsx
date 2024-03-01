@@ -3,17 +3,42 @@
 import { useStore } from '@/store/store';
 import { m_plus_rounded_1c } from '@/store/fontStore';
 import { EditNote, FolderDelete } from '@mui/icons-material';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
 import { Skeleton, Tooltip, Typography } from '@mui/material';
-import SidebarDocuments from './SidebarDocuments';
+import { Document } from '@/types/types';
+import SidebarDocumentsMemo from './SidebarDocuments';
 
-function SidebarComponent() {
+const MemoizedDocumentComponent = memo(SidebarComponent);
+
+function SidebarMemo() {
   const { showSidebar, flipShowSidebar, documents } = useStore((store) => ({
     showSidebar:     store.showSidebar,
     flipShowSidebar: store.flipShowSidebar,
     documents:       store.documents,
   }));
+
+  return (
+    <div>
+      <MemoizedDocumentComponent 
+        documents={documents}
+        flipShowSidebar={flipShowSidebar}
+        showSidebar={showSidebar}
+      />
+    </div>
+  );
+}
+
+export default SidebarMemo;
+
+type Props = {
+  showSidebar: boolean,
+  flipShowSidebar: () => void,
+  documents: Document[]
+}
+
+function SidebarComponent(props: Props) {
+  const { showSidebar, flipShowSidebar, documents } = props;
 
   const [createNewDocument, setCreateNewDocument] = useState<boolean>(false);
 
@@ -40,7 +65,6 @@ function SidebarComponent() {
                 title='削除したテキスト' 
                 className=' dark:text-gray-300'>
                 <button 
-                  // onClick={createNewSentence}
                   className=' rounded-lg p-0.5 duration-150'>
                   <FolderDelete style={{fontSize: 25}}/>
                 </button>
@@ -70,7 +94,7 @@ function SidebarComponent() {
               {<Skeleton />}
             </Typography>
           :
-            <SidebarDocuments 
+            <SidebarDocumentsMemo 
               createNewDocument={createNewDocument}
               setCreateNewDocument={setCreateNewDocument}
             />
@@ -80,5 +104,3 @@ function SidebarComponent() {
     </div>
   );
 }
-
-export default SidebarComponent
