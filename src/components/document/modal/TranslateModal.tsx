@@ -96,11 +96,17 @@ function TranslateModal(props: TranslateModalProps) {
                 <ReadingButton 
                   document={document}
                   selectedWords={selectedWords}
+                  ln={document!.language}
                 />
                 { selectedWords }
               </span>
               <span className='selectedWordsContainer bg-gray-200 dark:bg-gray-900 p-1'>
-                <Translate style={{fontSize: 20}}/> { translatedWords }
+                <ReadingButton 
+                  document={document}
+                  selectedWords={translatedWords}
+                  ln={document!.translateLanguage}
+                />
+                { translatedWords }
               </span>
             </div>
             ↓

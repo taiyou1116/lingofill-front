@@ -4,11 +4,7 @@ React.memo調べる
 リクエスト理解する
 
 実装
-1 翻訳の方も読み上げ
 2 差分(変更した項目のみ)を送信
-3 setDocuments, setDocument使っている場所がすべて差分のみの効率的処理か確認
-4 Redux検討, zustandとの違い
-5 コンポーネントを分ける。あとSidebarDocument
 
 - 好きなところから再生
 - 多言語でのUI表示

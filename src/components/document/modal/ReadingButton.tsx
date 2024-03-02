@@ -8,10 +8,11 @@ import React, { useRef } from 'react'
 type Props = {
   document: Document | null,
   selectedWords: string,
+  ln: string,
 }
 
 function ReadingButton(props: Props) {
-  const { document, selectedWords } = props;
+  const { document, selectedWords, ln } = props;
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -23,7 +24,7 @@ function ReadingButton(props: Props) {
         audioRef.current.currentTime = 0;
       }
 
-      const voice = getVoiceForLanguage(document!.language);
+      const voice = getVoiceForLanguage(ln);
       audioRef.current = await convertTextToSpeech(text, voice);
       audioRef.current.play();
     } catch(err) {
