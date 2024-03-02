@@ -21,6 +21,13 @@ export type TranslationObj = {
 // モード
 export type SelectedMode = 'preview' | 'edit' | 'input';
 
+// 言語と音声
+export const languageVoiceMap = {
+    en: 'Salli',
+    jp: 'Mizuki',
+    es: 'Lupe',
+};
+
 // アプリ全体で共有する状態の型
 export type state = {
     showSidebar: boolean,

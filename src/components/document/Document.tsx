@@ -1,13 +1,14 @@
 "use client"
 import { useStore } from "@/store/store";
-import SendDocumentDataButton from "./SendDocumentDataButton";
 import { oswald } from "@/store/fontStore";
 import { Box, LinearProgress } from "@mui/material";
-import { memo } from "react";
+import React, { memo } from "react";
 import { Document, SelectedMode } from "@/types/types";
-import ThreeWayToggleMemo from "./ThreeWayToggle";
+import ThreeWayToggleMemo from "./header/ThreeWayToggle";
 import TranslateDocumentMemo from "./TranslateDocument";
 import InputMemo from "./InputDocument";
+import SendDocumentButtonMemo from "./header/SendDocumentDataButton";
+import SelectLanguageMemo from "./header/SelectLanguage";
 
 const MemoizedDocumentComponent = memo(DocumentComponent);
 
@@ -83,8 +84,9 @@ function DocumentComponent(props: Props) {
         <div className=" flex gap-5 items-center">
           <h1 className={` dark:text-gray-100 text-xxs  ${oswald.className}`}>{ document.title }</h1>
           <ThreeWayToggleMemo />
+          <SelectLanguageMemo />
         </div>
-        <SendDocumentDataButton />
+        <SendDocumentButtonMemo />
       </div>
     )
   }
