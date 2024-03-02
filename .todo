@@ -4,7 +4,7 @@ React.memo調べる
 リクエスト理解する
 
 実装
-1 language実装 選択されたdocument言語 -> サーバー管理 -> documentごと管理
+1 翻訳の方も読み上げ
 2 差分(変更した項目のみ)を送信
 3 setDocuments, setDocument使っている場所がすべて差分のみの効率的処理か確認
 4 Redux検討, zustandとの違い
@@ -19,6 +19,10 @@ React.memo調べる
 - お気に入り登録 ... 低
 - Shift + クリックで離れていても選択 ... 低
 - 設定, (男女音声, なめらかな再生, よりフォーマルな翻訳)
+
+バグ
+テキスト作成 -> テキスト入力 -> タイトル編集
+Warning: SidebarDocuments contains an input of type text with both value and defaultValue props. Input elements must be either controlled or uncontrolled (specify either the value prop, or the defaultValue prop, but not both). Decide between using a controlled or uncontrolled input element and remove one of these props. More info: 
 
 追加案
 - AIで詳細を記入できたらおもろいかも

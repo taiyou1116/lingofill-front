@@ -144,15 +144,15 @@ export function createDate(timestamp: string) {
   return date.toLocaleString();
 }
 
-export async function translateText(text: string) {
+export async function translateText(text: string, ln: string, translateLn : string) {
   try {
     const result = await Predictions.convert({
       translateText: {
         source: {
           text: text,
-          language: "en"
+          language: ln,
         },
-        targetLanguage: "ja"
+        targetLanguage: translateLn
       }
     });
     
@@ -162,14 +162,36 @@ export async function translateText(text: string) {
   }
 }
 
-export async function convertTextToSpeech(text: string) {
+type LanguageVoiceMap = {
+  [languageCode: string]: string;
+}
+
+// 言語と音声
+const languageVoiceMap: LanguageVoiceMap = {
+  en: 'Salli',
+  ja: 'Mizuki',
+  es: 'Lupe',
+  fr: 'Lea',
+  de: 'Vicki',
+  it: 'Bianca',
+  pt: 'Ines',
+  ru: 'Tatyana',
+  ar: 'Zeina',
+  ko: 'Seoyeon',
+};
+
+export function getVoiceForLanguage(languageCode: string): string {
+  return languageVoiceMap[languageCode];
+}
+
+export async function convertTextToSpeech(text: string, voice: string) {
   try {
     const result = await Predictions.convert({
       textToSpeech: {
         source: {
           text,
         },
-        voiceId: 'Salli' // 声の種類を指定
+        voiceId: voice // 声の種類を指定
       }
     });
     const audio = new Audio(result.speech.url);

@@ -5,7 +5,7 @@ import React, { memo, useEffect, useRef, useState } from 'react'
 import "../../app/globals.css";
 import { handleCloseModal } from '@/utils/modal';
 import { Document } from '@/types/types';
-import { convertTextToSpeech, translateText } from '@/utils/request';
+import { convertTextToSpeech, getVoiceForLanguage, translateText } from '@/utils/request';
 import { ContentPaste, Save, StarBorder, Translate, VolumeUp } from '@mui/icons-material';
 import { Tooltip } from '@mui/material';
 import ModalCenterMemo from '../ModalCenter';
@@ -69,7 +69,7 @@ function TranslateModal(props: TranslateModalProps) {
   useEffect(() => {
     if (document === null) return;
     const translateTextAsync = async () => {
-      const translatedText = await translateText(selectedWords);
+      const translatedText = await translateText(selectedWords, document.language, document.translateLanguage);
       if (translatedText === undefined) return;
       setTranslatedWords(translatedText);
     }
@@ -92,7 +92,9 @@ function TranslateModal(props: TranslateModalProps) {
         audioRef.current.pause();
         audioRef.current.currentTime = 0;
       }
-      audioRef.current = await convertTextToSpeech(text);
+
+      const voice = getVoiceForLanguage(document!.language);
+      audioRef.current = await convertTextToSpeech(text, voice);
       audioRef.current.play();
     } catch(err) {
       console.error(err);

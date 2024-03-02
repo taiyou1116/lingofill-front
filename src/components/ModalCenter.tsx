@@ -42,7 +42,7 @@ function ModalCenterComponent(props: ModalCenterProps) {
   const { children, showCenterModal, flipCenterModal } = props;
 
   return (
-    <div className={` fixed inset-0 flex items-center justify-center ${showCenterModal ? '' : ' pointer-events-none'}`}>
+    <div className={` fixed z-10 inset-0 flex items-center justify-center ${showCenterModal ? '' : ' pointer-events-none'}`}>
       {/* 背景 */}
       <div 
         onClick={() => handleCloseModal(flipCenterModal)} 

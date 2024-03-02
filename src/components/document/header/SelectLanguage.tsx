@@ -35,7 +35,6 @@ type Props = {
 
 function SelectLanguage(props: Props) {
   const { document, setDocument, documents, setDocuments } = props;
-  console.log(document);
 
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
@@ -102,7 +101,15 @@ function SelectLanguage(props: Props) {
           >
             <MenuItem value={'ja'}>日本語</MenuItem>
             <MenuItem value={'en'}>English</MenuItem>
-            <MenuItem value={'sp'}>Spanish</MenuItem>
+            <MenuItem value={'es'}>Español</MenuItem>
+            <MenuItem value={'fr'}>Français</MenuItem>
+            <MenuItem value={'de'}>Deutsch</MenuItem>
+            <MenuItem value={'it'}>Italiano</MenuItem>
+            <MenuItem value={'pt'}>Português</MenuItem>
+            <MenuItem value={'ru'}>Русский</MenuItem>
+            <MenuItem value={'ar'}>عربي</MenuItem>
+            <MenuItem value={'ko'}>한국어</MenuItem>
+            
           </Select>
         </FormControl>
         <TrendingFlat className=" dark:text-gray-300" />
@@ -117,7 +124,14 @@ function SelectLanguage(props: Props) {
           >
             <MenuItem value={'ja'}>日本語</MenuItem>
             <MenuItem value={'en'}>English</MenuItem>
-            <MenuItem value={'sp'}>Spanish</MenuItem>
+            <MenuItem value={'es'}>Español</MenuItem>
+            <MenuItem value={'fr'}>Français</MenuItem>
+            <MenuItem value={'de'}>Deutsch</MenuItem>
+            <MenuItem value={'it'}>Italiano</MenuItem>
+            <MenuItem value={'pt'}>Português</MenuItem>
+            <MenuItem value={'ru'}>Русский</MenuItem>
+            <MenuItem value={'ar'}>عربي</MenuItem>
+            <MenuItem value={'ko'}>한국어</MenuItem>
           </Select>
         </FormControl>
       </ThemeProvider>
