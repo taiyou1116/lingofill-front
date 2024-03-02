@@ -93,6 +93,8 @@ function SidebarDocuments(props: Props) {
             ...document,
             text: data.text,
             translations: data.translations,
+            language: data.language,
+            translateLanguage: data.translateLanguage,
           }
         }
         return document;
@@ -119,6 +121,8 @@ function SidebarDocuments(props: Props) {
       isNew: true,
       isDelete: false,
       translations: [],
+      language: 'en',
+      translateLanguage: 'ja',
       updatedAt: now,
     }
     setDocuments([newDocument, ...documents]);
@@ -149,7 +153,7 @@ function SidebarDocuments(props: Props) {
   const uploadDocument = async (index: number) => {
     try {
       const now = Date.now().toString();
-      await updateText(username, documents[index].sortKey, documents[index].title, documents[index].text, documents[index].translations, now);
+      await updateText(username, documents[index].sortKey, documents[index].title, documents[index].text, documents[index].translations, documents[index].language, documents[index].translateLanguage, now);
       const documentsLocal = [...documents];
       documentsLocal[index].isSynced = true;
       documentsLocal[index].updatedAt = now;

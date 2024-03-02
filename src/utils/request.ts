@@ -2,7 +2,8 @@ import { Document, TranslationObj } from "@/types/types";
 import toast from "react-hot-toast";
 import { Predictions } from "@aws-amplify/predictions";
 
-export async function updateText(partition: string, sort: string, title: string, text: string, translations: TranslationObj[], updatedAt: string) {
+export async function updateText
+  (partition: string, sort: string, title: string, text: string, translations: TranslationObj[],language:string, translateLanguage: string, updatedAt: string) {
   try {
     const response = await fetch(`/api`, {
       method: "PUT",
@@ -16,6 +17,8 @@ export async function updateText(partition: string, sort: string, title: string,
         text: text,
         isDelete: false,
         translations: translations,
+        language: language,
+        translateLanguage: translateLanguage,
         updatedAt: updatedAt,
       }),
     });
@@ -50,9 +53,11 @@ export async function getTitles(partition: string) {
     return {
       sortKey: d.sortKey.S,
       title: d.title.S, 
-      text: '',
+      text: '',  
       isSynced: true,
       translations: [],
+      language: '',
+      translateLanguage: '',
       updatedAt: d.updatedAt.S,
     }
   });
@@ -95,9 +100,11 @@ export async function getText(partition: string, sortKey: string) {
             memo: t.M.memo ? t.M.memo.S : "",
           }))
         : [],
+      language: data.language.S,
+      translateLanguage: data.translateLanguage.S,
       updatedAt: data.updatedAt.S,
     };
-
+    console.log(document);
     return document;
 
   } catch(error) {

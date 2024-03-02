@@ -18,8 +18,9 @@ export const useStore = create<state>((set) => ({
     },
 
     // 選択されているtext
+    // null追加した
     document: null,
-    setDocument: (document: Document) => {
+    setDocument: (document: Document | null) => {
         set({ document: document })
     },
 
