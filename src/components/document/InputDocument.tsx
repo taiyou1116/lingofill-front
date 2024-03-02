@@ -2,6 +2,7 @@ import React, { memo, useEffect, useState } from 'react'
 import debounce from "lodash/debounce";
 import { Document } from '@/types/types';
 import { useStore } from '@/store/store';
+import { useTranslation } from 'react-i18next';
 
 const MemoizedDocumentComponent = memo(InputDocument);
 
@@ -36,7 +37,7 @@ type Props = {
 
 function InputDocument(props: Props) {
   const { document, setDocument, documents, setDocuments } = props;
-
+  const { t } = useTranslation();
   const [inputText, setInputText] = useState(document!.text);
 
   // デバウンスされた関数を作成
@@ -78,7 +79,7 @@ function InputDocument(props: Props) {
   return (
     <textarea
       className=" resize-none h-screen max-h-[calc(100vh-200px)] w-full p-3 origin-input rounded-md dark:bg-slate-600 dark:text-slate-300"
-      placeholder="原文をペースト (Command⌘ + V)" 
+      placeholder={t('document.input')}
       value={document?.text}
       onChange={inputOriginalText}
     />

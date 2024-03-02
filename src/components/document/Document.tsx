@@ -10,6 +10,8 @@ import InputMemo from "./InputDocument";
 import SendDocumentButtonMemo from "./header/SendDocumentDataButton";
 import SelectLanguageMemo from "./header/SelectLanguage";
 
+import { useTranslation } from "react-i18next";
+
 const MemoizedDocumentComponent = memo(DocumentComponent);
 
 function DocumentMemoComponent() {
@@ -40,7 +42,7 @@ type Props = {
 
 function DocumentComponent(props: Props) {
   const { document, selectedmode, isLoading } = props;
-
+  const { t } = useTranslation();
   const [words, setWords] = useState<string[] | undefined>(undefined);
 
   useEffect(() => {
@@ -56,7 +58,7 @@ function DocumentComponent(props: Props) {
   const renderContentByMode = () => {
     if (document === null) {
       return (
-        <div className=" dark:text-gray-300">テキストを選択もしくは作成してください。</div>
+        <div className=" dark:text-gray-300"> {t('document.chooseText')}</div>
       )
     }
     if (isLoading) {
