@@ -109,6 +109,7 @@ function SelectLanguage(props: Props) {
             <MenuItem value={'ru'}>Русский</MenuItem>
             <MenuItem value={'ar'}>عربي</MenuItem>
             <MenuItem value={'ko'}>한국어</MenuItem>
+            <MenuItem value={'zh'}>中国語</MenuItem>
             
           </Select>
         </FormControl>
@@ -132,6 +133,7 @@ function SelectLanguage(props: Props) {
             <MenuItem value={'ru'}>Русский</MenuItem>
             <MenuItem value={'ar'}>عربي</MenuItem>
             <MenuItem value={'ko'}>한국어</MenuItem>
+            <MenuItem value={'zh'}>中国語</MenuItem>
           </Select>
         </FormControl>
       </ThemeProvider>

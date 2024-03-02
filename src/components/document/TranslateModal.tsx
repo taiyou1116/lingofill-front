@@ -172,7 +172,7 @@ function TranslateModal(props: TranslateModalProps) {
         <div className=' w-full'>
           <div className=' w-full flex flex-col justify-center items-center gap-3'>
             <div className=' flex gap-3 items-center justify-center'>
-              <span className='selectedWordsContainer'>
+              <span className={`selectedWordsContainer `}>
                 <Tooltip title='読み上げ' className=' mr-2 cursor-pointer' onClick={() => listenText(selectedWords)}>
                   <VolumeUp style={{fontSize: 20}}/>
                 </Tooltip>

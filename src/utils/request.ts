@@ -178,6 +178,7 @@ const languageVoiceMap: LanguageVoiceMap = {
   ru: 'Tatyana',
   ar: 'Zeina',
   ko: 'Seoyeon',
+  zh: 'Zhiyu',
 };
 
 export function getVoiceForLanguage(languageCode: string): string {

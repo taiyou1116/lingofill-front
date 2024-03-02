@@ -145,7 +145,7 @@ function TranslateDocument(props: TranslateDocumentType) {
               key={index}
               onClick={() => handleClick(index)}
               onMouseMove={() => handleMouseMove(index)}
-              className={`select-none p-0.5 cursor-pointer ${selectedWordsIndexes.includes(index) ? "bg-blue-300 dark:bg-blue-500" : "bg-transparent"}`}
+              className={`select-none cursor-pointer ${ document?.language !== 'ja' && document?.language !== 'zh' ? 'p-0.5' : '' } ${selectedWordsIndexes.includes(index) ? "bg-blue-300 dark:bg-blue-500" : "bg-transparent"}`}
             >
               {word}
             </span>

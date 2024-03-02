@@ -42,7 +42,12 @@ function DocumentComponent(props: Props) {
   const { document, selectedmode, isLoading } = props;
 
   const text = document?.text;
-  const words = text?.split(" ");
+  let words: string[] | undefined;
+  if (document?.language === 'ja' || document?.language === 'zh') {
+    words = text?.split("");
+  } else {
+    words = text?.split(" ");
+  }  
 
   const renderContentByMode = () => {
     if (document === null) {
