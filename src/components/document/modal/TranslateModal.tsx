@@ -5,7 +5,6 @@ import React, { memo, useEffect, useState } from 'react'
 import "../../../app/globals.css";
 import { Document } from '@/types/types';
 import { translateText } from '@/utils/request';
-import { Translate } from '@mui/icons-material';
 import ModalCenterMemo from '../../ModalCenter';
 import ReadingButton from './ReadingButton';
 import InputBlock from './InputBlock';
