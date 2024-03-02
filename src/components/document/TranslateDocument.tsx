@@ -87,10 +87,9 @@ function TranslateDocument(props: TranslateDocumentType) {
       const maxIndex = Math.max(startDragIndex, index);
 
       for (let i = minIndex; i <= maxIndex; i++) {
-        /* 
-        translationでスクロールしてもClick操作同様に振る舞う 
-        ブロックに触れたらその時点でhandleMouseUp
-        */
+        
+        // translationでスクロールしてもClick操作同様に振る舞う 
+        // ブロックに触れたらその時点でhandleMouseUp
         const translation = document!.translations.find(translation => translation.indexes.includes(i));
         if (translation) {
           handleMouseUp();
@@ -152,17 +151,11 @@ function TranslateDocument(props: TranslateDocumentType) {
           );
         }
       })}
-
       <div>
-        {/* { showCenterModal 
-        ? */}
-          <TranslateModalMemo
-            selectedWordsIndexes={selectedWordsIndexes}
-            selectedWords={selectedWords}
-          />
-        {/* : 
-          null
-        } */}
+        <TranslateModalMemo
+          selectedWordsIndexes={selectedWordsIndexes}
+          selectedWords={selectedWords}
+        />
       </div>
     </div>
   )
