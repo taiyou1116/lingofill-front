@@ -28,6 +28,8 @@ export async function PUT(req: NextRequest) {
           }
         }))
       },
+      "language": { S: data.language },
+      "translateLanguage": { S: data.translateLanguage },
       "updatedAt": { S: data.updatedAt },
     }
   };

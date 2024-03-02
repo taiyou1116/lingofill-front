@@ -7,15 +7,19 @@ import React, { memo } from 'react'
 const MemoizedSelectLanguage = memo(SelectLanguage);
 
 function SelectLanguageMemo() {
-  const { document, setDocument } = useStore((store) => ({
+  const { document, setDocument, documents, setDocuments } = useStore((store) => ({
     document:     store.document,
     setDocument:  store.setDocument,
+    documents:     store.documents,
+    setDocuments:  store.setDocuments,
   }));
   return (
     <div>
       <MemoizedSelectLanguage 
         document={document}
         setDocument={setDocument}
+        documents={documents}
+        setDocuments={setDocuments}
       />
     </div>
   );
@@ -25,10 +29,12 @@ export default SelectLanguageMemo;
 type Props = {
   document: Document | null,
   setDocument: (document: Document | null) => void,
+  documents: Document[],
+  setDocuments: (documents: Document[]) => void,
 }
 
 function SelectLanguage(props: Props) {
-  const { document, setDocument } = props;
+  const { document, setDocument, documents, setDocuments } = props;
   console.log(document);
 
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -49,16 +55,28 @@ function SelectLanguage(props: Props) {
     const newDocument = {
       ...document!,
       language: language,
+      isSynced: false,
     }
+
+    const newDocuments = documents.map((doc) =>
+      doc.sortKey === document?.sortKey ? newDocument : doc
+    );
     setDocument(newDocument);
+    setDocuments(newDocuments);
   }
   // 変更したらdocuments, documentを更新
   const changeTranslateLanguage = (language: string) => {
     const newDocument = {
       ...document!,
       translateLanguage: language,
+      isSynced: false,
     }
+    
+    const newDocuments = documents.map((doc) =>
+      doc.sortKey === document?.sortKey ? newDocument : doc
+    );
     setDocument(newDocument);
+    setDocuments(newDocuments);
   }
   
   // storeで管理

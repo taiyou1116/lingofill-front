@@ -44,7 +44,7 @@ function SendDocumentDataButton(props: Props) {
     newDocuments[documentIndex] = document!;
     try {
       const now = Date.now().toString();
-      await updateText(username, document!.sortKey, document!.title, document!.text, document!.translations, now);
+      await updateText(username, document!.sortKey, document!.title, document!.text, document!.translations, document!.language, document!.translateLanguage, now);
       newDocuments[documentIndex].isSynced = true;
       newDocuments[documentIndex].updatedAt = now;
       newDocuments.sort((a, b) => parseInt(b.updatedAt) - parseInt(a.updatedAt));
