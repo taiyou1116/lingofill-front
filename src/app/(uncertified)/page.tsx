@@ -14,9 +14,8 @@ Amplify.configure(awsExports);
 
 const MyApp = () => {
   const router = useRouter();
-  const {setUsername, setTheme} = useStore((store) => ({
+  const {setUsername} = useStore((store) => ({
     setUsername:  store.setUsername,
-    setTheme:     store.setTheme,
   }));
 
   async function currentAuthenticatedUser() {

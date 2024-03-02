@@ -2,7 +2,7 @@
 import { useStore } from "@/store/store";
 import { oswald } from "@/store/fontStore";
 import { Box, LinearProgress } from "@mui/material";
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Document, SelectedMode } from "@/types/types";
 import ThreeWayToggleMemo from "./header/ThreeWayToggle";
 import TranslateDocumentMemo from "./TranslateDocument";
@@ -41,13 +41,17 @@ type Props = {
 function DocumentComponent(props: Props) {
   const { document, selectedmode, isLoading } = props;
 
-  const text = document?.text;
-  let words: string[] | undefined;
-  if (document?.language === 'ja' || document?.language === 'zh') {
-    words = text?.split("");
-  } else {
-    words = text?.split(" ");
-  }  
+  const [words, setWords] = useState<string[] | undefined>(undefined);
+
+  useEffect(() => {
+    let tempWords: string[] | undefined;
+    if (document?.language === 'ja' || document?.language === 'zh') {
+      tempWords = document?.text?.split("");
+    } else {
+      tempWords = document?.text?.split(" ");
+    }
+    setWords(tempWords);
+  }, [document]);
 
   const renderContentByMode = () => {
     if (document === null) {

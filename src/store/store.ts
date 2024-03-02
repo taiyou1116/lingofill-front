@@ -49,9 +49,4 @@ export const useStore = create<state>((set) => ({
     setIsLoading: (state: boolean) => {
         set({ isLoading: state })
     },
-
-    theme: 'light',
-    setTheme: (theme: string) => {
-        set({ theme: theme })
-    }
 }))

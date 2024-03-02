@@ -14,9 +14,8 @@ import DocumentMemoComponent from '@/components/document/Document';
 Amplify.configure(awsExports);
 
 function Home() {
-  const {setDocuments, setTheme, username, setUsername, selectedWordsIndexes, setSelectedWordsIndexes, showCenterModal} = useStore((store) => ({
+  const {setDocuments, username, setUsername, selectedWordsIndexes, setSelectedWordsIndexes, showCenterModal} = useStore((store) => ({
     setDocuments:            store.setDocuments,
-    setTheme:                store.setTheme,
     username:                store.username,
     setUsername:             store.setUsername,
     selectedWordsIndexes:    store.selectedWordsIndexes,
@@ -37,19 +36,6 @@ function Home() {
     };
     fetchData();
   }, [setDocuments, username, setUsername])
-
-  // テーマを決める
-  useEffect(() => {
-    const getTheme = () => {
-      const theme = localStorage.getItem('theme');
-      if (theme === null) {
-        localStorage.setItem('theme', 'light');
-        return;
-      }
-      setTheme(theme);
-    }
-    getTheme();
-  }, [setTheme])
 
   // 翻訳indexをリセット
   const resetSelectedWordsIndexes = () => {
