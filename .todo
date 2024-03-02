@@ -8,7 +8,7 @@ React.memo調べる
 2 差分(変更した項目のみ)を送信
 3 setDocuments, setDocument使っている場所がすべて差分のみの効率的処理か確認
 4 Redux検討, zustandとの違い
-5 コンポーネントを分ける。特に、propsを子だけで完結できそうな時
+5 コンポーネントを分ける。あとSidebarDocument
 
 - 好きなところから再生
 - 多言語でのUI表示

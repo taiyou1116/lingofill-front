@@ -1,10 +1,12 @@
 import { useStore } from '@/store/store';
 import { Document } from '@/types/types'
 import { handleStopPropagation } from '@/utils/modal';
-import { createDate, deleteText, getText, updateText } from '@/utils/request';
-import { CloudUpload, Delete, ModeEdit } from '@mui/icons-material';
-import { Tooltip } from '@mui/material';
+import { createDate, getText } from '@/utils/request';
 import React, { Dispatch, SetStateAction, memo, useEffect, useRef, useState } from 'react'
+import CreateNewDocument from './sidebarDocument/CreateNewDocument';
+import UploadDocumentButton from './sidebarDocument/UploadDocumentButton';
+import EditTitle from './sidebarDocument/EditTitle';
+import DeleteTextButton from './sidebarDocument/DeleteTextButton';
 
 const MemoizedDocumentComponent = memo(SidebarDocuments);
 
@@ -107,29 +109,6 @@ function SidebarDocuments(props: Props) {
     }
   }
 
-  const createNewDocumentBlur = (input: string) => {
-    if (input === '') {
-      setCreateNewDocument(false);
-      return;
-    }
-    const now = Date.now().toString();
-    const newDocument: Document = {
-      title: input,
-      text: '',
-      sortKey: now,
-      isSynced: false,
-      isNew: true,
-      isDelete: false,
-      translations: [],
-      language: 'en',
-      translateLanguage: 'ja',
-      updatedAt: now,
-    }
-    setDocuments([newDocument, ...documents]);
-    setInput('');
-    setCreateNewDocument(false);
-  }
-
   const finishEditing = (index: number, value: string) => {
     // documents配列を更新
     const newSentences = [...documents];
@@ -145,56 +124,18 @@ function SidebarDocuments(props: Props) {
     setDocuments(newSentences);
   };
 
-  const editTitle = (index: number) => {
-    setInput(documents[index].title);
-    setInputNameIndex(index);
-  }
-
-  const uploadDocument = async (index: number) => {
-    try {
-      const now = Date.now().toString();
-      await updateText(username, documents[index].sortKey, documents[index].title, documents[index].text, documents[index].translations, documents[index].language, documents[index].translateLanguage, now);
-      const documentsLocal = [...documents];
-      documentsLocal[index].isSynced = true;
-      documentsLocal[index].updatedAt = now;
-      
-      documentsLocal.sort((a, b) => parseInt(b.updatedAt) - parseInt(a.updatedAt));
-      setDocuments(documentsLocal);
-    } catch(error) {
-      console.error(error);
-    }
-  }
-
-  const deleteTextButton = async (index: number) => {
-    try {
-      await deleteText(username, documents[index].sortKey);
-      const filterDoc = documents.filter((doc) => doc !== documents[index]);
-      if (documents[index] === documentPublic) {
-        setDocument(null);
-      }
-      setDocuments(filterDoc);
-    } catch(error) {
-      console.error(error);
-    }
-  }
-
   return (
     <div className=' break-all flex flex-col w-full overflow-y-auto' style={{ maxHeight: '90vh', overflowY: 'auto' }}>
       {/* 新規作成input */}
       { createNewDocument 
       ? 
-        <input className=' p-2'
-          placeholder='新規テキスト名を入力'
-          type='text' 
-          value={input}
-          // defaultValue=''
-          onChange={(e) => {
-            setInput(e.target.value);
-          }}
-          onBlur={() => {
-            createNewDocumentBlur(input)}
-          }
-          ref={inputRef}
+        <CreateNewDocument 
+          input={input}
+          setInput={setInput}
+          setCreateNewDocument={setCreateNewDocument}
+          documents={documents}
+          setDocuments={setDocuments}
+          inputRef={inputRef}
         />
       : '' }
       
@@ -236,22 +177,27 @@ function SidebarDocuments(props: Props) {
                   
                   <div onClick={handleStopPropagation} className=' flex gap-0.5 pl-1'>
                     { document.isSynced ? '' : 
-                      <Tooltip title='変更を保存する'>
-                        <button onClick={() => uploadDocument(index)}>
-                          <CloudUpload style={{fontSize: 15}} className=' dark:text-gray-100' />
-                        </button>
-                      </Tooltip>
+                      <UploadDocumentButton 
+                        username={username}
+                        documents={documents}
+                        setDocuments={setDocuments}
+                        index={index}
+                      />
                     }
-                    <Tooltip title='テキスト名を変更'>
-                      <button onClick={() => editTitle(index)}>
-                        <ModeEdit style={{fontSize: 15}} className=' dark:text-gray-100' />
-                      </button>
-                    </Tooltip>
-                    <Tooltip title='テキストを削除'>
-                      <button onClick={() => deleteTextButton(index)}>
-                        <Delete style={{fontSize: 15}} color='error' />
-                      </button>
-                    </Tooltip>
+                    <EditTitle 
+                      setInput={setInput}
+                      setInputNameIndex={setInputNameIndex}
+                      documents={documents}
+                      index={index}
+                    />
+                    <DeleteTextButton 
+                      username={username}
+                      documentPublic={document}
+                      setDocument={setDocument}
+                      documents={documents}
+                      setDocuments={setDocuments}
+                      index={index}
+                    />
                   </div>
                 </div>
               }

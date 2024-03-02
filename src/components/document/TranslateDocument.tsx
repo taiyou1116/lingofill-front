@@ -3,7 +3,7 @@ import { useStore } from "@/store/store";
 import { Tooltip } from "@mui/material";
 import { m_plus_rounded_1c } from "@/store/fontStore";
 import { Document } from "@/types/types";
-import TranslateModalMemo from "./TranslateModal";
+import TranslateModalMemo from "./modal/TranslateModal";
 
 const MemoizedDocumentComponent = memo(TranslateDocument);
 
