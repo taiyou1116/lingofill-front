@@ -1,6 +1,72 @@
 {
     "document": {
-       "chooseText": "choose text or create new text.",
-       "input": "paste original text (Command⌘ + V)"
+      "chooseText": "Select or create a text.",
+      "input": "Paste the original text (Command⌘ + V)",
+  
+      "header": {
+        "selectLanguage": {
+          "language": "Language",
+          "translation": "Translation"
+        },
+        "sendDocumentDataButton": {
+          "saveText": "Save Text",
+          "savedText": "Text Saved"
+        },
+        "threeWayToggle": {
+          "edit": "Edit",
+          "input": "Input"
+        }
+      },
+      "modal": {
+        "deleteBlockButton": {
+          "cancelBlock": "Cancel Block"
+        },
+        "inputBlock": {
+          "inputBlock": "Block Display",
+          "originalText": "Original Text",
+          "translation": "Translation",
+          "favorite": "Add to Favorites"
+        },
+        "inputMemo": {
+          "noteTheOriginalText": "Note the Original Text",
+          "noteTheTranslation": "Note the Translation",
+          "inputMemo": "Enter your note here (e.g., context, usage, translated text, etc.)"
+        }, 
+        "readingButton": {
+          "readAloud": "Read Aloud"
+        },
+        "saveButton": {
+          "save": "Save"
+        }
+      }
+    },
+    "header": {
+      "textList": "Text List",
+      "acountSetting": "Account Settings",
+      "acount": "Account",
+      "setting": "Settings",
+      "howToUse": "How to Use"
+    },
+    "sidebar": {
+      "textList": "Text List",
+      "deleteText": "Delete Text List",
+      "createNewText": "Create New Text"
+    },
+    "sidebarDocument": {
+      "inputTextName": "Enter New Text Name",
+  
+      "createNewDocument": {
+        "inputTextName": "Enter New Text Name"
+      },
+      "deleteTextButton": {
+        "deleteText": "Delete Text"
+      },
+      "editTitle": {
+        "editTitle": "Edit Title"
+      },
+      "uploadDocumentButton": {
+        "uploadDocument": "Save Changes"
+      }
     }
 }
+  

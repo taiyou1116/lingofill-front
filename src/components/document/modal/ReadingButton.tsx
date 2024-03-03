@@ -1,19 +1,18 @@
-import { Document } from '@/types/types';
 import { convertTextToSpeech, getVoiceForLanguage } from '@/utils/request';
 import { VolumeUp } from '@mui/icons-material'
 import { Tooltip } from '@mui/material'
 import React, { useRef } from 'react'
+import { useTranslation } from 'react-i18next';
 
 
 type Props = {
-  document: Document | null,
   selectedWords: string,
   ln: string,
 }
 
 function ReadingButton(props: Props) {
-  const { document, selectedWords, ln } = props;
-
+  const { selectedWords, ln } = props;
+  const { t } = useTranslation();
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   // amazon Pollyで読み上げ
@@ -33,7 +32,7 @@ function ReadingButton(props: Props) {
   }
 
   return (
-    <Tooltip title='読み上げ' className=' mr-2 cursor-pointer' onClick={() => listenText(selectedWords)}>
+    <Tooltip title={t('document.modal.readingButton.readAloud')} className=' mr-2 cursor-pointer' onClick={() => listenText(selectedWords)}>
       <VolumeUp style={{fontSize: 20}}/>
     </Tooltip>
   )

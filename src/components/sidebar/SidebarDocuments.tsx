@@ -7,6 +7,7 @@ import CreateNewDocument from './sidebarDocument/CreateNewDocument';
 import UploadDocumentButton from './sidebarDocument/UploadDocumentButton';
 import EditTitle from './sidebarDocument/EditTitle';
 import DeleteTextButton from './sidebarDocument/DeleteTextButton';
+import { useTranslation } from 'react-i18next';
 
 const MemoizedDocumentComponent = memo(SidebarDocuments);
 
@@ -60,7 +61,7 @@ type Props = {
 
 function SidebarDocuments(props: Props) {
   const { createNewDocument, setCreateNewDocument, setDocument, documentPublic, username, documents, setDocuments, flipShowSidebar, setIsLoading } = props;
-
+  const { t } = useTranslation();
   const [inputNameIndex, setInputNameIndex] = useState<number>(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const [input, setInput] = useState<string>('');
@@ -151,7 +152,7 @@ function SidebarDocuments(props: Props) {
               ?
                 <div>
                   <input className=' p-2'
-                    placeholder='テキスト名を入力'
+                    placeholder={t('sidebarDocument.inputTextName')}
                     type='text' 
                     value={input}
                     defaultValue={document.title}

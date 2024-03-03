@@ -3,6 +3,7 @@ import React from 'react'
 import { handleCloseModal } from '@/utils/modal';
 import { Document } from '@/types/types';
 import { useStore } from '@/store/store';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   selectedWordsIndexes: number[],
@@ -16,7 +17,7 @@ type Props = {
 
 function SaveButton(props: Props) {
   const { selectedWordsIndexes, userInputTranslation, userInputMemo, document, setDocument, documents, setDocuments } = props;
-
+  const { t } = useTranslation();
   const {flipCenterModal} = useStore((store) => ({
     flipCenterModal: store.flipCenterModal,
   }));
@@ -73,7 +74,7 @@ function SaveButton(props: Props) {
       className='px-4 py-1 md:px-4 md:py-2 bg-gray-800 text-gray-200 rounded-md dark:bg-white dark:text-black'
       onClick={handleSaveButton}
     >
-      <div className=' flex gap-1 items-center'><Save />保存する</div>
+      <div className=' flex gap-1 items-center'><Save />{t('document.modal.saveButton.save')}</div>
     </button>
   )
 }

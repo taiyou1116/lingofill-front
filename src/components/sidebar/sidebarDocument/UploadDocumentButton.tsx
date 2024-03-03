@@ -3,6 +3,7 @@ import { updateText } from '@/utils/request'
 import { CloudUpload } from '@mui/icons-material'
 import { Tooltip } from '@mui/material'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   username: string,
@@ -13,6 +14,7 @@ type Props = {
 
 function UploadDocumentButton(props: Props) {
   const { username, documents, setDocuments, index } = props;
+  const { t } = useTranslation();
   const uploadDocument = async (index: number) => {
     try {
       const now = Date.now().toString();
@@ -29,7 +31,7 @@ function UploadDocumentButton(props: Props) {
   }
 
   return (
-    <Tooltip title='変更を保存する'>
+    <Tooltip title={t('sidebarDocument.uploadDocumentButton.uploadDocument')}>
       <button onClick={() => uploadDocument(index)}>
         <CloudUpload style={{fontSize: 15}} className=' dark:text-gray-100' />
       </button>

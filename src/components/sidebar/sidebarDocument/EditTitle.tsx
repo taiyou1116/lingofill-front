@@ -2,6 +2,7 @@ import { Document } from '@/types/types'
 import { ModeEdit } from '@mui/icons-material'
 import { Tooltip } from '@mui/material'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   setInput: (value: React.SetStateAction<string>) => void,
@@ -12,13 +13,14 @@ type Props = {
 
 function EditTitle(props: Props) {
   const { setInput, setInputNameIndex, documents, index  } = props;
+  const { t } = useTranslation();
   const editTitle = (index: number) => {
     setInput(documents[index].title);
     setInputNameIndex(index);
   }
 
   return (
-    <Tooltip title='テキスト名を変更'>
+    <Tooltip title={t('sidebarDocument.editTitle.editTitle')}>
       <button onClick={() => editTitle(index)}>
         <ModeEdit style={{fontSize: 15}} className=' dark:text-gray-100' />
       </button>

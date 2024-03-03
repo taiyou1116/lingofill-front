@@ -9,10 +9,11 @@ import { Toaster } from "react-hot-toast";
 import { Menu, MenuItem, Tooltip } from "@mui/material";
 import { useState } from "react";
 import { changeLanguage } from "i18next";
+import { useTranslation } from "react-i18next";
 
 function HeaderComponent() {
   const flipShowSidebar = useStore((store) => store.flipShowSidebar);
-  
+  const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -30,7 +31,7 @@ function HeaderComponent() {
   return (
     <div className="header-bg-height flex items-center justify-between shadow-2xl bg-white dark:bg-gray-600">
       <div className='flex items-center pl-4 gap-5'>
-        <Tooltip title="テキスト一覧">
+        <Tooltip title={t('header.textList')}>
           <button onClick={flipShowSidebar}>
             <Reorder style={{fontSize: 35}} className=" dark:text-gray-200" />
           </button>
@@ -45,7 +46,7 @@ function HeaderComponent() {
       <button onClick={changeLn}>言語変更</button>
       <div className=' flex px-10 items-center gap-1'>
         <div onClick={handleClick} className=" cursor-pointer">
-          <Tooltip title="アカウント設定">
+          <Tooltip title={t('header.acountSetting')}>
             <AccountCircle style={{fontSize: 35}} className=" dark:text-gray-200" />
           </Tooltip>
         </div>
@@ -65,17 +66,17 @@ function HeaderComponent() {
         >
           <Link href='/acount'>
             <MenuItem className=" flex items-center gap-1">
-              <AccountCircle style={{fontSize: 20}} /> アカウント
+              <AccountCircle style={{fontSize: 20}} /> {t('header.acount')}
             </MenuItem>
           </Link>
           <Link href='/setting'>
             <MenuItem className=" flex items-center gap-1">
-              <Settings style={{fontSize: 20}} /> 設定
+              <Settings style={{fontSize: 20}} /> {t('header.setting')}
             </MenuItem>
           </Link>
           <Link href='/doc'>
             <MenuItem className=" flex items-center gap-1">
-              <Help style={{fontSize: 20}} /> 使い方
+              <Help style={{fontSize: 20}} /> {t('header.howToUse')}
             </MenuItem>
           </Link>
         </Menu>

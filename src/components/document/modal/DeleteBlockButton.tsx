@@ -1,5 +1,6 @@
 import { Document } from '@/types/types';
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   document: Document | null,
@@ -11,7 +12,7 @@ type Props = {
 
 function DeleteBlockButton(props: Props) {
   const { document, setDocument, documents, setDocuments, selectedWordsIndexes } = props;
-
+  const { t } = useTranslation();
   const deleteBlock = () => {
     if (!document) return;
 
@@ -36,7 +37,7 @@ function DeleteBlockButton(props: Props) {
       className=' text-gray-400 rounded-md '
       onClick={deleteBlock}
     >
-      ブロックを取り消す
+      {t('document.modal.deleteBlockButton.cancelBlock')}
     </button>
   )
 }

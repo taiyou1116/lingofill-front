@@ -1,6 +1,71 @@
 {
     "document": {
        "chooseText": "テキストを選択もしくは作成してください。",
-       "input": "原文をペースト (Command⌘ + V)"
+       "input": "原文をペースト (Command⌘ + V)",
+
+       "header": {
+            "selectLanguage": {
+                "language": "言語",
+                "translation": "翻訳"
+            },
+            "sendDocumentDataButton": {
+                "saveText": "テキストを保存する",
+                "savedText": "テキスト保存済み"
+            },
+            "threeWayToggle": {
+                "edit": "編集",
+                "input": "入力"
+            }
+       },
+       "modal": {
+            "deleteBlockButton": {
+                "cancelBlock": "ブロックを取り消す"
+            },
+            "inputBlock": {
+                "inputBlock": "ブロックの表示",
+                "originalText": "原文",
+                "translation": "翻訳",
+                "favorite": "お気に入り登録"
+            },
+            "inputMemo": {
+                "noteTheOriginalText": "原文をメモに",
+                "noteTheTranslation": "翻訳をメモに",
+                "inputMemo": "メモをここに入力（例：文脈、用法、訳文など）"
+            }, 
+            "readingButton": {
+                "readAloud": "読み上げ"
+            },
+            "saveButton": {
+                "save": "保存する"
+            }
+       }
+    },
+    "header": {
+        "textList": "テキスト一覧",
+        "acountSetting": "アカウント設定",
+        "acount": "アカウント",
+        "setting": "設定",
+        "howToUse": "使いかた"
+    },
+    "sidebar": {
+        "textList": "Text List",
+        "deleteText": "Delete Text List",
+        "createNewText": "Create New Text"
+    },
+    "sidebarDocument": {
+        "inputTextName": "新しいテキスト名を入力",
+
+        "createNewDocument": {
+            "inputTextName": "新しいテキスト名を入力"
+        },
+        "deleteTextButton": {
+            "deleteText": "テキストを削除"
+        },
+        "editTitle": {
+            "editTitle": "タイトルを変更"
+        },
+        "uploadDocumentButton": {
+            "uploadDocument": "変更を保存する"
+        }
     }
 }

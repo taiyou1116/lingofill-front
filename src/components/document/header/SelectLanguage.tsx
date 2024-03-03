@@ -3,6 +3,7 @@ import { Document } from '@/types/types';
 import { TrendingFlat } from '@mui/icons-material'
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, ThemeProvider, createTheme, useMediaQuery } from '@mui/material'
 import React, { memo } from 'react'
+import { useTranslation } from 'react-i18next';
 
 const MemoizedSelectLanguage = memo(SelectLanguage);
 
@@ -35,7 +36,7 @@ type Props = {
 
 function SelectLanguage(props: Props) {
   const { document, setDocument, documents, setDocuments } = props;
-
+  const { t } = useTranslation();
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
   // ダークモードまたはライトモードのテーマを動的に生成
@@ -91,12 +92,12 @@ function SelectLanguage(props: Props) {
     <div className=" flex items-center">
       <ThemeProvider theme={theme}>
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <InputLabel id="demo-simple-select-label">言語</InputLabel>
+          <InputLabel id="demo-simple-select-label">{t('document.header.selectLanguage.language')}</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={document!.language}
-            label="言語"
+            label={t('document.header.selectLanguage.language')}
             onChange={handleLanguageChange}
           >
             <MenuItem value={'ja'}>日本語</MenuItem>
@@ -115,12 +116,12 @@ function SelectLanguage(props: Props) {
         </FormControl>
         <TrendingFlat className=" dark:text-gray-300" />
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <InputLabel id="demo-simple-select-label">翻訳</InputLabel>
+          <InputLabel id="demo-simple-select-label">{t('document.header.selectLanguage.translation')}</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={document!.translateLanguage}
-            label="翻訳"
+            label={t('document.header.selectLanguage.translation')}
             onChange={handleTranslateLanguageChange}
           >
             <MenuItem value={'ja'}>日本語</MenuItem>

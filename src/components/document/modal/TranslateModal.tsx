@@ -57,7 +57,7 @@ type TranslateModalProps = {
 }
 
 function TranslateModal(props: TranslateModalProps) {
-  const { selectedWordsIndexes, selectedWords, flipCenterModal, document, setDocument, documents, setDocuments } = props;
+  const { selectedWordsIndexes, selectedWords, document, setDocument, documents, setDocuments } = props;
   
   const [userInputTranslation, setUserInputTranslation] = useState('');
   const [userInputMemo, setUserInputMemo] = useState('');
@@ -93,7 +93,6 @@ function TranslateModal(props: TranslateModalProps) {
             <div className=' flex gap-3 items-center justify-center'>
               <span className={`selectedWordsContainer `}>
                 <ReadingButton 
-                  document={document}
                   selectedWords={selectedWords}
                   ln={document!.language}
                 />
@@ -101,7 +100,6 @@ function TranslateModal(props: TranslateModalProps) {
               </span>
               <span className='selectedWordsContainer bg-gray-200 dark:bg-gray-900 p-1'>
                 <ReadingButton 
-                  document={document}
                   selectedWords={translatedWords}
                   ln={document!.translateLanguage}
                 />

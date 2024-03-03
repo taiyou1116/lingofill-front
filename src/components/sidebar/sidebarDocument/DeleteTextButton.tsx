@@ -3,6 +3,7 @@ import { deleteText } from '@/utils/request'
 import { Delete } from '@mui/icons-material'
 import { Tooltip } from '@mui/material'
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 
 type Props = {
   username: string,
@@ -15,6 +16,7 @@ type Props = {
 
 function DeleteTextButton(props: Props) {
   const { username, documents, setDocument,setDocuments, index, documentPublic } = props;
+  const { t } = useTranslation();
   const deleteTextButton = async (index: number) => {
     try {
       await deleteText(username, documents[index].sortKey);
@@ -29,7 +31,7 @@ function DeleteTextButton(props: Props) {
   }
 
   return (
-    <Tooltip title='テキストを削除'>
+    <Tooltip title={t('sidebarDocument.deleteTextButton.deleteText')}>
       <button onClick={() => deleteTextButton(index)}>
         <Delete style={{fontSize: 15}} color='error' />
       </button>

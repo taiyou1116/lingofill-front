@@ -1,5 +1,6 @@
 import { Document } from '@/types/types';
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   input: string,
@@ -12,7 +13,7 @@ type Props = {
 
 function CreateNewDocument(props: Props) {
   const { input, setInput, setCreateNewDocument, documents, setDocuments, inputRef } = props;
-
+  const { t } = useTranslation();
   const createNewDocumentBlur = (input: string) => {
     if (input === '') {
       setCreateNewDocument(false);
@@ -38,7 +39,7 @@ function CreateNewDocument(props: Props) {
 
   return (
     <input className=' p-2'
-      placeholder='新規テキスト名を入力'
+      placeholder={t('sidebarDocument.createNewDocument.inputTextName')}
       type='text' 
       value={input}
       onChange={(e) => {

@@ -8,6 +8,7 @@ import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
 import { Skeleton, Tooltip, Typography } from '@mui/material';
 import { Document } from '@/types/types';
 import SidebarDocumentsMemo from './SidebarDocuments';
+import { useTranslation } from 'react-i18next';
 
 const MemoizedDocumentComponent = memo(SidebarComponent);
 
@@ -39,7 +40,7 @@ type Props = {
 
 function SidebarComponent(props: Props) {
   const { showSidebar, flipShowSidebar, documents } = props;
-
+  const { t } = useTranslation();
   const [createNewDocument, setCreateNewDocument] = useState<boolean>(false);
 
   // documentの作成ではなく、inputのみ作成 -> titleが付けられた時点でdocumentsに格納
@@ -59,10 +60,10 @@ function SidebarComponent(props: Props) {
       >
         <div className="flex flex-col gap-3">
           <div className=' flex justify-between w-full p-5 items-center'>
-            <h1 className={`dark:text-gray-300 ${m_plus_rounded_1c.className}`}>テキスト一覧</h1>
+            <h1 className={`dark:text-gray-300 ${m_plus_rounded_1c.className}`}>{t('sidebar.textList')}</h1>
             <div className=' flex gap-1 items-center'>
               <Tooltip 
-                title='削除したテキスト' 
+                title={t('sidebar.deleteText')}
                 className=' dark:text-gray-300'>
                 <button 
                   className=' rounded-lg p-0.5 duration-150'>
@@ -70,7 +71,7 @@ function SidebarComponent(props: Props) {
                 </button>
               </Tooltip> 
               <Tooltip 
-                title='テキスト新規作成' 
+                title={t('sidebar.createNewText')}
                 className=' dark:text-gray-300'>
                 <button 
                   onClick={createNewSentence}

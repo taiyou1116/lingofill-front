@@ -5,6 +5,7 @@ import { ThemeProvider, ToggleButton, ToggleButtonGroup, createTheme, useMediaQu
 import { SelectedMode } from '@/types/types';
 import { useStore } from '@/store/store';
 import { TextSnippet, Translate } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
 
 const MemoizedDocumentComponent = memo(ThreeWayToggle);
 
@@ -28,6 +29,7 @@ type Props = {
 
 function ThreeWayToggle(props: Props) {
   const { setSelectedModeGlobal } = props;
+  const { t } = useTranslation();
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
   // ダークモードまたはライトモードのテーマを動的に生成
@@ -86,8 +88,8 @@ function ThreeWayToggle(props: Props) {
             },'& .Mui-selected': {}
         }}
       >
-        <ToggleButton value="edit"><Translate style={{fontSize: 15}} /> 編集</ToggleButton>
-        <ToggleButton value="input"><TextSnippet style={{fontSize: 15}} /> 入力</ToggleButton>
+        <ToggleButton value="edit"><Translate style={{fontSize: 15}} />{t('document.header.threeWayToggle.edit')}</ToggleButton>
+        <ToggleButton value="input"><TextSnippet style={{fontSize: 15}} />{t('document.header.threeWayToggle.input')}</ToggleButton>
       </ToggleButtonGroup>
     </ThemeProvider>
   );
