@@ -13,17 +13,22 @@ import DocumentMemoComponent from '@/components/document/Document';
 
 import i18n from "@/i18n";
 import { I18nextProvider } from "react-i18next";
+import { changeLanguage } from 'i18next';
 
 Amplify.configure(awsExports);
 
 function Home() {
-  const {setDocuments, username, setUsername, selectedWordsIndexes, setSelectedWordsIndexes, showCenterModal} = useStore((store) => ({
+  const {setDocuments, username, setUsername, selectedWordsIndexes, setSelectedWordsIndexes, showCenterModal, language, setLanguage} = useStore((store) => ({
     setDocuments:            store.setDocuments,
     username:                store.username,
     setUsername:             store.setUsername,
     selectedWordsIndexes:    store.selectedWordsIndexes,
     setSelectedWordsIndexes: store.setSelectedWordsIndexes,
     showCenterModal:         store.showCenterModal,
+
+    // 設定
+    language: store.language,
+    setLanguage: store.setLanguage,
   }));
 
   // '/home'でリロードしたときにgetCurrentUserでログイン処理
@@ -39,6 +44,19 @@ function Home() {
     };
     fetchData();
   }, [setDocuments, username, setUsername])
+
+
+  // 言語選択 localStorageから取得
+  useEffect(() => {
+    const ln = localStorage.getItem('language');
+    if (ln !== null) {
+      changeLanguage(ln);
+      setLanguage(ln);
+    } else {
+      localStorage.setItem('language', 'ja');
+    }
+    
+  }, [setLanguage])
 
   // 翻訳indexをリセット
   const resetSelectedWordsIndexes = () => {

@@ -49,4 +49,11 @@ export const useStore = create<state>((set) => ({
     setIsLoading: (state: boolean) => {
         set({ isLoading: state })
     },
+
+
+    // setting関連
+    language: 'ja',
+    setLanguage: (ln: string) => {
+        set({ language: ln })
+    }
 }))

@@ -1,19 +1,12 @@
-// import React from 'react'
-// import ModalCenterComponent from '../ModalCenter'
-// import { useStore } from '@/store/store';
+import React from 'react'
 
-// function Setting() {
-//   const {flipCenterModal} = useStore((store) => ({
-//     flipCenterModal: store.flipCenterModal,
-//   }));
+function Setting() {
 
-//   return (
-//     <div>
-//       <ModalCenterComponent>
-//         <div>dd</div>
-//       </ModalCenterComponent>
-//     </div>
-//   )
-// }
+  return (
+    <div>
+      dd
+    </div>
+  )
+}
 
-// export default Setting
+export default Setting
