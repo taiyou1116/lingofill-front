@@ -8,7 +8,6 @@ import Link from 'next/link';
 import { Toaster } from "react-hot-toast";
 import { Menu, MenuItem, Tooltip } from "@mui/material";
 import { useState } from "react";
-import { changeLanguage } from "i18next";
 import { useTranslation } from "react-i18next";
 
 function HeaderComponent() {
@@ -22,11 +21,6 @@ function HeaderComponent() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  // テスト
-  const changeLn = () => {
-    changeLanguage('es');
-  }
 
   return (
     <div className="header-bg-height flex items-center justify-between shadow-2xl bg-white dark:bg-gray-600">
@@ -43,7 +37,6 @@ function HeaderComponent() {
           </h1> 
         </Link>
       </div>
-      <button onClick={changeLn}>言語変更</button>
       <div className=' flex px-10 items-center gap-1'>
         <div onClick={handleClick} className=" cursor-pointer">
           <Tooltip title={t('header.acountSetting')}>

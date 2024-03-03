@@ -1,4 +1,4 @@
-import { convertTextToSpeech, getVoiceForLanguage } from '@/utils/request';
+import { convertTextToSpeech, getVoiceForLanguage, processAndSpeak, splitTextToSegments } from '@/utils/request';
 import { VolumeUp } from '@mui/icons-material'
 import { Tooltip } from '@mui/material'
 import React, { useRef } from 'react'
@@ -14,6 +14,14 @@ function ReadingButton(props: Props) {
   const { selectedWords, ln } = props;
   const { t } = useTranslation();
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const listenTexts = async (text: string) => {
+    // const text = "ここに長い文章を入れます...";
+    const textSegments = splitTextToSegments(text);
+    const voice = getVoiceForLanguage(ln);
+    processAndSpeak(textSegments, voice);
+  }
+  
 
   // amazon Pollyで読み上げ
   const listenText = async (text: string) => {
@@ -32,7 +40,7 @@ function ReadingButton(props: Props) {
   }
 
   return (
-    <Tooltip title={t('document.modal.readingButton.readAloud')} className=' mr-2 cursor-pointer' onClick={() => listenText(selectedWords)}>
+    <Tooltip title={t('document.modal.readingButton.readAloud')} className=' mr-2 cursor-pointer' onClick={() => listenTexts(selectedWords)}>
       <VolumeUp style={{fontSize: 20}}/>
     </Tooltip>
   )
