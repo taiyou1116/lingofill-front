@@ -1,0 +1,72 @@
+{
+    "document": {
+      "chooseText": "कृपया टेक्स्ट चुनें या बनाएँ।",
+      "input": "मूल पाठ पेस्ट करें (Command⌘ + V)",
+  
+      "header": {
+        "selectLanguage": {
+          "language": "भाषा",
+          "translation": "अनुवाद"
+        },
+        "sendDocumentDataButton": {
+          "saveText": "टेक्स्ट सहेजें",
+          "savedText": "टेक्स्ट सहेजा गया"
+        },
+        "threeWayToggle": {
+          "edit": "संपादित करें",
+          "input": "इनपुट"
+        }
+      },
+      "modal": {
+        "deleteBlockButton": {
+          "cancelBlock": "ब्लॉक रद्द करें"
+        },
+        "inputBlock": {
+          "inputBlock": "ब्लॉक दिखाएं",
+          "originalText": "मूल पाठ",
+          "translation": "अनुवाद",
+          "favorite": "पसंदीदा में जोड़ें"
+        },
+        "inputMemo": {
+          "noteTheOriginalText": "मूल पाठ को नोट करें",
+          "noteTheTranslation": "अनुवाद को नोट करें",
+          "inputMemo": "यहाँ अपना नोट दर्ज करें (उदाहरण: संदर्भ, प्रयोग, अनुवादित पाठ आदि)"
+        }, 
+        "readingButton": {
+          "readAloud": "उच्चारण करें"
+        },
+        "saveButton": {
+          "save": "सहेजें"
+        }
+      }
+    },
+    "header": {
+      "textList": "टेक्स्ट सूची",
+      "acountSetting": "खाता सेटिंग",
+      "acount": "खाता",
+      "setting": "सेटिंग",
+      "howToUse": "कैसे इस्तेमाल करे"
+    },
+    "sidebar": {
+      "textList": "टेक्स्ट सूची",
+      "deleteText": "टेक्स्ट सूची हटाएं",
+      "createNewText": "नया टेक्स्ट बनाएँ"
+    },
+    "sidebarDocument": {
+      "inputTextName": "नए टेक्स्ट का नाम दर्ज करें",
+  
+      "createNewDocument": {
+        "inputTextName": "नए टेक्स्ट का नाम दर्ज करें"
+      },
+      "deleteTextButton": {
+        "deleteText": "टेक्स्ट हटाएँ"
+      },
+      "editTitle": {
+        "editTitle": "शीर्षक में परिवर्तन करें"
+      },
+      "uploadDocumentButton": {
+        "uploadDocument": "परिवर्तन सहेजें"
+      }
+    }
+  }
+  

@@ -25,7 +25,7 @@ function HeaderComponent() {
 
   // テスト
   const changeLn = () => {
-    changeLanguage('en');
+    changeLanguage('es');
   }
 
   return (

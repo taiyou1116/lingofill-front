@@ -1,0 +1,72 @@
+{
+    "document": {
+      "chooseText": "Seleccione o cree un texto.",
+      "input": "Pegue el texto original (Comando⌘ + V)",
+  
+      "header": {
+        "selectLanguage": {
+          "language": "Idioma",
+          "translation": "Traducción"
+        },
+        "sendDocumentDataButton": {
+          "saveText": "Guardar texto",
+          "savedText": "Texto guardado"
+        },
+        "threeWayToggle": {
+          "edit": "Editar",
+          "input": "Entrada"
+        }
+      },
+      "modal": {
+        "deleteBlockButton": {
+          "cancelBlock": "Cancelar bloque"
+        },
+        "inputBlock": {
+          "inputBlock": "Mostrar bloque",
+          "originalText": "Texto original",
+          "translation": "Traducción",
+          "favorite": "Añadir a favoritos"
+        },
+        "inputMemo": {
+          "noteTheOriginalText": "Anotar el texto original",
+          "noteTheTranslation": "Anotar la traducción",
+          "inputMemo": "Ingrese su nota aquí (ejemplo: contexto, uso, texto traducido, etc.)"
+        }, 
+        "readingButton": {
+          "readAloud": "Leer en voz alta"
+        },
+        "saveButton": {
+          "save": "Guardar"
+        }
+      }
+    },
+    "header": {
+      "textList": "Lista de textos",
+      "acountSetting": "Configuración de la cuenta",
+      "acount": "Cuenta",
+      "setting": "Configuración",
+      "howToUse": "Cómo usar"
+    },
+    "sidebar": {
+      "textList": "Lista de Textos",
+      "deleteText": "Eliminar Lista de Textos",
+      "createNewText": "Crear Nuevo Texto"
+    },
+    "sidebarDocument": {
+      "inputTextName": "Ingrese el nombre del nuevo texto",
+  
+      "createNewDocument": {
+        "inputTextName": "Ingrese el nombre del nuevo texto"
+      },
+      "deleteTextButton": {
+        "deleteText": "Eliminar Texto"
+      },
+      "editTitle": {
+        "editTitle": "Editar Título"
+      },
+      "uploadDocumentButton": {
+        "uploadDocument": "Guardar Cambios"
+      }
+    }
+  }
+  

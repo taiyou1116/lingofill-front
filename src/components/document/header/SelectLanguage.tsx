@@ -111,7 +111,7 @@ function SelectLanguage(props: Props) {
             <MenuItem value={'ar'}>عربي</MenuItem>
             <MenuItem value={'ko'}>한국어</MenuItem>
             <MenuItem value={'zh'}>中国語</MenuItem>
-            
+            <MenuItem value={'hi'}>हिंदी</MenuItem>
           </Select>
         </FormControl>
         <TrendingFlat className=" dark:text-gray-300" />
@@ -135,6 +135,7 @@ function SelectLanguage(props: Props) {
             <MenuItem value={'ar'}>عربي</MenuItem>
             <MenuItem value={'ko'}>한국어</MenuItem>
             <MenuItem value={'zh'}>中国語</MenuItem>
+            <MenuItem value={'hi'}>हिंदी</MenuItem>
           </Select>
         </FormControl>
       </ThemeProvider>

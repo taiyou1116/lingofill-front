@@ -3,6 +3,9 @@ import { initReactI18next } from "react-i18next";
 
 import translationJa from "./i18n/ja.json";
 import translationEn from "./i18n/en.json";
+import translationZh from "./i18n/zh.json";
+import translationHi from "./i18n/hi.json";
+import translationEs from "./i18n/es.json";
 
 const resources = {
   ja: {
@@ -11,6 +14,15 @@ const resources = {
   en: {
     translation: translationEn,
   },
+  zh: {
+    translation: translationZh,
+  },
+  hi: {
+    translation: translationHi,
+  },
+  es: {
+    translation: translationEs,
+  }
 };
 
 i18n

@@ -1,0 +1,72 @@
+{
+    "document": {
+      "chooseText": "选择或创建文本。",
+      "input": "粘贴原文（Command⌘ + V）",
+  
+      "header": {
+        "selectLanguage": {
+          "language": "语言",
+          "translation": "翻译"
+        },
+        "sendDocumentDataButton": {
+          "saveText": "保存文本",
+          "savedText": "文本已保存"
+        },
+        "threeWayToggle": {
+          "edit": "编辑",
+          "input": "输入"
+        }
+      },
+      "modal": {
+        "deleteBlockButton": {
+          "cancelBlock": "取消块"
+        },
+        "inputBlock": {
+          "inputBlock": "块显示",
+          "originalText": "原文",
+          "translation": "翻译",
+          "favorite": "添加到收藏"
+        },
+        "inputMemo": {
+          "noteTheOriginalText": "记下原文",
+          "noteTheTranslation": "记下翻译",
+          "inputMemo": "在此输入备注（例如：上下文、用法、翻译文本等）"
+        }, 
+        "readingButton": {
+          "readAloud": "朗读"
+        },
+        "saveButton": {
+          "save": "保存"
+        }
+      }
+    },
+    "header": {
+      "textList": "文本列表",
+      "acountSetting": "账户设置",
+      "acount": "账户",
+      "setting": "设置",
+      "howToUse": "使用方法"
+    },
+    "sidebar": {
+      "textList": "文本列表",
+      "deleteText": "删除文本列表",
+      "createNewText": "创建新文本"
+    },
+    "sidebarDocument": {
+      "inputTextName": "输入新文本名称",
+  
+      "createNewDocument": {
+        "inputTextName": "输入新文本名称"
+      },
+      "deleteTextButton": {
+        "deleteText": "删除文本"
+      },
+      "editTitle": {
+        "editTitle": "编辑标题"
+      },
+      "uploadDocumentButton": {
+        "uploadDocument": "保存更改"
+      }
+    }
+  }
+  
