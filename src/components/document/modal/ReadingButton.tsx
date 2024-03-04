@@ -1,42 +1,23 @@
-import { convertTextToSpeech, getVoiceForLanguage, processAndSpeak, splitTextToSegments } from '@/utils/request';
+import { getVoiceForLanguage, processAndSpeak, splitTextToSegments } from '@/utils/request';
 import { VolumeUp } from '@mui/icons-material'
 import { Tooltip } from '@mui/material'
-import React, { useRef } from 'react'
 import { useTranslation } from 'react-i18next';
 
 
 type Props = {
   selectedWords: string,
   ln: string,
+  audioStream: HTMLAudioElement,
 }
 
 function ReadingButton(props: Props) {
-  const { selectedWords, ln } = props;
+  const { selectedWords, ln, audioStream } = props;
   const { t } = useTranslation();
-  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const listenTexts = async (text: string) => {
-    // const text = "ここに長い文章を入れます...";
     const textSegments = splitTextToSegments(text);
     const voice = getVoiceForLanguage(ln);
-    processAndSpeak(textSegments, voice);
-  }
-  
-
-  // amazon Pollyで読み上げ
-  const listenText = async (text: string) => {
-    try {
-      if (audioRef.current !== null) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      }
-
-      const voice = getVoiceForLanguage(ln);
-      audioRef.current = await convertTextToSpeech(text, voice);
-      audioRef.current.play();
-    } catch(err) {
-      console.error(err);
-    }
+    await processAndSpeak(textSegments, voice, audioStream);
   }
 
   return (

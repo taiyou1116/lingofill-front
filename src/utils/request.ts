@@ -206,18 +206,19 @@ export async function convertTextToSpeech(text: string, voice: string) {
 
 async function playAudioStream(audioStream: HTMLAudioElement) {
   return new Promise((resolve, reject) => {
-    audioStream.onended = resolve; // 再生が終了したらPromiseを解決
-    audioStream.onerror = reject; // エラーが発生したらPromiseを拒否
-    audioStream.play(); // 音声の再生を開始
+
+    audioStream.onended = resolve;
+    audioStream.onerror = reject;
+    audioStream.play();
   });
 }
 
-// translateDocumentでの再生(文章を5個ずつ取得)
-export async function processAndSpeak(textSegments: string[], voice: string) {
+// translateDocumentでの再生(文章を1つずつ取得)
+export async function processAndSpeak(textSegments: string[], voice: string, audioStream: HTMLAudioElement) {
   for (const segment of textSegments) {
     try {
       // Amazon Pollyへのリクエストを送信して音声データを取得
-      const audioStream = await convertTextToSpeech(segment, voice);
+      audioStream = await convertTextToSpeech(segment, voice);
       await playAudioStream(audioStream);
     } catch (error) {
       console.error("Error processing text segment:", error);
@@ -226,5 +227,5 @@ export async function processAndSpeak(textSegments: string[], voice: string) {
 }
 
 export function splitTextToSegments(text: string) {
-  return text.split("."); 
+  return text.split("."); // ? ! でも
 }
