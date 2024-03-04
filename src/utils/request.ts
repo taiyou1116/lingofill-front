@@ -213,7 +213,8 @@ if (typeof window !== 'undefined') {
 export { audioStream };
 
 // translateDocumentでの再生(文章を1つずつ取得)
-export async function processAndSpeak(textSegments: string[], voice: string) {
+export async function processAndSpeak(textSegments: string[], voice: string, onPlay: () => void, onEnd: () => void ) {
+  onPlay();
   if (audioStream !== undefined) {
     if (!audioStream.paused) {
       audioStream.pause();
@@ -229,6 +230,7 @@ export async function processAndSpeak(textSegments: string[], voice: string) {
       console.error("Error processing text segment:", error);
     }
   }
+  onEnd();
 }
 
 async function playAudioStream(audioStream: HTMLAudioElement) {

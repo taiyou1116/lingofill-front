@@ -1,9 +1,9 @@
+import { GrobaltStore } from '@/store/grobalStore';
 import { getVoiceForLanguage, processAndSpeak, splitTextToSegments } from '@/utils/request';
 import { VolumeUp } from '@mui/icons-material'
 import { Tooltip } from '@mui/material'
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-
 
 type Props = {
   selectedWords: string,
@@ -12,12 +12,14 @@ type Props = {
 
 function ReadingButton(props: Props) {
   const { selectedWords, ln } = props;
+  const { setIsPlaying } = GrobaltStore();
+
   const { t } = useTranslation();
 
   const listenTexts = async (text: string) => {
     const textSegments = splitTextToSegments(text);
     const voice = getVoiceForLanguage(ln);
-    await processAndSpeak(textSegments, voice);
+    await processAndSpeak(textSegments, voice, () => setIsPlaying(true), () => setIsPlaying(false));
   }
 
   return (

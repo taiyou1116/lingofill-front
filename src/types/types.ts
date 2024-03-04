@@ -54,4 +54,7 @@ export type state = {
 
     language: string,
     setLanguage: (ln: string) => void,
+
+    isPlaying: boolean,
+    setIsPlaying: (state: boolean) => void;
 }

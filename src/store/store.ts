@@ -52,5 +52,10 @@ export const useStore = create<state>((set) => ({
     language: 'ja',
     setLanguage: (ln: string) => {
         set({ language: ln })
-    }
+    },
+
+    isPlaying: false,
+    setIsPlaying: (state: boolean) => {
+        set({ isPlaying: state })
+    },
 }))

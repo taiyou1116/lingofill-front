@@ -4,7 +4,7 @@ import { useStore } from "./store";
 export const GrobaltStore = () => {
   const { 
     document, setDocument, documents, setDocuments, showCenterModal, flipCenterModal, showSidebar, flipShowSidebar, selectedWordsIndexes, setSelectedWordsIndexes,
-    selectedMode, setSelectedMode, isLoading, setIsLoading, username,
+    selectedMode, setSelectedMode, isLoading, setIsLoading, username, isPlaying, setIsPlaying,
   } = useStore(state => ({
     document: state.document,
     setDocument: state.setDocument,
@@ -26,10 +26,13 @@ export const GrobaltStore = () => {
     isLoading: state.isLoading,
     setIsLoading: state.setIsLoading,
     username: state.username,
+
+    isPlaying: state.isPlaying,
+    setIsPlaying: state.setIsPlaying,
   }));
 
   return { 
     document, setDocument, documents, setDocuments, showCenterModal, flipCenterModal, showSidebar, flipShowSidebar, selectedWordsIndexes, setSelectedWordsIndexes,
-    selectedMode, setSelectedMode, isLoading, setIsLoading, username, 
+    selectedMode, setSelectedMode, isLoading, setIsLoading, username, isPlaying, setIsPlaying,
   };
 }

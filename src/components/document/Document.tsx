@@ -4,7 +4,6 @@ import { Box, LinearProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ReadingButton from "./modal/ReadingButton";
-import { audioStream } from "@/utils/request";
 import StopAudio from "./header/StopAudio";
 import SelectLanguage from "./header/SelectLanguage";
 import InputDocument from "./InputDocument";
@@ -14,7 +13,7 @@ import SendDocumentDataButton from "./header/SendDocumentDataButton";
 import ThreeWayToggle from "./header/ThreeWayToggle";
 
 function DocumentComponent() {
-  const { document, selectedMode, isLoading } = GrobaltStore();
+  const { document, selectedMode, isLoading, isPlaying } = GrobaltStore();
 
   const { t } = useTranslation();
   const [words, setWords] = useState<string[] | undefined>(undefined);
@@ -72,7 +71,7 @@ function DocumentComponent() {
           <ThreeWayToggle />
           <SelectLanguage />
 
-          { audioStream.paused
+          { !isPlaying
           ? 
             <ReadingButton 
               selectedWords={document.text}

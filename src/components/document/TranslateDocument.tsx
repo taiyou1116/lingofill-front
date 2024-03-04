@@ -15,7 +15,7 @@ function TranslateDocument(props: Props) {
 
   // ドラッグ処理(熟語処理)
   const [isDragging, setIsDragging] = useState(false);
-  const [selectedWords, setSelectedWords] = useState('');
+  const [selectedWords, setSelectedWords] = useState('hello');
   const [startDragIndex, setStartDragIndex] = useState<number | null>(null); // ドラッグ開始インデックス 
   
   // 単語編集処理
