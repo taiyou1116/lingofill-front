@@ -5,9 +5,9 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 type Props = {
+  documents: Document[],
   setInput: (value: React.SetStateAction<string>) => void,
   setInputNameIndex: (value: React.SetStateAction<number>) => void,
-  documents: Document[],
   index: number,
 }
 
@@ -28,4 +28,4 @@ function EditTitle(props: Props) {
   )
 }
 
-export default EditTitle
+export default React.memo(EditTitle);

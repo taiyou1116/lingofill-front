@@ -79,4 +79,4 @@ function SaveButton(props: Props) {
   )
 }
 
-export default SaveButton
+export default React.memo(SaveButton);

@@ -1,7 +1,6 @@
 "use client"
 
 import { AccountCircle, Help, Reorder, Settings } from "@mui/icons-material";
-import { useStore } from '@/store/store';
 import { oswald } from '@/store/fontStore';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,11 +8,13 @@ import { Toaster } from "react-hot-toast";
 import { Menu, MenuItem, Tooltip } from "@mui/material";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { GrobaltStore } from "@/store/grobalStore";
 
 function HeaderComponent() {
-  const flipShowSidebar = useStore((store) => store.flipShowSidebar);
+  const {flipShowSidebar} = GrobaltStore();
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
+  
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
   };

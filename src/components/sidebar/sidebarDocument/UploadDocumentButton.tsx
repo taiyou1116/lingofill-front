@@ -6,9 +6,9 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 type Props = {
-  username: string,
   documents: Document[],
   setDocuments: (documents: Document[]) => void,
+  username: string,
   index: number,
 }
 
@@ -39,4 +39,4 @@ function UploadDocumentButton(props: Props) {
   )
 }
 
-export default UploadDocumentButton
+export default React.memo(UploadDocumentButton);

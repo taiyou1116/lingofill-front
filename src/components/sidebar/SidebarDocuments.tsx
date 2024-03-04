@@ -1,4 +1,3 @@
-import { useStore } from '@/store/store';
 import { Document } from '@/types/types'
 import { handleStopPropagation } from '@/utils/modal';
 import { createDate, getText } from '@/utils/request';
@@ -8,59 +7,18 @@ import UploadDocumentButton from './sidebarDocument/UploadDocumentButton';
 import EditTitle from './sidebarDocument/EditTitle';
 import DeleteTextButton from './sidebarDocument/DeleteTextButton';
 import { useTranslation } from 'react-i18next';
-
-const MemoizedDocumentComponent = memo(SidebarDocuments);
-
-type Prop = {
-  createNewDocument: boolean,
-  setCreateNewDocument: Dispatch<SetStateAction<boolean>>,
-}
-
-function SidebarDocumentsMemo(props: Prop) {
-  const { createNewDocument, setCreateNewDocument } = props;
-  const {setDocument, documentPublic, username, documents, setDocuments, flipShowSidebar, setIsLoading } = useStore((store) => ({
-    setDocument:     store.setDocument,
-    documentPublic:  store.document,
-    username:        store.username,
-    documents:       store.documents,
-    setDocuments:    store.setDocuments,
-    flipShowSidebar: store.flipShowSidebar,
-    setIsLoading:    store.setIsLoading,
-  }));
-
-  return (
-    <div>
-      <MemoizedDocumentComponent 
-        createNewDocument={createNewDocument}
-        setCreateNewDocument={setCreateNewDocument}
-        setDocument={setDocument}
-        documentPublic={documentPublic}
-        username={username}
-        documents={documents}
-        setDocuments={setDocuments}
-        flipShowSidebar={flipShowSidebar}
-        setIsLoading={setIsLoading}
-      />
-    </div>
-  );
-}
-
-export default SidebarDocumentsMemo;
+import { GrobaltStore } from '@/store/grobalStore';
 
 type Props = {
   createNewDocument: boolean,
   setCreateNewDocument: Dispatch<SetStateAction<boolean>>,
-  setDocument:     (document: Document | null) => void,
-  documentPublic:  Document | null,
-  username:        string,
   documents:       Document[],
-  setDocuments:    (documents: Document[]) => void,
   flipShowSidebar: () => void,
-  setIsLoading:    (state: boolean) => void,
 }
 
 function SidebarDocuments(props: Props) {
-  const { createNewDocument, setCreateNewDocument, setDocument, documentPublic, username, documents, setDocuments, flipShowSidebar, setIsLoading } = props;
+  const { createNewDocument, setCreateNewDocument, documents, flipShowSidebar } = props;
+  const { username, setIsLoading, setDocument, setDocuments, document } = GrobaltStore();
   const { t } = useTranslation();
   const [inputNameIndex, setInputNameIndex] = useState<number>(-1);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -141,12 +99,12 @@ function SidebarDocuments(props: Props) {
       : '' }
       
       { 
-        documents.map((document, index) => {
+        documents.map((localDoc, index) => {
           return (
             <div 
               key={index} 
               onClick={() => openSentence(index)}
-              className={`border-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-500 dark:hover:bg-gray-900 border-b-2 h-full w-full py-4 px-2 cursor-pointer duration-100 ${ documentPublic?.sortKey === documents[index].sortKey ? " border-2 border-gray-900 dark:border-gray-500" : ""}`}
+              className={`border-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-500 dark:hover:bg-gray-900 border-b-2 h-full w-full py-4 px-2 cursor-pointer duration-100 ${ document?.sortKey === documents[index].sortKey ? " border-2 border-gray-900 dark:border-gray-500" : ""}`}
             >
               { inputNameIndex === index
               ?
@@ -157,7 +115,7 @@ function SidebarDocuments(props: Props) {
                     placeholder={t('sidebarDocument.inputTextName')}
                     type='text' 
                     value={input}
-                    defaultValue={document.title}
+                    defaultValue={localDoc.title}
                     onChange={(e) => {
                       setInput(e.target.value);
                     }}
@@ -171,15 +129,15 @@ function SidebarDocuments(props: Props) {
                 <div className=' flex justify-between'>
                   <div className=' flex flex-col gap-0.5'>
                     <div className=' dark:text-gray-100'>
-                      { document.title }
+                      { localDoc.title }
                     </div>
                     <div className=' text-xs text-slate-500'>
-                      { createDate(document.updatedAt) }
+                      { createDate(localDoc.updatedAt) }
                     </div>
                   </div>
                   
                   <div onClick={handleStopPropagation} className=' flex gap-0.5 pl-1'>
-                    { document.isSynced ? '' : 
+                    { localDoc.isSynced ? '' : 
                       <UploadDocumentButton 
                         username={username}
                         documents={documents}
@@ -195,7 +153,7 @@ function SidebarDocuments(props: Props) {
                     />
                     <DeleteTextButton 
                       username={username}
-                      documentPublic={document}
+                      document={document!}
                       setDocument={setDocument}
                       documents={documents}
                       setDocuments={setDocuments}
@@ -211,3 +169,5 @@ function SidebarDocuments(props: Props) {
     </div>
   )
 }
+
+export default React.memo(SidebarDocuments);

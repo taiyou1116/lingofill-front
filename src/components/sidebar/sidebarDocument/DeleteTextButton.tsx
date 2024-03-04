@@ -6,22 +6,22 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 type Props = {
-  username: string,
-  documents: Document[],
+  document: Document,
   setDocument: (document: Document | null) => void,
+  documents: Document[],
   setDocuments: (documents: Document[]) => void,
+  username: string,
   index: number,
-  documentPublic: Document,
 }
 
 function DeleteTextButton(props: Props) {
-  const { username, documents, setDocument,setDocuments, index, documentPublic } = props;
+  const { username, documents, setDocument,setDocuments, index, document } = props;
   const { t } = useTranslation();
   const deleteTextButton = async (index: number) => {
     try {
       await deleteText(username, documents[index].sortKey);
       const filterDoc = documents.filter((doc) => doc !== documents[index]);
-      if (documents[index] === documentPublic) {
+      if (documents[index] === document) {
         setDocument(null);
       }
       setDocuments(filterDoc);
@@ -39,4 +39,4 @@ function DeleteTextButton(props: Props) {
   )
 }
 
-export default DeleteTextButton
+export default React.memo(DeleteTextButton);

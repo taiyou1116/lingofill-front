@@ -1,6 +1,7 @@
 import { getVoiceForLanguage, processAndSpeak, splitTextToSegments } from '@/utils/request';
 import { VolumeUp } from '@mui/icons-material'
 import { Tooltip } from '@mui/material'
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 
@@ -26,4 +27,4 @@ function ReadingButton(props: Props) {
   )
 }
 
-export default ReadingButton
+export default React.memo(ReadingButton);

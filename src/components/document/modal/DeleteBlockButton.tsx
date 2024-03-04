@@ -42,4 +42,4 @@ function DeleteBlockButton(props: Props) {
   )
 }
 
-export default DeleteBlockButton
+export default React.memo(DeleteBlockButton);

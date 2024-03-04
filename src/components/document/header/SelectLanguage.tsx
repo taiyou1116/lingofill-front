@@ -1,41 +1,12 @@
-import { useStore } from '@/store/store';
-import { Document } from '@/types/types';
+import { GrobaltStore } from '@/store/grobalStore';
 import { TrendingFlat } from '@mui/icons-material'
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, ThemeProvider, createTheme, useMediaQuery } from '@mui/material'
-import React, { memo } from 'react'
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-const MemoizedSelectLanguage = memo(SelectLanguage);
+function SelectLanguage() {
+  const { document, setDocument, documents, setDocuments } = GrobaltStore();
 
-function SelectLanguageMemo() {
-  const { document, setDocument, documents, setDocuments } = useStore((store) => ({
-    document:     store.document,
-    setDocument:  store.setDocument,
-    documents:     store.documents,
-    setDocuments:  store.setDocuments,
-  }));
-  return (
-    <div>
-      <MemoizedSelectLanguage 
-        document={document}
-        setDocument={setDocument}
-        documents={documents}
-        setDocuments={setDocuments}
-      />
-    </div>
-  );
-}
-export default SelectLanguageMemo;
-
-type Props = {
-  document: Document | null,
-  setDocument: (document: Document | null) => void,
-  documents: Document[],
-  setDocuments: (documents: Document[]) => void,
-}
-
-function SelectLanguage(props: Props) {
-  const { document, setDocument, documents, setDocuments } = props;
   const { t } = useTranslation();
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
@@ -142,3 +113,5 @@ function SelectLanguage(props: Props) {
     </div>
   )
 }
+
+export default React.memo(SelectLanguage);

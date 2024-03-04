@@ -33,4 +33,4 @@ function InputMemo(props: Props) {
   )
 }
 
-export default InputMemo
+export default React.memo(InputMemo);

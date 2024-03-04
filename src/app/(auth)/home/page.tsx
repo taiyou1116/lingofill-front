@@ -9,11 +9,11 @@ import { useStore } from "@/store/store";
 import { useEffect } from "react";
 import { getTitles } from "@/utils/request";
 import { getCurrentUser } from "aws-amplify/auth";
-import DocumentMemoComponent from '@/components/document/Document';
 
 import i18n from "@/i18n";
 import { I18nextProvider } from "react-i18next";
 import { changeLanguage } from 'i18next';
+import DocumentComponent from '@/components/document/Document';
 
 Amplify.configure(awsExports);
 
@@ -69,7 +69,7 @@ function Home() {
   return (
     <div className=" h-full" onMouseDown={resetSelectedWordsIndexes} >
       <I18nextProvider i18n={i18n} defaultNS={"translation"}>
-        <DocumentMemoComponent />
+        <DocumentComponent />
       </I18nextProvider>
     </div>
   )

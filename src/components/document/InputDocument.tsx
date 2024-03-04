@@ -1,42 +1,12 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import debounce from "lodash/debounce";
 import { Document } from '@/types/types';
-import { useStore } from '@/store/store';
 import { useTranslation } from 'react-i18next';
+import { GrobaltStore } from '@/store/grobalStore';
 
-const MemoizedDocumentComponent = memo(InputDocument);
+function InputDocument() {
+  const { document, setDocument, documents, setDocuments } = GrobaltStore();
 
-function InputMemo() {
-  const { document, setDocument, documents, setDocuments } = useStore((store) => ({
-    document:     store.document,
-    setDocument:  store.setDocument,
-    documents:    store.documents,
-    setDocuments: store.setDocuments,
-  }));
-
-  return (
-    <div>
-      <MemoizedDocumentComponent 
-        document={document}
-        setDocument={setDocument}
-        documents={documents}
-        setDocuments={setDocuments}
-      />
-    </div>
-  );
-}
-
-export default InputMemo;
-
-type Props = {
-  document: Document | null,
-  setDocument: (document: Document | null) => void,
-  documents: Document[],
-  setDocuments: (documents: Document[]) => void,
-}
-
-function InputDocument(props: Props) {
-  const { document, setDocument, documents, setDocuments } = props;
   const { t } = useTranslation();
   const [inputText, setInputText] = useState(document!.text);
 
@@ -86,3 +56,5 @@ function InputDocument(props: Props) {
     />
   )
 }
+
+export default React.memo(InputDocument);

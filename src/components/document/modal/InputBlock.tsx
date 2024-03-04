@@ -36,4 +36,4 @@ function InputBlock(props: Props) {
   )
 }
 
-export default InputBlock
+export default React.memo(InputBlock);

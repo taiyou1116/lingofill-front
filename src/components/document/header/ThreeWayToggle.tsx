@@ -1,34 +1,14 @@
 "use client"
 
-import React, { memo, useState } from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider, ToggleButton, ToggleButtonGroup, createTheme, useMediaQuery } from '@mui/material';
 import { SelectedMode } from '@/types/types';
-import { useStore } from '@/store/store';
 import { TextSnippet, Translate } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
+import { GrobaltStore } from '@/store/grobalStore';
 
-const MemoizedDocumentComponent = memo(ThreeWayToggle);
-
-function ThreeWayToggleMemo() {
-  const setSelectedModeGlobal = useStore((store) => store.setSelectedMode);
-
-  return (
-    <div>
-      <MemoizedDocumentComponent 
-        setSelectedModeGlobal={setSelectedModeGlobal}
-      />
-    </div>
-  );
-}
-
-export default ThreeWayToggleMemo;
-
-type Props = {
-  setSelectedModeGlobal: (select: SelectedMode) => void,
-}
-
-function ThreeWayToggle(props: Props) {
-  const { setSelectedModeGlobal } = props;
+function ThreeWayToggle() {
+  const { setSelectedMode } = GrobaltStore();
   const { t } = useTranslation();
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
@@ -51,7 +31,7 @@ function ThreeWayToggle(props: Props) {
   ) => {
     setSelectedModeLocal(newMode);
     if (newMode) {
-      setSelectedModeGlobal(newMode);
+      setSelectedMode(newMode);
     }
   };
   
@@ -94,3 +74,5 @@ function ThreeWayToggle(props: Props) {
     </ThemeProvider>
   );
 }
+
+export default React.memo(ThreeWayToggle);

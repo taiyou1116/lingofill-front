@@ -1,49 +1,20 @@
 "use client"
 
-import { useStore } from '@/store/store';
 import { m_plus_rounded_1c } from '@/store/fontStore';
 import { EditNote, FolderDelete } from '@mui/icons-material';
-import { memo, useState } from 'react';
+import React, { useState } from 'react';
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
 import { Skeleton, Tooltip, Typography } from '@mui/material';
-import { Document } from '@/types/types';
-import SidebarDocumentsMemo from './SidebarDocuments';
 import { useTranslation } from 'react-i18next';
+import { GrobaltStore } from '@/store/grobalStore';
+import SidebarDocuments from './SidebarDocuments';
 
-const MemoizedDocumentComponent = memo(SidebarComponent);
-
-function SidebarMemo() {
-  const { showSidebar, flipShowSidebar, documents } = useStore((store) => ({
-    showSidebar:     store.showSidebar,
-    flipShowSidebar: store.flipShowSidebar,
-    documents:       store.documents,
-  }));
-
-  return (
-    <div>
-      <MemoizedDocumentComponent 
-        documents={documents}
-        flipShowSidebar={flipShowSidebar}
-        showSidebar={showSidebar}
-      />
-    </div>
-  );
-}
-
-export default SidebarMemo;
-
-type Props = {
-  showSidebar: boolean,
-  flipShowSidebar: () => void,
-  documents: Document[]
-}
-
-function SidebarComponent(props: Props) {
-  const { showSidebar, flipShowSidebar, documents } = props;
+function SidebarComponent() {
+  const { showSidebar, flipShowSidebar, documents } = GrobaltStore();
   const { t } = useTranslation();
+
   const [createNewDocument, setCreateNewDocument] = useState<boolean>(false);
 
-  // documentの作成ではなく、inputのみ作成 -> titleが付けられた時点でdocumentsに格納
   const createNewSentence = () => {
     setCreateNewDocument(true);
   }
@@ -95,9 +66,11 @@ function SidebarComponent(props: Props) {
               {<Skeleton />}
             </Typography>
           :
-            <SidebarDocumentsMemo 
+            <SidebarDocuments
               createNewDocument={createNewDocument}
               setCreateNewDocument={setCreateNewDocument}
+              documents={documents}
+              flipShowSidebar={flipShowSidebar}
             />
           }
         </div>
@@ -105,3 +78,5 @@ function SidebarComponent(props: Props) {
     </div>
   );
 }
+
+export default React.memo(SidebarComponent);

@@ -3,11 +3,11 @@ import React from 'react'
 import { useTranslation } from 'react-i18next';
 
 type Props = {
+  documents: Document[],
+  setDocuments: (documents: Document[]) => void,
   input: string,
   setInput: (value: React.SetStateAction<string>) => void,
   setCreateNewDocument: React.Dispatch<React.SetStateAction<boolean>>,
-  documents: Document[],
-  setDocuments: (documents: Document[]) => void,
   inputRef: React.RefObject<HTMLInputElement>,
 }
 
@@ -55,4 +55,4 @@ function CreateNewDocument(props: Props) {
   )
 }
 
-export default CreateNewDocument
+export default React.memo(CreateNewDocument);

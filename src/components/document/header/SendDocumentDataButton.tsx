@@ -1,57 +1,30 @@
-import { useStore } from '@/store/store';
-import { Document } from '@/types/types';
+import { GrobaltStore } from '@/store/grobalStore';
 import { updateText } from '@/utils/request';
 import { CheckCircle, CloudUpload } from '@mui/icons-material';
-import { memo } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-const MemoizedDocumentComponent = memo(SendDocumentDataButton);
-
-function SendDocumentButtonMemo() {
-  const {setDocuments, document, documents, username} = useStore((store) => ({
-    setDocuments: store.setDocuments,
-    document:     store.document,
-    documents:    store.documents,
-    username:     store.username,
-  }));
-
-  return (
-    <div>
-      <MemoizedDocumentComponent 
-        document={document}
-        documents={documents}
-        setDocuments={setDocuments}
-        username={username}
-      />
-    </div>
-  );
-}
-
-export default SendDocumentButtonMemo;
-
-type Props = {
-  document: Document | null,
-  documents: Document[],
-  setDocuments: (documents: Document[]) => void,
-  username: string,
-}
-
-function SendDocumentDataButton(props: Props) {
-  const { document, documents, setDocuments, username } = props;
+function SendDocumentDataButton() {
+  const { document, documents, setDocuments, username } = GrobaltStore();
   const { t } = useTranslation();
+
   const updateDocuments = async () => {
     const documentIndex = documents.findIndex((d) => d.sortKey === document!.sortKey);
     const newDocuments = [...documents];
     newDocuments[documentIndex] = document!;
+
     try {
       const now = Date.now().toString();
       await updateText(username, document!.sortKey, document!.title, document!.text, document!.translations, document!.language, document!.translateLanguage, now);
+      
       newDocuments[documentIndex].isSynced = true;
       newDocuments[documentIndex].updatedAt = now;
       newDocuments.sort((a, b) => parseInt(b.updatedAt) - parseInt(a.updatedAt));
+      
     } catch(error) {
       console.error(error);
       newDocuments[documentIndex].isSynced = false;
+
     } finally {
       setDocuments(newDocuments);
     }
@@ -83,3 +56,5 @@ function SendDocumentDataButton(props: Props) {
     </div>
   )
 }
+
+export default React.memo(SendDocumentDataButton);

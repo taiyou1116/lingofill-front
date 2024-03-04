@@ -1,49 +1,21 @@
 "use client"
-import { useStore } from "@/store/store";
 import { oswald } from "@/store/fontStore";
 import { Box, LinearProgress } from "@mui/material";
-import React, { memo, useEffect, useState } from "react";
-import { Document, SelectedMode } from "@/types/types";
-import ThreeWayToggleMemo from "./header/ThreeWayToggle";
-import TranslateDocumentMemo from "./TranslateDocument";
-import InputMemo from "./InputDocument";
-import SendDocumentButtonMemo from "./header/SendDocumentDataButton";
-import SelectLanguageMemo from "./header/SelectLanguage";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ReadingButton from "./modal/ReadingButton";
 import { audioStream } from "@/utils/request";
 import StopAudio from "./header/StopAudio";
+import SelectLanguage from "./header/SelectLanguage";
+import InputDocument from "./InputDocument";
+import TranslateDocument from "./TranslateDocument";
+import { GrobaltStore } from "@/store/grobalStore";
+import SendDocumentDataButton from "./header/SendDocumentDataButton";
+import ThreeWayToggle from "./header/ThreeWayToggle";
 
-const MemoizedDocumentComponent = memo(DocumentComponent);
+function DocumentComponent() {
+  const { document, selectedMode, isLoading } = GrobaltStore();
 
-function DocumentMemoComponent() {
-  const { document, selectedmode, isLoading } = useStore((store) => ({
-    document:     store.document,
-    selectedmode: store.selectedmode,
-    isLoading:    store.isLoading,
-  }));
-
-  return (
-    <div>
-      <MemoizedDocumentComponent 
-        document={document}
-        selectedmode={selectedmode}
-        isLoading={isLoading} 
-      />
-    </div>
-  );
-}
-
-export default DocumentMemoComponent;
-
-type Props = {
-  document: Document | null,
-  selectedmode: SelectedMode,
-  isLoading: boolean,
-}
-
-function DocumentComponent(props: Props) {
-  const { document, selectedmode, isLoading } = props;
   const { t } = useTranslation();
   const [words, setWords] = useState<string[] | undefined>(undefined);
 
@@ -72,16 +44,17 @@ function DocumentComponent(props: Props) {
         </div>
       )
     }
-    switch (selectedmode) {
+    switch (selectedMode) {
       case 'edit':
         return (
-          <TranslateDocumentMemo
+          <TranslateDocument
             words={words}
+            document={document}
           />
         );
       case 'input':
         return (
-          <InputMemo />
+          <InputDocument />
         );
       default:
         return <div>不明なモードです。</div>;
@@ -96,8 +69,8 @@ function DocumentComponent(props: Props) {
       <div className=" flex items-center justify-between">
         <div className=" flex gap-5 items-center">
           <h1 className={` dark:text-gray-100 text-xxs  ${oswald.className}`}>{ document.title }</h1>
-          <ThreeWayToggleMemo />
-          <SelectLanguageMemo />
+          <ThreeWayToggle />
+          <SelectLanguage />
 
           { audioStream.paused
           ? 
@@ -110,7 +83,7 @@ function DocumentComponent(props: Props) {
           } 
           
         </div>
-        <SendDocumentButtonMemo />
+        <SendDocumentDataButton />
       </div>
     )
   }
@@ -125,3 +98,5 @@ function DocumentComponent(props: Props) {
     </div>
   );
 }
+
+export default React.memo(DocumentComponent);
