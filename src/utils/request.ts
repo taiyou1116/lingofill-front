@@ -204,15 +204,6 @@ export async function convertTextToSpeech(text: string, voice: string) {
   }
 }
 
-async function playAudioStream(audioStream: HTMLAudioElement) {
-  return new Promise((resolve, reject) => {
-
-    audioStream.onended = resolve;
-    audioStream.onerror = reject;
-    audioStream.play();
-  });
-}
-
 let audioStream: HTMLAudioElement;
 if (typeof window !== 'undefined') {
   // 実行環境がクライアントサイドの場合のみAudioオブジェクトを初期化
@@ -238,6 +229,15 @@ export async function processAndSpeak(textSegments: string[], voice: string) {
       console.error("Error processing text segment:", error);
     }
   }
+}
+
+async function playAudioStream(audioStream: HTMLAudioElement) {
+  return new Promise((resolve, reject) => {
+
+    audioStream.onended = resolve;
+    audioStream.onerror = reject;
+    audioStream.play();
+  });
 }
 
 export async function stopAudio() {
