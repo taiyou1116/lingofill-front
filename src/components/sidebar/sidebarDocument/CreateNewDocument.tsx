@@ -38,7 +38,9 @@ function CreateNewDocument(props: Props) {
   }
 
   return (
-    <input className=' p-2'
+    <input 
+      maxLength={100}
+      className=' p-2'
       placeholder={t('sidebarDocument.createNewDocument.inputTextName')}
       type='text' 
       value={input}

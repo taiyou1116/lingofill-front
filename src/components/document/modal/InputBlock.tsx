@@ -16,6 +16,7 @@ function InputBlock(props: Props) {
   return (
     <div className=' flex w-full gap-3 justify-center items-center'>
       <input 
+        maxLength={20000}
         type='text' 
         placeholder={t('document.modal.inputBlock.inputBlock')}
         value={userInputTranslation}

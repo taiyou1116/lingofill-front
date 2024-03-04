@@ -151,7 +151,9 @@ function SidebarDocuments(props: Props) {
               { inputNameIndex === index
               ?
                 <div>
-                  <input className=' p-2'
+                  <input 
+                    maxLength={100}
+                    className=' p-2'
                     placeholder={t('sidebarDocument.inputTextName')}
                     type='text' 
                     value={input}

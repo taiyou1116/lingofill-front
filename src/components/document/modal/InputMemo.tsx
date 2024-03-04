@@ -23,6 +23,7 @@ function InputMemo(props: Props) {
         </button>
       </div>
       <textarea 
+        maxLength={1000}
         placeholder={t('document.modal.inputMemo.inputMemo')}
         className=' border p-1 h-full w-full resize-none rounded-md border-stone-900 dark:bg-gray-800 dark:border-gray-400 dark:text-gray-100' 
         value={userInputMemo}
