@@ -6,13 +6,15 @@ React.memo調べる
 実装
 差分(変更した項目のみ)を送信
 
+- AudioProviderの方法で行くか？
 - 好きなところから再生 ... 着手 -> 音声, ぼかし, 切る
 - 全体再生 -> 音声が流れているか判定 -> 止める          ... あとで
 - 読んでいるところをbg変える
 
+- カスタムフックでシンプルか
+- AIで詳細を記入できたらおもろいかも(課金)
 - useEffectが適切か
 
-- テキストの長さ制限
 - Documentも5つずつくらい取得する方がいいかも
 - 説明のdoc
 - お気に入り登録、単語、熟語集(問題も) ... 中
@@ -22,8 +24,9 @@ React.memo調べる
 Warning: SidebarDocuments contains an input of type text with both value and defaultValue props. Input elements must be either controlled or uncontrolled (specify either the value prop, or the defaultValue prop, but not both). Decide between using a controlled or uncontrolled input element and remove one of these props. More info: 
 
 追加案
-- AIで詳細を記入できたらおもろいかも
+
 - 初期例文もあり
+- 共有フォルダ
 
 アプリのイメージ図
 フロント
