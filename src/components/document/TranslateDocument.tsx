@@ -1,4 +1,4 @@
-import React, { memo, useRef, useState } from "react";
+import React, { memo, useState } from "react";
 import { useStore } from "@/store/store";
 import { Tooltip } from "@mui/material";
 import { m_plus_rounded_1c } from "@/store/fontStore";
@@ -52,10 +52,8 @@ function TranslateDocument(props: TranslateDocumentType) {
 
   // ドラッグ処理(熟語処理)
   const [isDragging, setIsDragging] = useState(false);
-  const [selectedWords, setSelectedWords] = useState('hello');
+  const [selectedWords, setSelectedWords] = useState('');
   const [startDragIndex, setStartDragIndex] = useState<number | null>(null); // ドラッグ開始インデックス 
-
-  const audioRef = useRef(new Audio());
   
   // 単語編集処理
   const handleClick = (index: number) => {
@@ -157,7 +155,6 @@ function TranslateDocument(props: TranslateDocumentType) {
         <TranslateModalMemo
           selectedWordsIndexes={selectedWordsIndexes}
           selectedWords={selectedWords}
-          audioRef={audioRef}
         />
       </div>
     </div>

@@ -7,22 +7,21 @@ import { useTranslation } from 'react-i18next';
 type Props = {
   selectedWords: string,
   ln: string,
-  audioStream: HTMLAudioElement,
 }
 
 function ReadingButton(props: Props) {
-  const { selectedWords, ln, audioStream } = props;
+  const { selectedWords, ln } = props;
   const { t } = useTranslation();
 
   const listenTexts = async (text: string) => {
     const textSegments = splitTextToSegments(text);
     const voice = getVoiceForLanguage(ln);
-    await processAndSpeak(textSegments, voice, audioStream);
+    await processAndSpeak(textSegments, voice);
   }
 
   return (
     <Tooltip title={t('document.modal.readingButton.readAloud')} className=' mr-2 cursor-pointer' onClick={() => listenTexts(selectedWords)}>
-      <VolumeUp style={{fontSize: 20}}/>
+      <VolumeUp style={{fontSize: 20}} className=' dark:text-gray-300' />
     </Tooltip>
   )
 }

@@ -9,10 +9,10 @@ import TranslateDocumentMemo from "./TranslateDocument";
 import InputMemo from "./InputDocument";
 import SendDocumentButtonMemo from "./header/SendDocumentDataButton";
 import SelectLanguageMemo from "./header/SelectLanguage";
-import { TooltipProps, styled, tooltipClasses } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { VolumeUp } from "@mui/icons-material";
 import ReadingButton from "./modal/ReadingButton";
+import { audioStream } from "@/utils/request";
+import StopAudio from "./header/StopAudio";
 
 const MemoizedDocumentComponent = memo(DocumentComponent);
 
@@ -87,14 +87,6 @@ function DocumentComponent(props: Props) {
         return <div>不明なモードです。</div>;
     }
   }
-  
-  const NoMaxWidthTooltip = styled(({ className, ...props }: TooltipProps) => (
-      <Tooltip {...props} classes={{ popper: className }} />
-    ))({
-      [`& .${tooltipClasses.tooltip}`]: {
-        maxWidth: 'none',
-      },
-  });
 
   const showToggle = () => {
     if (document === null) {
@@ -106,13 +98,17 @@ function DocumentComponent(props: Props) {
           <h1 className={` dark:text-gray-100 text-xxs  ${oswald.className}`}>{ document.title }</h1>
           <ThreeWayToggleMemo />
           <SelectLanguageMemo />
-          <NoMaxWidthTooltip title='タップしたところから再生 | ブロックをぼかして再生 | 再生を止める'>
-            <VolumeUp />
-            {/* <ReadingButton 
-              selectedWords={"sss"}
+
+          { audioStream.paused
+          ? 
+            <ReadingButton 
+              selectedWords={document.text}
               ln={document!.language}
-            /> */}
-          </NoMaxWidthTooltip>
+            />
+          :
+            <StopAudio />
+          } 
+          
         </div>
         <SendDocumentButtonMemo />
       </div>

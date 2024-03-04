@@ -17,11 +17,10 @@ const MemoizedDocumentComponent = memo(TranslateModal);
 type Props = {
   selectedWordsIndexes: number[],
   selectedWords: string,
-  audioRef: React.MutableRefObject<HTMLAudioElement>,
 }
 
 function TranslateModalMemo(props: Props) {
-  const { selectedWordsIndexes, selectedWords, audioRef } = props;
+  const { selectedWordsIndexes, selectedWords } = props;
   const {flipCenterModal, document, setDocuments, documents, setDocument} = useStore((store) => ({
     flipCenterModal: store.flipCenterModal,
     document:        store.document,
@@ -40,7 +39,6 @@ function TranslateModalMemo(props: Props) {
         setDocument={setDocument}
         documents={documents}
         setDocuments={setDocuments}
-        audioRef={audioRef}
       />
     </div>
   );
@@ -56,11 +54,10 @@ type TranslateModalProps = {
   setDocument: (document: Document | null) => void,
   documents: Document[],
   setDocuments: (documents: Document[]) => void,
-  audioRef: React.MutableRefObject<HTMLAudioElement>,
 }
 
 function TranslateModal(props: TranslateModalProps) {
-  const { selectedWordsIndexes, selectedWords, document, setDocument, documents, setDocuments, audioRef } = props;
+  const { selectedWordsIndexes, selectedWords, document, setDocument, documents, setDocuments } = props;
   
   const [userInputTranslation, setUserInputTranslation] = useState('');
   const [userInputMemo, setUserInputMemo] = useState('');
@@ -98,7 +95,6 @@ function TranslateModal(props: TranslateModalProps) {
                 <ReadingButton 
                   selectedWords={selectedWords}
                   ln={document!.language}
-                  audioStream={audioRef.current}
                 />
                 { selectedWords }
               </span>
@@ -106,7 +102,6 @@ function TranslateModal(props: TranslateModalProps) {
                 <ReadingButton 
                   selectedWords={translatedWords}
                   ln={document!.translateLanguage}
-                  audioStream={audioRef.current}
                 />
                 { translatedWords }
               </span>

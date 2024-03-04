@@ -213,8 +213,23 @@ async function playAudioStream(audioStream: HTMLAudioElement) {
   });
 }
 
+// export let audioStream: HTMLAudioElement;
+let audioStream: HTMLAudioElement;
+if (typeof window !== 'undefined') {
+  // 実行環境がクライアントサイドの場合のみAudioオブジェクトを初期化
+  audioStream = new Audio();
+}
+
+export { audioStream };
+
 // translateDocumentでの再生(文章を1つずつ取得)
-export async function processAndSpeak(textSegments: string[], voice: string, audioStream: HTMLAudioElement) {
+export async function processAndSpeak(textSegments: string[], voice: string) {
+  if (audioStream !== undefined) {
+    if (!audioStream.paused) {
+      audioStream.pause();
+    }
+  }
+  
   for (const segment of textSegments) {
     try {
       // Amazon Pollyへのリクエストを送信して音声データを取得
@@ -226,6 +241,14 @@ export async function processAndSpeak(textSegments: string[], voice: string, aud
   }
 }
 
+export async function stopAudio() {
+  if (audioStream !== undefined) {
+    if (!audioStream.paused) {
+      audioStream.pause();
+    }
+  }
+}
+
 export function splitTextToSegments(text: string) {
-  return text.split("."); // ? ! でも
+  return text.split(/(?<=[\.|\?|!])/);
 }
