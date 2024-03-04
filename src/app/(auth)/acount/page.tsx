@@ -1,11 +1,7 @@
 "use client"
 
 import '@aws-amplify/ui-react/styles.css';
-// import { Amplify } from "aws-amplify";
-// import awsExports from "../../../aws-exports";
 import { signOut } from 'aws-amplify/auth';
-
-// Amplify.configure(awsExports);
 
 function Acount() {
 

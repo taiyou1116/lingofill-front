@@ -18,7 +18,7 @@ import { changeLanguage } from 'i18next';
 Amplify.configure(awsExports);
 
 function Home() {
-  const {setDocuments, username, setUsername, selectedWordsIndexes, setSelectedWordsIndexes, showCenterModal, language, setLanguage} = useStore((store) => ({
+  const {setDocuments, username, setUsername, selectedWordsIndexes, setSelectedWordsIndexes, showCenterModal, setLanguage} = useStore((store) => ({
     setDocuments:            store.setDocuments,
     username:                store.username,
     setUsername:             store.setUsername,

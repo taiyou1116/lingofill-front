@@ -1,7 +1,7 @@
 "use client"
 import { useStore } from "@/store/store";
 import { oswald } from "@/store/fontStore";
-import { Box, LinearProgress, Tooltip } from "@mui/material";
+import { Box, LinearProgress } from "@mui/material";
 import React, { memo, useEffect, useState } from "react";
 import { Document, SelectedMode } from "@/types/types";
 import ThreeWayToggleMemo from "./header/ThreeWayToggle";

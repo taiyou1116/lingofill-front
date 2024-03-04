@@ -213,7 +213,6 @@ async function playAudioStream(audioStream: HTMLAudioElement) {
   });
 }
 
-// export let audioStream: HTMLAudioElement;
 let audioStream: HTMLAudioElement;
 if (typeof window !== 'undefined') {
   // 実行環境がクライアントサイドの場合のみAudioオブジェクトを初期化

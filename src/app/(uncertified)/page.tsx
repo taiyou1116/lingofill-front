@@ -18,19 +18,19 @@ const MyApp = () => {
     setUsername:  store.setUsername,
   }));
 
-  async function currentAuthenticatedUser() {
-    try {
-      const { username } = await getCurrentUser();
-      return username;
-    } catch (err) {
-      console.log("getCurrentUserエラー: " + err);
-    }
-  }
+  // async function currentAuthenticatedUser() {
+  //   try {
+  //     const { username } = await getCurrentUser();
+  //     return username;
+  //   } catch (err) {
+  //     console.log("getCurrentUserエラー: " + err);
+  //   }
+  // }
 
   useEffect(() => {
     async function handleAutoSignIn() {
       try {
-        const username = await currentAuthenticatedUser();
+        const {username} = await getCurrentUser();
         if (username !== undefined) {
           setUsername(username);
           router.replace('/home');
