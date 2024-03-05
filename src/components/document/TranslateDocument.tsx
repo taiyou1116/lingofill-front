@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tooltip } from "@mui/material";
 import { m_plus_rounded_1c } from "@/store/fontStore";
 import { Document } from "@/types/types";
@@ -6,17 +6,29 @@ import { GrobalStore } from "@/store/grobalStore";
 import TranslateModal from "./modal/TranslateModal";
 
 type Props = {
-  words: string[] | undefined,
   document: Document | null,
+  sentences: string[],
 }
 function TranslateDocument(props: Props) {
-  const { words, document } = props;
+  const { document, sentences } = props;
   const { showCenterModal, flipCenterModal, selectedWordsIndexes, setSelectedWordsIndexes } = GrobalStore();
 
   // ドラッグ処理(熟語処理)
+  const [words, setWords] = useState<string[] | undefined>(undefined);
   const [isDragging, setIsDragging] = useState(false);
   const [selectedWords, setSelectedWords] = useState('hello');
   const [startDragIndex, setStartDragIndex] = useState<number | null>(null); // ドラッグ開始インデックス 
+
+  // 単語用 -> sentencesからさらに分割
+  useEffect(() => {
+    let tempWords: string[] | undefined;
+    if (document?.language === 'ja' || document?.language === 'zh') {
+      tempWords = sentences.map((s) => s.split("")).flat();
+    } else {
+      tempWords = sentences.map((s) => s.split(" ")).flat();
+    }
+    setWords(tempWords);
+  }, [document]);
   
   // 単語編集処理
   const handleClick = (index: number) => {
@@ -24,9 +36,11 @@ function TranslateDocument(props: Props) {
 
     const translation = document!.translations.find(translation => translation.indexes.includes(index));
     if (translation) {
+      console.log("translation: " + index);
       setSelectedWordsIndexes(translation.indexes);
       setSelectedWords(translation.indexes.map((i) => words![i]).join(' '));
     } else {
+      console.log(index);
       setSelectedWordsIndexes([index]);
       setSelectedWords( words![index]);
     }
@@ -75,53 +89,55 @@ function TranslateDocument(props: Props) {
   };
 
   return (
-    <div className="break-all overflow-y-auto max-h-[calc(100vh-200px)] p-3 rounded-md bg-white dark:bg-slate-600 dark:text-slate-300" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
-      {words?.map((word, index) => {
-        // すでに日本語訳されているか確認
-        const translation = document!.translations.find(translation => translation.indexes.includes(index));
+    <div className="overflow-y-auto max-h-[calc(100vh-200px)] p-3 rounded-md bg-white dark:bg-slate-600 dark:text-slate-300">
+      {(() => {
+        let globalIndex = 0;
 
-        // 単語 or 熟語の一文字目か確認
-        if (translation && translation.indexes[0] === index) {
-          return (
-            <span
-              key={index}
-              onClick={() => handleClick(index)}
-              onMouseMove={() => handleMouseMove(index)}
-              className={`select-none py-0.5 px-1 mx-0.5 cursor-pointer rounded-md bg-slate-200 dark:bg-slate-900 text-sm`}
-            >
-              <Tooltip
-                key={index} 
-                title={
-                <div className={` text-sm ${m_plus_rounded_1c.className}`}>
-                  <div className=' memo-output'>{ translation.memo }</div>
-                </div>}
-              >
-                <span>{ translation.translatedText }</span>
-              </Tooltip>
+        return sentences.map((sentence, sentenceIndex) => (
+          <React.Fragment key={sentenceIndex}>
+            <span className="break-all" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+              {sentence.split(" ").map((word) => {
+                // この時点での globalIndex の値を captureIndex として保存
+                const captureIndex = globalIndex;
+                const translation = document!.translations.find(translation => translation.indexes.includes(captureIndex));
+                
+                if (translation && translation.indexes[0] === captureIndex) {
+                  globalIndex++;
+                  return(
+                    <span
+                    key={captureIndex}
+                    onClick={() => handleClick(captureIndex)} // captureIndex を使用
+                    onMouseMove={() => handleMouseMove(captureIndex)} // captureIndex を使用
+                    className={`select-none py-0.5 px-1 mx-0.5 cursor-pointer rounded-md bg-slate-200 dark:bg-slate-900 text-sm`}
+                  >
+                    <Tooltip title={<div className={`text-sm ${m_plus_rounded_1c.className}`}>{translation.memo}</div>}>
+                      <span>{translation.translatedText}</span>
+                    </Tooltip>
+                  </span>
+                  )
+                } else if (!translation) {
+                  globalIndex++;
+                  return(
+                    <span
+                    key={captureIndex}
+                    onClick={() => handleClick(captureIndex)} // captureIndex を使用
+                    onMouseMove={() => handleMouseMove(captureIndex)} // captureIndex を使用
+                    className={`select-none cursor-pointer ${document?.language !== 'ja' && document?.language !== 'zh' ? 'p-0.5' : ''} ${selectedWordsIndexes.includes(captureIndex) ? "bg-blue-300 dark:bg-blue-500" : "bg-transparent"}`}
+                  >
+                    {word}
+                  </span>
+                  )
+                } else {
+                  globalIndex++;
+                }
+              })}
             </span>
-          );
-        } else if (!translation) {
-          // 翻訳されていない単語、または熟語の2番目以降の単語をスキップ
-          return (
-            <span
-              key={index}
-              onClick={() => handleClick(index)}
-              onMouseMove={() => handleMouseMove(index)}
-              className={`select-none cursor-pointer ${ document?.language !== 'ja' && document?.language !== 'zh' ? 'p-0.5' : '' } ${selectedWordsIndexes.includes(index) ? "bg-blue-300 dark:bg-blue-500" : "bg-transparent"}`}
-            >
-              {word}
-            </span>
-          );
-        }
-      })}
-      <div>
-        <TranslateModal
-          selectedWordsIndexes={selectedWordsIndexes}
-          selectedWords={selectedWords}
-        />
-      </div>
+          </React.Fragment>
+        ));
+      })()}
+      <TranslateModal selectedWordsIndexes={selectedWordsIndexes} selectedWords={selectedWords} />
     </div>
-  )
+  );
 }
 
 export default React.memo(TranslateDocument);

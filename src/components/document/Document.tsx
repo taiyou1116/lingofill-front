@@ -17,16 +17,19 @@ function DocumentComponent() {
   const { document, selectedMode, isLoading, isPlaying } = GrobalStore();
 
   const { t } = useTranslation();
-  const [words, setWords] = useState<string[] | undefined>(undefined);
+  const [sentences, setSentences] = useState<string[] | undefined>(undefined);
 
   useEffect(() => {
+    if (document === null) return;
+
     let tempWords: string[] | undefined;
-    if (document?.language === 'ja' || document?.language === 'zh') {
-      tempWords = document?.text?.split("");
+    if (document.language === 'ja' || document.language === 'zh') {
+      // 日本語ようの作成する!!
     } else {
-      tempWords = document?.text?.split(" ");
+      tempWords = splitTextToSegments(document.text);
     }
-    setWords(tempWords);
+    setSentences(tempWords);
+    // console.log("document: " + tempWords);
   }, [document]);
 
   const renderContentByMode = () => {
@@ -48,8 +51,8 @@ function DocumentComponent() {
       case 'edit':
         return (
           <TranslateDocument
-            words={words}
             document={document}
+            sentences={sentences!}
           />
         );
       case 'input':
@@ -75,7 +78,7 @@ function DocumentComponent() {
           { !isPlaying
           ? 
             <ReadingButton 
-              selectedWords={splitTextToSegments(document.text)}
+              sentences={sentences!}
               ln={document!.language}
             />
           :

@@ -6,12 +6,12 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 type Props = {
-  selectedWords: string[],
+  sentences: string[],
   ln: string,
 }
 
 function ReadingButton(props: Props) {
-  const { selectedWords, ln } = props;
+  const { sentences, ln } = props;
   const { setIsPlaying } = GrobalStore();
 
   const { t } = useTranslation();
@@ -35,12 +35,12 @@ function ReadingButton(props: Props) {
   };
 
   // number の変更を監視
-  useEffect(() => {
-    console.log(number);
-  }, [number]);
+  // useEffect(() => {
+  //   console.log(number);
+  // }, [number]);
 
   return (
-    <Tooltip title={t('document.modal.readingButton.readAloud')} className=' mr-2 cursor-pointer' onClick={() => listenTexts(selectedWords)}>
+    <Tooltip title={t('document.modal.readingButton.readAloud')} className=' mr-2 cursor-pointer' onClick={() => listenTexts(sentences)}>
       <VolumeUp style={{fontSize: 20}} className=' dark:text-gray-300' />
     </Tooltip>
   )
