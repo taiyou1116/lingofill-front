@@ -4,7 +4,7 @@ import { useStore } from "./store";
 export const GrobalStore = () => {
   const { 
     document, setDocument, documents, setDocuments, showCenterModal, flipCenterModal, showSidebar, flipShowSidebar, selectedWordsIndexes, setSelectedWordsIndexes,
-    selectedMode, setSelectedMode, isLoading, setIsLoading, username, isPlaying, setIsPlaying,
+    selectedMode, setSelectedMode, isLoading, setIsLoading, username, isPlaying, setIsPlaying, readingNumber, setReadingNumber,
   } = useStore(state => ({
     document: state.document,
     setDocument: state.setDocument,
@@ -29,10 +29,13 @@ export const GrobalStore = () => {
 
     isPlaying: state.isPlaying,
     setIsPlaying: state.setIsPlaying,
+
+    readingNumber: state.readingNumber,
+    setReadingNumber: state.setReadingNumber,
   }));
 
   return { 
     document, setDocument, documents, setDocuments, showCenterModal, flipCenterModal, showSidebar, flipShowSidebar, selectedWordsIndexes, setSelectedWordsIndexes,
-    selectedMode, setSelectedMode, isLoading, setIsLoading, username, isPlaying, setIsPlaying,
+    selectedMode, setSelectedMode, isLoading, setIsLoading, username, isPlaying, setIsPlaying, readingNumber, setReadingNumber,
   };
 }

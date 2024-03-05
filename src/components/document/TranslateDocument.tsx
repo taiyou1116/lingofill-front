@@ -11,7 +11,7 @@ type Props = {
 }
 function TranslateDocument(props: Props) {
   const { document, sentences } = props;
-  const { showCenterModal, flipCenterModal, selectedWordsIndexes, setSelectedWordsIndexes } = GrobalStore();
+  const { showCenterModal, flipCenterModal, selectedWordsIndexes, setSelectedWordsIndexes, readingNumber } = GrobalStore();
 
   // ドラッグ処理(熟語処理)
   const [words, setWords] = useState<string[] | undefined>(undefined);
@@ -36,11 +36,9 @@ function TranslateDocument(props: Props) {
 
     const translation = document!.translations.find(translation => translation.indexes.includes(index));
     if (translation) {
-      console.log("translation: " + index);
       setSelectedWordsIndexes(translation.indexes);
       setSelectedWords(translation.indexes.map((i) => words![i]).join(' '));
     } else {
-      console.log(index);
       setSelectedWordsIndexes([index]);
       setSelectedWords( words![index]);
     }
@@ -95,7 +93,7 @@ function TranslateDocument(props: Props) {
 
         return sentences.map((sentence, sentenceIndex) => (
           <React.Fragment key={sentenceIndex}>
-            <span className="break-all" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+            <span className={`break-all  ${ sentenceIndex === readingNumber ? ' bg-yellow-600/50' : '' }`} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
               {sentence.split(" ").map((word) => {
                 // この時点での globalIndex の値を captureIndex として保存
                 const captureIndex = globalIndex;

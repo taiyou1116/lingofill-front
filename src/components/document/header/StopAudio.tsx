@@ -5,11 +5,13 @@ import { Tooltip } from '@mui/material'
 import React from 'react'
 
 function StopAudio() {
-  const { setIsPlaying } = GrobalStore();
+  const { setIsPlaying, setReadingNumber } = GrobalStore();
+  
 
   const StopReading = () => {
     setIsPlaying(false);
     stopAudio();
+    setReadingNumber(-1);
   }
 
   return (

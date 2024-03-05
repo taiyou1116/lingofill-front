@@ -29,7 +29,6 @@ function DocumentComponent() {
       tempWords = splitTextToSegments(document.text);
     }
     setSentences(tempWords);
-    // console.log("document: " + tempWords);
   }, [document]);
 
   const renderContentByMode = () => {
@@ -80,6 +79,7 @@ function DocumentComponent() {
             <ReadingButton 
               sentences={sentences!}
               ln={document!.language}
+              shouldIncrement={true}
             />
           :
             <StopAudio />

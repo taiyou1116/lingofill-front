@@ -57,4 +57,8 @@ export type state = {
 
     isPlaying: boolean,
     setIsPlaying: (state: boolean) => void;
+
+    readingNumber: number,
+    // setReadingNumber の新しい型シグネチャ
+    setReadingNumber: (value: number | ((prevNumber: number) => number)) => void;
 }

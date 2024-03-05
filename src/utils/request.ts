@@ -252,5 +252,6 @@ export async function stopAudio() {
 }
 
 export function splitTextToSegments(text: string) {
-  return text.split(/(?<=[\.|\?|!])/);
+  // return text.split(/(?<=[\.|\?|!])/);
+  return text.split(/(?<=[.?!])\s+/);
 }

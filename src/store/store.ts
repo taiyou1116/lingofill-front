@@ -58,4 +58,12 @@ export const useStore = create<state>((set) => ({
     setIsPlaying: (state: boolean) => {
         set({ isPlaying: state })
     },
+
+    readingNumber: -1,
+    setReadingNumber: (value: number | UpdateFunction) => {
+        set(({ readingNumber }) => ({
+            readingNumber: typeof value === 'function' ? value(readingNumber) : value
+        }));
+    },
 }))
+type UpdateFunction = (prevNumber: number) => number;

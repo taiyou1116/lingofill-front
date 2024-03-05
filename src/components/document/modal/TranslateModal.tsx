@@ -28,27 +28,27 @@ function TranslateModal(props: TranslateModalProps) {
     - 選んだワードの翻訳 
     - ブロック、メモがすでにある場合は格納 
   */
-  // useEffect(() => {
-  //   if (document === null) return;
+  useEffect(() => {
+    if (document === null) return;
 
-  //   const translateTextAsync = async () => {
-  //     const translatedText = await translateText(selectedWords, document.language, document.translateLanguage);
-  //     if (translatedText === undefined) return;
-  //     setTranslatedWords(translatedText);
-  //   }
+    const translateTextAsync = async () => {
+      const translatedText = await translateText(selectedWords, document.language, document.translateLanguage);
+      if (translatedText === undefined) return;
+      setTranslatedWords(translatedText);
+    }
     
-  //   const translation = document.translations.find(translation => translation.indexes.includes(selectedWordsIndexes[0]));
+    const translation = document.translations.find(translation => translation.indexes.includes(selectedWordsIndexes[0]));
 
-  //   if (translation === undefined) {
-  //     setUserInputTranslation('');
-  //     setUserInputMemo('');
+    if (translation === undefined) {
+      setUserInputTranslation('');
+      setUserInputMemo('');
 
-  //   } else {
-  //     setUserInputTranslation(translation.translatedText);
-  //     setUserInputMemo(translation.memo);
-  //   }
-  //   translateTextAsync();
-  // }, [selectedWords])
+    } else {
+      setUserInputTranslation(translation.translatedText);
+      setUserInputMemo(translation.memo);
+    }
+    translateTextAsync();
+  }, [selectedWords])
 
   return (
     <ModalCenter>
@@ -56,17 +56,19 @@ function TranslateModal(props: TranslateModalProps) {
           <div className=' w-full flex flex-col justify-center items-center gap-3'>
             <div className=' flex gap-3 items-center justify-center'>
               <span className={`selectedWordsContainer `}>
-                {/* <ReadingButton 
+                <ReadingButton 
                   sentences={splitTextToSegments(selectedWords)}
                   ln={document!.language}
-                /> */}
+                  shouldIncrement={false}
+                />
                 { selectedWords }
               </span>
               <span className='selectedWordsContainer bg-gray-200 dark:bg-gray-900 p-1'>
-                {/* <ReadingButton 
+                <ReadingButton 
                   sentences={splitTextToSegments(translatedWords)}
                   ln={document!.translateLanguage}
-                /> */}
+                  shouldIncrement={false}
+                />
                 { translatedWords }
               </span>
             </div>
