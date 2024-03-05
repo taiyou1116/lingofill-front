@@ -1,11 +1,11 @@
-import { GrobaltStore } from '@/store/grobalStore';
+import { GrobalStore } from '@/store/grobalStore';
 import { updateText } from '@/utils/request';
 import { CheckCircle, CloudUpload } from '@mui/icons-material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 function SendDocumentDataButton() {
-  const { document, documents, setDocuments, username } = GrobaltStore();
+  const { document, documents, setDocuments, username } = GrobalStore();
   const { t } = useTranslation();
 
   const updateDocuments = async () => {

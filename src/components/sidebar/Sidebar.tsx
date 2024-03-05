@@ -6,11 +6,11 @@ import React, { useState } from 'react';
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
 import { Skeleton, Tooltip, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { GrobaltStore } from '@/store/grobalStore';
+import { GrobalStore } from '@/store/grobalStore';
 import SidebarDocuments from './SidebarDocuments';
 
 function SidebarComponent() {
-  const { showSidebar, flipShowSidebar, documents } = GrobaltStore();
+  const { showSidebar, flipShowSidebar, documents } = GrobalStore();
   const { t } = useTranslation();
 
   const [createNewDocument, setCreateNewDocument] = useState<boolean>(false);

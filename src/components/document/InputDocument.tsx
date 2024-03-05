@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import debounce from "lodash/debounce";
 import { Document } from '@/types/types';
 import { useTranslation } from 'react-i18next';
-import { GrobaltStore } from '@/store/grobalStore';
+import { GrobalStore } from '@/store/grobalStore';
 
 function InputDocument() {
-  const { document, setDocument, documents, setDocuments } = GrobaltStore();
+  const { document, setDocument, documents, setDocuments } = GrobalStore();
 
   const { t } = useTranslation();
   const [inputText, setInputText] = useState(document!.text);

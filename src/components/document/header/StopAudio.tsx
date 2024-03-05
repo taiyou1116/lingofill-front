@@ -1,11 +1,11 @@
-import { GrobaltStore } from '@/store/grobalStore'
+import { GrobalStore } from '@/store/grobalStore'
 import { stopAudio } from '@/utils/request'
 import { StopCircle } from '@mui/icons-material'
 import { Tooltip } from '@mui/material'
 import React from 'react'
 
 function StopAudio() {
-  const { setIsPlaying } = GrobaltStore();
+  const { setIsPlaying } = GrobalStore();
 
   const StopReading = () => {
     setIsPlaying(false);

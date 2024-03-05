@@ -213,7 +213,7 @@ if (typeof window !== 'undefined') {
 export { audioStream };
 
 // translateDocumentでの再生(文章を1つずつ取得)
-export async function processAndSpeak(textSegments: string[], voice: string, onPlay: () => void, onEnd: () => void ) {
+export async function processAndSpeak(textSegments: string[], voice: string, onPlay: () => void, onEnd: () => void, plusOne: () => void ) {
   onPlay();
   if (audioStream !== undefined) {
     if (!audioStream.paused) {
@@ -226,6 +226,7 @@ export async function processAndSpeak(textSegments: string[], voice: string, onP
       // Amazon Pollyへのリクエストを送信して音声データを取得
       audioStream = await convertTextToSpeech(segment, voice);
       await playAudioStream(audioStream);
+      plusOne();
     } catch (error) {
       console.error("Error processing text segment:", error);
     }

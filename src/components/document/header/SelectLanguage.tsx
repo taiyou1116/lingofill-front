@@ -1,11 +1,11 @@
-import { GrobaltStore } from '@/store/grobalStore';
+import { GrobalStore } from '@/store/grobalStore';
 import { TrendingFlat } from '@mui/icons-material'
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, ThemeProvider, createTheme, useMediaQuery } from '@mui/material'
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 function SelectLanguage() {
-  const { document, setDocument, documents, setDocuments } = GrobaltStore();
+  const { document, setDocument, documents, setDocuments } = GrobalStore();
 
   const { t } = useTranslation();
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');

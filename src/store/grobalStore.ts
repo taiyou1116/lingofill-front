@@ -1,7 +1,7 @@
 import { useStore } from "./store";
 
 
-export const GrobaltStore = () => {
+export const GrobalStore = () => {
   const { 
     document, setDocument, documents, setDocuments, showCenterModal, flipCenterModal, showSidebar, flipShowSidebar, selectedWordsIndexes, setSelectedWordsIndexes,
     selectedMode, setSelectedMode, isLoading, setIsLoading, username, isPlaying, setIsPlaying,

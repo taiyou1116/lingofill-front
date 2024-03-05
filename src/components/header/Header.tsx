@@ -8,10 +8,10 @@ import { Toaster } from "react-hot-toast";
 import { Menu, MenuItem, Tooltip } from "@mui/material";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { GrobaltStore } from "@/store/grobalStore";
+import { GrobalStore } from "@/store/grobalStore";
 
 function HeaderComponent() {
-  const {flipShowSidebar} = GrobaltStore();
+  const {flipShowSidebar} = GrobalStore();
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
   

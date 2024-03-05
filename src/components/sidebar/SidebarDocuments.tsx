@@ -7,7 +7,7 @@ import UploadDocumentButton from './sidebarDocument/UploadDocumentButton';
 import EditTitle from './sidebarDocument/EditTitle';
 import DeleteTextButton from './sidebarDocument/DeleteTextButton';
 import { useTranslation } from 'react-i18next';
-import { GrobaltStore } from '@/store/grobalStore';
+import { GrobalStore } from '@/store/grobalStore';
 
 type Props = {
   createNewDocument: boolean,
@@ -18,7 +18,7 @@ type Props = {
 
 function SidebarDocuments(props: Props) {
   const { createNewDocument, setCreateNewDocument, documents, flipShowSidebar } = props;
-  const { username, setIsLoading, setDocument, setDocuments, document } = GrobaltStore();
+  const { username, setIsLoading, setDocument, setDocuments, document } = GrobalStore();
   const { t } = useTranslation();
   const [inputNameIndex, setInputNameIndex] = useState<number>(-1);
   const inputRef = useRef<HTMLInputElement>(null);

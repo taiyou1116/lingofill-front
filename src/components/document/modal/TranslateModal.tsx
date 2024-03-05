@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState } from 'react'
 import "../../../app/globals.css";
-import { translateText } from '@/utils/request';
+import { splitTextToSegments, translateText } from '@/utils/request';
 import ReadingButton from './ReadingButton';
 import InputBlock from './InputBlock';
 import InputMemo from './InputMemo';
 import SaveButton from './SaveButton';
 import DeleteBlockButton from './DeleteBlockButton';
-import { GrobaltStore } from '@/store/grobalStore';
+import { GrobalStore } from '@/store/grobalStore';
 import ModalCenter from './ModalCenter';
 
 type TranslateModalProps = {
@@ -18,7 +18,7 @@ type TranslateModalProps = {
 
 function TranslateModal(props: TranslateModalProps) {
   const { selectedWordsIndexes, selectedWords } = props;
-  const { document, setDocument, documents, setDocuments } = GrobaltStore();
+  const { document, setDocument, documents, setDocuments } = GrobalStore();
   
   const [userInputTranslation, setUserInputTranslation] = useState('');
   const [userInputMemo, setUserInputMemo] = useState('');
@@ -30,6 +30,7 @@ function TranslateModal(props: TranslateModalProps) {
   */
   useEffect(() => {
     if (document === null) return;
+
     const translateTextAsync = async () => {
       const translatedText = await translateText(selectedWords, document.language, document.translateLanguage);
       if (translatedText === undefined) return;
@@ -37,9 +38,11 @@ function TranslateModal(props: TranslateModalProps) {
     }
     
     const translation = document.translations.find(translation => translation.indexes.includes(selectedWordsIndexes[0]));
+
     if (translation === undefined) {
       setUserInputTranslation('');
       setUserInputMemo('');
+
     } else {
       setUserInputTranslation(translation.translatedText);
       setUserInputMemo(translation.memo);
@@ -54,14 +57,14 @@ function TranslateModal(props: TranslateModalProps) {
             <div className=' flex gap-3 items-center justify-center'>
               <span className={`selectedWordsContainer `}>
                 <ReadingButton 
-                  selectedWords={selectedWords}
+                  selectedWords={splitTextToSegments(selectedWords)}
                   ln={document!.language}
                 />
                 { selectedWords }
               </span>
               <span className='selectedWordsContainer bg-gray-200 dark:bg-gray-900 p-1'>
                 <ReadingButton 
-                  selectedWords={translatedWords}
+                  selectedWords={splitTextToSegments(translatedWords)}
                   ln={document!.translateLanguage}
                 />
                 { translatedWords }

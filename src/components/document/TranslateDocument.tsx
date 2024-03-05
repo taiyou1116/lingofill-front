@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Tooltip } from "@mui/material";
 import { m_plus_rounded_1c } from "@/store/fontStore";
 import { Document } from "@/types/types";
-import { GrobaltStore } from "@/store/grobalStore";
+import { GrobalStore } from "@/store/grobalStore";
 import TranslateModal from "./modal/TranslateModal";
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 }
 function TranslateDocument(props: Props) {
   const { words, document } = props;
-  const { showCenterModal, flipCenterModal, selectedWordsIndexes, setSelectedWordsIndexes } = GrobaltStore();
+  const { showCenterModal, flipCenterModal, selectedWordsIndexes, setSelectedWordsIndexes } = GrobalStore();
 
   // ドラッグ処理(熟語処理)
   const [isDragging, setIsDragging] = useState(false);

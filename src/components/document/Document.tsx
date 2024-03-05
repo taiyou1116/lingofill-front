@@ -8,12 +8,13 @@ import StopAudio from "./header/StopAudio";
 import SelectLanguage from "./header/SelectLanguage";
 import InputDocument from "./InputDocument";
 import TranslateDocument from "./TranslateDocument";
-import { GrobaltStore } from "@/store/grobalStore";
+import { GrobalStore } from "@/store/grobalStore";
 import SendDocumentDataButton from "./header/SendDocumentDataButton";
 import ThreeWayToggle from "./header/ThreeWayToggle";
+import { splitTextToSegments } from "@/utils/request";
 
 function DocumentComponent() {
-  const { document, selectedMode, isLoading, isPlaying } = GrobaltStore();
+  const { document, selectedMode, isLoading, isPlaying } = GrobalStore();
 
   const { t } = useTranslation();
   const [words, setWords] = useState<string[] | undefined>(undefined);
@@ -74,7 +75,7 @@ function DocumentComponent() {
           { !isPlaying
           ? 
             <ReadingButton 
-              selectedWords={document.text}
+              selectedWords={splitTextToSegments(document.text)}
               ln={document!.language}
             />
           :

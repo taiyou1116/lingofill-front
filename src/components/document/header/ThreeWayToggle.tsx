@@ -5,10 +5,10 @@ import { ThemeProvider, ToggleButton, ToggleButtonGroup, createTheme, useMediaQu
 import { SelectedMode } from '@/types/types';
 import { TextSnippet, Translate } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
-import { GrobaltStore } from '@/store/grobalStore';
+import { GrobalStore } from '@/store/grobalStore';
 
 function ThreeWayToggle() {
-  const { setSelectedMode } = GrobaltStore();
+  const { setSelectedMode } = GrobalStore();
   const { t } = useTranslation();
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 

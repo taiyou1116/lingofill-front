@@ -3,7 +3,7 @@
 import React, { ReactNode } from 'react'
 import "../../../app/globals.css";
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
-import { GrobaltStore } from '@/store/grobalStore';
+import { GrobalStore } from '@/store/grobalStore';
 
 type ModalCenterProps = {
   children: ReactNode,
@@ -11,7 +11,7 @@ type ModalCenterProps = {
 
 function ModalCenterComponent(props: ModalCenterProps) {
   const { children } = props;
-  const { showCenterModal, flipCenterModal } = GrobaltStore();
+  const { showCenterModal, flipCenterModal } = GrobalStore();
 
   return (
     <div className={` fixed z-10 inset-0 flex items-center justify-center ${showCenterModal ? '' : ' pointer-events-none'}`}>
