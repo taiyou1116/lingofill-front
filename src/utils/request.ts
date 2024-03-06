@@ -253,9 +253,9 @@ export async function stopAudio() {
 
 export function splitTextToSegments(text: string, ln: string | undefined) {
   if (ln === 'ja' || ln === 'zh') {
-    return text.split(/(?<=[。!?])\s+/);
+    // return text.split(/(?<=[。!?])\s+/);
+    return text.split(/(?<=[。!?])/);
   } else {
     return text.split(/(?<=[.?!])\s+/);
   } 
-  // return text.split(/(?<=[.?!])\s+/);
 }
