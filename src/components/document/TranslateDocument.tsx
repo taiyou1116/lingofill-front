@@ -4,6 +4,7 @@ import { m_plus_rounded_1c } from "@/store/fontStore";
 import { Document } from "@/types/types";
 import { GrobalStore } from "@/store/grobalStore";
 import TranslateModal from "./modal/TranslateModal";
+import { judgeSpaceLanguage } from "@/utils/helper";
 
 type Props = {
   document: Document | null,
@@ -24,10 +25,10 @@ function TranslateDocument(props: Props) {
     if (document === null) return;
 
     let tempWords: string[];
-    if (document.language === 'ja' || document.language === 'zh') {
-      tempWords = sentences.map((s) => s.split("")).flat();
-    } else {
+    if (judgeSpaceLanguage(document.language)) {
       tempWords = sentences.map((s) => s.split(" ")).flat();
+    } else {
+      tempWords = sentences.map((s) => s.split("")).flat();
     }
     setWords(tempWords);
   }, [sentences]);

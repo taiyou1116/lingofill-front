@@ -6,22 +6,12 @@ import { SelectedMode } from '@/types/types';
 import { TextSnippet, Translate } from '@mui/icons-material';
 import { useTranslation } from 'react-i18next';
 import { GrobalStore } from '@/store/grobalStore';
+import { useThemeMode } from '@/hooks/hooks';
 
 function ThreeWayToggle() {
   const { setSelectedMode } = GrobalStore();
   const { t } = useTranslation();
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-
-  // ダークモードまたはライトモードのテーマを動的に生成
-  const theme = React.useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: prefersDarkMode ? 'dark' : 'light',
-        },
-      }),
-    [prefersDarkMode]
-  );
+  const theme = useThemeMode();
 
   const [selectedMode, setSelectedModeLocal] = useState<SelectedMode>('input');
 

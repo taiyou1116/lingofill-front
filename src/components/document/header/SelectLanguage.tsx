@@ -1,3 +1,4 @@
+import { useThemeMode } from '@/hooks/hooks';
 import { GrobalStore } from '@/store/grobalStore';
 import { TrendingFlat } from '@mui/icons-material'
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, ThemeProvider, createTheme, useMediaQuery } from '@mui/material'
@@ -8,18 +9,7 @@ function SelectLanguage() {
   const { document, setDocument, documents, setDocuments } = GrobalStore();
 
   const { t } = useTranslation();
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-
-  // ダークモードまたはライトモードのテーマを動的に生成
-  const theme = React.useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: prefersDarkMode ? 'dark' : 'light',
-        },
-      }),
-    [prefersDarkMode]
-  );
+  const theme = useThemeMode();
 
   // 変更したらdocuments, documentを更新
   const changeLanguage = (language: string) => {
