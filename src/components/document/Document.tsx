@@ -17,14 +17,15 @@ function DocumentComponent() {
   const { document, selectedMode, isLoading, isPlaying } = GrobalStore();
 
   const { t } = useTranslation();
-  const [sentences, setSentences] = useState<string[] | undefined>(undefined);
+  const [sentences, setSentences] = useState<string[]>([]);
 
   useEffect(() => {
     if (document === null) return;
 
-    let tempWords: string[] | undefined;
+    let tempWords: string[];
     if (document.language === 'ja' || document.language === 'zh') {
       // 日本語ようの作成する!!
+      tempWords = splitTextToSegments(document.text);
     } else {
       tempWords = splitTextToSegments(document.text);
     }

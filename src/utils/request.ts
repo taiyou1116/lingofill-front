@@ -252,6 +252,10 @@ export async function stopAudio() {
 }
 
 export function splitTextToSegments(text: string) {
-  // return text.split(/(?<=[\.|\?|!])/);
+  // if (partingNote) {
+  //   return text.split(/(?<=[.?!])\s+/);
+  // } else {
+  //   return text.split(/(?<=[。!?])\s+/);
+  // } 
   return text.split(/(?<=[.?!])\s+/);
 }

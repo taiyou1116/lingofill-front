@@ -14,21 +14,23 @@ function TranslateDocument(props: Props) {
   const { showCenterModal, flipCenterModal, selectedWordsIndexes, setSelectedWordsIndexes, readingNumber } = GrobalStore();
 
   // ドラッグ処理(熟語処理)
-  const [words, setWords] = useState<string[] | undefined>(undefined);
+  const [words, setWords] = useState<string[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const [selectedWords, setSelectedWords] = useState('hello');
   const [startDragIndex, setStartDragIndex] = useState<number | null>(null); // ドラッグ開始インデックス 
 
   // 単語用 -> sentencesからさらに分割
   useEffect(() => {
-    let tempWords: string[] | undefined;
-    if (document?.language === 'ja' || document?.language === 'zh') {
+    if (document === null) return;
+
+    let tempWords: string[];
+    if (document.language === 'ja' || document.language === 'zh') {
       tempWords = sentences.map((s) => s.split("")).flat();
     } else {
       tempWords = sentences.map((s) => s.split(" ")).flat();
     }
     setWords(tempWords);
-  }, [document]);
+  }, [sentences]);
   
   // 単語編集処理
   const handleClick = (index: number) => {
@@ -37,10 +39,10 @@ function TranslateDocument(props: Props) {
     const translation = document!.translations.find(translation => translation.indexes.includes(index));
     if (translation) {
       setSelectedWordsIndexes(translation.indexes);
-      setSelectedWords(translation.indexes.map((i) => words![i]).join(' '));
+      setSelectedWords(translation.indexes.map((i) => words[i]).join(' '));
     } else {
       setSelectedWordsIndexes([index]);
-      setSelectedWords( words![index]);
+      setSelectedWords( words[index]);
     }
     flipCenterModal();
   };
@@ -82,7 +84,7 @@ function TranslateDocument(props: Props) {
     setStartDragIndex(null);
     if (selectedWordsIndexes.length > 0) {
       flipCenterModal();
-      setSelectedWords(selectedWordsIndexes.map((i) => words![i]).join(' '));
+      setSelectedWords(selectedWordsIndexes.map((i) => words[i]).join(' '));
     }
   };
 
@@ -94,40 +96,39 @@ function TranslateDocument(props: Props) {
         return sentences.map((sentence, sentenceIndex) => (
           <React.Fragment key={sentenceIndex}>
             <span className={`break-all  ${ sentenceIndex === readingNumber ? ' bg-yellow-600/50' : '' }`} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
-              {sentence.split(" ").map((word) => {
+              {sentence.split(' ').map((word) => {
                 // この時点での globalIndex の値を captureIndex として保存
                 const captureIndex = globalIndex;
                 const translation = document!.translations.find(translation => translation.indexes.includes(captureIndex));
                 
                 if (translation && translation.indexes[0] === captureIndex) {
                   globalIndex++;
-                  return(
+                  return (
                     <span
-                    key={captureIndex}
-                    onClick={() => handleClick(captureIndex)} // captureIndex を使用
-                    onMouseMove={() => handleMouseMove(captureIndex)} // captureIndex を使用
-                    className={`select-none py-0.5 px-1 mx-0.5 cursor-pointer rounded-md bg-slate-200 dark:bg-slate-900 text-sm`}
-                  >
-                    <Tooltip title={<div className={`text-sm ${m_plus_rounded_1c.className}`}>{translation.memo}</div>}>
-                      <span>{translation.translatedText}</span>
-                    </Tooltip>
-                  </span>
+                      key={captureIndex}
+                      onClick={() => handleClick(captureIndex)} // captureIndex を使用
+                      onMouseMove={() => handleMouseMove(captureIndex)} // captureIndex を使用
+                      className={`select-none py-0.5 px-1 mx-0.5 cursor-pointer rounded-md bg-slate-200 dark:bg-slate-900 text-sm`}
+                    >
+                      <Tooltip title={<div className={`text-sm ${m_plus_rounded_1c.className}`}>{translation.memo}</div>}>
+                        <span>{translation.translatedText}</span>
+                      </Tooltip>
+                    </span>
                   )
                 } else if (!translation) {
                   globalIndex++;
-                  return(
+                  return (
                     <span
-                    key={captureIndex}
-                    onClick={() => handleClick(captureIndex)} // captureIndex を使用
-                    onMouseMove={() => handleMouseMove(captureIndex)} // captureIndex を使用
-                    className={`select-none cursor-pointer ${document?.language !== 'ja' && document?.language !== 'zh' ? 'p-0.5' : ''} ${selectedWordsIndexes.includes(captureIndex) ? "bg-blue-300 dark:bg-blue-500" : "bg-transparent"}`}
-                  >
-                    {word}
-                  </span>
+                      key={captureIndex}
+                      onClick={() => handleClick(captureIndex)} // captureIndex を使用
+                      onMouseMove={() => handleMouseMove(captureIndex)} // captureIndex を使用
+                      className={`select-none cursor-pointer ${document?.language !== 'ja' && document?.language !== 'zh' ? 'p-0.5' : ''} ${selectedWordsIndexes.includes(captureIndex) ? "bg-blue-300 dark:bg-blue-500" : "bg-transparent"}`}
+                    >
+                      {word}
+                    </span>
                   )
-                } else {
-                  globalIndex++;
-                }
+                } 
+                globalIndex++;
               })}
             </span>
           </React.Fragment>
