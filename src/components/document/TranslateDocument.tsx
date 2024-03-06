@@ -84,7 +84,11 @@ function TranslateDocument(props: Props) {
     setStartDragIndex(null);
     if (selectedWordsIndexes.length > 0) {
       flipCenterModal();
-      setSelectedWords(selectedWordsIndexes.map((i) => words[i]).join(' '));
+      if (document?.language === 'ja' || document?.language === 'zh') {
+        setSelectedWords(selectedWordsIndexes.map((i) => words[i]).join(''));
+      } else {
+        setSelectedWords(selectedWordsIndexes.map((i) => words[i]).join(' '));
+      }
     }
   };
 
@@ -96,7 +100,7 @@ function TranslateDocument(props: Props) {
         return sentences.map((sentence, sentenceIndex) => (
           <React.Fragment key={sentenceIndex}>
             <span className={`break-all  ${ sentenceIndex === readingNumber ? ' bg-yellow-600/50' : '' }`} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
-              {sentence.split(' ').map((word) => {
+              {(document?.language === 'ja' || document?.language === 'zh' ? sentence.split('') : sentence.split(' ')).map((word) => {
                 // この時点での globalIndex の値を captureIndex として保存
                 const captureIndex = globalIndex;
                 const translation = document!.translations.find(translation => translation.indexes.includes(captureIndex));

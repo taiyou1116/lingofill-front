@@ -1,6 +1,5 @@
 amplify-auth -> https://docs.amplify.aws/javascript/build-a-backend/auth/manage-user-session/
 
-React.memo調べる
 リクエスト理解する
 
 実装
@@ -8,14 +7,14 @@ React.memo調べる
 
 - 好きなところから再生 ... 処理をReadingButtonから他のところへ
 - ぼかし
-- 日本語、中国語対応。 ... 着手, 表示とModal
+- 日本語、中国語対応。 ... 着手 表示とModal(空白が入る), 音声で一度にすべて再生される
 
-- AIで詳細を記入できたらおもろいかも(課金)
 - useEffectが適切か(全コンポーネントでログ)
-
 - Documentも5つずつくらい取得する方がいいかも
-- 説明のdoc
 - お気に入り登録、単語、熟語集(問題も) ... 中
+- AIで詳細を記入できたらおもろいかも(課金)
+- 説明のdoc
+
 
 バグ
 テキスト作成 -> テキスト入力 -> タイトル編集

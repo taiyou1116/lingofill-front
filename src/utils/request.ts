@@ -251,11 +251,11 @@ export async function stopAudio() {
   }
 }
 
-export function splitTextToSegments(text: string) {
-  // if (partingNote) {
-  //   return text.split(/(?<=[.?!])\s+/);
-  // } else {
-  //   return text.split(/(?<=[。!?])\s+/);
-  // } 
-  return text.split(/(?<=[.?!])\s+/);
+export function splitTextToSegments(text: string, ln: string | undefined) {
+  if (ln === 'ja' || ln === 'zh') {
+    return text.split(/(?<=[。!?])\s+/);
+  } else {
+    return text.split(/(?<=[.?!])\s+/);
+  } 
+  // return text.split(/(?<=[.?!])\s+/);
 }

@@ -57,7 +57,7 @@ function TranslateModal(props: TranslateModalProps) {
             <div className=' flex gap-3 items-center justify-center'>
               <span className={`selectedWordsContainer `}>
                 <ReadingButton 
-                  sentences={splitTextToSegments(selectedWords)}
+                  sentences={splitTextToSegments(selectedWords, document?.language)}
                   ln={document!.language}
                   shouldIncrement={false}
                 />
@@ -65,7 +65,7 @@ function TranslateModal(props: TranslateModalProps) {
               </span>
               <span className='selectedWordsContainer bg-gray-200 dark:bg-gray-900 p-1'>
                 <ReadingButton 
-                  sentences={splitTextToSegments(translatedWords)}
+                  sentences={splitTextToSegments(translatedWords, document?.translateLanguage)}
                   ln={document!.translateLanguage}
                   shouldIncrement={false}
                 />

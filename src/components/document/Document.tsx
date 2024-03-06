@@ -23,12 +23,13 @@ function DocumentComponent() {
     if (document === null) return;
 
     let tempWords: string[];
-    if (document.language === 'ja' || document.language === 'zh') {
-      // 日本語ようの作成する!!
-      tempWords = splitTextToSegments(document.text);
-    } else {
-      tempWords = splitTextToSegments(document.text);
-    }
+    // if (document.language === 'ja' || document.language === 'zh') {
+    //   // 日本語ようの作成する!!
+    //   tempWords = splitTextToSegments(document.text, document.language);
+    // } else {
+    //   tempWords = splitTextToSegments(document.text, document.language);
+    // }
+    tempWords = splitTextToSegments(document.text, document.language);
     setSentences(tempWords);
   }, [document]);
 
