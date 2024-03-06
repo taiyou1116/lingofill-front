@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react'
 import "../../../app/globals.css";
-import { splitTextToSegments, translateText } from '@/utils/request';
+import { splitTextToSegments, translateText } from '@/utils/helper';
 import ReadingButton from './ReadingButton';
 import InputBlock from './InputBlock';
 import InputMemo from './InputMemo';

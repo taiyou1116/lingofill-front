@@ -6,7 +6,7 @@ amplify-auth -> https://docs.amplify.aws/javascript/build-a-backend/auth/manage-
 差分(変更した項目のみ)を送信
 
 - 好きなところから再生 ... 処理をReadingButtonから他のところへ
-- ヘルパー関数で綺麗に
+- ヘルパー関数で綺麗に, zh, ja判定、その他
 - ぼかし
 
 

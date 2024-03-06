@@ -11,7 +11,7 @@ import TranslateDocument from "./TranslateDocument";
 import { GrobalStore } from "@/store/grobalStore";
 import SendDocumentDataButton from "./header/SendDocumentDataButton";
 import ThreeWayToggle from "./header/ThreeWayToggle";
-import { splitTextToSegments } from "@/utils/request";
+import { splitTextToSegments } from "@/utils/helper";
 
 function DocumentComponent() {
   const { document, selectedMode, isLoading, isPlaying } = GrobalStore();

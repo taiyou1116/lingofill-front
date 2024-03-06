@@ -1,5 +1,5 @@
 import { GrobalStore } from '@/store/grobalStore'
-import { stopAudio } from '@/utils/request'
+import { stopAudio } from '@/utils/helper'
 import { StopCircle } from '@mui/icons-material'
 import { Tooltip } from '@mui/material'
 import React from 'react'

@@ -18,15 +18,6 @@ const MyApp = () => {
     setUsername:  store.setUsername,
   }));
 
-  // async function currentAuthenticatedUser() {
-  //   try {
-  //     const { username } = await getCurrentUser();
-  //     return username;
-  //   } catch (err) {
-  //     console.log("getCurrentUserエラー: " + err);
-  //   }
-  // }
-
   useEffect(() => {
     async function handleAutoSignIn() {
       try {

@@ -62,3 +62,9 @@ export type state = {
     // setReadingNumber の新しい型シグネチャ
     setReadingNumber: (value: number | ((prevNumber: number) => number)) => void;
 }
+
+export type LanguageVoiceMap = {
+    [languageCode: string]: string;
+}
+
+export type UpdateFunction = (prevNumber: number) => number;

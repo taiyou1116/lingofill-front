@@ -1,7 +1,6 @@
 // アプリ全体で共有する状態を管理
 
-import { state } from "@/types/types";
-import { Document, SelectedMode } from "@/types/types";
+import { Document, SelectedMode, UpdateFunction, state } from "@/types/types";
 import { create } from "zustand";
 
 export const useStore = create<state>((set) => ({
@@ -66,4 +65,3 @@ export const useStore = create<state>((set) => ({
         }));
     },
 }))
-type UpdateFunction = (prevNumber: number) => number;

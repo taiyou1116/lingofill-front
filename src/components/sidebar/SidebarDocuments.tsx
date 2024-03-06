@@ -1,7 +1,8 @@
 import { Document } from '@/types/types'
 import { handleStopPropagation } from '@/utils/modal';
-import { createDate, getText } from '@/utils/request';
-import React, { Dispatch, SetStateAction, memo, useEffect, useRef, useState } from 'react'
+import { getText } from '@/utils/request';
+import { createDate } from '@/utils/helper';
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import CreateNewDocument from './sidebarDocument/CreateNewDocument';
 import UploadDocumentButton from './sidebarDocument/UploadDocumentButton';
 import EditTitle from './sidebarDocument/EditTitle';
