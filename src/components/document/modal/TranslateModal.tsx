@@ -42,7 +42,6 @@ function TranslateModal(props: TranslateModalProps) {
     if (translation === undefined) {
       setUserInputTranslation('');
       setUserInputMemo('');
-
     } else {
       setUserInputTranslation(translation.translatedText);
       setUserInputMemo(translation.memo);
@@ -75,14 +74,12 @@ function TranslateModal(props: TranslateModalProps) {
             ↓
             <InputBlock 
               selectedWords={selectedWords}
-              translatedWords={translatedWords}
               userInputTranslation={userInputTranslation}
               setUserInputTranslation={setUserInputTranslation}
             />
           </div>
         </div>
         <InputMemo 
-          selectedWords={selectedWords}
           translatedWords={translatedWords}
           userInputMemo={userInputMemo}
           setUserInputMemo={setUserInputMemo}

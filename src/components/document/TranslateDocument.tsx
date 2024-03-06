@@ -113,7 +113,7 @@ function TranslateDocument(props: Props) {
                       key={captureIndex}
                       onClick={() => handleClick(captureIndex)} // captureIndex を使用
                       onMouseMove={() => handleMouseMove(captureIndex)} // captureIndex を使用
-                      className={`select-none py-0.5 px-1 mx-0.5 cursor-pointer rounded-md bg-slate-200 dark:bg-slate-900 text-sm`}
+                      className={`select-none py-0.5 px-1 mx-0.5 cursor-pointer rounded-md bg-slate-200 dark:bg-slate-900/50 text-sm`}
                     >
                       <Tooltip title={<div className={`text-sm ${m_plus_rounded_1c.className}`}>{translation.memo}</div>}>
                         <span>{translation.translatedText}</span>
