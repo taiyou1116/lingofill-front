@@ -5,6 +5,7 @@ amplify-auth -> https://docs.amplify.aws/javascript/build-a-backend/auth/manage-
 実装
 差分(変更した項目のみ)を送信
 
+- Amplify.configure(awsExports) 何度もやっていいか
 - 重複modal, inputmemo, block
 - muiで自らダークモード指定のところを見る
 - ヘルパー関数で綺麗に, その他

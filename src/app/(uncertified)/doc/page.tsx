@@ -9,10 +9,11 @@ import { getCurrentUser } from "aws-amplify/auth";
 import { oswald } from "@/store/fontStore";
 import Image from "next/image";
 import { CheckCircle } from "@mui/icons-material";
-// import { Amplify } from "aws-amplify";
-// import amplifyconfig from '../../amplifyconfiguration.json';
+import { Amplify } from "aws-amplify";
+// import amplifyconfig from '../amplifyconfiguration.json';
+import awsExports from "../../../aws-exports";;
 
-// Amplify.configure(amplifyconfig);
+Amplify.configure(awsExports);
 function Doc() {
   const [login, setLogin] = useState(false);
 
