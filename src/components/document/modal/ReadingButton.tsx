@@ -36,7 +36,7 @@ function ReadingButton(props: Props) {
   };
 
   return (
-    <Tooltip title={t('document.modal.readingButton.readAloud')} className=' mr-2 cursor-pointer' onClick={() => listenTexts(sentences)}>
+    <Tooltip title={t('document.modal.readingButton.readAloud')} className=' mr-0.5 cursor-pointer' onClick={() => listenTexts(sentences)}>
       <VolumeUp style={{fontSize: 20}} className=' dark:text-gray-300' />
     </Tooltip>
   )

@@ -10,6 +10,8 @@ import SaveButton from './SaveButton';
 import DeleteBlockButton from './DeleteBlockButton';
 import { GrobalStore } from '@/store/grobalStore';
 import ModalCenter from './ModalCenter';
+import { ContentCopy } from '@mui/icons-material';
+import { Tooltip } from '@mui/material';
 
 type TranslateModalProps = {
   selectedWordsIndexes: number[],
@@ -54,33 +56,42 @@ function TranslateModal(props: TranslateModalProps) {
         <div className=' w-full'>
           <div className=' w-full flex flex-col justify-center items-center gap-3'>
             <div className=' flex gap-3 items-center justify-center'>
-              <span className={`selectedWordsContainer `}>
+              <div>
                 <ReadingButton 
                   sentences={splitTextToSegments(selectedWords, document?.language)}
                   ln={document!.language}
                   shouldIncrement={false}
                 />
-                { selectedWords }
-              </span>
-              <span className='selectedWordsContainer bg-gray-200 dark:bg-gray-900 p-1'>
+                <Tooltip title='コピー' className=' cursor-pointer' onClick={() => navigator.clipboard.writeText(selectedWords)}>
+                  <ContentCopy style={{fontSize: 20}} />
+                </Tooltip>
+                <span className={`selectedWordsContainer p-1`}>
+                  { selectedWords }
+                </span>
+              </div>
+              
+              <div>
                 <ReadingButton 
                   sentences={splitTextToSegments(translatedWords, document?.translateLanguage)}
                   ln={document!.translateLanguage}
                   shouldIncrement={false}
                 />
-                { translatedWords }
-              </span>
+                <Tooltip title='コピー' className=' cursor-pointer' onClick={() => navigator.clipboard.writeText(translatedWords)}>
+                  <ContentCopy style={{fontSize: 20}} />
+                </Tooltip>
+                <span className={`selectedWordsContainer bg-gray-200 dark:bg-gray-900 p-1`}>
+                  { translatedWords }
+                </span>
+              </div>
             </div>
             ↓
             <InputBlock 
-              selectedWords={selectedWords}
               userInputTranslation={userInputTranslation}
               setUserInputTranslation={setUserInputTranslation}
             />
           </div>
         </div>
         <InputMemo 
-          translatedWords={translatedWords}
           userInputMemo={userInputMemo}
           setUserInputMemo={setUserInputMemo}
         />

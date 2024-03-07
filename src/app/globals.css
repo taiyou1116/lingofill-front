@@ -35,6 +35,7 @@ body {
   max-height: 20vh; /* ビューポートの高さの1/3に設定 */
   overflow-y: auto; /* 内容が最大高さを超える場合にスクロールバーを表示 */
   display: block; /* span要素に適用する場合は必要 */
+  margin-top: 10px;
 }
 
 .memo-output {
