@@ -1,17 +1,15 @@
 "use client"
 
 import React, { useEffect, useState } from 'react'
-import "../../../app/globals.css";
+import { GrobalStore } from '@/store/grobalStore';
 import { splitTextToSegments, translateText } from '@/utils/helper';
-import ReadingButton from './ReadingButton';
-import InputBlock from './InputBlock';
 import InputMemo from './InputMemo';
 import SaveButton from './SaveButton';
-import DeleteBlockButton from './DeleteBlockButton';
-import { GrobalStore } from '@/store/grobalStore';
+import InputBlock from './InputBlock';
 import ModalCenter from './ModalCenter';
-import { ContentCopy } from '@mui/icons-material';
-import { Tooltip } from '@mui/material';
+import DeleteBlockButton from './DeleteBlockButton';
+import ReadAndCopyContainer from './ReadAndCopyContainer';
+import "../../../app/globals.css";
 
 type TranslateModalProps = {
   selectedWordsIndexes: number[],
@@ -56,33 +54,19 @@ function TranslateModal(props: TranslateModalProps) {
         <div className=' w-full'>
           <div className=' w-full flex flex-col justify-center items-center gap-3'>
             <div className=' flex gap-3 items-center justify-center'>
-              <div>
-                <ReadingButton 
-                  sentences={splitTextToSegments(selectedWords, document?.language)}
-                  ln={document!.language}
-                  shouldIncrement={false}
-                />
-                <Tooltip title='コピー' className=' cursor-pointer' onClick={() => navigator.clipboard.writeText(selectedWords)}>
-                  <ContentCopy style={{fontSize: 20}} />
-                </Tooltip>
-                <span className={`selectedWordsContainer p-1`}>
-                  { selectedWords }
-                </span>
-              </div>
-              
-              <div>
-                <ReadingButton 
-                  sentences={splitTextToSegments(translatedWords, document?.translateLanguage)}
-                  ln={document!.translateLanguage}
-                  shouldIncrement={false}
-                />
-                <Tooltip title='コピー' className=' cursor-pointer' onClick={() => navigator.clipboard.writeText(translatedWords)}>
-                  <ContentCopy style={{fontSize: 20}} />
-                </Tooltip>
-                <span className={`selectedWordsContainer bg-gray-200 dark:bg-gray-900 p-1`}>
-                  { translatedWords }
-                </span>
-              </div>
+              <ReadAndCopyContainer 
+                sentences={splitTextToSegments(selectedWords, document?.language)}
+                ln={document!.language}
+                shouldIncrement={false}
+                words={selectedWords}
+              />
+              <ReadAndCopyContainer 
+                sentences={splitTextToSegments(translatedWords, document?.translateLanguage)}
+                ln={document!.translateLanguage}
+                shouldIncrement={false}
+                words={translatedWords}
+                className='bg-gray-200 dark:bg-gray-900'
+              />
             </div>
             ↓
             <InputBlock 

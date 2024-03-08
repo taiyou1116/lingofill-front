@@ -1,15 +1,15 @@
 "use client"
 
-import { m_plus_rounded_1c } from '@/store/fontStore';
-import { EditNote, FolderDelete } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
-import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
-import { Tooltip } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 import { GrobalStore } from '@/store/grobalStore';
+import { m_plus_rounded_1c } from '@/store/fontStore';
+import { useTranslation } from 'react-i18next';
 import SidebarDocuments from './SidebarDocuments';
 import { getCurrentUser } from 'aws-amplify/auth';
 import { getTitles } from '@/utils/request';
+import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
+import { EditNote, FolderDelete } from '@mui/icons-material';
+import { Tooltip } from '@mui/material';
 
 function SidebarComponent() {
   const { showSidebar, flipShowSidebar, documents, setDocuments, username, setUsername } = GrobalStore();

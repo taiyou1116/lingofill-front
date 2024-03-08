@@ -1,9 +1,9 @@
 "use client"
 
 import React, { ReactNode } from 'react'
-import "../../../app/globals.css";
-import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
 import { GrobalStore } from '@/store/grobalStore';
+import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
+import "../../../app/globals.css";
 
 type ModalCenterProps = {
   children: ReactNode,

@@ -1,8 +1,9 @@
+
+import React from 'react';
 import { GrobalStore } from '@/store/grobalStore';
+import { useTranslation } from 'react-i18next';
 import { updateText } from '@/utils/request';
 import { CheckCircle, CloudUpload } from '@mui/icons-material';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 function SendDocumentDataButton() {
   const { document, documents, setDocuments, username } = GrobalStore();

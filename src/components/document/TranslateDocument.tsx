@@ -1,10 +1,11 @@
+
 import React, { useEffect, useState } from "react";
-import { Tooltip } from "@mui/material";
-import { m_plus_rounded_1c } from "@/store/fontStore";
-import { Document } from "@/types/types";
 import { GrobalStore } from "@/store/grobalStore";
-import TranslateModal from "./modal/TranslateModal";
+import { m_plus_rounded_1c } from "@/store/fontStore";
 import { judgeSpaceLanguage } from "@/utils/helper";
+import TranslateModal from "./modal/TranslateModal";
+import { Document } from "@/types/types";
+import { Tooltip } from "@mui/material";
 
 type Props = {
   document: Document | null,

@@ -1,8 +1,9 @@
+
 import React, { useEffect, useState } from 'react'
+import { GrobalStore } from '@/store/grobalStore';
+import { useTranslation } from 'react-i18next';
 import debounce from "lodash/debounce";
 import { Document } from '@/types/types';
-import { useTranslation } from 'react-i18next';
-import { GrobalStore } from '@/store/grobalStore';
 
 function InputDocument() {
   const { document, setDocument, documents, setDocuments } = GrobalStore();

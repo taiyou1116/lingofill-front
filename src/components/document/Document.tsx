@@ -1,17 +1,19 @@
+
 "use client"
-import { oswald } from "@/store/fontStore";
-import { Box, LinearProgress } from "@mui/material";
+
 import React, { useEffect, useState } from "react";
+import { GrobalStore } from "@/store/grobalStore";
 import { useTranslation } from "react-i18next";
+import { oswald } from "@/store/fontStore";
+import { splitTextToSegments } from "@/utils/helper";
+import InputDocument from "./InputDocument";
+import TranslateDocument from "./TranslateDocument";
 import ReadingButton from "./modal/ReadingButton";
 import StopAudio from "./header/StopAudio";
 import SelectLanguage from "./header/SelectLanguage";
-import InputDocument from "./InputDocument";
-import TranslateDocument from "./TranslateDocument";
-import { GrobalStore } from "@/store/grobalStore";
 import SendDocumentDataButton from "./header/SendDocumentDataButton";
 import ThreeWayToggle from "./header/ThreeWayToggle";
-import { splitTextToSegments } from "@/utils/helper";
+import { Box, LinearProgress } from "@mui/material";
 
 function DocumentComponent() {
   const { document, selectedMode, isLoading, isPlaying } = GrobalStore();
