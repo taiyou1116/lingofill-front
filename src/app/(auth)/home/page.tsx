@@ -6,8 +6,6 @@ import "@aws-amplify/ui-react/styles.css";
 import { Amplify } from "aws-amplify";
 import awsExports from "../../../aws-exports";
 import { useEffect } from "react";
-import { getTitles } from "@/utils/request";
-import { getCurrentUser } from "aws-amplify/auth";
 
 import i18n from "@/i18n";
 import { I18nextProvider } from "react-i18next";
@@ -18,21 +16,7 @@ import { GrobalStore } from '@/store/grobalStore';
 Amplify.configure(awsExports);
 
 function Home() {
-  const {setDocuments, username, setUsername, selectedWordsIndexes, setSelectedWordsIndexes, showCenterModal, setLanguage} = GrobalStore();
-
-  // '/home'でリロードしたときにgetCurrentUserでログイン処理
-  useEffect(() => {
-    const fetchData = async () => {
-      if (username === '') {
-        const user = await getCurrentUser();
-        setUsername(user.username);
-      } else {
-        const data = await getTitles(username);
-        setDocuments(data);
-      }
-    };
-    fetchData();
-  }, [setDocuments, username, setUsername])
+  const { selectedWordsIndexes, setSelectedWordsIndexes, showCenterModal, setLanguage} = GrobalStore();
 
 
   // 言語選択 localStorageから取得

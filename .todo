@@ -1,16 +1,26 @@
 amplify-auth -> https://docs.amplify.aws/javascript/build-a-backend/auth/manage-user-session/
 
-リクエスト理解する
+https://main.d5yypxcoba5g4.amplifyapp.com/
+
+変更点:
+aws ホストされた UI それぞれ、2つずつURL追加
+
+疲れた時: 
+ライブラリ作成
+- 言語系の何か
 
 実装
-差分(変更した項目のみ)を送信
-
+- 差分(変更した項目のみ)を送信
 - Amplify.configure(awsExports) 何度もやっていいか
 - 重複modal, inputmemo, block
 - muiで自らダークモード指定のところを見る
 - ヘルパー関数で綺麗に, その他
 - Modalでもbgの色変えるか？ ... 低
 - ぼかし ... 低
+- documentがない時ずっとloadingUIが表示される ... sidebarでdocuments.length === 0で管理しているから
+- ログイン後/docで何も表示されない -> ログイン情報があればログインする
+- ログアウトボタン押した絵と、特にリダイレクトされない -> リダイレクトエンドポイントの問題か？
+- ログイン後/docでhomeにリダイレクトされない
 
 - useEffectが適切か(全コンポーネントでログ)
 - Documentも5つずつくらい取得する方がいいかも

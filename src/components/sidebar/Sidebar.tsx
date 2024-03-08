@@ -2,22 +2,34 @@
 
 import { m_plus_rounded_1c } from '@/store/fontStore';
 import { EditNote, FolderDelete } from '@mui/icons-material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
-import { Skeleton, Tooltip, Typography } from '@mui/material';
+import { Tooltip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { GrobalStore } from '@/store/grobalStore';
 import SidebarDocuments from './SidebarDocuments';
+import { getCurrentUser } from 'aws-amplify/auth';
+import { getTitles } from '@/utils/request';
 
 function SidebarComponent() {
-  const { showSidebar, flipShowSidebar, documents } = GrobalStore();
+  const { showSidebar, flipShowSidebar, documents, setDocuments, username, setUsername } = GrobalStore();
   const { t } = useTranslation();
 
   const [createNewDocument, setCreateNewDocument] = useState<boolean>(false);
 
-  const createNewSentence = () => {
-    setCreateNewDocument(true);
-  }
+  // documentsはsidebarで受け取るように変更
+  useEffect(() => {
+    const fetchData = async () => {
+      if (username === '') {
+        const user = await getCurrentUser();
+        setUsername(user.username);
+      } else {
+        const data = await getTitles(username);
+        setDocuments(data);
+      }
+    };
+    fetchData();
+  }, [setDocuments, username, setUsername])
 
   return (
     <div>
@@ -45,34 +57,19 @@ function SidebarComponent() {
                 title={t('sidebar.createNewText')}
                 className=' dark:text-gray-300'>
                 <button 
-                  onClick={createNewSentence}
+                  onClick={() => setCreateNewDocument(true)}
                   className=' border-2 rounded-lg p-0.5 dark:border-gray-400  hover:border-slate-600 duration-150'>
                   <EditNote style={{fontSize: 25}}/>
                 </button>
               </Tooltip> 
             </div>
           </div>
-
-          { documents.length === 0
-          ?
-            <Typography 
-              variant="h3"
-              className=' w-full'
-            >
-              {<Skeleton />}
-              {<Skeleton />}
-              {<Skeleton />}
-              {<Skeleton />}
-              {<Skeleton />}
-            </Typography>
-          :
-            <SidebarDocuments
-              createNewDocument={createNewDocument}
-              setCreateNewDocument={setCreateNewDocument}
-              documents={documents}
-              flipShowSidebar={flipShowSidebar}
-            />
-          }
+          <SidebarDocuments
+            createNewDocument={createNewDocument}
+            setCreateNewDocument={setCreateNewDocument}
+            documents={documents}
+            flipShowSidebar={flipShowSidebar}
+          />
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import "../../globals.css";
 import HeaderComponent from "@/components/header/Header";
-import SidebarMemo from "@/components/sidebar/Sidebar";
+import Sidebar from "@/components/sidebar/Sidebar";
 
 export default function Layout({
   children,
@@ -10,7 +10,7 @@ export default function Layout({
   return (
     <div>
       <div className={` flex w-screen h-screen`}>
-        <SidebarMemo />
+        <Sidebar />
         <div className=" h-screen w-screen">
           <HeaderComponent />
           <div className=" content">{children}</div>
