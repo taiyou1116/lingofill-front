@@ -1,8 +1,9 @@
 import { Document, TranslationObj } from "@/types/types";
 import toast from "react-hot-toast";
 
-export async function updateText
-  (partition: string, sort: string, title: string, text: string, translations: TranslationObj[],language:string, translateLanguage: string, updatedAt: string) {
+export async function updateText(
+  partition: string, sort: string, title: string, text: string, translations: TranslationObj[],language:string, translateLanguage: string, updatedAt: string
+) {
   try {
     const response = await fetch(`/api`, {
       method: "PUT",
@@ -37,8 +38,10 @@ export async function updateText
 
 // sortKey, title取得
 export async function getTitles(partition: string) {
-  const baseUrl = 'http://localhost:3000/api/title';
-  const url = new URL(baseUrl);
+  const baseUrl = '/api/title';
+  const currentUrl = window.location.origin;
+  const url = new URL(baseUrl, currentUrl);
+
   url.searchParams.append('partition', partition);
   
   const res = await fetch(url, {
@@ -70,8 +73,10 @@ export async function getTitles(partition: string) {
 
 export async function getText(partition: string, sortKey: string) {
   try {
-    const baseUrl = 'http://localhost:3000/api/text';
-    const url = new URL(baseUrl);
+    const baseUrl = '/api/text';
+    const currentUrl = window.location.origin;
+    const url = new URL(baseUrl, currentUrl);
+    
     url.searchParams.append('partition', partition);
     url.searchParams.append('sortKey', sortKey);
     
