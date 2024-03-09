@@ -101,7 +101,7 @@ function TranslateDocument(props: Props) {
 
         return sentences.map((sentence, sentenceIndex) => (
           <React.Fragment key={sentenceIndex}>
-            <span className={`break-all  ${ sentenceIndex === readingNumber ? ' bg-yellow-600/50' : '' }`} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+            <span className={`break-all  ${ sentenceIndex === readingNumber ? ' bg-yellow-600/50' : '' }`} onTouchStart={handleMouseDown} onTouchEnd={handleMouseUp} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
               {(document?.language === 'ja' || document?.language === 'zh' ? sentence.split('') : sentence.split(' ')).map((word) => {
                 // この時点での globalIndex の値を captureIndex として保存
                 const captureIndex = globalIndex;
@@ -114,6 +114,7 @@ function TranslateDocument(props: Props) {
                       key={captureIndex}
                       onClick={() => handleClick(captureIndex)} // captureIndex を使用
                       onMouseMove={() => handleMouseMove(captureIndex)} // captureIndex を使用
+                      onTouchMove={() => handleMouseMove(captureIndex)}
                       className={`select-none py-0.5 px-1 mx-0.5 cursor-pointer rounded-md bg-slate-200 dark:bg-slate-900/50 text-sm`}
                     >
                       <Tooltip title={<div className={`text-sm ${m_plus_rounded_1c.className}`}>{translation.memo}</div>}>
@@ -128,6 +129,7 @@ function TranslateDocument(props: Props) {
                       key={captureIndex}
                       onClick={() => handleClick(captureIndex)} // captureIndex を使用
                       onMouseMove={() => handleMouseMove(captureIndex)} // captureIndex を使用
+                      onTouchMove={() => handleMouseMove(captureIndex)}
                       className={`select-none cursor-pointer ${document?.language !== 'ja' && document?.language !== 'zh' ? 'p-0.5' : ''} ${selectedWordsIndexes.includes(captureIndex) ? "bg-blue-300 dark:bg-blue-500" : "bg-transparent"}`}
                     >
                       {word}

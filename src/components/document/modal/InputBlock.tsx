@@ -18,6 +18,7 @@ function InputBlock(props: Props) {
     <div className=' flex flex-col w-3/5 gap-1'>
       <PasteButton
         setUserInput={setUserInputTranslation}
+        plceholder='document.modal.inputBlock.inputBlock'
       />
       <div className=' flex items-center gap-3'>
         <input 

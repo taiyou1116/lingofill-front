@@ -13,6 +13,7 @@ function InputMemo(props: Props) {
     <div className=' w-full h-full flex flex-col gap-1'>
       <PasteButton 
         setUserInput={setUserInputMemo}
+        plceholder='document.modal.inputMemo.inputMemo'
       />
       <textarea 
         maxLength={1000}
