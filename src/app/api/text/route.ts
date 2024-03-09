@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { DynamoDBClient, GetItemCommand, UpdateItemCommand, UpdateItemCommandInput } from "@aws-sdk/client-dynamodb";
-
-// DynamoDBクライアントの初期化
-const client = new DynamoDBClient({ region: "ap-northeast-1" });
+import { GetItemCommand, UpdateItemCommand, UpdateItemCommandInput } from "@aws-sdk/client-dynamodb";
+import client from "@/utils/dynamoDBClient";
 
 // ユーザーテキストを取得するAPI
 export async function GET(req: NextRequest) {

@@ -1,7 +1,6 @@
 import { NextRequest } from "next/server";
-import { DynamoDBClient, QueryCommand } from "@aws-sdk/client-dynamodb";
-
-const client = new DynamoDBClient({ region: "ap-northeast-1" });
+import { QueryCommand } from "@aws-sdk/client-dynamodb";
+import client from "@/utils/dynamoDBClient";
 
 // タイトル取得
 export async function GET(req: NextRequest) {

@@ -1,9 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { DynamoDBClient, PutItemCommand } from "@aws-sdk/client-dynamodb";
+import { PutItemCommand } from "@aws-sdk/client-dynamodb";
 import { TranslationObj } from "@/types/types";
-
-// DynamoDBクライアントの初期化
-const client = new DynamoDBClient({ region: "ap-northeast-1" });
+import client from "@/utils/dynamoDBClient";
 
 // 変更内容ををサーバーへ
 export async function PUT(req: NextRequest) {

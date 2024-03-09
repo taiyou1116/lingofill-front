@@ -3,12 +3,6 @@ amplify-auth -> https://docs.amplify.aws/javascript/build-a-backend/auth/manage-
 https://main.d5yypxcoba5g4.amplifyapp.com/
 http://localhost:3000/
 
-本番環境
-google認証したら、localhost3000:~となっていたぞ
-
-変更点:
-aws ホストされた UI それぞれ、2つずつURL追加
-
 疲れた時: 
 ライブラリ作成
 - 言語系の何か
