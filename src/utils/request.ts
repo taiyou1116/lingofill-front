@@ -108,7 +108,6 @@ export async function getText(partition: string, sortKey: string) {
       translateLanguage: data.translateLanguage.S,
       updatedAt: data.updatedAt.S,
     };
-    console.log(document);
     return document;
 
   } catch(error) {

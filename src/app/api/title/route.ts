@@ -36,6 +36,10 @@ export async function GET(req: NextRequest) {
     },
   };
 
+  console.log(process.env.ACCESS_KEY as string);
+  console.log(process.env.SECRET_KEY as string);
+  console.log(process.env.REGION as string);
+
   try {
     const { Items } = await client.send(new QueryCommand(params));
     return new Response(JSON.stringify(Items), {
