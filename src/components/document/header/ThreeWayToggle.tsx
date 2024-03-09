@@ -41,7 +41,7 @@ function ThreeWayToggle() {
               color: theme.palette.text.primary,
               fontSize: '0.875rem', // デフォルトフォントサイズ
               '@media (max-width:600px)': {
-                fontSize: '0.4rem', // モバイルデバイスのフォントサイズを小さくする
+                fontSize: '0.6rem', // モバイルデバイスのフォントサイズを小さくする
               },
               '&:first-of-type': {
                 paddingLeft: '20px',

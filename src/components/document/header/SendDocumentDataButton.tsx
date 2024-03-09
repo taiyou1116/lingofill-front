@@ -51,7 +51,7 @@ function SendDocumentDataButton() {
       ? 
        <div className=' bg-none py-2 px-4 flex gap-1 items-center'>
         <CheckCircle className=' dark:text-gray-100' />
-        <span className=' dark:text-gray-100  text-xxs'>{t('document.header.sendDocumentDataButton.savedText')}</span>
+        <span className=' dark:text-gray-300  text-xxs'>{t('document.header.sendDocumentDataButton.savedText')}</span>
        </div>
       : changeSendDataButton() }
     </div>

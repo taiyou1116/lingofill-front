@@ -30,10 +30,12 @@
         "inputMemo": {
           "noteTheOriginalText": "记下原文",
           "noteTheTranslation": "记下翻译",
-          "inputMemo": "在此输入备注（例如：上下文、用法、翻译文本等）"
+          "inputMemo": "在此输入备注（例如：上下文、用法、翻译文本等）",
+          "paste": "从剪贴板粘贴"
         }, 
         "readingButton": {
-          "readAloud": "朗读"
+          "readAloud": "朗读",
+          "copy": "复制"
         },
         "saveButton": {
           "save": "保存"

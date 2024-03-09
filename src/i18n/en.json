@@ -30,10 +30,12 @@
         "inputMemo": {
           "noteTheOriginalText": "Note the Original Text",
           "noteTheTranslation": "Note the Translation",
-          "inputMemo": "Enter your note here (e.g., context, usage, translated text, etc.)"
+          "inputMemo": "Enter your note here (e.g., context, usage, translated text, etc.)",
+          "paste": "Paste from clipboard"
         }, 
         "readingButton": {
-          "readAloud": "Read Aloud"
+          "readAloud": "Read Aloud",
+          "copy": "Copy"
         },
         "saveButton": {
           "save": "Save"

@@ -1,60 +1,35 @@
 amplify-auth -> https://docs.amplify.aws/javascript/build-a-backend/auth/manage-user-session/
 
 https://main.d5yypxcoba5g4.amplifyapp.com/
-http://localhost:3000/
-
-今main!!!
-DynamoDBからのアイテム取得中にエラーが発生しました: Error: Resolved credential object is not valid
 
 疲れた時: 
 ライブラリ作成
 - 言語系の何か
 
 実装
+- フレキシブルUI, UI言語
+- お気に入り登録、単語、熟語集(問題も) ... 中
+- sidebarをmore作る
 - 差分(変更した項目のみ)を送信
 - Modalでもbgの色変えるか？ ... 低
 - ぼかし ... 低
 - documentsゲット時のloading消しちゃった。 -> 解決策: テンプレの作成
-- ログイン後/docで何も表示されない -> ログイン情報があればログインする
-- ログアウトボタン押した絵と、特にリダイレクトされない -> リダイレクトエンドポイントの問題か？ プロバイダー使わないとなる
-- ログイン後/docでhomeにリダイレクトされない
 - useEffectが適切か(全コンポーネントでログ)
 - Documentも5つずつくらい取得する方がいいかも
-- お気に入り登録、単語、熟語集(問題も) ... 中
 - AIで詳細を記入できたらおもろいかも(課金)
 - 説明のdoc
 - lambdaがどうなっているのか確認
 
-わりとどうでもいい
-- Amplify.configure(awsExports) 何度もやっていいか
-- muiで自らダークモード指定のところを見る
-- ヘルパー関数で綺麗に, その他
-
-
 バグ
 テキスト作成 -> テキスト入力 -> タイトル編集
 Warning: SidebarDocuments contains an input of type text with both value and defaultValue props. Input elements must be either controlled or uncontrolled (specify either the value prop, or the defaultValue prop, but not both). Decide between using a controlled or uncontrolled input element and remove one of these props. More info: 
+音声bg途中で消える
+
+ログイン、ログアウト系
+- ログイン後/docで何も表示されない -> ログイン情報があればログインする
+- ログアウトボタン押した絵と、特にリダイレクトされない -> リダイレクトエンドポイントの問題か？ プロバイダー使わないとなる
+- ログイン後/docでhomeにリダイレクトされない
 
 追加案
-
 - 初期例文もあり
 - 共有フォルダ
-
-アプリのイメージ図
-フロント
-
-- Next.js
-  バックエンド
-- Go or Node.js
-  インフラ
-- S3
-- Lambda
-- Amplify, Cognito(Auth)
-
-利点
-
-- Google 等のアカウントで管理(多端末で共有)
-- Google 翻訳で自動翻訳も可(ON OFF 変更可)
-- 単語、熟語に対応
-- 多言語対応
-- 穴埋めをまとめてテストできるように

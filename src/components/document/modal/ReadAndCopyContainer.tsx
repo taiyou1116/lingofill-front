@@ -44,7 +44,7 @@ function ReadAndCopyContainer(props: Props) {
       <Tooltip title={t('document.modal.readingButton.readAloud')} className=' mr-0.5 cursor-pointer' onClick={() => listenTexts(sentences)}>
         <VolumeUp style={{fontSize: 20}} className='hover:text-gray-300 dark:text-gray-300 dark:hover:text-gray-500' />
       </Tooltip>
-      <Tooltip title='コピー' className=' cursor-pointer' onClick={() => navigator.clipboard.writeText(words)}>
+      <Tooltip title={t('document.modal.readingButton.copy')} className=' cursor-pointer' onClick={() => navigator.clipboard.writeText(words)}>
         <ContentCopy style={{fontSize: 20}} className='hover:text-gray-300 dark:text-gray-300 dark:hover:text-gray-500' />
       </Tooltip>
       <span className={`selectedWordsContainer p-1 ${className}`}>

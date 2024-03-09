@@ -44,13 +44,10 @@ body {
 
 .text-xxs {
   @media (max-width:800px) {
-    font-size: 0.75rem/* 12px */;
+    font-size: 1rem/* 12px */;
     line-height: 1rem/* 16px */;
   }
-  @media (max-width:600px) {
-    font-size: 0.6rem/* 12px */;
-    line-height: 0.8rem/* 16px */;
-  }
+  
 }
 
 /* classnameが記述できない(md, lg) */

@@ -28,12 +28,12 @@
                 "favorite": "お気に入り登録"
             },
             "inputMemo": {
-                "noteTheOriginalText": "原文をメモに",
-                "noteTheTranslation": "翻訳をメモに",
-                "inputMemo": "メモをここに入力（例：文脈、用法、訳文など）"
+                "inputMemo": "メモをここに入力（例：文脈、用法、訳文など）",
+                "paste": "クリップボードからペースト"
             }, 
             "readingButton": {
-                "readAloud": "読み上げ"
+                "readAloud": "読み上げ",
+                "copy": "コピー"
             },
             "saveButton": {
                 "save": "保存する"

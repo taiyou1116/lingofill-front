@@ -9,11 +9,16 @@ import { useTranslation } from "react-i18next";
 import { Toaster } from "react-hot-toast";
 import { Menu, MenuItem, Tooltip } from "@mui/material";
 import { AccountCircle, Help, Reorder, Settings } from "@mui/icons-material";
+import { useWindowSize } from "@/hooks/hooks";
+import { truncateText } from "@/utils/helper";
+import SendDocumentDataButton from "../document/header/SendDocumentDataButton";
 
 function HeaderComponent() {
-  const {flipShowSidebar} = GrobalStore();
+  const {flipShowSidebar, document} = GrobalStore();
   const { t } = useTranslation();
   const [anchorEl, setAnchorEl] = useState(null);
+  const { width } = useWindowSize();
+  const isSm = width <= 640;
   
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -31,12 +36,20 @@ function HeaderComponent() {
             <Reorder style={{fontSize: 35}} className=" dark:text-gray-200" />
           </button>
         </Tooltip>
-        <Link href={"/home"} className=' flex items-center cursor-pointer hover:bg-gray-200 dark:bg-gray-500 dark:hover:bg-gray-600 border-2 border-black rounded-lg pr-3'>
-          <Image src="LF.svg" width="40" height="40" alt='ロゴ' />
-          <h1 className={` text-xl ${oswald.className}`}>
-            Lingo Fill
-          </h1> 
-        </Link>
+        { isSm
+        ?
+          <div className=" flex items-center">
+            <div className=" dark:text-gray-100">{ truncateText(document?.title, 20)}</div>
+            { document === null ? '' : <SendDocumentDataButton /> }
+          </div>
+        :
+          <Link href={"/home"} className=' flex items-center cursor-pointer hover:bg-gray-200 dark:bg-gray-500 dark:hover:bg-gray-600 border-2 border-black rounded-lg pr-3'>
+            <Image src="LF.svg" width="40" height="40" alt='ロゴ' />
+            <h1 className={` text-xl ${oswald.className}`}>
+              Lingo Fill
+            </h1> 
+          </Link>
+        }
       </div>
       <div className=' flex px-10 items-center gap-1'>
         <div onClick={handleClick} className=" cursor-pointer">

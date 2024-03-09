@@ -28,12 +28,12 @@
           "favorite": "Añadir a favoritos"
         },
         "inputMemo": {
-          "noteTheOriginalText": "Anotar el texto original",
-          "noteTheTranslation": "Anotar la traducción",
-          "inputMemo": "Ingrese su nota aquí (ejemplo: contexto, uso, texto traducido, etc.)"
+          "inputMemo": "Ingrese su nota aquí (ejemplo: contexto, uso, texto traducido, etc.)",
+          "paste": "Pegar desde el portapapeles"
         }, 
         "readingButton": {
-          "readAloud": "Leer en voz alta"
+          "readAloud": "Leer en voz alta",
+          "copy": "Copiar"
         },
         "saveButton": {
           "save": "Guardar"
