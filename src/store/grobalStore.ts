@@ -5,6 +5,7 @@ export const GrobalStore = () => {
   const { 
     document, setDocument, documents, setDocuments, showCenterModal, flipCenterModal, showSidebar, flipShowSidebar, selectedWordsIndexes, setSelectedWordsIndexes,
     selectedMode, setSelectedMode, isLoading, setIsLoading, username, setUsername, isPlaying, setIsPlaying, readingNumber, setReadingNumber, language, setLanguage,
+    voiceType, setVoiceType, voiceRate, setVoiceRate,
   } = useStore(state => ({
     document: state.document,
     setDocument: state.setDocument,
@@ -37,10 +38,17 @@ export const GrobalStore = () => {
 
     language: state.language,
     setLanguage: state.setLanguage,
+
+    voiceType: state.voiceType,
+    setVoiceType: state.setVoiceType,
+
+    voiceRate: state.voiceRate,
+    setVoiceRate: state.setVoiceRate,
   }));
 
   return { 
     document, setDocument, documents, setDocuments, showCenterModal, flipCenterModal, showSidebar, flipShowSidebar, selectedWordsIndexes, setSelectedWordsIndexes,
     selectedMode, setSelectedMode, isLoading, setIsLoading, username, setUsername, isPlaying, setIsPlaying, readingNumber, setReadingNumber, language, setLanguage,
+    voiceType, setVoiceType, voiceRate, setVoiceRate,
   };
 }

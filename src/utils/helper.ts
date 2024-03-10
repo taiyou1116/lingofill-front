@@ -1,5 +1,6 @@
 import { LanguageVoiceMap } from "@/types/types";
 import { Predictions } from "@aws-amplify/predictions";
+import { getAudio } from "./request";
 
 export function createDate(timestamp: string) {
   const date = new Date(Number(timestamp));
@@ -27,7 +28,7 @@ export async function translateText(text: string, ln: string, translateLn : stri
 // 言語と音声セット
 const languageVoiceMap: LanguageVoiceMap = {
   en: 'Salli',
-  ja: 'Mizuki',
+  ja: 'Takumi',
   es: 'Lupe',
   fr: 'Lea',
   de: 'Vicki',
@@ -44,24 +45,6 @@ export function getVoiceForLanguage(languageCode: string): string {
   return languageVoiceMap[languageCode];
 }
 
-export async function convertTextToSpeech(text: string, voice: string) {
-  try {
-    const result = await Predictions.convert({
-      textToSpeech: {
-        source: {
-          text,
-        },
-        voiceId: voice // 声の種類を指定
-      }
-    });
-    const audio = new Audio(result.speech.url);
-    return audio;
-  } catch (err) {
-    console.error(err);
-    throw err;
-  }
-}
-
 let audioStream: HTMLAudioElement;
 if (typeof window !== 'undefined') {
   // 実行環境がクライアントサイドの場合のみAudioオブジェクトを初期化
@@ -71,7 +54,10 @@ if (typeof window !== 'undefined') {
 export { audioStream };
 
 // translateDocumentでの再生(文章を1つずつ取得)
-export async function processAndSpeak(textSegments: string[], voice: string, onPlay: () => void, onEnd: () => void, plusOne: () => void ) {
+export async function processAndSpeak(
+  textSegments: string[], voice: string, onPlay: () => void, onEnd: () => void, plusOne: () => void,
+  voiceType: string, voiceRate: string,
+  ) {
   onPlay();
   if (audioStream !== undefined) {
     if (!audioStream.paused) {
@@ -82,7 +68,7 @@ export async function processAndSpeak(textSegments: string[], voice: string, onP
   for (const segment of textSegments) {
     try {
       // Amazon Pollyへのリクエストを送信して音声データを取得
-      audioStream = await convertTextToSpeech(segment, voice);
+      audioStream = await getAudio(segment, voice, voiceType, voiceRate + '%'); //初期値 standard 100%
       await playAudioStream(audioStream);
       plusOne();
     } catch (error) {

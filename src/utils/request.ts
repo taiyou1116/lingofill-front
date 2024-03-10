@@ -141,3 +141,36 @@ export async function deleteText(partition: string, sort: string) {
     throw error; // エラーを再投げする場合、呼び出し元でキャッチする必要がある
   }
 }
+
+// Polly
+export async function getAudio(text: string, voiceId: string, engine = "standard", rate: string) {
+  try {
+    const baseUrl = '/api/polly';
+    const currentUrl = window.location.origin;
+    const url = new URL(baseUrl, currentUrl);
+
+    url.searchParams.append('text', text);
+    url.searchParams.append('voiceId', voiceId);
+    url.searchParams.append('engine', engine);
+    url.searchParams.append('rate', rate);
+    
+    const res = await fetch(url, {
+      headers: {
+        'Content-Type': "audio/mpeg",
+      },
+    });
+
+    const blob = await res.blob();
+
+    // Blobを元に音声オブジェクトを生成
+    const audioUrl = URL.createObjectURL(blob);
+    const audio = new Audio(audioUrl);
+
+    // 音声オブジェクトを返す
+    return audio;
+
+  } catch(error) {
+    toast.error("音声の取得に失敗しました。インターネット環境を確かめてください。");
+    throw error;
+  }
+}

@@ -23,6 +23,9 @@ export type TranslationObj = {
 // モード
 export type SelectedMode = 'preview' | 'edit' | 'input';
 
+export type VoiceType = 'neural' | 'standard';
+export type VoiceRate = '50' | '60' | '70' | '80' | '90' | '100' | '110' | '120' | '130' | '140' | '150';
+
 // アプリ全体で共有する状態の型
 export type state = {
     showSidebar: boolean,
@@ -59,8 +62,13 @@ export type state = {
     setIsPlaying: (state: boolean) => void;
 
     readingNumber: number,
-    // setReadingNumber の新しい型シグネチャ
     setReadingNumber: (value: number | ((prevNumber: number) => number)) => void;
+
+    voiceType: VoiceType,
+    setVoiceType: (voice: VoiceType) => void,
+
+    voiceRate: VoiceRate,
+    setVoiceRate: (newRate: VoiceRate) => void,
 }
 
 export type LanguageVoiceMap = {

@@ -7,6 +7,7 @@ https://main.d5yypxcoba5g4.amplifyapp.com/
 - 言語系の何か
 
 実装
+- 速度調整
 - 差分(変更した項目のみ)を送信 ... 着手
 - フレキシブルUI, UI言語
 - お気に入り登録、単語、熟語集(問題も) ... 中
@@ -15,15 +16,19 @@ https://main.d5yypxcoba5g4.amplifyapp.com/
 - documentsゲット時のloading消しちゃった。 -> 解決策: テンプレの作成
 - useEffectが適切か(全コンポーネントでログ)
 - Documentも5つずつくらい取得する方がいいかも
-- AIで詳細を記入できたらおもろいかも(課金)
 - 説明のdoc
 - lambdaがどうなっているのか確認
 - 音声のネットワークエラー
+- Bufferの理解
 
 バグ
 テキスト作成 -> テキスト入力 -> タイトル編集
 Warning: SidebarDocuments contains an input of type text with both value and defaultValue props. Input elements must be either controlled or uncontrolled (specify either the value prop, or the defaultValue prop, but not both). Decide between using a controlled or uncontrolled input element and remove one of these props. More info: 
 音声bg途中で消える
+
+課金
+- AIで詳細を記入
+- Pollyの自然音声 -> nural, standardそれぞれ選ぶ
 
 ログイン、ログアウト系
 - ログイン後/docで何も表示されない -> ログイン情報があればログインする

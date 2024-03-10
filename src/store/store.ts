@@ -1,6 +1,6 @@
 // アプリ全体で共有する状態を管理
 
-import { Document, SelectedMode, UpdateFunction, state } from "@/types/types";
+import { Document, SelectedMode, UpdateFunction, VoiceRate, VoiceType, state } from "@/types/types";
 import { create } from "zustand";
 
 export const useStore = create<state>((set) => ({
@@ -53,6 +53,7 @@ export const useStore = create<state>((set) => ({
         set({ language: ln })
     },
 
+    // 音声
     isPlaying: false,
     setIsPlaying: (state: boolean) => {
         set({ isPlaying: state })
@@ -64,4 +65,14 @@ export const useStore = create<state>((set) => ({
             readingNumber: typeof value === 'function' ? value(readingNumber) : value
         }));
     },
+
+    voiceType: 'standard',
+    setVoiceType: (voice: VoiceType) => {
+        set({ voiceType: voice })
+    },
+
+    voiceRate: '100',
+    setVoiceRate: (newRate: VoiceRate) => {
+        set({ voiceRate: newRate })
+    }
 }))
