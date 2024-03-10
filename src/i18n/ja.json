@@ -53,6 +53,7 @@
         "createNewText": "新しくテキストを作成"
     },
     "sidebarDocument": {
+        "more": "詳細",
         "inputTextName": "新しいテキスト名を入力",
 
         "createNewDocument": {

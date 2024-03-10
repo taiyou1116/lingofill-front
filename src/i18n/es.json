@@ -53,6 +53,7 @@
       "createNewText": "Crear Nuevo Texto"
     },
     "sidebarDocument": {
+      "more": "Detalles",
       "inputTextName": "Ingrese el nombre del nuevo texto",
   
       "createNewDocument": {

@@ -55,6 +55,7 @@
       "createNewText": "创建新文本"
     },
     "sidebarDocument": {
+      "more": "详细",
       "inputTextName": "输入新文本名称",
   
       "createNewDocument": {

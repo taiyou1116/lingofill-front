@@ -33,7 +33,7 @@ function UploadDocumentButton(props: Props) {
   return (
     <Tooltip title={t('sidebarDocument.uploadDocumentButton.uploadDocument')}>
       <button onClick={() => uploadDocument(index)}>
-        <CloudUpload style={{fontSize: 15}} className=' dark:text-gray-100' />
+        <CloudUpload style={{fontSize: 20}} className=' text-lime-400 dark:text-lime-600' />
       </button>
     </Tooltip>
   )

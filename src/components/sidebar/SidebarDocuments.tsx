@@ -1,14 +1,19 @@
-import { Document } from '@/types/types'
+
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next';
+import { GrobalStore } from '@/store/grobalStore';
+import { useThemeMode } from '@/hooks/hooks';
 import { handleStopPropagation } from '@/utils/modal';
 import { getText } from '@/utils/request';
 import { createDate } from '@/utils/helper';
-import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import CreateNewDocument from './sidebarDocument/CreateNewDocument';
 import UploadDocumentButton from './sidebarDocument/UploadDocumentButton';
 import EditTitle from './sidebarDocument/EditTitle';
 import DeleteTextButton from './sidebarDocument/DeleteTextButton';
-import { useTranslation } from 'react-i18next';
-import { GrobalStore } from '@/store/grobalStore';
+import { Document } from '@/types/types'
+import { Menu, MenuItem, ThemeProvider, Tooltip } from '@mui/material';
+import { MoreHoriz } from '@mui/icons-material';
+
 
 type Props = {
   createNewDocument: boolean,
@@ -21,9 +26,23 @@ function SidebarDocuments(props: Props) {
   const { createNewDocument, setCreateNewDocument, documents, flipShowSidebar } = props;
   const { username, setIsLoading, setDocument, setDocuments, document } = GrobalStore();
   const { t } = useTranslation();
+  const theme = useThemeMode();
+
   const [inputNameIndex, setInputNameIndex] = useState<number>(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const [input, setInput] = useState<string>('');
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [activeMenuIndex, setActiveMenuIndex] = useState<null | number>(null);
+
+  const handleClick = (event: any, index: number) => {
+    setAnchorEl(event.currentTarget);
+    setActiveMenuIndex(index);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+    setActiveMenuIndex(null);
+  };
 
   useEffect(() => {
     if (inputNameIndex !== -1 && inputRef.current) {
@@ -115,7 +134,6 @@ function SidebarDocuments(props: Props) {
                     className=' p-2'
                     placeholder={t('sidebarDocument.inputTextName')}
                     type='text' 
-                    value={input}
                     defaultValue={localDoc.title}
                     onChange={(e) => {
                       setInput(e.target.value);
@@ -137,7 +155,7 @@ function SidebarDocuments(props: Props) {
                     </div>
                   </div>
                   
-                  <div onClick={handleStopPropagation} className=' flex gap-0.5 pl-1'>
+                  <div onClick={handleStopPropagation} className=' flex gap-1 pl-1 items-center'>
                     { localDoc.isSynced ? '' : 
                       <UploadDocumentButton 
                         username={username}
@@ -146,20 +164,51 @@ function SidebarDocuments(props: Props) {
                         index={index}
                       />
                     }
-                    <EditTitle 
-                      setInput={setInput}
-                      setInputNameIndex={setInputNameIndex}
-                      documents={documents}
-                      index={index}
-                    />
-                    <DeleteTextButton 
-                      username={username}
-                      document={document!}
-                      setDocument={setDocument}
-                      documents={documents}
-                      setDocuments={setDocuments}
-                      index={index}
-                    />
+
+                    <div className=' flex items-center gap-1'>
+                      <div onClick={(event) => handleClick(event, index)} className=" cursor-pointer">
+                        <Tooltip title={t('sidebarDocument.more')}>
+                          <MoreHoriz style={{fontSize: 25}} className=" dark:text-gray-200" />
+                        </Tooltip>
+                      </div>
+                    </div>
+                    <ThemeProvider theme={theme}>
+                      <Menu
+                        autoFocus={false}
+                        anchorEl={anchorEl}
+                        open={Boolean(anchorEl) && activeMenuIndex !== null}
+                        onClose={handleClose}
+                        anchorOrigin={{
+                          vertical: 'bottom',
+                          horizontal: 'right',
+                        }}
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'right',
+                        }}
+                      >
+                        <MenuItem className=" flex items-center gap-1">
+                          <EditTitle 
+                            setInput={setInput}
+                            setInputNameIndex={setInputNameIndex}
+                            documents={documents}
+                            index={activeMenuIndex!}
+                            handleClose={handleClose}
+                          />
+                        </MenuItem>
+                        <MenuItem className=" flex items-center gap-1">
+                          <DeleteTextButton 
+                            username={username}
+                            document={document!}
+                            setDocument={setDocument}
+                            documents={documents}
+                            setDocuments={setDocuments}
+                            index={activeMenuIndex!}
+                            handleClose={handleClose}
+                          />
+                        </MenuItem>
+                      </Menu>
+                      </ThemeProvider>
                   </div>
                 </div>
               }
