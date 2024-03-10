@@ -1,4 +1,4 @@
-import { LanguageVoiceMap } from "@/types/types";
+import { LanguageVoiceMap, VoiceType } from "@/types/types";
 import { Predictions } from "@aws-amplify/predictions";
 import { getAudio } from "./request";
 
@@ -25,24 +25,29 @@ export async function translateText(text: string, ln: string, translateLn : stri
   }
 }
 
-// 言語と音声セット
+// 言語と音声セット 0 standard, 1 neural
+// ロシア語、アラビア語はneural非対応
 const languageVoiceMap: LanguageVoiceMap = {
-  en: 'Salli',
-  ja: 'Takumi',
-  es: 'Lupe',
-  fr: 'Lea',
-  de: 'Vicki',
-  it: 'Bianca',
-  pt: 'Ines',
-  ru: 'Tatyana',
-  ar: 'Zeina',
-  ko: 'Seoyeon',
-  zh: 'Zhiyu',
-  hi: 'Aditi'
+  en: ['Salli', 'Slli'],
+  ja: ['Mizuki', 'Kazuha'],
+  es: ['Lupe', 'Lupe'],
+  fr: ['Lea', 'Lea'],
+  de: ['Vicki', 'Vicki'],
+  it: ['Bianca', 'Bianca'],
+  pt: ['Ines', 'Ines'],
+  ru: ['Tatyana', ''],
+  ar: ['Zeina', ''],
+  ko: ['Seoyeon', 'Seoyeon'],
+  zh: ['Zhiyu', 'Zhiyu'],
+  hi: ['Aditi', 'Kajal'],
 };
 
-export function getVoiceForLanguage(languageCode: string): string {
-  return languageVoiceMap[languageCode];
+export function getVoiceForLanguage(languageCode: string, voiceType: VoiceType): string {
+  if (voiceType === 'neural') {
+    return languageVoiceMap[languageCode][1];
+  } else {
+    return languageVoiceMap[languageCode][0];
+  }
 }
 
 let audioStream: HTMLAudioElement;

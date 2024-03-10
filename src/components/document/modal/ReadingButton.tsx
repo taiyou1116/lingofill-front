@@ -19,7 +19,7 @@ function ReadingButton(props: Props) {
   const { t } = useTranslation();
 
   const listenTexts = async (selectedWords: string[]) => {
-    const voice = getVoiceForLanguage(ln);
+    const voice = getVoiceForLanguage(ln, voiceType);
 
     await processAndSpeak(selectedWords, voice, () => {
       if (shouldIncrement === true) {

@@ -72,7 +72,7 @@ export type state = {
 }
 
 export type LanguageVoiceMap = {
-    [languageCode: string]: string;
+    [languageCode: string]: string[];
 }
 
 export type UpdateFunction = (prevNumber: number) => number;

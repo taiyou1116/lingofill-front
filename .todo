@@ -7,7 +7,9 @@ https://main.d5yypxcoba5g4.amplifyapp.com/
 - 言語系の何か
 
 実装
-- 速度調整
+- voiseTypeの判定helper関数
+- ロシア語のneuralエラー
+- 読み上げ無限ループ
 - 差分(変更した項目のみ)を送信 ... 着手
 - フレキシブルUI, UI言語
 - お気に入り登録、単語、熟語集(問題も) ... 中
