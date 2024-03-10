@@ -18,13 +18,19 @@ function ModalCenterComponent(props: ModalCenterProps) {
       {/* 背景 */}
       <div 
         onClick={() => handleCloseModal(flipCenterModal)} 
-        className={` fixed h-screen w-screen shadow-2lg bg-black/50 transition-opacity duration-300 ${ showCenterModal ? 'opacity-100' : 'opacity-0 pointer-events-none' }`}
+        className={` fixed h-screen w-screen shadow-2lg transition-opacity duration-300 
+                   bg-black/50 
+                   ${ showCenterModal ? 'opacity-100' : 'opacity-0 pointer-events-none' }`}
       >
       </div>
       {/* ModalWindow */}
       <div 
         onClick={handleStopPropagation} 
-        className={` fixed h-4/5 w-5/6  md:w-3/5 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-5 flex flex-col justify-start items-center gap-10 duration-300 ${ showCenterModal ? ' scale-100' : ' scale-0 pointer-events-none' }`}
+        className={` fixed h-4/5 w-5/6  md:w-3/5  rounded-xl shadow-lg p-5 
+                     flex flex-col justify-start items-center gap-10 duration-300
+                   bg-white 
+                   dark:bg-gray-800 
+                   ${ showCenterModal ? ' scale-100' : ' scale-0 pointer-events-none' }`}
       >
         { children }
       </div>

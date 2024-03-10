@@ -22,7 +22,9 @@ function PasteButton(props: Props) {
     <div className=' flex items-center gap-2 text-xs dark:text-gray-400'>
         {t(plceholder)}
         <Tooltip title={t('document.modal.inputMemo.paste')} className=' cursor-pointer' onClick={getClipboardText}>
-          <ContentPaste style={{ fontSize: 20 }} className='hover:text-gray-300 dark:text-gray-300 dark:hover:text-gray-500' />
+          <ContentPaste style={{ fontSize: 20 }} className='hover:text-gray-300 
+                                                            dark:text-gray-300 
+                                                            dark:hover:text-gray-500' />
         </Tooltip>
       </div>
   )

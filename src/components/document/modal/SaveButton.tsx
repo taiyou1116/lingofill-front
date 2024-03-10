@@ -71,7 +71,10 @@ function SaveButton(props: Props) {
 
   return (
     <button 
-      className='px-4 py-1 md:px-4 md:py-2 bg-gray-800 text-gray-200 rounded-md dark:bg-white dark:text-black hover:bg-gray-300 dark:hover:bg-gray-300'
+      className='px-4 py-1 md:px-4 md:py-2 rounded-md 
+               bg-gray-800 dark:bg-white
+               text-gray-200 dark:text-black 
+               hover:bg-gray-300 dark:hover:bg-gray-300'
       onClick={handleSaveButton}
     >
       <div className=' flex gap-1 items-center'><Save />{t('document.modal.saveButton.save')}</div>

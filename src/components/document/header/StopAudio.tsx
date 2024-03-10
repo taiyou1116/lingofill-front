@@ -8,7 +8,6 @@ import { Tooltip } from '@mui/material'
 function StopAudio() {
   const { setIsPlaying, setReadingNumber } = GrobalStore();
   
-
   const StopReading = () => {
     setIsPlaying(false);
     stopAudio();

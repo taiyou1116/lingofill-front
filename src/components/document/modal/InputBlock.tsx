@@ -26,7 +26,11 @@ function InputBlock(props: Props) {
           type='text' 
           value={userInputTranslation}
           onChange={(e) => setUserInputTranslation(e.target.value)}
-          className=' border border-gray-900 p-1 w-full modal-center-input rounded-md dark:bg-gray-800 dark:border-gray-400 dark:text-gray-100'
+          className=' border p-1 w-full modal-center-input rounded-md
+                    border-gray-900 
+                    dark:bg-gray-800 
+                    dark:border-gray-400 
+                    dark:text-gray-100'
         />
         <Tooltip title={t('document.modal.inputBlock.favorite')}>
           <StarBorder className='cursor-pointer hover:text-gray-300 dark:text-gray-300 dark:hover:text-gray-500'/>

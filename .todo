@@ -7,10 +7,9 @@ https://main.d5yypxcoba5g4.amplifyapp.com/
 - 言語系の何か
 
 実装
+- 差分(変更した項目のみ)を送信 ... 着手
 - フレキシブルUI, UI言語
 - お気に入り登録、単語、熟語集(問題も) ... 中
-- sidebarをmore作る
-- 差分(変更した項目のみ)を送信
 - Modalでもbgの色変えるか？ ... 低
 - ぼかし ... 低
 - documentsゲット時のloading消しちゃった。 -> 解決策: テンプレの作成
@@ -19,6 +18,7 @@ https://main.d5yypxcoba5g4.amplifyapp.com/
 - AIで詳細を記入できたらおもろいかも(課金)
 - 説明のdoc
 - lambdaがどうなっているのか確認
+- 音声のネットワークエラー
 
 バグ
 テキスト作成 -> テキスト入力 -> タイトル編集
