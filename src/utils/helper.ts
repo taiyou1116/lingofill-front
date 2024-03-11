@@ -28,7 +28,7 @@ export async function translateText(text: string, ln: string, translateLn : stri
 // 言語と音声セット 0 standard, 1 neural
 // ロシア語、アラビア語はneural非対応
 const languageVoiceMap: LanguageVoiceMap = {
-  en: ['Salli', 'Slli'],
+  en: ['Salli', 'Salli'],
   ja: ['Mizuki', 'Kazuha'],
   es: ['Lupe', 'Lupe'],
   fr: ['Lea', 'Lea'],
@@ -100,6 +100,7 @@ export async function stopAudio() {
   }
 }
 
+/**スペースのある言語でtrueを返す */
 export function judgeSpaceLanguage(ln: string | undefined) {
   if (ln === 'ja' || ln === 'zh') {
     return false;

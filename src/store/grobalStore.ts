@@ -3,9 +3,19 @@ import { useStore } from "./store";
 
 export const GrobalStore = () => {
   const { 
-    document, setDocument, documents, setDocuments, showCenterModal, flipCenterModal, showSidebar, flipShowSidebar, selectedWordsIndexes, setSelectedWordsIndexes,
-    selectedMode, setSelectedMode, isLoading, setIsLoading, username, setUsername, isPlaying, setIsPlaying, readingNumber, setReadingNumber, language, setLanguage,
-    voiceType, setVoiceType, voiceRate, setVoiceRate,
+    document, setDocument, 
+    documents, setDocuments, 
+    showCenterModal, flipCenterModal, 
+    showSidebar, flipShowSidebar, 
+    selectedWordsIndexes, setSelectedWordsIndexes,
+    selectedMode, setSelectedMode, 
+    isLoading, setIsLoading, 
+    username, setUsername, 
+    isPlaying, setIsPlaying, 
+    readingNumber, setReadingNumber, 
+    language, setLanguage,
+    voiceType, setVoiceType, 
+    voiceRate, setVoiceRate,
   } = useStore(state => ({
     document: state.document,
     setDocument: state.setDocument,
@@ -47,8 +57,18 @@ export const GrobalStore = () => {
   }));
 
   return { 
-    document, setDocument, documents, setDocuments, showCenterModal, flipCenterModal, showSidebar, flipShowSidebar, selectedWordsIndexes, setSelectedWordsIndexes,
-    selectedMode, setSelectedMode, isLoading, setIsLoading, username, setUsername, isPlaying, setIsPlaying, readingNumber, setReadingNumber, language, setLanguage,
-    voiceType, setVoiceType, voiceRate, setVoiceRate,
+    document, setDocument, 
+    documents, setDocuments, 
+    showCenterModal, flipCenterModal, 
+    showSidebar, flipShowSidebar, 
+    selectedWordsIndexes, setSelectedWordsIndexes,
+    selectedMode, setSelectedMode, 
+    isLoading, setIsLoading, 
+    username, setUsername, 
+    isPlaying, setIsPlaying, 
+    readingNumber, setReadingNumber, 
+    language, setLanguage,
+    voiceType, setVoiceType, 
+    voiceRate, setVoiceRate,
   };
 }

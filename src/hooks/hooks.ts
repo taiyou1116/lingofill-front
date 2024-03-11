@@ -1,5 +1,6 @@
+
+import React, { useState, useEffect } from 'react';
 import { createTheme, useMediaQuery } from "@mui/material";
-import React from "react";
 
 export function useThemeMode() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -16,8 +17,6 @@ export function useThemeMode() {
 
   return theme;
 }
-
-import { useState, useEffect } from 'react';
 
 export function useWindowSize() {
   const [windowSize, setWindowSize] = useState({

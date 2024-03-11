@@ -3,37 +3,17 @@
 import "../../globals.css";
 import "@aws-amplify/ui-react/styles.css";
 import { Authenticator } from "@aws-amplify/ui-react";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { getCurrentUser } from "aws-amplify/auth";
+import { useState } from "react";
 import { oswald } from "@/store/fontStore";
 import Image from "next/image";
 import { CheckCircle } from "@mui/icons-material";
 import { Amplify } from "aws-amplify";
-// import amplifyconfig from '../amplifyconfiguration.json';
 import awsExports from "../../../aws-exports";;
 
 Amplify.configure(awsExports);
+
 function Doc() {
   const [login, setLogin] = useState(false);
-
-  // 本番は使う
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   async function handleAutoSignIn() {
-  //     try {
-  //       const username = await getCurrentUser();
-  //       if (username !== undefined) {
-  //         router.replace('/home');
-  //       }
-  //     } catch (error) {
-  //       console.log("エラー" + error);
-  //     }
-  //   }
-
-  //   handleAutoSignIn();
-  // }, [router])
 
   return (
     <div>
@@ -47,7 +27,11 @@ function Doc() {
               <Image src="LF.svg" width="60" height="60" alt='ロゴ' />
               <h1 className={` text-2xl ${oswald.className} `}>Lingo Fill</h1>
             </div>
-            <button className=" bg-blue-500 dark:bg-blue-800 rounded-md py-3 px-5 text-white" onClick={() => setLogin(true)}>今すぐはじめる</button>
+            <button 
+              className=" bg-blue-500 dark:bg-blue-800 rounded-md py-3 px-5 text-white" 
+              onClick={() => setLogin(true)}>
+              今すぐはじめる
+            </button>
           </div>
 
           <div className=" flex">

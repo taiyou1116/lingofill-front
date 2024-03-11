@@ -17,7 +17,10 @@ import { VoiceRate } from '@/types/types';
 Amplify.configure(awsExports);
 
 function Home() {
-  const { selectedWordsIndexes, setSelectedWordsIndexes, showCenterModal, setLanguage, setVoiceType, setVoiceRate} = GrobalStore();
+  const { selectedWordsIndexes, setSelectedWordsIndexes, 
+          showCenterModal, 
+          setLanguage, 
+          setVoiceType, setVoiceRate} = GrobalStore();
 
   // 言語選択 localStorageから取得
   useEffect(() => {

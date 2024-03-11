@@ -1,8 +1,15 @@
 import { Document, TranslationObj } from "@/types/types";
 import toast from "react-hot-toast";
 
-export async function updateText(
-  partition: string, sort: string, title: string, text: string, translations: TranslationObj[],language:string, translateLanguage: string, updatedAt: string
+export async function updateText (
+  partition: string, 
+  sort: string, 
+  title: string, 
+  text: string, 
+  translations: TranslationObj[],
+  language:string, 
+  translateLanguage: string, 
+  updatedAt: string
 ) {
   try {
     const response = await fetch(`/api`, {
