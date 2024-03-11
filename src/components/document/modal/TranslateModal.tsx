@@ -11,6 +11,7 @@ import DeleteBlockButton from './DeleteBlockButton';
 import ReadAndCopyContainer from './ReadAndCopyContainer';
 import "../../../app/globals.css";
 import { getTranslation } from '@/utils/request';
+import { Formality } from '@aws-sdk/client-translate';
 
 type TranslateModalProps = {
   selectedWordsIndexes: number[],
@@ -19,7 +20,7 @@ type TranslateModalProps = {
 
 function TranslateModal(props: TranslateModalProps) {
   const { selectedWordsIndexes, selectedWords } = props;
-  const { document, setDocument, documents, setDocuments } = GrobalStore();
+  const { document, setDocument, documents, setDocuments, translationExpression } = GrobalStore();
   
   const [userInputTranslation, setUserInputTranslation] = useState('');
   const [userInputMemo, setUserInputMemo] = useState('');
@@ -33,7 +34,8 @@ function TranslateModal(props: TranslateModalProps) {
     if (document === null) return;
 
     const translateTextAsync = async () => {
-      const translatedText = await getTranslation(selectedWords, document.language, document.translateLanguage, 'INFORMAL');
+      const translatedText = await getTranslation(selectedWords, document.language, document.translateLanguage, translationExpression as Formality );
+      console.log(translationExpression);
       if (translatedText === undefined) return;
       setTranslatedWords(translatedText);
     }

@@ -10,18 +10,19 @@ import React from 'react'
 function Setting() {
   const theme = useThemeMode();
 
-  const { language, setLanguage, voiceType, setVoiceType, voiceRate, setVoiceRate } = GrobalStore();
+  const { language, setLanguage, 
+          voiceType, setVoiceType, 
+          voiceRate, setVoiceRate, 
+          translationExpression, setTranslationExpression } = GrobalStore();
 
   const handleLanguageChange = (event: SelectChangeEvent) => {
-    const ln = event.target.value;
-    localStorage.setItem('language', ln);
-    setLanguage(ln);
-    changeLanguage(ln);
+    localStorage.setItem('language', event.target.value);
+    setLanguage(event.target.value);
+    changeLanguage(event.target.value);
   };
 
   const handleVoiceTypeChange = () => {
-    const newType = voiceType;
-    if (newType === 'standard') {
+    if (voiceType === 'standard') {
       setVoiceType('neural');
       localStorage.setItem('voiceType', 'neural');
     } else {
@@ -31,9 +32,13 @@ function Setting() {
   };
 
   const handleVoiceRateChange = (event: SelectChangeEvent) => {
-    const rate = event.target.value;
-    localStorage.setItem('rate', rate);
-    setVoiceRate(rate as VoiceRate);
+    localStorage.setItem('rate', event.target.value);
+    setVoiceRate(event.target.value as VoiceRate);
+  };
+
+  const handleExpressionLn = (e: SelectChangeEvent) => {
+    setTranslationExpression(e.target.value);
+    localStorage.setItem('translationExpression', e.target.value);
   };
   
   return (
@@ -43,6 +48,7 @@ function Setting() {
       <div className=' bg-gray-200 rounded-lg py-5 px-10 flex flex-col gap-10 w-3/6 dark:bg-gray-600'>
 
         <Divider />
+        <div className=' dark:text-gray-300'>一般</div>
           <div className=' flex flex-col gap-3'>
             <div className=' flex items-center justify-between dark:text-gray-300'>ダークモード <Switch /></div>
             <div className=' flex items-center justify-between dark:text-gray-300'>
@@ -67,7 +73,7 @@ function Setting() {
           </div>
 
           <Divider />
-
+          <div className=' dark:text-yellow-300'>Lingo Fill Plus</div>
           <div className=' flex flex-col gap-3'>
             <div className=' flex items-center justify-between dark:text-gray-300'>自然な読み上げ 
               <Switch 
@@ -97,6 +103,23 @@ function Setting() {
                     <MenuItem value={'130'}>130%</MenuItem>
                     <MenuItem value={'140'}>140%</MenuItem>
                     <MenuItem value={'150'}>150%</MenuItem>
+                  </Select>
+                </FormControl>
+            </div>
+            <div className=' flex items-center justify-between dark:text-gray-300'>
+              翻訳の表現
+                <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                  <InputLabel id="demo-simple-select-label">表現を選択</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={translationExpression}
+                    label={"翻訳方法"}
+                    onChange={(e) => handleExpressionLn(e)}
+                  >
+                    <MenuItem value={'NULL'}>デフォルト</MenuItem>
+                    <MenuItem value={'FORMAL'}>硬い表現</MenuItem>
+                    <MenuItem value={'INFORMAL'}>より自然な表現</MenuItem>
                   </Select>
                 </FormControl>
             </div>

@@ -15,7 +15,7 @@ export async function GET(req: NextRequest) {
     const text = searchParams.get('text')!;
     const sourceLanguageCode = searchParams.get('sourceLanguageCode')!;
     const targetLanguageCode = searchParams.get('targetLanguageCode')!;
-    const formality = searchParams.get('formality')!;
+    const formality = searchParams.get('formality');
 
     const command = new TranslateTextCommand({
         Text: text,

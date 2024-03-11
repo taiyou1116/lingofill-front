@@ -74,5 +74,10 @@ export const useStore = create<state>((set) => ({
     voiceRate: '100',
     setVoiceRate: (newRate: VoiceRate) => {
         set({ voiceRate: newRate })
+    },
+
+    translationExpression: 'NULL',
+    setTranslationExpression: (translationExpression: string) => {
+        set({ translationExpression: translationExpression })
     }
 }))

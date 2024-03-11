@@ -184,7 +184,7 @@ export async function getAudio(text: string, voiceId: string, engine = "standard
 }
 
 // translate
-export async function getTranslation(text: string, sourceLanguageCode: string, targetLanguageCode: string, formality: Formality) {
+export async function getTranslation(text: string, sourceLanguageCode: string, targetLanguageCode: string, formality: string) {
   try {
     const baseUrl = 'api/translate';
     const currentUrl = window.location.origin;
@@ -193,8 +193,8 @@ export async function getTranslation(text: string, sourceLanguageCode: string, t
     url.searchParams.append('text', text);
     url.searchParams.append('sourceLanguageCode', sourceLanguageCode);
     url.searchParams.append('targetLanguageCode', targetLanguageCode);
-    url.searchParams.append('formality', formality);
-
+    if (formality !== 'NULL') url.searchParams.append('formality', formality);
+    
     const res = await fetch(url, {
       headers: {
         'Content-Type': 'application/plain',

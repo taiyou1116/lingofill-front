@@ -16,6 +16,7 @@ export const GrobalStore = () => {
     language, setLanguage,
     voiceType, setVoiceType, 
     voiceRate, setVoiceRate,
+    translationExpression, setTranslationExpression,
   } = useStore(state => ({
     document: state.document,
     setDocument: state.setDocument,
@@ -54,6 +55,9 @@ export const GrobalStore = () => {
 
     voiceRate: state.voiceRate,
     setVoiceRate: state.setVoiceRate,
+
+    translationExpression: state.translationExpression,
+    setTranslationExpression: state.setTranslationExpression,
   }));
 
   return { 
@@ -70,5 +74,6 @@ export const GrobalStore = () => {
     language, setLanguage,
     voiceType, setVoiceType, 
     voiceRate, setVoiceRate,
+    translationExpression, setTranslationExpression,
   };
 }

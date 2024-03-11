@@ -69,6 +69,9 @@ export type state = {
 
     voiceRate: VoiceRate,
     setVoiceRate: (newRate: VoiceRate) => void,
+
+    translationExpression: string,
+    setTranslationExpression: (translationExpression: string) => void,
 }
 
 export type LanguageVoiceMap = {
