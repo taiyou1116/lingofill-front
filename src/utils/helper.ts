@@ -124,3 +124,37 @@ export function truncateText(text: string | undefined, maxLength: number) {
   }
   return text;
 }
+
+export function splitTextToSegment(text: string, ln: string): string[] {
+  if (judgeSpaceLanguage(ln)) {
+    return text.split('\n').reduce((acc, line, index, array) => {
+      // 文の終わり（. ? !）で分割し、空ではない結果だけをフィルターする
+      const sentences = line.match(/[^.!?]*[.!?]*/g)?.map(sentence => sentence.trim()).filter(sentence => sentence.length) || [];
+  
+      // 文ごとに結果に追加
+      acc.push(...sentences);
+  
+      // 最後の行以外には改行を追加
+      if (index < array.length - 1) {
+        acc.push('\n');
+      }
+  
+      return acc;
+    }, [] as string[]);
+  } else {
+    return text.split('\n').reduce((acc, line, index, array) => {
+      // 文の終わり（. ? !）で分割し、空ではない結果だけをフィルターする
+      const sentences = line.match(/[^。!?]*[。!?]*/g)?.map(sentence => sentence.trim()).filter(sentence => sentence.length) || [];
+  
+      // 文ごとに結果に追加
+      acc.push(...sentences);
+  
+      // 最後の行以外には改行を追加
+      if (index < array.length - 1) {
+        acc.push('\n');
+      }
+  
+      return acc;
+    }, [] as string[]);
+  }
+}

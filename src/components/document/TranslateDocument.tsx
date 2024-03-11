@@ -4,7 +4,7 @@ import { GrobalStore } from "@/store/grobalStore";
 import { m_plus_rounded_1c } from "@/store/fontStore";
 import { judgeSpaceLanguage } from "@/utils/helper";
 import TranslateModal from "./modal/TranslateModal";
-import { Document } from "@/types/types";
+import { Document, TranslationObj } from "@/types/types";
 import { Tooltip } from "@mui/material";
 
 type Props = {
@@ -95,65 +95,115 @@ function TranslateDocument(props: Props) {
   };
 
   return (
-    <div className="overflow-y-auto max-h-[calc(100vh-200px)] p-3 rounded-md bg-white dark:bg-slate-600 dark:text-slate-300">
-      {(() => {
-        let globalIndex = 0;
-
-        return sentences.map((sentence, sentenceIndex) => (
-          <React.Fragment key={sentenceIndex}>
-            <span 
-              className={`break-all  ${ sentenceIndex === readingNumber ? ' bg-yellow-600/50' : '' }`} 
-              onTouchStart={handleMouseDown} 
-              onTouchEnd={handleMouseUp} 
-              onMouseDown={handleMouseDown} 
-              onMouseUp={handleMouseUp}
-            >
-              {(!judgeSpaceLanguage(document?.language) ? sentence.split('') : sentence.split(' ')).map((word) => {
-                // この時点での globalIndex の値を captureIndex として保存
-                const captureIndex = globalIndex;
-                const translation = document!.translations.find(translation => translation.indexes.includes(captureIndex));
-                
-                if (translation && translation.indexes[0] === captureIndex) {
-                  globalIndex++;
-                  return (
-                    <span
-                      key={captureIndex}
-                      onClick={() => handleClick(captureIndex)} // captureIndex を使用
-                      onMouseMove={() => handleMouseMove(captureIndex)} // captureIndex を使用
-                      onTouchMove={() => handleMouseMove(captureIndex)}
-                      className={`select-none py-0.5 px-1 mx-0.5 cursor-pointer rounded-md text-sm
-                                bg-slate-200 dark:bg-slate-900/50`}
-                    >
-                      <Tooltip title={<div className={`text-sm ${m_plus_rounded_1c.className}`}>{translation.memo}</div>}>
-                        <span>{translation.translatedText}</span>
-                      </Tooltip>
-                    </span>
-                  )
-                } else if (!translation) {
-                  globalIndex++;
-                  return (
-                    <span
-                      key={captureIndex}
-                      onClick={() => handleClick(captureIndex)} // captureIndex を使用
-                      onMouseMove={() => handleMouseMove(captureIndex)} // captureIndex を使用
-                      onTouchMove={() => handleMouseMove(captureIndex)}
-                      className={`select-none cursor-pointer 
-                                  ${document?.language !== 'ja' && document?.language !== 'zh' ? 'p-0.5' : ''} 
-                                  ${selectedWordsIndexes.includes(captureIndex) ? "bg-blue-300 dark:bg-blue-500" : "bg-transparent"}`}
-                    >
-                      {word}
-                    </span>
-                  )
-                } 
-                globalIndex++;
-              })}
-            </span>
-          </React.Fragment>
-        ));
-      })()}
-      <TranslateModal selectedWordsIndexes={selectedWordsIndexes} selectedWords={selectedWords} />
-    </div>
+      <RenderText 
+      sentences={sentences}
+      readingNumber={readingNumber}
+      document={document!}
+      handleClick={handleClick}
+      handleMouseMove={handleMouseMove}
+      handleMouseDown={handleMouseDown}
+      handleMouseUp={handleMouseUp}
+      selectedWordsIndexes={selectedWordsIndexes}
+      selectedWords={selectedWords}
+    />
   );
 }
 
 export default React.memo(TranslateDocument);
+
+
+interface RenderTextProps {
+  sentences: string[];
+  readingNumber?: number;
+  document: Document;
+  handleClick: (index: number) => void;
+  handleMouseMove: (index: number) => void;
+  handleMouseDown: () => void;
+  handleMouseUp: () => void;
+  selectedWordsIndexes: number[];
+  selectedWords: string
+}
+
+const RenderText: React.FC<RenderTextProps> = ({ sentences, readingNumber, document, handleClick, handleMouseMove, handleMouseDown, handleMouseUp, selectedWordsIndexes, selectedWords }) => {
+  let globalIndex = 0;
+
+  const renderSentence = (sentence: string, sentenceIndex: number) => {
+    if (sentence === '\n') {
+      globalIndex++;
+      return <br key={`br-${sentenceIndex}`} />;
+    }
+
+    const words = document.language && judgeSpaceLanguage(document.language) ? sentence.split(' ') : sentence.split('');
+
+    return (
+      <React.Fragment key={sentenceIndex}>
+        <span
+          className={`break-all ${sentenceIndex === readingNumber ? ' text-yellow-300' : ''}`}
+          onTouchStart={handleMouseDown}
+          onTouchEnd={handleMouseUp}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
+        >
+          {words.map((word, wordIndex) => {
+            const captureIndex = globalIndex;
+            const translation = document.translations.find(t => t.indexes.includes(captureIndex));
+
+            if (translation && translation.indexes[0] === captureIndex) {
+              globalIndex++;
+              return (
+                <span
+                  key={captureIndex}
+                  onClick={() => handleClick(captureIndex)} // captureIndex を使用
+                  onMouseMove={() => handleMouseMove(captureIndex)} // captureIndex を使用
+                  onTouchMove={() => handleMouseMove(captureIndex)}
+                  className={`select-none py-0.5 px-1 mx-0.5 cursor-pointer rounded-md text-sm
+                            bg-slate-200 dark:bg-slate-900/50`}
+                >
+                  <Tooltip title={<div className={`text-sm ${m_plus_rounded_1c.className}`}>{translation.memo}</div>}>
+                    <span>{translation.translatedText}</span>
+                  </Tooltip>
+                </span>
+              )
+              // return renderTranslatedWord(translation, captureIndex);
+            } else if (!translation) {
+              globalIndex++;
+              return (
+                <span
+                  key={`${sentenceIndex}-${wordIndex}`}
+                  className={`select-none cursor-pointer ${document.language !== 'ja' && document.language !== 'zh' ? 'p-0.5' : ''} ${selectedWordsIndexes.includes(captureIndex) ? "bg-blue-300 dark:bg-blue-500" : "bg-transparent"}`}
+                  onClick={() => handleClick(captureIndex)}
+                  onMouseMove={() => handleMouseMove(captureIndex)}
+                  onTouchMove={() => handleMouseMove(captureIndex)}
+                >
+                  {word}
+                </span>
+              );
+            }
+            globalIndex++;
+          })}
+        </span>
+      </React.Fragment>
+    );
+  };
+
+  const renderTranslatedWord = (translation: TranslationObj, captureIndex: number) => (
+    <span
+      key={captureIndex}
+      onClick={() => handleClick(captureIndex)}
+      onMouseMove={() => handleMouseMove(captureIndex)}
+      onTouchMove={() => handleMouseMove(captureIndex)}
+      className="select-none py-0.5 px-1 mx-0.5 cursor-pointer rounded-md text-sm bg-slate-200 dark:bg-slate-900/50"
+    >
+      <Tooltip title={<div className="text-sm">{translation.memo}</div>}>
+        <div>{translation.translatedText}</div>
+      </Tooltip>
+    </span>
+  );
+
+  return (
+    <div className="overflow-y-auto max-h-[calc(100vh-200px)] p-3 rounded-md bg-white dark:bg-slate-600 dark:text-slate-300">
+      {sentences.map(renderSentence)}
+      <TranslateModal selectedWordsIndexes={selectedWordsIndexes} selectedWords={selectedWords} />
+    </div>
+  );
+};

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { GrobalStore } from "@/store/grobalStore";
 import { useTranslation } from "react-i18next";
 import { oswald } from "@/store/fontStore";
-import { splitTextToSegments } from "@/utils/helper";
+import { splitTextToSegment, splitTextToSegments } from "@/utils/helper";
 import InputDocument from "./InputDocument";
 import TranslateDocument from "./TranslateDocument";
 import ReadingButton from "./modal/ReadingButton";
@@ -26,7 +26,8 @@ function DocumentComponent() {
     if (document === null) return;
 
     let tempWords: string[];
-    tempWords = splitTextToSegments(document.text, document.language);
+    // tempWords = splitTextToSegments(document.text, document.language);
+    tempWords = splitTextToSegment(document.text, document.language);
     setSentences(tempWords);
   }, [document]);
 
