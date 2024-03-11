@@ -1,4 +1,5 @@
 import { Document, TranslationObj } from "@/types/types";
+import { Formality } from "@aws-sdk/client-translate";
 import toast from "react-hot-toast";
 
 export async function updateText (
@@ -179,5 +180,32 @@ export async function getAudio(text: string, voiceId: string, engine = "standard
   } catch(error) {
     toast.error("音声の取得に失敗しました。インターネット環境を確かめてください。");
     throw error;
+  }
+}
+
+// translate
+export async function getTranslation(text: string, sourceLanguageCode: string, targetLanguageCode: string, formality: Formality) {
+  try {
+    const baseUrl = 'api/translate';
+    const currentUrl = window.location.origin;
+    const url = new URL(baseUrl, currentUrl);
+
+    url.searchParams.append('text', text);
+    url.searchParams.append('sourceLanguageCode', sourceLanguageCode);
+    url.searchParams.append('targetLanguageCode', targetLanguageCode);
+    url.searchParams.append('formality', formality);
+
+    const res = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/plain',
+      }
+    })
+
+    const data = await res.text();
+    console.log(data);
+    return data;
+
+  } catch(err) {
+    console.error(err);
   }
 }

@@ -10,6 +10,7 @@ import ModalCenter from './ModalCenter';
 import DeleteBlockButton from './DeleteBlockButton';
 import ReadAndCopyContainer from './ReadAndCopyContainer';
 import "../../../app/globals.css";
+import { getTranslation } from '@/utils/request';
 
 type TranslateModalProps = {
   selectedWordsIndexes: number[],
@@ -32,7 +33,7 @@ function TranslateModal(props: TranslateModalProps) {
     if (document === null) return;
 
     const translateTextAsync = async () => {
-      const translatedText = await translateText(selectedWords, document.language, document.translateLanguage);
+      const translatedText = await getTranslation(selectedWords, document.language, document.translateLanguage, 'INFORMAL');
       if (translatedText === undefined) return;
       setTranslatedWords(translatedText);
     }

@@ -85,7 +85,6 @@ export async function processAndSpeak(
 
 async function playAudioStream(audioStream: HTMLAudioElement) {
   return new Promise((resolve, reject) => {
-
     audioStream.onended = resolve;
     audioStream.onerror = reject;
     audioStream.play();
@@ -109,6 +108,7 @@ export function judgeSpaceLanguage(ln: string | undefined) {
   }
 }
 
+/**スペースのある言語か判別する @param text テキスト @param ln 言語 */
 export function splitTextToSegments(text: string, ln: string | undefined) {
   if (judgeSpaceLanguage(ln)) {
     return text.split(/(?<=[.?!])\s+/);
@@ -117,11 +117,10 @@ export function splitTextToSegments(text: string, ln: string | undefined) {
   } 
 }
 
+/**表示したい文字数を指定 @param text 表示テキスト @param maxLength 指定の長さ */
 export function truncateText(text: string | undefined, maxLength: number) {
-  // テキストが指定された最大長より長い場合、指定された長さで切り取り、末尾に '...' を追加
   if (text && text.length > maxLength) {
     return text.slice(0, maxLength) + '...';
   }
-  // テキストが最大長以下の場合、そのまま返す
   return text;
 }

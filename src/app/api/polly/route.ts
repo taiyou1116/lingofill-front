@@ -21,7 +21,7 @@ const streamToBuffer = async (stream: Readable): Promise<Buffer> => {
 };
 
 
-export async function GET(req: NextRequest,) {
+export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
   const text = searchParams.get('text')!;
   const voiceId = searchParams.get('voiceId')!; // sortKeyも取得

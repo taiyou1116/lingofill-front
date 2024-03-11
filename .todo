@@ -6,10 +6,7 @@ https://main.d5yypxcoba5g4.amplifyapp.com/
 ライブラリ作成
 - 言語系の何か
 
-- translateDocument judgementのところ
-
 実装
-- voiseTypeの判定helper関数
 - ロシア語のneuralエラー
 - 自然な翻訳
 - 読み上げ無限ループ
