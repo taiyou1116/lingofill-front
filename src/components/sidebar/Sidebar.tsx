@@ -9,13 +9,14 @@ import { getCurrentUser } from 'aws-amplify/auth';
 import { getTitles } from '@/utils/request';
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
 import { EditNote, FolderDelete } from '@mui/icons-material';
-import { Tooltip } from '@mui/material';
+import { Skeleton, Tooltip, Typography } from '@mui/material';
 
 function SidebarComponent() {
   const { showSidebar, flipShowSidebar, documents, setDocuments, username, setUsername } = GrobalStore();
   const { t } = useTranslation();
 
   const [createNewDocument, setCreateNewDocument] = useState<boolean>(false);
+  const [ documentLoading, setDocumentLoading ] = useState<boolean>(false);
 
   // documentsはsidebarで受け取るように変更
   useEffect(() => {
@@ -24,7 +25,10 @@ function SidebarComponent() {
         const user = await getCurrentUser();
         setUsername(user.username);
       } else {
+        // ここで状態変数を使う
+        setDocumentLoading(true);
         const data = await getTitles(username);
+        setDocumentLoading(false);
         setDocuments(data);
       }
     };
@@ -58,18 +62,37 @@ function SidebarComponent() {
                 className=' dark:text-gray-300'>
                 <button 
                   onClick={() => setCreateNewDocument(true)}
-                  className=' border-2 rounded-lg p-0.5 dark:border-gray-400  hover:border-slate-600 duration-150'>
+                  className=' border-2 rounded-lg p-0.5 dark:border-gray-400  hover:border-slate-600 duration-150'
+                >
                   <EditNote style={{fontSize: 25}}/>
                 </button>
               </Tooltip> 
             </div>
           </div>
-          <SidebarDocuments
-            createNewDocument={createNewDocument}
-            setCreateNewDocument={setCreateNewDocument}
-            documents={documents}
-            flipShowSidebar={flipShowSidebar}
-          />
+          { documentLoading 
+          ?
+            <Typography variant="h3" className='px-3'>
+              { Array.from(new Array(5)).map((_, index) => (
+                <Skeleton key={index} animation="wave" />
+              )) }
+            </Typography>
+          :
+            (documents.length === 0) 
+            ? 
+            <div>
+              <div className=' px-3 dark:text-gray-300'>テキストがありません。</div>
+              <div className=' px-3 dark:text-gray-300'>
+                新規作成からテキストを作成しましょう！
+              </div>
+            </div>
+            :
+              <SidebarDocuments
+                createNewDocument={createNewDocument}
+                setCreateNewDocument={setCreateNewDocument}
+                documents={documents}
+                flipShowSidebar={flipShowSidebar}
+              />
+          }
         </div>
       </div>
     </div>

@@ -1,5 +1,4 @@
 import { Document, TranslationObj } from "@/types/types";
-import { Formality } from "@aws-sdk/client-translate";
 import toast from "react-hot-toast";
 
 export async function updateText (
@@ -75,6 +74,8 @@ export async function getTitles(partition: string) {
   const sortedDocuments = newDocuments.sort((a, b) => {
     return b.updatedAt.localeCompare(a.updatedAt);
   });
+  console.log(sortedDocuments);
+  console.log("取得OK");
 
   return sortedDocuments;
 }

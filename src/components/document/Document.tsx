@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { GrobalStore } from "@/store/grobalStore";
 import { useTranslation } from "react-i18next";
 import { oswald } from "@/store/fontStore";
-import { splitTextToSegment, splitTextToSegments } from "@/utils/helper";
+import { splitTextToSegment } from "@/utils/helper";
 import InputDocument from "./InputDocument";
 import TranslateDocument from "./TranslateDocument";
 import ReadingButton from "./modal/ReadingButton";
@@ -21,18 +21,16 @@ function DocumentComponent() {
 
   const { t } = useTranslation();
   const [sentences, setSentences] = useState<string[]>([]);
+  const { width } = useWindowSize();
+  const isSm = width <= 640;
 
   useEffect(() => {
     if (document === null) return;
 
-    let tempWords: string[];
-    // tempWords = splitTextToSegments(document.text, document.language);
-    tempWords = splitTextToSegment(document.text, document.language);
+    // let tempWords: string[];
+    const tempWords = splitTextToSegment(document.text, document.language);
     setSentences(tempWords);
   }, [document]);
-
-  const { width } = useWindowSize();
-  const isSm = width <= 640;
 
   const renderContentByMode = () => {
     if (document === null) {
@@ -73,7 +71,7 @@ function DocumentComponent() {
     if (isSm) {
       return (
         // header
-        <div className="">
+        // <div>
           <div className=" flex flex-col">
             <div className=" flex pt-2 px-1 items-center justify-between">
               <ThreeWayToggle />
@@ -90,7 +88,7 @@ function DocumentComponent() {
             } 
             </div>
           </div>
-        </div>
+        // </div>
       )
     } else {
       return (
