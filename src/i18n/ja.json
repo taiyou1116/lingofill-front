@@ -33,7 +33,8 @@
             }, 
             "readingButton": {
                 "readAloud": "読み上げ",
-                "copy": "コピー"
+                "copy": "コピー",
+                "copied": "コピーしました"
             },
             "saveButton": {
                 "save": "保存する"

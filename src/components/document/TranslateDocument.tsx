@@ -4,7 +4,7 @@ import { GrobalStore } from "@/store/grobalStore";
 import { m_plus_rounded_1c } from "@/store/fontStore";
 import { judgeSpaceLanguage } from "@/utils/helper";
 import TranslateModal from "./modal/TranslateModal";
-import { Document, TranslationObj } from "@/types/types";
+import { Document } from "@/types/types";
 import { Tooltip } from "@mui/material";
 
 type Props = {
@@ -124,7 +124,9 @@ interface RenderTextProps {
   selectedWords: string
 }
 
-const RenderText: React.FC<RenderTextProps> = ({ sentences, readingNumber, document, handleClick, handleMouseMove, handleMouseDown, handleMouseUp, selectedWordsIndexes, selectedWords }) => {
+const RenderText = (props: RenderTextProps) => {
+  const { sentences, readingNumber, document, selectedWordsIndexes, selectedWords,
+          handleClick, handleMouseMove, handleMouseDown, handleMouseUp } = props;
   let globalIndex = 0;
 
   const renderSentence = (sentence: string, sentenceIndex: number) => {
@@ -164,7 +166,7 @@ const RenderText: React.FC<RenderTextProps> = ({ sentences, readingNumber, docum
                   </Tooltip>
                 </span>
               )
-              // return renderTranslatedWord(translation, captureIndex);
+              
             } else if (!translation) {
               globalIndex++;
               return (
@@ -185,20 +187,6 @@ const RenderText: React.FC<RenderTextProps> = ({ sentences, readingNumber, docum
       </React.Fragment>
     );
   };
-
-  const renderTranslatedWord = (translation: TranslationObj, captureIndex: number) => (
-    <span
-      key={captureIndex}
-      onClick={() => handleClick(captureIndex)}
-      onMouseMove={() => handleMouseMove(captureIndex)}
-      onTouchMove={() => handleMouseMove(captureIndex)}
-      className="select-none py-0.5 px-1 mx-0.5 cursor-pointer rounded-md text-sm bg-slate-200 dark:bg-slate-900/50"
-    >
-      <Tooltip title={<div className="text-sm">{translation.memo}</div>}>
-        <div>{translation.translatedText}</div>
-      </Tooltip>
-    </span>
-  );
 
   return (
     <div className="overflow-y-auto max-h-[calc(100vh-200px)] p-3 rounded-md bg-white dark:bg-slate-600 dark:text-slate-300">

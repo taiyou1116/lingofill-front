@@ -35,7 +35,8 @@
         }, 
         "readingButton": {
           "readAloud": "Read Aloud",
-          "copy": "Copy"
+          "copy": "Copy", 
+          "copied": "Copied"
         },
         "saveButton": {
           "save": "Save"

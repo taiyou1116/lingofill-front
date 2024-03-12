@@ -33,7 +33,8 @@
         }, 
         "readingButton": {
           "readAloud": "उच्चारण करें",
-          "copy": "कॉपी"
+          "copy": "कॉपी",
+          "copied": "कॉपी किया गया"
         },
         "saveButton": {
           "save": "सहेजें"
