@@ -77,21 +77,12 @@ function SidebarComponent() {
               )) }
             </Typography>
           :
-            (documents.length === 0) 
-            ? 
-            <div>
-              <div className=' px-3 dark:text-gray-300'>テキストがありません。</div>
-              <div className=' px-3 dark:text-gray-300'>
-                新規作成からテキストを作成しましょう！
-              </div>
-            </div>
-            :
-              <SidebarDocuments
-                createNewDocument={createNewDocument}
-                setCreateNewDocument={setCreateNewDocument}
-                documents={documents}
-                flipShowSidebar={flipShowSidebar}
-              />
+            <SidebarDocuments
+              createNewDocument={createNewDocument}
+              setCreateNewDocument={setCreateNewDocument}
+              documents={documents}
+              flipShowSidebar={flipShowSidebar}
+            />
           }
         </div>
       </div>

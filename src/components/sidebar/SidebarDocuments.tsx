@@ -105,9 +105,15 @@ function SidebarDocuments(props: Props) {
 
   return (
     <div className=' break-all flex flex-col w-full overflow-y-auto' style={{ maxHeight: '90vh', overflowY: 'auto' }}>
+
+      { documents.length === 0 &&
+        <div className=' p-3 dark:text-gray-300'>
+          新規作成からテキストを作成する。
+        </div> 
+      }       
+
       {/* 新規作成input */}
-      { createNewDocument 
-      ? 
+      { createNewDocument &&
         <CreateNewDocument 
           input={input}
           setInput={setInput}
@@ -116,8 +122,8 @@ function SidebarDocuments(props: Props) {
           setDocuments={setDocuments}
           inputRef={inputRef}
         />
-      : '' }
-      
+      }
+
       { 
         documents.map((localDoc, index) => {
           return (
