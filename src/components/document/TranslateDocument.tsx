@@ -18,11 +18,14 @@ function TranslateDocument(props: Props) {
           selectedWordsIndexes, setSelectedWordsIndexes, 
           readingNumber } = GrobalStore();
 
-  // ドラッグ処理(熟語処理)
   const [words, setWords] = useState<string[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const [selectedWords, setSelectedWords] = useState('hello');
-  const [startDragIndex, setStartDragIndex] = useState<number | null>(null); // ドラッグ開始インデックス 
+  const [startDragIndex, setStartDragIndex] = useState<number | null>(null);
+  const [ oldIndex, setOldIndex ] = useState<number | null>(null);
+
+  // ドラッグ中に通ったblock (clickでも)
+  
 
   // 単語用 -> sentencesからさらに分割
   useEffect(() => {
@@ -64,6 +67,9 @@ function TranslateDocument(props: Props) {
     if (startDragIndex === null) {
       setStartDragIndex(index);
     } else {
+      if (oldIndex === index) return;
+      
+      setOldIndex(index);
       const newIndexes = [];
       const minIndex = Math.min(startDragIndex, index);
       const maxIndex = Math.max(startDragIndex, index);
@@ -71,8 +77,7 @@ function TranslateDocument(props: Props) {
       for (let i = minIndex; i <= maxIndex; i++) {
         const translation = document!.translations.find(translation => translation.indexes.includes(i));
         if (translation) {
-          handleMouseUp();
-          return;
+          console.log("unblock: " + translation.indexes);
         }
         newIndexes.push(i);
       }

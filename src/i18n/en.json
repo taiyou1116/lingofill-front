@@ -19,7 +19,7 @@
       },
       "modal": {
         "deleteBlockButton": {
-          "cancelBlock": "Cancel Block"
+          "cancelBlock": "Unblock"
         },
         "inputBlock": {
           "inputBlock": "Block Display",

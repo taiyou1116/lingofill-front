@@ -73,9 +73,7 @@ export async function getTitles(partition: string) {
   // sortKeyの大きい順に配列をソート
   const sortedDocuments = newDocuments.sort((a, b) => {
     return b.updatedAt.localeCompare(a.updatedAt);
-  });
-  console.log(sortedDocuments);
-  console.log("取得OK");
+  });;
 
   return sortedDocuments;
 }
@@ -203,7 +201,6 @@ export async function getTranslation(text: string, sourceLanguageCode: string, t
     })
 
     const data = await res.text();
-    console.log(data);
     return data;
 
   } catch(err) {

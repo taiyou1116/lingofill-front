@@ -2,6 +2,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next';
 import { Document } from '@/types/types';
+import { AutoFixHigh } from '@mui/icons-material';
 
 type Props = {
   document: Document | null,
@@ -35,10 +36,10 @@ function DeleteBlockButton(props: Props) {
 
   return (
     <button 
-      className=' text-gray-400 rounded-md '
+      className=' text-gray-200 rounded-md bg-red-500 hover:bg-red-800 px-4 py-1 md:px-4 md:py-2 w-1/6 '
       onClick={deleteBlock}
     >
-      {t('document.modal.deleteBlockButton.cancelBlock')}
+      <div className=' flex gap-1 items-center'><AutoFixHigh /> {t('document.modal.deleteBlockButton.cancelBlock')}</div>
     </button>
   )
 }

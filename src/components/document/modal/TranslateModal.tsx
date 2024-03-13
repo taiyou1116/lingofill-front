@@ -2,7 +2,9 @@
 
 import React, { useEffect, useState } from 'react'
 import { GrobalStore } from '@/store/grobalStore';
-import { splitTextToSegments, translateText } from '@/utils/helper';
+import { splitTextToSegments } from '@/utils/helper';
+import { getTranslation } from '@/utils/request';
+import { Formality } from '@aws-sdk/client-translate';
 import InputMemo from './InputMemo';
 import SaveButton from './SaveButton';
 import InputBlock from './InputBlock';
@@ -10,8 +12,6 @@ import ModalCenter from './ModalCenter';
 import DeleteBlockButton from './DeleteBlockButton';
 import ReadAndCopyContainer from './ReadAndCopyContainer';
 import "../../../app/globals.css";
-import { getTranslation } from '@/utils/request';
-import { Formality } from '@aws-sdk/client-translate';
 
 type TranslateModalProps = {
   selectedWordsIndexes: number[],
@@ -35,7 +35,6 @@ function TranslateModal(props: TranslateModalProps) {
 
     const translateTextAsync = async () => {
       const translatedText = await getTranslation(selectedWords, document.language, document.translateLanguage, translationExpression as Formality );
-      console.log(translationExpression);
       if (translatedText === undefined) return;
       setTranslatedWords(translatedText);
     }
@@ -82,7 +81,7 @@ function TranslateModal(props: TranslateModalProps) {
           userInputMemo={userInputMemo}
           setUserInputMemo={setUserInputMemo}
         />
-        <div className=' flex gap-3'>
+        <div className=' flex gap-3 w-full items-center justify-center'>
           <SaveButton 
             selectedWordsIndexes={selectedWordsIndexes}
             userInputTranslation={userInputTranslation}
