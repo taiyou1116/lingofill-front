@@ -18,13 +18,16 @@ function DeleteBlockButton(props: Props) {
   const deleteBlock = () => {
     if (!document) return;
 
-    // 選択された単語のインデックスを含まない翻訳をフィルタリング
-    const updatedTranslations = document.translations.filter(
-      (translation) => !translation.indexes.includes(selectedWordsIndexes[0])
+    // 選択された単語、熟語の最初のインデックスを含まない翻訳のみを残す
+    const deleteTranslations = document.translations.filter(
+      (translation) => (
+        !selectedWordsIndexes.includes(translation.indexes[0])
+      )
     );
+
     const updatedDocument = {
       ...document,
-      translations: updatedTranslations,
+      translations: deleteTranslations,
       isSynced: false,
     };
     const updatedDocuments = documents.map((doc) =>
