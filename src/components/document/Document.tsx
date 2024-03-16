@@ -13,8 +13,9 @@ import StopAudio from "./header/StopAudio";
 import SelectLanguage from "./header/SelectLanguage";
 import SendDocumentDataButton from "./header/SendDocumentDataButton";
 import ThreeWayToggle from "./header/ThreeWayToggle";
-import { Box, LinearProgress } from "@mui/material";
+import { Box, LinearProgress, Tooltip } from "@mui/material";
 import { useWindowSize } from "@/hooks/hooks";
+import { FormatUnderlined } from "@mui/icons-material";
 
 function DocumentComponent() {
   const { document, selectedMode, isLoading, isPlaying } = GrobalStore();
@@ -70,35 +71,10 @@ function DocumentComponent() {
     }
     if (isSm) {
       return (
-        // header
-        // <div>
-          <div className=" flex flex-col">
-            <div className=" flex pt-2 px-1 items-center justify-between">
-              <ThreeWayToggle />
-              <SelectLanguage />
-              { !isPlaying
-              ? 
-                <ReadingButton 
-                  sentences={sentences!}
-                  ln={document!.language}
-                  shouldIncrement={true}
-                />
-              :
-                <StopAudio />
-            } 
-            </div>
-          </div>
-        // </div>
-      )
-    } else {
-      return (
-        // header
-        <div className=" flex items-center justify-between">
-          <div className=" flex gap-5 items-center">
-            <h1 className={` dark:text-gray-100 text-xxs  ${oswald.className}`}>{ document.title }</h1>
+        <div className=" flex flex-col">
+          <div className=" flex pt-2 px-1 items-center justify-between">
             <ThreeWayToggle />
             <SelectLanguage />
-
             { !isPlaying
             ? 
               <ReadingButton 
@@ -108,8 +84,32 @@ function DocumentComponent() {
               />
             :
               <StopAudio />
-            } 
-            
+          } 
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div className=" flex items-center justify-between">
+          <div className=" flex gap-5 items-center">
+            <h1 className={` dark:text-gray-100 text-xxs  ${oswald.className}`}>{ document.title }</h1>
+            <ThreeWayToggle />
+            <SelectLanguage />
+            <div className=" flex gap-3">
+              { !isPlaying
+              ? 
+                <ReadingButton 
+                  sentences={sentences!}
+                  ln={document!.language}
+                  shouldIncrement={true}
+                />
+              :
+                <StopAudio />
+              } 
+              <Tooltip title='アンダーラインを引く' className=" cursor-pointer text-gray-300 hover:text-gray-500">
+                <FormatUnderlined style={{ fontSize: 20 }} />
+              </Tooltip>
+            </div>
           </div>
           <SendDocumentDataButton />
         </div>
