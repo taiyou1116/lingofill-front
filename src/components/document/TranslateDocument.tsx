@@ -8,10 +8,11 @@ import RenderText from "./RenderText";
 type Props = {
   document: Document | null,
   sentences: string[],
+  isSelectedReading: boolean,
 }
 
 function TranslateDocument(props: Props) {
-  const { document, sentences } = props;
+  const { document, sentences, isSelectedReading } = props;
   const { showCenterModal, flipCenterModal, 
           selectedWordsIndexes, setSelectedWordsIndexes, 
           readingNumber } = GrobalStore();
@@ -37,7 +38,7 @@ function TranslateDocument(props: Props) {
   
   // 単語編集処理
   const handleClick = (index: number) => {
-    if (showCenterModal) return;
+    if (showCenterModal || isSelectedReading) return;
 
     const translation = document!.translations.find(translation => translation.indexes.includes(index));
     if (translation) {
@@ -51,7 +52,7 @@ function TranslateDocument(props: Props) {
   };
 
   const handleMouseDown = () => {
-    if (showCenterModal) return;
+    if (showCenterModal || isSelectedReading) return;
     setIsDragging(true);
     setSelectedWordsIndexes([]);
   };
@@ -123,6 +124,7 @@ function TranslateDocument(props: Props) {
       handleMouseUp={handleMouseUp}
       selectedWordsIndexes={selectedWordsIndexes}
       selectedWords={selectedWords}
+      isSelectedReading={isSelectedReading}
     />
   );
 }

@@ -18,6 +18,9 @@ export function useThemeMode() {
   return theme;
 }
 
+/**
+ * 端末ごとにUIを変更する
+ * モバイル端末width640 */
 export function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
     width: 0,

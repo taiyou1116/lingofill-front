@@ -14,7 +14,7 @@ type Props = {
 }
 
 function ReadAndCopyContainer(props: Props) {
-  const { sentences, ln, shouldIncrement, words, className } = props;
+  const { sentences, ln, words, shouldIncrement, className } = props;
   const { t } = useTranslation();
 
   const [copied, setCopied] = useState<boolean>(false);

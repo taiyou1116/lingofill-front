@@ -1,9 +1,10 @@
 import { m_plus_rounded_1c } from "@/store/fontStore";
 import { Document } from "@/types/types";
-import { judgeSpaceLanguage } from "@/utils/helper";
+import { getVoiceForLanguage, judgeSpaceLanguage, processAndSpeak } from "@/utils/helper";
 import { Tooltip } from "@mui/material";
 import React from "react";
 import TranslateModal from "./modal/TranslateModal";
+import { GrobalStore } from "@/store/grobalStore";
 
 type RenderTextProps = {
   sentences: string[];
@@ -15,11 +16,14 @@ type RenderTextProps = {
   handleMouseUp: () => void;
   selectedWordsIndexes: number[];
   selectedWords: string
+  isSelectedReading: boolean,
 }
 
 const RenderText = (props: RenderTextProps) => {
-  const { sentences, readingNumber, document, selectedWordsIndexes, selectedWords,
+  const { sentences, readingNumber, document, selectedWordsIndexes, selectedWords, isSelectedReading,
           handleClick, handleMouseMove, handleMouseDown, handleMouseUp } = props;
+  const { voiceType, setReadingNumber, setIsPlaying, voiceRate } = GrobalStore();
+
   let globalIndex = 0;
 
   const renderSentence = (sentence: string, sentenceIndex: number) => {
@@ -27,6 +31,22 @@ const RenderText = (props: RenderTextProps) => {
       globalIndex++;
       return <br key={`br-${sentenceIndex}`} />;
     }
+    
+    const Test = async (sentenceIndex: number) => {
+      if (!isSelectedReading) return;
+      const newSentences = sentences.slice(sentenceIndex);
+      const voice = getVoiceForLanguage(document.language, voiceType);
+
+      await processAndSpeak(newSentences, voice, () => {
+        setReadingNumber(sentenceIndex);
+        setIsPlaying(true);
+      }, () => setIsPlaying(false), () => {
+        plusOne();
+      }, voiceType, voiceRate);
+    }
+    const plusOne = () => {
+      setReadingNumber(prevNumber => prevNumber + 1);
+    };
 
     const words = document.language && judgeSpaceLanguage(document.language) ? sentence.split(' ') : sentence.split('');
 
@@ -38,6 +58,7 @@ const RenderText = (props: RenderTextProps) => {
           onTouchEnd={handleMouseUp}
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
+          onClick={() => Test(sentenceIndex)}
         >
           {words.map((word, wordIndex) => {
             const captureIndex = globalIndex;

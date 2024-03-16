@@ -8,27 +8,25 @@ import { oswald } from "@/store/fontStore";
 import { splitTextToSegment } from "@/utils/helper";
 import InputDocument from "./InputDocument";
 import TranslateDocument from "./TranslateDocument";
-import ReadingButton from "./modal/ReadingButton";
 import StopAudio from "./header/StopAudio";
 import SelectLanguage from "./header/SelectLanguage";
 import SendDocumentDataButton from "./header/SendDocumentDataButton";
 import ThreeWayToggle from "./header/ThreeWayToggle";
 import { Box, LinearProgress, Tooltip } from "@mui/material";
 import { useWindowSize } from "@/hooks/hooks";
-import { FormatUnderlined } from "@mui/icons-material";
+import { FormatUnderlined, Palette, VolumeMute, VolumeUp } from "@mui/icons-material";
 
 function DocumentComponent() {
   const { document, selectedMode, isLoading, isPlaying } = GrobalStore();
 
   const { t } = useTranslation();
-  const [sentences, setSentences] = useState<string[]>([]);
   const { width } = useWindowSize();
   const isSm = width <= 640;
+  const [sentences, setSentences] = useState<string[]>([]);
+  const [ isSelectedReading, setIsSelectedReading ] = useState<boolean>(false);
 
   useEffect(() => {
     if (document === null) return;
-
-    // let tempWords: string[];
     const tempWords = splitTextToSegment(document.text, document.language);
     setSentences(tempWords);
   }, [document]);
@@ -54,6 +52,7 @@ function DocumentComponent() {
           <TranslateDocument
             document={document}
             sentences={sentences!}
+            isSelectedReading={isSelectedReading}
           />
         );
       case 'input':
@@ -75,16 +74,20 @@ function DocumentComponent() {
           <div className=" flex pt-2 px-1 items-center justify-between">
             <ThreeWayToggle />
             <SelectLanguage />
-            { !isPlaying
-            ? 
-              <ReadingButton 
-                sentences={sentences!}
-                ln={document!.language}
-                shouldIncrement={true}
-              />
+            { (!isSelectedReading)
+            ?
+              <Tooltip title='読み上げをオンにする' onClick={() => setIsSelectedReading(true)}>
+                <VolumeUp />
+              </Tooltip>
             :
-              <StopAudio />
-          } 
+              (!isPlaying)
+              ? 
+                <Tooltip title='読み上げをオフにする' className=" text-gray-300 cursor-pointer p-1 rounded-md bg-gray-600" onClick={() => setIsSelectedReading(false)}>
+                  <VolumeUp style={{ fontSize: 25 }} />
+                </Tooltip>
+              :
+                <StopAudio />
+            }
           </div>
         </div>
       )
@@ -95,20 +98,32 @@ function DocumentComponent() {
             <h1 className={` dark:text-gray-100 text-xxs  ${oswald.className}`}>{ document.title }</h1>
             <ThreeWayToggle />
             <SelectLanguage />
-            <div className=" flex gap-3">
-              { !isPlaying
-              ? 
-                <ReadingButton 
-                  sentences={sentences!}
-                  ln={document!.language}
-                  shouldIncrement={true}
-                />
+            <div className=" flex gap-3 items-center">
+              <div className="bg-gray-900 rounded-lg p-1">
+                { (!isSelectedReading)
+              ?
+                <Tooltip title='読み上げをオンにする' className=" text-gray-300 cursor-pointer p-1 hover:rounded hover:bg-gray-800" onClick={() => setIsSelectedReading(true)}>
+                  <VolumeMute style={{ fontSize: 25 }} />
+                </Tooltip>
               :
-                <StopAudio />
-              } 
-              <Tooltip title='アンダーラインを引く' className=" cursor-pointer text-gray-300 hover:text-gray-500">
-                <FormatUnderlined style={{ fontSize: 20 }} />
-              </Tooltip>
+                (!isPlaying)
+                ? 
+                  <Tooltip title='読み上げをオフにする' className=" text-gray-300 cursor-pointer p-1 rounded-md bg-gray-600" onClick={() => setIsSelectedReading(false)}>
+                    <VolumeUp style={{ fontSize: 25 }} />
+                  </Tooltip>
+                :
+                  <StopAudio />
+              }
+              </div>
+              
+              <div className=" flex gap-1 items-center bg-gray-900 rounded-lg p-1 text-gray-300 ">
+                <Tooltip title='アンダーラインを引く' className=" cursor-pointer p-1 hover:rounded hover:bg-gray-800">
+                  <FormatUnderlined style={{ fontSize: 25 }} />
+                </Tooltip>
+                <Tooltip title='アンダーラインの色を変える'>
+                  <Palette style={{ fontSize: 25 }}  className=" cursor-pointer hover:text-gray-500" />
+                </Tooltip>
+              </div>
             </div>
           </div>
           <SendDocumentDataButton />

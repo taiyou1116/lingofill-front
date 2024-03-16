@@ -12,6 +12,7 @@ type Props = {
   shouldIncrement: boolean,
 }
 
+// ifいらない、plusOneいらない　
 function ReadingButton(props: Props) {
   const { sentences, ln, shouldIncrement } = props;
   const { setIsPlaying, setReadingNumber, voiceType, voiceRate } = GrobalStore();
