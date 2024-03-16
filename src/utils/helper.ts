@@ -1,4 +1,4 @@
-import { LanguageVoiceMap, VoiceType } from "@/types/types";
+import { Document, LanguageVoiceMap, VoiceType } from "@/types/types";
 import { Predictions } from "@aws-amplify/predictions";
 import { getAudio } from "./request";
 
@@ -157,4 +157,19 @@ export function splitTextToSegment(text: string, ln: string): string[] {
       return acc;
     }, [] as string[]);
   }
+}
+
+export function leaveTranslation(document: Document, selectedWordsIndexes: number[]) {
+  // 選択された単語、熟語以外のtranslation
+  const leaveTranslations = document.translations.filter(
+    (translation) => (!selectedWordsIndexes.includes(translation.indexes[0])));
+
+  // document, documentsも更新
+  const newDocument = {
+    ...document,
+    translations: leaveTranslations,
+    isSynced: false,
+  };
+
+  return newDocument;
 }

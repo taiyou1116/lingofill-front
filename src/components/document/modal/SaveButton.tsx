@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { handleCloseModal } from '@/utils/modal';
 import { Document } from '@/types/types';
 import { Save } from '@mui/icons-material'
+import { leaveTranslation } from '@/utils/helper';
 
 
 type Props = {
@@ -27,27 +28,27 @@ function SaveButton(props: Props) {
     handleCloseModal(flipCenterModal);
   }
 
-  const handleTranslation = (selectedWordIndexes: number[], userInput: string, userInputMemo: string) => {
+  const handleTranslation = (selectedWordsIndexes: number[], userInput: string, userInputMemo: string) => {
     if (!document) return;
-    // translationsのコピーを作成（不変性を保持）
-    let updatedTranslations = [...(document.translations ?? [])];
+
+    const newDocument = leaveTranslation(document, selectedWordsIndexes);
 
     // 選択された単語のインデックスに基づく既存の翻訳を検索
-    const existingTranslationIndex = updatedTranslations.findIndex(translation =>
-      selectedWordIndexes.some(index => translation.indexes.includes(index))
+    const existingTranslationIndex = newDocument.translations.findIndex(translation =>
+      selectedWordsIndexes.some(index => translation.indexes.includes(index))
     );
 
     if (existingTranslationIndex !== -1) {
       // 既存の翻訳を更新
-      updatedTranslations[existingTranslationIndex] = {
-        ...updatedTranslations[existingTranslationIndex],
+      newDocument.translations[existingTranslationIndex] = {
+        ...newDocument.translations[existingTranslationIndex],
         translatedText: userInput,
         memo: userInputMemo,
       };
     } else {
       // 新しい翻訳を追加
-      updatedTranslations.push({
-        indexes: selectedWordIndexes,
+      newDocument.translations.push({
+        indexes: selectedWordsIndexes,
         translatedText: userInput,
         memo: userInputMemo,
       });
@@ -56,7 +57,7 @@ function SaveButton(props: Props) {
     // 更新されたドキュメントオブジェクトを作成
     const updatedDocument: Document = {
       ...document,
-      translations: updatedTranslations,
+      translations: newDocument.translations,
       isSynced: false,
     };
 

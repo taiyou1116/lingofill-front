@@ -66,7 +66,7 @@ const RenderText = (props: RenderTextProps) => {
               return (
                 <span
                   key={`${sentenceIndex}-${wordIndex}`}
-                  className={`select-none cursor-pointer 
+                  className={`select-none cursor-pointer
                               ${document.language !== 'ja' && document.language !== 'zh' ? 'p-0.5' : ''} 
                               ${selectedWordsIndexes.includes(captureIndex) ? "bg-blue-300 dark:bg-blue-500" : "bg-transparent"}`}
                   onClick={() => handleClick(captureIndex)}
