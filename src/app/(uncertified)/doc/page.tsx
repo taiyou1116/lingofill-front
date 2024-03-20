@@ -6,7 +6,7 @@ import { Authenticator } from "@aws-amplify/ui-react";
 import { useState } from "react";
 import { oswald } from "@/store/fontStore";
 import Image from "next/image";
-import { CheckCircle } from "@mui/icons-material";
+import { CheckCircle, Launch } from "@mui/icons-material";
 import { Amplify } from "aws-amplify";
 import awsExports from "../../../aws-exports";;
 
@@ -19,7 +19,12 @@ function Doc() {
     <div>
       { login 
       ?
-        <Authenticator socialProviders={['google']} />
+        <Authenticator socialProviders={['google']} >
+          <div className=" w-screen h-screen text-gray-300 flex flex-col gap-5 items-center justify-center">
+            <button onClick={() => console.log("unchi")} className=" bg-lime-600 py-4 px-8"><Launch /> 学習ページへ</button>
+            <button onClick={() => console.log("unchi")}>ドキュメントへ戻る</button>
+          </div>
+        </Authenticator>
       : 
         <div>
           <div className="header-bg-height flex items-center justify-between shadow-md px-10 bg-white dark:bg-gray-600">
