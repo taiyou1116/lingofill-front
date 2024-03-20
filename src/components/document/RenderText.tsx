@@ -1,7 +1,7 @@
 import { m_plus_rounded_1c } from "@/store/fontStore";
 import { Document } from "@/types/types";
 import { getVoiceForLanguage, judgeSpaceLanguage, processAndSpeak } from "@/utils/helper";
-import { Tooltip } from "@mui/material";
+import { Tooltip, TooltipProps, styled, tooltipClasses } from "@mui/material";
 import React from "react";
 import TranslateModal from "./modal/TranslateModal";
 import { GrobalStore } from "@/store/grobalStore";
@@ -50,6 +50,15 @@ const RenderText = (props: RenderTextProps) => {
 
     const words = document.language && judgeSpaceLanguage(document.language) ? sentence.split(' ') : sentence.split('');
 
+    const CustomWidthTooltip = styled(({ className, ...props }: TooltipProps) => (
+      <Tooltip {...props} classes={{ popper: className }} />
+    ))({
+      [`& .${tooltipClasses.tooltip}`]: {
+        maxWidth: 800,
+        backgroundColor: 'rgba(97, 97, 97, 1)',
+      },
+    });
+
     return (
       <React.Fragment key={sentenceIndex}>
         <span
@@ -76,9 +85,12 @@ const RenderText = (props: RenderTextProps) => {
                     ${selectedWordsIndexes.includes(captureIndex) ? "bg-blue-300 dark:bg-blue-500" : "bg-slate-200 dark:bg-slate-900/50"}
                   `}
                 >
-                  <Tooltip title={<div className={`text-sm ${m_plus_rounded_1c.className}`}>{translation.memo}</div>}>
+                  <CustomWidthTooltip
+                    title={<div className={`text-sm ${m_plus_rounded_1c.className}`}
+                    style={{ whiteSpace: 'pre-wrap' }}>{translation.memo}</div>}
+                  >
                     <span>{translation.translatedText}</span>
-                  </Tooltip>
+                  </CustomWidthTooltip>
                 </span>
               )
               

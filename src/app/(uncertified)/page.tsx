@@ -32,6 +32,7 @@ const MyApp = () => {
         console.log("エラー" + error);
         router.replace('/doc');
       }
+      console.log("呼ばれた");
     }
 
     handleAutoSignIn();

@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PasteButton from './PasteButton';
 import { generateMemoFromGPT4 } from '@/utils/request';
 import { AutoAwesome } from '@mui/icons-material';
+import { CircularProgress } from '@mui/material';
 
 type Props = {
   userInputMemo: string,
@@ -12,9 +13,12 @@ type Props = {
 
 function InputMemo(props: Props) {
   const { userInputMemo, setUserInputMemo, selectedWords, ln } = props;
+  const [ isGeneratingAIResponse, setIsGeneratingAIResponse ] = useState<boolean>(false);
 
   const generateMemo = async () => {
-    const text = await generateMemoFromGPT4(selectedWords, ln!);
+    setIsGeneratingAIResponse(true);
+    const text: string = await generateMemoFromGPT4(selectedWords, ln!);
+    setIsGeneratingAIResponse(false);
     setUserInputMemo(text);
   }
 
@@ -25,12 +29,19 @@ function InputMemo(props: Props) {
           setUserInput={setUserInputMemo}
           plceholder='document.modal.inputMemo.inputMemo'
         />
-        <button 
-          onClick={generateMemo} 
-          className=' bg-gray-600 py-1 px-2 text-sm flex gap-1 rounded-md border-gray-400 border hover:bg-gray-900'
-        >
-          <AutoAwesome style={{ fontSize: 20 }} />AIで生成
-        </button>
+        { isGeneratingAIResponse
+        ?
+          <div className='flex items-center gap-1 p-1'>
+            生成中<CircularProgress size={20} />
+          </div>
+        :
+          <button 
+            onClick={generateMemo} 
+            className=' bg-gray-600 py-1 px-2 text-sm flex gap-1 rounded-md border-gray-400 border hover:bg-gray-900'
+          >
+            <AutoAwesome style={{ fontSize: 20 }} />AIで生成
+          </button>
+        }
       </div>
       <textarea 
         maxLength={1000}
