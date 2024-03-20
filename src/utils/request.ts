@@ -224,7 +224,7 @@ export async function generateMemoFromGPT4(text: string, ln: string) {
     })
 
     const data = await res.json();
-    console.log(data);
+    return data.response;
   } catch(err) {
     console.error(err);
   }

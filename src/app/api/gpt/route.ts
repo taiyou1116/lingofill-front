@@ -23,6 +23,7 @@ export async function GET(req: NextRequest) {
           文法情報: 選択されたテキストが含まれる文法的構造（例: 時制、名詞の数、動詞の活用など）に関する説明を提供します。
         ` }],
       model: "gpt-3.5-turbo",
+      // gpt-4-turbo-preview
     });
     console.log(ln);
     const responseBody = JSON.stringify({
@@ -32,7 +33,7 @@ export async function GET(req: NextRequest) {
     return new Response(responseBody, {
       status: 200,
       headers: {
-        "Content-Type": "audio/json",
+        "Content-Type": "application/json",
       },
     });
     
@@ -41,7 +42,7 @@ export async function GET(req: NextRequest) {
     return new Response(JSON.stringify({ err: "GPTAPIエラー" }), {
       status: 500,
       headers: {
-        "Content-Type": "audio/json",
+        "Content-Type": "application/json",
       },
     });
   }
