@@ -207,3 +207,25 @@ export async function getTranslation(text: string, sourceLanguageCode: string, t
     console.error(err);
   }
 }
+
+export async function generateMemoFromGPT4(text: string, ln: string) {
+  const baseUrl = 'api/gpt';
+  const currentUrl = window.location.origin;
+  const url = new URL(baseUrl, currentUrl);
+
+  url.searchParams.append('text', text);
+  url.searchParams.append('ln', ln);
+
+  try {
+    const res = await fetch(url, {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+
+    const data = await res.json();
+    console.log(data);
+  } catch(err) {
+    console.error(err);
+  }
+}

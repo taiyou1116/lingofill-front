@@ -81,6 +81,8 @@ function TranslateModal(props: TranslateModalProps) {
         <InputMemo 
           userInputMemo={userInputMemo}
           setUserInputMemo={setUserInputMemo}
+          selectedWords={selectedWords}
+          ln={document?.translateLanguage}
         />
         <div className=' flex gap-3 w-full items-center justify-center'>
           <SaveButton 
