@@ -15,6 +15,10 @@
         "threeWayToggle": {
           "edit": "Edit",
           "input": "Input"
+        },
+        "aloud": {
+          "onAloud": "Turn on Read Aloud",
+          "offAloud": "Turn off Read Aloud"
         }
       },
       "modal": {
@@ -28,10 +32,10 @@
           "favorite": "Add to Favorites"
         },
         "inputMemo": {
-          "noteTheOriginalText": "Note the Original Text",
-          "noteTheTranslation": "Note the Translation",
           "inputMemo": "Enter your note here (e.g., context, usage, translated text, etc.)",
-          "paste": "Paste from clipboard"
+          "paste": "Paste from clipboard",
+          "generateAI": "Generate with AI",
+          "generatingAI": "Generating"
         }, 
         "readingButton": {
           "readAloud": "Read Aloud",
@@ -39,8 +43,9 @@
           "copied": "Copied"
         },
         "saveButton": {
-          "save": "Save"
-        }
+          "save": "Block"
+        },
+        "closeModal": "Close"
       }
     },
     "header": {

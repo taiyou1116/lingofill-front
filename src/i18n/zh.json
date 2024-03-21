@@ -15,6 +15,10 @@
         "threeWayToggle": {
           "edit": "编辑",
           "input": "输入"
+        },
+        "aloud": {
+          "onAloud": "开启朗读",
+          "offAloud": "关闭朗读"
         }
       },
       "modal": {
@@ -28,10 +32,10 @@
           "favorite": "添加到收藏"
         },
         "inputMemo": {
-          "noteTheOriginalText": "记下原文",
-          "noteTheTranslation": "记下翻译",
           "inputMemo": "在此输入备注（例如：上下文、用法、翻译文本等）",
-          "paste": "从剪贴板粘贴"
+          "paste": "从剪贴板粘贴",
+          "generateAI": "用AI生成",
+          "generatingAI": "生成中"
         }, 
         "readingButton": {
           "readAloud": "朗读",
@@ -39,8 +43,9 @@
           "copied": "已复制"
         },
         "saveButton": {
-          "save": "保存"
-        }
+          "save": "阻止"
+        },
+        "closeModal": "关闭"
       }
     },
     "header": {

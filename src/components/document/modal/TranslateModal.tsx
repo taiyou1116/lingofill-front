@@ -13,6 +13,7 @@ import DeleteBlockButton from './DeleteBlockButton';
 import ReadAndCopyContainer from './ReadAndCopyContainer';
 import "../../../app/globals.css";
 import { handleCloseModal } from '@/utils/modal';
+import { useTranslation } from 'react-i18next';
 
 type TranslateModalProps = {
   selectedWordsIndexes: number[],
@@ -22,6 +23,7 @@ type TranslateModalProps = {
 function TranslateModal(props: TranslateModalProps) {
   const { selectedWordsIndexes, selectedWords } = props;
   const { document, setDocument, documents, setDocuments, translationExpression, flipCenterModal } = GrobalStore();
+  const { t } = useTranslation();
   
   const [userInputTranslation, setUserInputTranslation] = useState('');
   const [userInputMemo, setUserInputMemo] = useState('');
@@ -101,7 +103,7 @@ function TranslateModal(props: TranslateModalProps) {
             setDocuments={setDocuments}
             selectedWordsIndexes={selectedWordsIndexes}
           />
-          <button onClick={() => handleCloseModal(flipCenterModal)} >閉じる</button>
+          <button onClick={() => handleCloseModal(flipCenterModal)} >{t('document.modal.closeModal')}</button>
         </div>
     </ModalCenter>
   )

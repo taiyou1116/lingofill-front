@@ -102,13 +102,13 @@ function DocumentComponent() {
               <div className="bg-gray-900 rounded-lg p-1">
                 { (!isSelectedReading)
               ?
-                <Tooltip title='読み上げをオンにする' className=" text-gray-300 cursor-pointer p-1 hover:rounded hover:bg-gray-800" onClick={() => setIsSelectedReading(true)}>
+                <Tooltip title={t('document.header.aloud.onAloud')} className=" text-gray-300 cursor-pointer p-1 hover:rounded hover:bg-gray-800" onClick={() => setIsSelectedReading(true)}>
                   <VolumeMute style={{ fontSize: 25 }} />
                 </Tooltip>
               :
                 (!isPlaying)
                 ? 
-                  <Tooltip title='読み上げをオフにする' className=" text-gray-300 cursor-pointer p-1 rounded-md bg-gray-600" onClick={() => setIsSelectedReading(false)}>
+                  <Tooltip title={t('document.header.aloud.offAloud')} className=" text-gray-300 cursor-pointer p-1 rounded-md bg-gray-600" onClick={() => setIsSelectedReading(false)}>
                     <VolumeUp style={{ fontSize: 25 }} />
                   </Tooltip>
                 :

@@ -15,7 +15,11 @@
         "threeWayToggle": {
           "edit": "Editar",
           "input": "Entrada"
-        }
+        },
+        "aloud": {
+          "onAloud": "Activar la lectura en voz alta",
+          "offAloud": "Desactivar la lectura en voz alta"
+      }
       },
       "modal": {
         "deleteBlockButton": {
@@ -29,7 +33,9 @@
         },
         "inputMemo": {
           "inputMemo": "Ingrese su nota aquí (ejemplo: contexto, uso, texto traducido, etc.)",
-          "paste": "Pegar desde el portapapeles"
+          "paste": "Pegar desde el portapapeles",
+          "generateAI": "Generar con IA",
+          "generatingAI": "Generando"
         }, 
         "readingButton": {
           "readAloud": "Leer en voz alta",
@@ -37,8 +43,9 @@
           "copied": "Copiado"
         },
         "saveButton": {
-          "save": "Guardar"
-        }
+          "save": "Bloquear"
+        },
+        "closeModal": "Cerrar"
       }
     },
     "header": {

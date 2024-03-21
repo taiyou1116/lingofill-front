@@ -3,6 +3,7 @@ import PasteButton from './PasteButton';
 import { generateMemoFromGPT4 } from '@/utils/request';
 import { AutoAwesome } from '@mui/icons-material';
 import { CircularProgress } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   userInputMemo: string,
@@ -14,6 +15,7 @@ type Props = {
 function InputMemo(props: Props) {
   const { userInputMemo, setUserInputMemo, selectedWords, ln } = props;
   const [ isGeneratingAIResponse, setIsGeneratingAIResponse ] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   const generateMemo = async () => {
     setIsGeneratingAIResponse(true);
@@ -32,14 +34,14 @@ function InputMemo(props: Props) {
         { isGeneratingAIResponse
         ?
           <div className='flex items-center gap-1 p-1'>
-            生成中<CircularProgress size={20} />
+            {t('document.modal.inputMemo.generatingAI')}<CircularProgress size={20} />
           </div>
         :
           <button 
             onClick={generateMemo} 
             className=' bg-gray-600 py-1 px-2 text-sm flex gap-1 rounded-md border-gray-400 border hover:bg-gray-900'
           >
-            <AutoAwesome style={{ fontSize: 20 }} />AIで生成
+            <AutoAwesome style={{ fontSize: 20 }} />{t('document.modal.inputMemo.generateAI')}
           </button>
         }
       </div>

@@ -48,26 +48,16 @@ function SidebarComponent() {
         <div className="flex flex-col gap-3">
           <div className=' flex justify-between w-full p-5 items-center'>
             <h1 className={`dark:text-gray-300 ${m_plus_rounded_1c.className}`}>{t('sidebar.textList')}</h1>
-            <div className=' flex gap-1 items-center'>
-              <Tooltip 
-                title={t('sidebar.deleteText')}
-                className=' dark:text-gray-300'>
-                <button 
-                  className=' rounded-lg p-0.5 duration-150'>
-                  <FolderDelete style={{fontSize: 25}}/>
-                </button>
-              </Tooltip> 
-              <Tooltip 
-                title={t('sidebar.createNewText')}
-                className=' dark:text-gray-300'>
-                <button 
-                  onClick={() => setCreateNewDocument(true)}
-                  className=' border-2 rounded-lg p-0.5 dark:border-gray-400  hover:border-slate-600 duration-150'
-                >
-                  <EditNote style={{fontSize: 25}}/>
-                </button>
-              </Tooltip> 
-            </div>
+            <Tooltip 
+              title={t('sidebar.createNewText')}
+              className=' dark:text-gray-300'>
+              <button 
+                onClick={() => setCreateNewDocument(true)}
+                className=' border-2 rounded-lg p-0.5 dark:border-gray-400  hover:border-slate-600 duration-150'
+              >
+                <EditNote style={{fontSize: 25}}/>
+              </button>
+            </Tooltip> 
           </div>
           { documentLoading 
           ?
