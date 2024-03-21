@@ -39,7 +39,7 @@ function InputMemo(props: Props) {
         :
           <button 
             onClick={generateMemo} 
-            className=' bg-gray-600 py-1 px-2 text-sm flex gap-1 rounded-md border-gray-400 border hover:bg-gray-900'
+            className=' dark:bg-gray-600 py-1 px-2 text-sm flex gap-1 rounded-md border-gray-400 border hover:bg-gray-300 dark:hover:bg-gray-900'
           >
             <AutoAwesome style={{ fontSize: 20 }} />{t('document.modal.inputMemo.generateAI')}
           </button>
