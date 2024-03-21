@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import OpenAI from "openai";
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY as string });
 
 export async function GET(req: NextRequest) {
 
@@ -25,11 +25,12 @@ export async function GET(req: NextRequest) {
       model: "gpt-3.5-turbo",
       // gpt-4-turbo-preview
     });
-    console.log(ln);
     const responseBody = JSON.stringify({
       response: completion.choices[0].message.content,
     })
-  
+
+    console.log("apikey: " + openai.apiKey);
+
     return new Response(responseBody, {
       status: 200,
       headers: {
@@ -39,7 +40,7 @@ export async function GET(req: NextRequest) {
     
   } catch (err){
     console.error(err);
-    return new Response(JSON.stringify({ err: "GPTAPIエラー" }), {
+    return new Response(JSON.stringify({ err: "GPTAPIエラー: " + err }), {
       status: 500,
       headers: {
         "Content-Type": "application/json",
