@@ -95,6 +95,7 @@ function TranslateModal(props: TranslateModalProps) {
             setDocument={setDocument}
             documents={documents}
             setDocuments={setDocuments}
+            selectedWords={selectedWords}
           />
           <DeleteBlockButton 
             document={document}

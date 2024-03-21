@@ -130,14 +130,14 @@ function DocumentComponent() {
               }
               </div>
               
-              <div className=" flex gap-1 items-center bg-gray-900 rounded-lg p-1 text-gray-300 ">
+              {/* <div className=" flex gap-1 items-center bg-gray-900 rounded-lg p-1 text-gray-300 ">
                 <Tooltip title='アンダーラインを引く' className=" cursor-pointer p-1 hover:rounded hover:bg-gray-800">
                   <FormatUnderlined style={{ fontSize: 25 }} />
                 </Tooltip>
                 <Tooltip title='アンダーラインの色を変える'>
                   <Palette style={{ fontSize: 25 }}  className=" cursor-pointer hover:text-gray-500" />
                 </Tooltip>
-              </div>
+              </div> */}
             </div>
           </div>
           <SendDocumentDataButton />
