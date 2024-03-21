@@ -12,6 +12,7 @@ frontend:
         - echo "ACCESS_KEY=$ACCESS_KEY" >> .env
         - echo "SECRET_KEY=$SECRET_KEY" >> .env
         - echo "REGION=$REGION" >> .env
+        - echo "OPENAI_API_KEY=$OPENAI_API_KEY" >> .env
         - yarn install
     build:
       commands:
