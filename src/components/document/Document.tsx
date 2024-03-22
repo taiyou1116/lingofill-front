@@ -99,7 +99,7 @@ function DocumentComponent() {
             <ThreeWayToggle />
             <SelectLanguage />
             <div className=" flex gap-3 items-center">
-              <div className="bg-white border dark:bg-gray-900 rounded-lg p-1">
+              <div className="bg-white border dark:border-gray-900 dark:bg-gray-900 rounded-lg p-1">
                 { (!isSelectedReading)
               ?
                 <Tooltip 
@@ -117,7 +117,7 @@ function DocumentComponent() {
                 ? 
                   <Tooltip 
                     title={t('document.header.aloud.offAloud')} 
-                    className=" cursor-pointer p-1 rounded-md 
+                    className=" cursor-pointer p-1 rounded-md
                               dark:text-gray-300 
                               bg-gray-300 
                               dark:bg-gray-600" 

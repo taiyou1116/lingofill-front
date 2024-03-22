@@ -73,11 +73,11 @@ function TranslateModal(props: TranslateModalProps) {
                 className='bg-gray-200 dark:bg-gray-900'
               />
             </div>
-            ↓
+            {/* ↓
             <InputBlock 
               userInputTranslation={userInputTranslation}
               setUserInputTranslation={setUserInputTranslation}
-            />
+            /> */}
           </div>
         </div>
         <InputMemo 
