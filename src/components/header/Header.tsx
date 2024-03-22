@@ -11,7 +11,6 @@ import { Menu, MenuItem, Tooltip } from "@mui/material";
 import { AccountCircle, Help, Reorder, Settings } from "@mui/icons-material";
 import { useWindowSize } from "@/hooks/hooks";
 import { truncateText } from "@/utils/helper";
-import SendDocumentDataButton from "../document/header/SendDocumentDataButton";
 
 function HeaderComponent() {
   const {flipShowSidebar, document} = GrobalStore();
@@ -30,7 +29,7 @@ function HeaderComponent() {
 
   return (
     <div className="fixed z-10 w-full header-bg-height flex items-center justify-between shadow-2xl bg-white dark:bg-gray-600">
-      <div className='flex items-center pl-4 gap-5'>
+      <div className='flex items-center pl-4 gap-5 w-full'>
         <Tooltip title={t('header.textList')}>
           <button onClick={flipShowSidebar}>
             <Reorder style={{fontSize: 35}} className=" dark:text-gray-200" />
@@ -38,10 +37,7 @@ function HeaderComponent() {
         </Tooltip>
         { isSm
         ?
-          <div className=" flex items-center">
-            <div className=" dark:text-gray-100">{ truncateText(document?.title, 20)}</div>
-            { document === null ? '' : <SendDocumentDataButton /> }
-          </div>
+          <div className=" dark:text-gray-100">{ truncateText(document?.title, 20)}</div>
         :
           <Link href={"/home"} className=' flex items-center cursor-pointer hover:bg-gray-200 dark:bg-gray-500 dark:hover:bg-gray-600 border-2 border-black rounded-lg pr-3'>
             <Image src="LF.svg" width="40" height="40" alt='ロゴ' />
@@ -51,7 +47,7 @@ function HeaderComponent() {
           </Link>
         }
       </div>
-      <div className=' flex px-10 items-center gap-1'>
+      <div className={`flex ${ isSm ? 'px-1' : 'px-10' } items-center gap-1`}>
         <div onClick={handleClick} className=" cursor-pointer">
           <Tooltip title={t('header.acountSetting')}>
             <AccountCircle style={{fontSize: 35}} className=" dark:text-gray-200" />

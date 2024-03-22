@@ -12,16 +12,17 @@ import StopAudio from "./header/StopAudio";
 import SelectLanguage from "./header/SelectLanguage";
 import SendDocumentDataButton from "./header/SendDocumentDataButton";
 import ThreeWayToggle from "./header/ThreeWayToggle";
-import { Box, LinearProgress, Tooltip } from "@mui/material";
-import { useWindowSize } from "@/hooks/hooks";
-import { FormatUnderlined, Palette, VolumeMute, VolumeUp } from "@mui/icons-material";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, LinearProgress, Menu, MenuItem, OutlinedInput, Select, SelectChangeEvent, ThemeProvider, Tooltip } from "@mui/material";
+import { useThemeMode, useWindowSize } from "@/hooks/hooks";
+import {  MoreHoriz, VolumeMute, VolumeUp } from "@mui/icons-material";
 
 function DocumentComponent() {
   const { document, selectedMode, isLoading, isPlaying } = GrobalStore();
 
   const { t } = useTranslation();
   const { width } = useWindowSize();
-  const isSm = width <= 640;
+  const isSm = width <= 425;
+  const theme = useThemeMode();
   const [sentences, setSentences] = useState<string[]>([]);
   const [ isSelectedReading, setIsSelectedReading ] = useState<boolean>(false);
 
@@ -30,6 +31,23 @@ function DocumentComponent() {
     const tempWords = splitTextToSegment(document.text, document.language);
     setSentences(tempWords);
   }, [document]);
+
+  const [open, setOpen] = React.useState(false);
+  const [age, setAge] = React.useState<number | string>('');
+
+  const handleChange = (event: SelectChangeEvent<typeof age>) => {
+    setAge(Number(event.target.value) || '');
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = (event: React.SyntheticEvent<unknown>, reason?: string) => {
+    if (reason !== 'backdropClick') {
+      setOpen(false);
+    }
+  };
 
   const renderContentByMode = () => {
     if (document === null) {
@@ -70,24 +88,56 @@ function DocumentComponent() {
     }
     if (isSm) {
       return (
-        <div className=" flex flex-col">
-          <div className=" flex pt-2 px-1 items-center justify-between">
+        <div className="fixed pt-10 mt-6 pb-3 flex flex-col w-full bg-gray-800/95">
+          <div className=" flex pt-5 px-3 items-center justify-between">
             <ThreeWayToggle />
-            <SelectLanguage />
-            { (!isSelectedReading)
-            ?
-              <Tooltip title='読み上げをオンにする' onClick={() => setIsSelectedReading(true)}>
-                <VolumeUp />
-              </Tooltip>
-            :
-              (!isPlaying)
-              ? 
-                <Tooltip title='読み上げをオフにする' className=" text-gray-300 cursor-pointer p-1 rounded-md bg-gray-600" onClick={() => setIsSelectedReading(false)}>
-                  <VolumeUp style={{ fontSize: 25 }} />
-                </Tooltip>
-              :
-                <StopAudio />
-            }
+            <div className=" flex items-center gap-1">
+              <div>  
+                <button onClick={handleClickOpen}><MoreHoriz style={{ fontSize: 35 }} className="dark:text-gray-300  dark:bg-gray-900 rounded-lg p-1" /></button>
+                <ThemeProvider theme={theme}>                
+                  <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
+                    <DialogTitle>言語選択</DialogTitle>
+                    <DialogContent>
+                      <SelectLanguage />
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleClose}>Ok</Button>
+                    </DialogActions> 
+                  </Dialog>
+                </ThemeProvider>
+              </div>
+              <div className="bg-white border dark:border-gray-900 dark:bg-gray-900 rounded-lg p-1">
+                { (!isSelectedReading)
+                ?
+                  <Tooltip 
+                    title={t('document.header.aloud.onAloud')} 
+                    className=" cursor-pointer p-1 hover:rounded 
+                              dark:text-gray-300 
+                              hover:bg-gray-200 
+                              dark:hover:bg-gray-800" 
+                    onClick={() => setIsSelectedReading(true)}
+                  >
+                    <VolumeMute style={{ fontSize: 25 }} />
+                  </Tooltip>
+                :
+                  (!isPlaying)
+                  ? 
+                    <Tooltip 
+                      title={t('document.header.aloud.offAloud')} 
+                      className=" cursor-pointer p-1 rounded-md
+                                dark:text-gray-300 
+                                bg-gray-300 
+                                dark:bg-gray-600" 
+                      onClick={() => setIsSelectedReading(false)}
+                    >
+                      <VolumeUp style={{ fontSize: 25 }} />
+                    </Tooltip>
+                  :
+                    <StopAudio />
+                }
+              </div>
+            </div>
+            <SendDocumentDataButton />
           </div>
         </div>
       )

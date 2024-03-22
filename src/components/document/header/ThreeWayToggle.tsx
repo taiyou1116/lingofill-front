@@ -49,14 +49,14 @@ function ThreeWayToggle() {
               '&:first-of-type': {
                 paddingLeft: '20px',
                 paddingRight: '20px',
-                borderTopLeftRadius: '16px', // 最初のボタンの左上の角を丸くする
-                borderBottomLeftRadius: '16px', // 最初のボタンの左下の角を丸くする
+                borderTopLeftRadius: '10px', // 最初のボタンの左上の角を丸くする
+                borderBottomLeftRadius: '10px', // 最初のボタンの左下の角を丸くする
               },
               '&:last-of-type': {
                 paddingLeft: '20px',
                 paddingRight: '20px',
-                borderTopRightRadius: '16px', // 最後のボタンの右上の角を丸くする
-                borderBottomRightRadius: '16px', // 最後のボタンの右下の角を丸くする
+                borderTopRightRadius: '10px', // 最後のボタンの右上の角を丸くする
+                borderBottomRightRadius: '10px', // 最後のボタンの右下の角を丸くする
               },
             },'& .Mui-selected': {}
         }}
