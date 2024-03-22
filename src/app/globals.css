@@ -5,6 +5,7 @@
 body {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+  overflow-x: hidden;
 }
 @media (prefers-color-scheme: dark) {
   body {

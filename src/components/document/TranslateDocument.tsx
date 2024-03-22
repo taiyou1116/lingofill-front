@@ -117,7 +117,7 @@ function TranslateDocument(props: Props) {
     <RenderText
       sentences={sentences}
       readingNumber={readingNumber}
-      document={document!}
+      doc={document!}
       handleClick={handleClick}
       handleMouseMove={handleMouseMove}
       handleMouseDown={handleMouseDown}
