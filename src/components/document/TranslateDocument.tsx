@@ -123,6 +123,7 @@ function TranslateDocument(props: Props) {
       handleMouseDown={handleMouseDown}
       handleMouseUp={handleMouseUp}
       selectedWordsIndexes={selectedWordsIndexes}
+      setSelectedWordsIndexes={setSelectedWordsIndexes}
       selectedWords={selectedWords}
       isSelectedReading={isSelectedReading}
     />

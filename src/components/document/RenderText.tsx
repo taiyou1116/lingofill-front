@@ -2,7 +2,7 @@ import { m_plus_rounded_1c } from "@/store/fontStore";
 import { Document } from "@/types/types";
 import { getVoiceForLanguage, judgeSpaceLanguage, processAndSpeak } from "@/utils/helper";
 import { Tooltip } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import TranslateModal from "./modal/TranslateModal";
 import { GrobalStore } from "@/store/grobalStore";
 
@@ -17,20 +17,23 @@ type RenderTextProps = {
   selectedWordsIndexes: number[];
   selectedWords: string
   isSelectedReading: boolean,
+  setSelectedWordsIndexes: (selectedWordsIndexes: number[]) => void,
 }
 
 const RenderText = (props: RenderTextProps) => {
   const { sentences, readingNumber, doc, selectedWordsIndexes, selectedWords, isSelectedReading,
-          handleClick, handleMouseMove, handleMouseDown, handleMouseUp } = props;
+          handleClick, handleMouseMove, handleMouseDown, handleMouseUp, setSelectedWordsIndexes } = props;
   const { voiceType, setReadingNumber, setIsPlaying, voiceRate } = GrobalStore();
 
   let globalIndex = 0;
   
-  const [longTouch, setLongTouch] = useState<boolean>(false);
+  const [startNumber, setStartNumber] = useState<number>(-1);
   const touchIndexRef = useRef<number | null>(null);
   const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null);
 
   const handleTouchStart = (index: number) => {
+    
+    setSelectedWordsIndexes([]);
     touchIndexRef.current = index;
     // 以前のタイマーがあればクリア
     if (timerId) clearTimeout(timerId);
@@ -38,21 +41,13 @@ const RenderText = (props: RenderTextProps) => {
     // 0.5秒後に実行されるタイマーを設定
     const newTimerId = setTimeout(() => {      
       if (index === touchIndexRef.current) {
-        setLongTouch(true); 
+        document.body.style.overflow = 'hidden';
+        handleMouseDown();
+        setStartNumber(index);
+        setSelectedWordsIndexes([index]);
       }
-    }, 500);
-  
+    }, 200);
     setTimerId(newTimerId);
-  };
-
-  const handleTouchEnd = () => {
-    setLongTouch(false);
-    touchIndexRef.current = null;
-  
-    if (timerId) {
-      clearTimeout(timerId);
-      setTimerId(null);
-    }
   };
 
   const handleTouchMove = (e: React.TouchEvent<HTMLSpanElement>) => {
@@ -66,8 +61,25 @@ const RenderText = (props: RenderTextProps) => {
     // 要素からindexを取得（要素が正しく取得でき、data-index属性を持っている場合）
     if (elementUnderTouch && elementUnderTouch.hasAttribute('data-index')) {
       const newIndex = parseInt(elementUnderTouch.getAttribute('data-index')!, 10);
+
+      if (newIndex === startNumber) {
+        touchIndexRef.current = newIndex;
+        handleMouseMove(newIndex);
+      }
       if (newIndex === touchIndexRef.current) return;
-      touchIndexRef.current = newIndex;
+        touchIndexRef.current = newIndex;
+        handleMouseMove(newIndex);
+      }
+  };
+
+  const handleTouchEnd = () => {
+    touchIndexRef.current = null;
+    handleMouseUp();
+    document.body.style.overflow = '';
+  
+    if (timerId) {
+      clearTimeout(timerId);
+      setTimerId(null);
     }
   };
 
@@ -99,8 +111,6 @@ const RenderText = (props: RenderTextProps) => {
       <React.Fragment key={sentenceIndex}>
         <span
           className={`break-all ${sentenceIndex === readingNumber ? ' text-yellow-300' : ''}`}
-          // onTouchStart={handleMouseDown}
-          // onTouchEnd={handleMouseUp}
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
           onClick={() => Test(sentenceIndex)}

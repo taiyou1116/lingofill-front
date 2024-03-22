@@ -12,7 +12,7 @@ import StopAudio from "./header/StopAudio";
 import SelectLanguage from "./header/SelectLanguage";
 import SendDocumentDataButton from "./header/SendDocumentDataButton";
 import ThreeWayToggle from "./header/ThreeWayToggle";
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, LinearProgress, Menu, MenuItem, OutlinedInput, Select, SelectChangeEvent, ThemeProvider, Tooltip } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, LinearProgress, SelectChangeEvent, ThemeProvider, Tooltip } from "@mui/material";
 import { useThemeMode, useWindowSize } from "@/hooks/hooks";
 import {  MoreHoriz, VolumeMute, VolumeUp } from "@mui/icons-material";
 
