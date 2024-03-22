@@ -48,14 +48,16 @@ function InputDocument() {
   };
 
   return (
-    <textarea
-      maxLength={15000}
-      className=" resize-none h-screen max-h-[calc(100vh-200px)] w-full p-3 origin-input rounded-md 
-                dark:bg-slate-600 dark:text-slate-300"
-      placeholder={t('document.input')}
-      value={document?.text}
-      onChange={inputOriginalText}
-    />
+    <div className=' pt-32'>
+      <textarea
+        maxLength={15000}
+        className=" resize-none h-screen max-h-[calc(100vh-200px)] w-full p-3 origin-input rounded-md 
+                  dark:bg-slate-600 dark:text-slate-300"
+        placeholder={t('document.input')}
+        value={document?.text}
+        onChange={inputOriginalText}
+      />
+    </div>
   )
 }
 

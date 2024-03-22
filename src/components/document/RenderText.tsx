@@ -2,7 +2,7 @@ import { m_plus_rounded_1c } from "@/store/fontStore";
 import { Document } from "@/types/types";
 import { getVoiceForLanguage, judgeSpaceLanguage, processAndSpeak } from "@/utils/helper";
 import { Tooltip } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TranslateModal from "./modal/TranslateModal";
 import { GrobalStore } from "@/store/grobalStore";
 
@@ -31,18 +31,14 @@ const RenderText = (props: RenderTextProps) => {
   const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null);
 
   const handleTouchStart = (index: number) => {
-    console.log("start: " + index);
     touchIndexRef.current = index;
     // 以前のタイマーがあればクリア
     if (timerId) clearTimeout(timerId);
   
     // 0.5秒後に実行されるタイマーを設定
-    const newTimerId = setTimeout(() => {
-      console.log("touchIndex: " + touchIndexRef.current);
-      
+    const newTimerId = setTimeout(() => {      
       if (index === touchIndexRef.current) {
         setLongTouch(true); 
-        console.log("kita");
       }
     }, 500);
   
@@ -71,9 +67,7 @@ const RenderText = (props: RenderTextProps) => {
     if (elementUnderTouch && elementUnderTouch.hasAttribute('data-index')) {
       const newIndex = parseInt(elementUnderTouch.getAttribute('data-index')!, 10);
       if (newIndex === touchIndexRef.current) return;
-
       touchIndexRef.current = newIndex;
-      console.log('Moved over index:', newIndex);
     }
   };
 
@@ -163,9 +157,11 @@ const RenderText = (props: RenderTextProps) => {
   };
 
   return (
-    <div className={`${ longTouch === false ? 'overflow-y-auto' : ' overflow-y-clip' } max-h-[calc(100vh-200px)] p-3 rounded-md bg-white dark:bg-slate-600 dark:text-slate-300`}>
-      {sentences.map(renderSentence)}
-      <TranslateModal selectedWordsIndexes={selectedWordsIndexes} selectedWords={selectedWords} />
+    <div className=" pt-32">
+      <div className={` max-h-max p-3 rounded-md bg-white dark:bg-slate-600 dark:text-slate-300`}>
+        {sentences.map(renderSentence)}
+        <TranslateModal selectedWordsIndexes={selectedWordsIndexes} selectedWords={selectedWords} />
+      </div>
     </div>
   );
 };
