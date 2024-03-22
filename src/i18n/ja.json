@@ -9,8 +9,8 @@
                 "translation": "翻訳"
             },
             "sendDocumentDataButton": {
-                "saveText": "テキストを保存する",
-                "savedText": "テキスト保存済み"
+                "saveText": "保存する",
+                "savedText": "保存済み"
             },
             "threeWayToggle": {
                 "edit": "編集",

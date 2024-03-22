@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { GrobalStore } from "@/store/grobalStore";
 import { useTranslation } from "react-i18next";
 import { oswald } from "@/store/fontStore";
-import { splitTextToSegment } from "@/utils/helper";
+import { splitTextToSegment, truncateText } from "@/utils/helper";
 import InputDocument from "./InputDocument";
 import TranslateDocument from "./TranslateDocument";
 import StopAudio from "./header/StopAudio";
@@ -93,9 +93,9 @@ function DocumentComponent() {
       )
     } else {
       return (
-        <div className=" fixed pt-10 pb-3 w-full bg-gray-800/95 mt-6 pr-5 flex items-center justify-between">
+        <div className=" fixed pt-10 pb-3 w-full bg-gray-800/95 mt-6 pr-10 flex items-center justify-between">
           <div className=" flex gap-5 items-center">
-            <h1 className={` dark:text-gray-100 text-xxs  ${oswald.className}`}>{ document.title }</h1>
+            <h1 className={` dark:text-gray-100 text-xxs  ${oswald.className}`}>{ truncateText(document?.title, 20)}</h1>
             <ThreeWayToggle />
             <SelectLanguage />
             <div className=" flex gap-3 items-center">

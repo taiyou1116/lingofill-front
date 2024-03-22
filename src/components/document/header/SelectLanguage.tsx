@@ -53,8 +53,8 @@ function SelectLanguage() {
   return (
     <div className=" flex items-center">
       <ThemeProvider theme={theme}>
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <InputLabel id="demo-simple-select-label">{t('document.header.selectLanguage.language')}</InputLabel>
+        <FormControl sx={{ m: 1, minWidth: 50 }} size="small">
+          <InputLabel id="demo-simple-select-label" className=' text-xs'>{t('document.header.selectLanguage.language')}</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
@@ -76,9 +76,9 @@ function SelectLanguage() {
             <MenuItem value={'hi'}>हिंदी</MenuItem>
           </Select>
         </FormControl>
-        <TrendingFlat className=" dark:text-gray-300" />
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <InputLabel id="demo-simple-select-label">{t('document.header.selectLanguage.translation')}</InputLabel>
+        <TrendingFlat className=" dark:text-gray-300" fontSize='small' />
+        <FormControl sx={{ m: 1, minWidth: 50 }} size="small">
+          <InputLabel id="demo-simple-select-label" className=' text-xs'>{t('document.header.selectLanguage.translation')}</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"

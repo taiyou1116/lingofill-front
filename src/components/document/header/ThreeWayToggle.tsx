@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { GrobalStore } from '@/store/grobalStore';
 import { useTranslation } from 'react-i18next';
-import { useThemeMode } from '@/hooks/hooks';
+import { useThemeMode, useWindowSize } from '@/hooks/hooks';
 import { SelectedMode } from '@/types/types';
 import { TextSnippet, Translate } from '@mui/icons-material';
 import { ThemeProvider, ToggleButton, ToggleButtonGroup } from '@mui/material';
@@ -12,6 +12,9 @@ function ThreeWayToggle() {
   const { setSelectedMode } = GrobalStore();
   const { t } = useTranslation();
   const theme = useThemeMode();
+
+  const { width } = useWindowSize();
+  const isSm = width <= 768;
 
   const [selectedMode, setSelectedModeLocal] = useState<SelectedMode>('input');
 
@@ -58,8 +61,12 @@ function ThreeWayToggle() {
             },'& .Mui-selected': {}
         }}
       >
-        <ToggleButton value="edit"><Translate style={{fontSize: 15}} />{t('document.header.threeWayToggle.edit')}</ToggleButton>
-        <ToggleButton value="input"><TextSnippet style={{fontSize: 15}} />{t('document.header.threeWayToggle.input')}</ToggleButton>
+        <ToggleButton value="edit"><Translate style={{fontSize: 15}} />
+          {isSm ? '' : t('document.header.threeWayToggle.edit') }
+        </ToggleButton>
+        <ToggleButton value="input"><TextSnippet style={{fontSize: 15}} />
+          {isSm ? '' : t('document.header.threeWayToggle.input') }
+        </ToggleButton>
       </ToggleButtonGroup>
     </ThemeProvider>
   );

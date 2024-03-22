@@ -9,8 +9,8 @@
           "translation": "Translation"
         },
         "sendDocumentDataButton": {
-          "saveText": "Save Text",
-          "savedText": "Text Saved"
+          "saveText": "Save",
+          "savedText": "Saved"
         },
         "threeWayToggle": {
           "edit": "Edit",

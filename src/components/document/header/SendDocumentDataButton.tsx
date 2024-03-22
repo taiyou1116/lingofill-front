@@ -51,7 +51,7 @@ function SendDocumentDataButton() {
                       dark:hover:bg-lime-700 
                       flex gap-1 items-center rounded-lg py-2 px-4'
         >
-          <CloudUpload style={{fontSize: 20}} />
+          <CloudUpload style={{fontSize: 20}} className=' dark:text-gray-100' />
           <span className=' dark:text-gray-300 text-xxs'>{t('document.header.sendDocumentDataButton.saveText')}</span>
         </button>
       )
