@@ -23,7 +23,7 @@
        },
        "modal": {
             "deleteBlockButton": {
-                "cancelBlock": "ブロックを取り消す"
+                "cancelBlock": "メモの削除"
             },
             "inputBlock": {
                 "inputBlock": "ブロックの表示",
@@ -43,7 +43,7 @@
                 "copied": "コピーしました"
             },
             "saveButton": {
-                "save": "ブロック化"
+                "save": "メモの作成"
             },
             "closeModal": "閉じる"
        }

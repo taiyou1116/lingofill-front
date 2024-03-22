@@ -7,7 +7,6 @@ import { getTranslation } from '@/utils/request';
 import { Formality } from '@aws-sdk/client-translate';
 import InputMemo from './InputMemo';
 import SaveButton from './SaveButton';
-import InputBlock from './InputBlock';
 import ModalCenter from './ModalCenter';
 import DeleteBlockButton from './DeleteBlockButton';
 import ReadAndCopyContainer from './ReadAndCopyContainer';
@@ -56,56 +55,51 @@ function TranslateModal(props: TranslateModalProps) {
 
   return (
     <ModalCenter>
-        <div className=' w-full'>
-          <div className=' w-full flex flex-col justify-center items-center gap-3'>
-            <div className=' flex gap-3 items-center justify-center'>
-              <ReadAndCopyContainer 
-                sentences={splitTextToSegments(selectedWords, document?.language)}
-                ln={document!.language}
-                shouldIncrement={false}
-                words={selectedWords}
-              />
-              <ReadAndCopyContainer 
-                sentences={splitTextToSegments(translatedWords, document?.translateLanguage)}
-                ln={document!.translateLanguage}
-                shouldIncrement={false}
-                words={translatedWords}
-                className='bg-gray-200 dark:bg-gray-900'
-              />
-            </div>
-            {/* ↓
-            <InputBlock 
-              userInputTranslation={userInputTranslation}
-              setUserInputTranslation={setUserInputTranslation}
-            /> */}
+      <div className=' w-full'>
+        <div className=' w-full flex flex-col justify-center items-center gap-3'>
+          <div className=' flex gap-3 items-center justify-center'>
+            <ReadAndCopyContainer 
+              sentences={splitTextToSegments(selectedWords, document?.language)}
+              ln={document!.language}
+              shouldIncrement={false}
+              words={selectedWords}
+            />
+            <ReadAndCopyContainer 
+              sentences={splitTextToSegments(translatedWords, document?.translateLanguage)}
+              ln={document!.translateLanguage}
+              shouldIncrement={false}
+              words={translatedWords}
+              className='bg-gray-200 dark:bg-gray-900'
+            />
           </div>
         </div>
-        <InputMemo 
+      </div>
+      <InputMemo 
+        userInputMemo={userInputMemo}
+        setUserInputMemo={setUserInputMemo}
+        selectedWords={selectedWords}
+        ln={document?.translateLanguage}
+      />
+      <div className=' flex gap-3 w-full items-center justify-center'>
+        <SaveButton 
+          selectedWordsIndexes={selectedWordsIndexes}
+          userInputTranslation={userInputTranslation}
           userInputMemo={userInputMemo}
-          setUserInputMemo={setUserInputMemo}
+          document={document}
+          setDocument={setDocument}
+          documents={documents}
+          setDocuments={setDocuments}
           selectedWords={selectedWords}
-          ln={document?.translateLanguage}
         />
-        <div className=' flex gap-3 w-full items-center justify-center'>
-          <SaveButton 
-            selectedWordsIndexes={selectedWordsIndexes}
-            userInputTranslation={userInputTranslation}
-            userInputMemo={userInputMemo}
-            document={document}
-            setDocument={setDocument}
-            documents={documents}
-            setDocuments={setDocuments}
-            selectedWords={selectedWords}
-          />
-          <DeleteBlockButton 
-            document={document}
-            setDocument={setDocument}
-            documents={documents}
-            setDocuments={setDocuments}
-            selectedWordsIndexes={selectedWordsIndexes}
-          />
-          <button onClick={() => handleCloseModal(flipCenterModal)} >{t('document.modal.closeModal')}</button>
-        </div>
+        <DeleteBlockButton 
+          document={document}
+          setDocument={setDocument}
+          documents={documents}
+          setDocuments={setDocuments}
+          selectedWordsIndexes={selectedWordsIndexes}
+        />
+        <button onClick={() => handleCloseModal(flipCenterModal)} >{t('document.modal.closeModal')}</button>
+      </div>
     </ModalCenter>
   )
 }

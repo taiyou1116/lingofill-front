@@ -23,7 +23,7 @@
       },
       "modal": {
         "deleteBlockButton": {
-          "cancelBlock": "ब्लॉक रद्द करें"
+          "cancelBlock": "एक नोट हटाएँ"
         },
         "inputBlock": {
           "inputBlock": "ब्लॉक दिखाएं",
@@ -43,7 +43,7 @@
           "copied": "कॉपी किया गया"
         },
         "saveButton": {
-          "save": "अवरोधित करें"
+          "save": "एक नोट बनाएँ"
         },
         "closeModal": "बंद करें"
       }

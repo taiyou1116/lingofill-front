@@ -77,7 +77,7 @@ function SaveButton(props: Props) {
 
   return (
     <button 
-      className='px-4 py-1 md:px-4 md:py-2 rounded-md w-1/6
+      className='px-4 py-1 md:px-4 md:py-2 rounded-md
                bg-lime-500
                text-gray-200
                hover:bg-lime-800'

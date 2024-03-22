@@ -23,7 +23,7 @@
       },
       "modal": {
         "deleteBlockButton": {
-          "cancelBlock": "Unblock"
+          "cancelBlock": "Delete a note"
         },
         "inputBlock": {
           "inputBlock": "Block Display",
@@ -43,7 +43,7 @@
           "copied": "Copied"
         },
         "saveButton": {
-          "save": "Block"
+          "save": "Create a note"
         },
         "closeModal": "Close"
       }

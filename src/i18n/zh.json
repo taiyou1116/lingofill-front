@@ -23,7 +23,7 @@
       },
       "modal": {
         "deleteBlockButton": {
-          "cancelBlock": "取消块"
+          "cancelBlock": "删除笔记"
         },
         "inputBlock": {
           "inputBlock": "块显示",
@@ -43,7 +43,7 @@
           "copied": "已复制"
         },
         "saveButton": {
-          "save": "阻止"
+          "save": "创建笔记"
         },
         "closeModal": "关闭"
       }
