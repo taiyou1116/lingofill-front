@@ -6,6 +6,7 @@ body {
   --tw-bg-opacity: 1;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
   overflow-x: hidden;
+  overscroll-behavior-y: none;
 }
 @media (prefers-color-scheme: dark) {
   body {
@@ -20,7 +21,6 @@ body {
 
 .content {
   height: calc(100vh - 70px); /* ビューポートの高さからヘッダーの高さを差し引く */
-  /* overflow: hidden;  */
 }
 
 .modal-center-input {
