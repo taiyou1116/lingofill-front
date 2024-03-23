@@ -28,7 +28,7 @@ function HeaderComponent() {
   };
 
   return (
-    <div className="fixed z-10 w-full header-bg-height flex items-center justify-between shadow-2xl bg-white dark:bg-gray-600">
+    <div className="fixed z-10 w-full header-bg-height flex items-center justify-between shadow-sm dark:shadow-2xl bg-white dark:bg-gray-600">
       <div className='flex items-center pl-4 gap-5 w-full'>
         <Tooltip title={t('header.textList')}>
           <button onClick={flipShowSidebar}>

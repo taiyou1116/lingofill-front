@@ -8,12 +8,16 @@ import { oswald } from "@/store/fontStore";
 import Image from "next/image";
 import { CheckCircle, Launch } from "@mui/icons-material";
 import { Amplify } from "aws-amplify";
-import awsExports from "../../../aws-exports";;
+import awsExports from "../../../aws-exports";
 
 Amplify.configure(awsExports);
 
 function Doc() {
   const [login, setLogin] = useState(false);
+
+  const transferHomeRoute = () => {
+    window.open('https://main.d5yypxcoba5g4.amplifyapp.com/', '_blank');
+  }
 
   return (
     <div>
@@ -21,8 +25,8 @@ function Doc() {
       ?
         <Authenticator socialProviders={['google']} >
           <div className=" w-screen h-screen text-gray-300 flex flex-col gap-5 items-center justify-center">
-            <button onClick={() => console.log("unchi")} className=" bg-lime-600 py-4 px-8"><Launch /> 学習ページへ</button>
-            <button onClick={() => console.log("unchi")}>ドキュメントへ戻る</button>
+            <button onClick={transferHomeRoute} className=" bg-lime-600 py-4 px-8"><Launch /> 学習ページへ</button>
+            <button onClick={() => setLogin(false)}>ドキュメントへ</button>
           </div>
         </Authenticator>
       : 
@@ -32,11 +36,18 @@ function Doc() {
               <Image src="LF.svg" width="60" height="60" alt='ロゴ' />
               <h1 className={` text-2xl ${oswald.className} `}>Lingo Fill</h1>
             </div>
-            <button 
-              className=" bg-blue-500 dark:bg-blue-800 rounded-md py-3 px-5 text-white" 
-              onClick={() => setLogin(true)}>
-              今すぐはじめる
-            </button>
+            <div className=" flex items-center gap-3">
+              <button 
+                className=" bg-gray-200 rounded-md py-2 px-3 text-gray-800" 
+                onClick={transferHomeRoute}>
+                ログイン済みの方
+              </button>
+              <button 
+                className=" bg-blue-500 dark:bg-blue-800 rounded-md py-3 px-5 dark:text-white" 
+                onClick={() => setLogin(true)}>
+                今すぐはじめる
+              </button>
+            </div>
           </div>
 
           <div className=" flex">

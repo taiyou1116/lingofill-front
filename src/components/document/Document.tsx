@@ -33,11 +33,6 @@ function DocumentComponent() {
   }, [document]);
 
   const [open, setOpen] = React.useState(false);
-  const [age, setAge] = React.useState<number | string>('');
-
-  const handleChange = (event: SelectChangeEvent<typeof age>) => {
-    setAge(Number(event.target.value) || '');
-  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -88,12 +83,12 @@ function DocumentComponent() {
     }
     if (isSm) {
       return (
-        <div className="fixed pt-10 mt-6 pb-3 flex flex-col w-full bg-gray-800/95">
+        <div className="fixed pt-10 mt-6 pb-3 flex flex-col w-full bg-gray-100/95 dark:bg-gray-800/95">
           <div className=" flex pt-5 px-3 items-center justify-between">
             <ThreeWayToggle />
             <div className=" flex items-center gap-1">
               <div>  
-                <button onClick={handleClickOpen}><MoreHoriz style={{ fontSize: 35 }} className="dark:text-gray-300  dark:bg-gray-900 rounded-lg p-1" /></button>
+                <button onClick={handleClickOpen}><MoreHoriz style={{ fontSize: 35 }} className="bg-white border dark:border-gray-900 dark:text-gray-300  dark:bg-gray-900 rounded-lg p-1" /></button>
                 <ThemeProvider theme={theme}>                
                   <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
                     <DialogTitle>言語選択</DialogTitle>
@@ -143,7 +138,7 @@ function DocumentComponent() {
       )
     } else {
       return (
-        <div className=" fixed pt-10 pb-3 w-full bg-gray-800/95 mt-6 pr-10 flex items-center justify-between">
+        <div className=" fixed pt-10 pb-3 w-full bg-gray-100/95 dark:bg-gray-800/95 mt-6 pr-10 flex items-center justify-between">
           <div className=" flex gap-5 items-center">
             <h1 className={` dark:text-gray-100 text-xxs  ${oswald.className}`}>{ truncateText(document?.title, 20)}</h1>
             <ThreeWayToggle />
