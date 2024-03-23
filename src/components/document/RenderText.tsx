@@ -5,6 +5,7 @@ import { Tooltip } from "@mui/material";
 import React, { useRef, useState } from "react";
 import TranslateModal from "./modal/TranslateModal";
 import { GrobalStore } from "@/store/grobalStore";
+import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 type RenderTextProps = {
   sentences: string[];
@@ -41,7 +42,8 @@ const RenderText = (props: RenderTextProps) => {
     // 0.5秒後に実行されるタイマーを設定
     const newTimerId = setTimeout(() => {      
       if (index === touchIndexRef.current) {
-        document.body.style.overflow = 'hidden';
+        // document.body.style.overflow = 'hidden';
+        disableBodyScroll(document.body);
         handleMouseDown();
         setStartNumber(index);
         setSelectedWordsIndexes([index]);
@@ -75,8 +77,8 @@ const RenderText = (props: RenderTextProps) => {
   const handleTouchEnd = () => {
     touchIndexRef.current = null;
     handleMouseUp();
-    document.body.style.overflow = '';
-  
+    // document.body.style.overflow = '';
+    enableBodyScroll(document.body);
     if (timerId) {
       clearTimeout(timerId);
       setTimerId(null);
