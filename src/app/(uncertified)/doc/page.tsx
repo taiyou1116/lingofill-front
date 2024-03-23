@@ -45,7 +45,7 @@ function Doc() {
               <button 
                 className=" bg-blue-500 dark:bg-blue-800 rounded-md py-3 px-5 dark:text-white" 
                 onClick={() => setLogin(true)}>
-                今すぐはじめる
+                初めての方
               </button>
             </div>
           </div>

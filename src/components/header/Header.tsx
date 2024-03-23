@@ -7,10 +7,11 @@ import { GrobalStore } from "@/store/grobalStore";
 import { oswald } from '@/store/fontStore';
 import { useTranslation } from "react-i18next";
 import { Toaster } from "react-hot-toast";
-import { Menu, MenuItem, Tooltip } from "@mui/material";
-import { AccountCircle, Help, Reorder, Settings } from "@mui/icons-material";
+import { Divider, Menu, MenuItem, Tooltip } from "@mui/material";
+import { AccountCircle, Help, Logout, Reorder, Settings } from "@mui/icons-material";
 import { useWindowSize } from "@/hooks/hooks";
 import { truncateText } from "@/utils/helper";
+import Acount from "@/components/header/Acount";
 
 function HeaderComponent() {
   const {flipShowSidebar, document} = GrobalStore();
@@ -67,11 +68,6 @@ function HeaderComponent() {
             horizontal: 'right',
           }}
         >
-          <Link href='/acount'>
-            <MenuItem className=" flex items-center gap-1">
-              <AccountCircle style={{fontSize: 20}} /> {t('header.acount')}
-            </MenuItem>
-          </Link>
           <Link href='/setting'>
             <MenuItem className=" flex items-center gap-1">
               <Settings style={{fontSize: 20}} /> {t('header.setting')}
@@ -82,6 +78,10 @@ function HeaderComponent() {
               <Help style={{fontSize: 20}} /> {t('header.howToUse')}
             </MenuItem>
           </Link>
+          <Divider variant="middle" className=" py-1"/>
+          <MenuItem className=" flex items-center gap-1 text-red-500">
+            <Logout style={{fontSize: 20}} /> <Acount />
+          </MenuItem>
         </Menu>
       </div>
       <Toaster 

@@ -16,9 +16,7 @@ function Acount() {
   }
 
   return (
-    <div className=' py-5'>
-      <button onClick={handleSignOut}>サインアウト</button>
-    </div>
+    <button onClick={handleSignOut}>サインアウト</button>
   )
 }
 
