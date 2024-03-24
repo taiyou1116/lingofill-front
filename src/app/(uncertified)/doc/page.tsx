@@ -6,9 +6,10 @@ import { Authenticator } from "@aws-amplify/ui-react";
 import { useState } from "react";
 import { oswald } from "@/store/fontStore";
 import Image from "next/image";
-import { CheckCircle, Launch } from "@mui/icons-material";
+import { CloudUpload, Comment, Description, DevicesOther, Language, Launch, Psychology, RecordVoiceOver, Translate } from "@mui/icons-material";
 import { Amplify } from "aws-amplify";
 import awsExports from "../../../aws-exports";
+import { Divider } from "@mui/material";
 
 Amplify.configure(awsExports);
 
@@ -49,146 +50,155 @@ function Doc() {
               </button>
             </div>
           </div>
-
-          <div className=" flex">
+          <div className=" flex justify-center">
             <div className=" flex flex-col pt-12 px-6 gap-5">
               <h1 className=" text-7xl text-blue-500">
                 Lingo Fillとは
               </h1>
               <div className=" flex flex-col gap-5 dark:text-gray-300">
-                Lingo Fillを使えばあなただけの言語学習テキストを簡単に作成できます
+                <div className=" font-bold text-lg">シンプルな長文専用の言語学習サービスです。</div>
+                <div>あなただけの言語学習テキストを簡単に作成できます。</div>
                 <div className=" grid grid-cols-2 gap-3">
-                  <div><CheckCircle /> 多言語対応</div>
-                  <div><CheckCircle /> 音声読み上げ</div>
-                  <div><CheckCircle /> 無制限のテキスト保存</div>
-                  <div><CheckCircle /> 自由なブロック表示</div>
-                  <div><CheckCircle /> スタイリッシュなUI</div>
-                  <div><CheckCircle /> AIによる補完</div>
-                  <div><CheckCircle /> 多端末での共有</div>
+                  <div className=" flex items-center gap-1"><Language /> 多言語対応</div>
+                  <div className=" flex items-center gap-1"><Translate /> 高速で正確な翻訳</div>
+                  <div className=" flex items-center gap-1"><RecordVoiceOver /> 自然な音声読み上げ</div>
+                  <div className=" flex items-center gap-1"><CloudUpload /> 無制限のテキスト保存</div>
+                  <div className=" flex items-center gap-1"><Comment /> 自分だけのメモの作成</div>
+                  <div className=" flex items-center gap-1"><Psychology /> AIによる補完</div>
+                  <div className=" flex items-center gap-1"><DevicesOther /> 多端末での共有</div>
                 </div>
               </div>
             </div>
-            <Image src="/lingo-fill-test.png" width="800" height="800" alt='ロゴ' />
+            <Image src="/template_1.png" width="720" height="450" alt='ロゴ' />
           </div>
-
-          <div className=" flex flex-col justify-center items-center mt-32">
-            <h1 className=" text-5xl text-blue-500">多言語対応</h1>
-            <div className=" flex">
+          <Divider className=" mt-16"/>
+          <div className=" flex flex-col justify-center items-center mt-16">
+            <h1 className=" text-5xl text-blue-500"><Description style={{ fontSize: 40 }} />使い方</h1>
+            <div className=" flex flex-col gap-2">
+              <div className=" flex items-center justify-between gap-3">
+                <div className=" flex pt-16 px-6 gap-5">
+                  <div className=" flex flex-col gap-5 dark:text-gray-300">
+                    <div>①アカウントを作成もしくは、Googleでサインインします。</div>
+                  </div>
+                </div>
+                <Image src="/signin.png" width="720" height="450" alt='ロゴ' />
+              </div>
+              <div className=" flex items-center justify-between gap-3">
+                <div className=" flex pt-16 px-6 gap-5">
+                  <div className=" flex flex-col gap-5 dark:text-gray-300">
+                    <div>②新規でテキストを作成します。</div>
+                    <div> - 新規テキスト名を入力しましょう。</div>
+                  </div>
+                </div>
+                <Image src="/create_text.png" width="720" height="450" alt='ロゴ' />
+              </div>
+              <div className=" flex items-center justify-between gap-3">
+                <div className=" flex pt-16 px-6 gap-5">
+                  <div className=" flex flex-col gap-5 dark:text-gray-300">
+                    <div>③学びたい文章をコピーしてそのままペーストします。</div>
+                  </div>
+                </div>
+                <Image src="/paste.png" width="720" height="450" alt='ロゴ' />
+              </div>
+              <div className=" flex items-center justify-between gap-3">
+                <div className=" flex pt-16 px-6 gap-5">
+                  <div className=" flex flex-col gap-5 dark:text-gray-300">
+                    <div>④編集モードに切り替えます。</div>
+                    <div>- 単語をタップして意味を確認します。</div>
+                    <div>- 使い方の分からない熟語を選択しAIに使い方を聞きましょう。</div>
+                    <div>- 読み上げ機能を使用して文章を耳で覚えましょう。</div>
+                    <div>- メモを作成して反復して覚えましょう。</div>
+                  </div>
+                </div>
+                <Image src="/modal.png" width="720" height="450" alt='ロゴ' />
+              </div>
+            </div>
+          </div> 
+          <Divider className=" mt-16"/>
+          <div className=" flex flex-col justify-center items-center mt-16">
+            <h1 className=" text-5xl text-blue-500"><Language style={{ fontSize: 40 }} />多言語対応</h1>
+            <div className=" flex items-center gap-3">
               <div className=" flex pt-16 px-6 gap-5">
                 <div className=" flex flex-col gap-5 dark:text-gray-300">
-                  Lingo Fillはさまざまな言語に対応しています。
-                  あなたの学びたい言語にも対応しているはずです。
-                  <div className=" grid grid-cols-2 gap-3">
-                    <div><CheckCircle /> 多言語対応</div>
-                    <div><CheckCircle /> 音読機能</div>
-                    <div><CheckCircle /> 無制限のテキスト保存</div>
-                    <div><CheckCircle /> 自由なブロック表示</div>
+                  <div>Lingo Fillはさまざまな言語に対応しています。</div>
+                  <div>あなたの学びたい言語にも対応しているはずです。</div>
+                  <div className=" text-sm">
+                    対応言語: 日本語, English, Español, Français, Deutsch, Italiano, Português, Русский, عربي, 한국어, 中国語, हिंदी
                   </div>
                 </div>
               </div>
-              <Image src="/lingo-fill-test.png" width="800" height="800" alt='ロゴ' />
+              <Image src="/world.png" width="500" height="500" alt='ロゴ' />
             </div>
           </div> 
           <div className=" flex flex-col justify-center items-center mt-32">
-            <h1 className=" text-5xl text-blue-500">音声読み上げ</h1>
-            <div className=" flex">
+            <h1 className=" text-5xl text-blue-500"><Translate style={{ fontSize: 40 }} />素早く正確な翻訳</h1>
+            <div className=" flex items-center gap-3">
               <div className=" flex pt-16 px-6 gap-5">
                 <div className=" flex flex-col gap-5 dark:text-gray-300">
-                  Lingo Fillは、AIにより強化された音声を好きな箇所で何度でも繰り返し聴くことができます
-                  <div className=" grid grid-cols-2 gap-3">
-                    <div><CheckCircle /> 多言語対応</div>
-                    <div><CheckCircle /> 音読機能</div>
-                    <div><CheckCircle /> 無制限のテキスト保存</div>
-                    <div><CheckCircle /> 自由なブロック表示</div>
-                  </div>
+                  <div>Lingo Fillはあなたの分からない単語、熟語を高速で翻訳します。</div>
+                  <div>翻訳するには、知りたい単語をクリックするだけです。複雑なステップはなくストレスフリーです。</div>
                 </div>
               </div>
-              <Image src="/lingo-fill-test.png" width="800" height="800" alt='ロゴ' />
+              <Image src="/translate.png" width="500" height="500" alt='ロゴ' />
             </div>
           </div> 
           <div className=" flex flex-col justify-center items-center mt-32">
-            <h1 className=" text-5xl text-blue-500">無制限のテキスト保存</h1>
-            <div className=" flex">
+            <h1 className=" text-5xl text-blue-500"><RecordVoiceOver style={{ fontSize: 40 }} />音声読み上げ</h1>
+            <div className=" flex items-center gap-3">
               <div className=" flex pt-16 px-6 gap-5">
                 <div className=" flex flex-col gap-5 dark:text-gray-300">
-                  Lingo Fillは、あなたの作成したオリジナルテキストを厳重に保管します。また、無制限のテキスト保存が可能です。
-                  <div className=" grid grid-cols-2 gap-3">
-                    <div><CheckCircle /> 多言語対応</div>
-                    <div><CheckCircle /> 音読機能</div>
-                    <div><CheckCircle /> 無制限のテキスト保存</div>
-                    <div><CheckCircle /> 自由なブロック表示</div>
-                  </div>
+                  Lingo FillはAIにより強化された音声を好きな箇所から何度でも繰り返し聴くことができます。
                 </div>
               </div>
-              <Image src="/lingo-fill-test.png" width="800" height="800" alt='ロゴ' />
+              <Image src="/speaker-1.svg" width="500" height="500" alt='ロゴ' />
             </div>
           </div> 
           <div className=" flex flex-col justify-center items-center mt-32">
-            <h1 className=" text-5xl text-blue-500">自由なブロック表示</h1>
-            <div className=" flex">
+            <h1 className=" text-5xl text-blue-500 pb-5"><CloudUpload style={{ fontSize: 40 }} />無制限のテキスト保存</h1>
+            <div className=" flex items-center gap-3">
               <div className=" flex pt-16 px-6 gap-5">
                 <div className=" flex flex-col gap-5 dark:text-gray-300">
-                  Lingo Fillは、暗記したい単語、熟語を好きなようにカスタマイズして表示できます。例えば、母国語に翻訳して表示したり、空白にして音声によるリスニングにも使えます。
-                  <div className=" grid grid-cols-2 gap-3">
-                    <div><CheckCircle /> 多言語対応</div>
-                    <div><CheckCircle /> 音読機能</div>
-                    <div><CheckCircle /> 無制限のテキスト保存</div>
-                    <div><CheckCircle /> 自由なブロック表示</div>
-                  </div>
+                  <div>Lingo Fillは、無制限のテキスト保存が可能です。</div>
+                  <div>テキストはオンライン上で保存されるためあなたのデバイスを圧迫することもありません。</div>
                 </div>
               </div>
-              <Image src="/lingo-fill-test.png" width="800" height="800" alt='ロゴ' />
+              <Image src="/2108272.png" width="500" height="500" alt='ロゴ' />
             </div>
           </div> 
           <div className=" flex flex-col justify-center items-center mt-32">
-            <h1 className=" text-5xl text-blue-500">スタイリッシュなUI</h1>
-            <div className=" flex">
+            <h1 className=" text-5xl text-blue-500"><Comment style={{ fontSize: 40 }} />自分だけのメモの作成</h1>
+            <div className=" flex items-center gap-3">
               <div className=" flex pt-16 px-6 gap-5">
                 <div className=" flex flex-col gap-5 dark:text-gray-300">
-                  Lingo Fillは、ライトモード、ダークモードをあなたのシステムに合わせて自動的に変更します。ボタンにはツールチップを表示しユーザーフレンドリーなUIを提供します。
-                  <div className=" grid grid-cols-2 gap-3">
-                    <div><CheckCircle /> 多言語対応</div>
-                    <div><CheckCircle /> 音読機能</div>
-                    <div><CheckCircle /> 無制限のテキスト保存</div>
-                    <div><CheckCircle /> 自由なブロック表示</div>
-                  </div>
+                  <div>Lingo Fillは、あなただけのメモを素早く作成できます。</div>
+                  <div>また、知りたい単語、熟語の意味、用法などを素早くAIが教えてくれます。</div>
                 </div>
               </div>
-              <Image src="/lingo-fill-test.png" width="800" height="800" alt='ロゴ' />
+              <Image src="/Taking-Notes-2.svg" width="500" height="500" alt='ロゴ' />
             </div>
           </div> 
           <div className=" flex flex-col justify-center items-center mt-32">
-            <h1 className=" text-5xl text-blue-500">多端末での共有</h1>
-            <div className=" flex">
+            <h1 className=" text-5xl text-blue-500"><DevicesOther style={{ fontSize: 40 }} />多端末での共有</h1>
+            <div className=" flex items-center gap-3">
               <div className=" flex pt-16 px-6 gap-5">
                 <div className=" flex flex-col gap-5 dark:text-gray-300">
-                  Lingo Fillは、サーバーでテキストを保管します。そのため、PCで作成したテキストを旅先でスマートフォンを使用し操作することが可能です。
-                  <div className=" grid grid-cols-2 gap-3">
-                    <div><CheckCircle /> 多言語対応</div>
-                    <div><CheckCircle /> 音読機能</div>
-                    <div><CheckCircle /> 無制限のテキスト保存</div>
-                    <div><CheckCircle /> 自由なブロック表示</div>
-                  </div>
+                  <div>Lingo Fillは、オンライン上でテキストを保管します。</div>
+                  <div>PCで作成したテキストを旅先でスマートフォンを使用し学習することが可能です。</div>
                 </div>
               </div>
-              <Image src="/lingo-fill-test.png" width="800" height="800" alt='ロゴ' />
+              <Image src="/the-cloud.svg" width="500" height="500" alt='ロゴ' />
             </div>
           </div> 
           <div className=" flex flex-col justify-center items-center mt-32">
-            <h1 className=" text-5xl text-blue-500">AIによる補完</h1>
-            <div className=" flex">
+            <h1 className=" text-5xl text-blue-500"><Psychology style={{ fontSize: 40 }} />AIによる補完</h1>
+            <div className=" flex items-center gap-3">
               <div className=" flex pt-16 px-6 gap-5">
                 <div className=" flex flex-col gap-5 dark:text-gray-300">
-                  Lingo Fillは、GPT4による補完を提供します。使い方の分からない単語、熟語を自動的にAIが補完し表示します。
-                  <div className=" grid grid-cols-2 gap-3">
-                    <div><CheckCircle /> 多言語対応</div>
-                    <div><CheckCircle /> 音読機能</div>
-                    <div><CheckCircle /> 無制限のテキスト保存</div>
-                    <div><CheckCircle /> 自由なブロック表示</div>
-                  </div>
+                  <div>Lingo Fillは、GPT4による補完を提供します。</div>
+                  <div>使い方の分からない単語、熟語を自動的にAIが補完し表示します。</div>
                 </div>
               </div>
-              <Image src="/lingo-fill-test.png" width="800" height="800" alt='ロゴ' />
+              <Image src="/wandering-mind.svg" width="500" height="500" alt='ロゴ' />
             </div>
           </div> 
         </div>

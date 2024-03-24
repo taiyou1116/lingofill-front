@@ -5,6 +5,7 @@ import { Tooltip } from "@mui/material";
 import React, { useRef, useState } from "react";
 import TranslateModal from "./modal/TranslateModal";
 import { GrobalStore } from "@/store/grobalStore";
+import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 type RenderTextProps = {
   sentences: string[];
@@ -31,8 +32,6 @@ const RenderText = (props: RenderTextProps) => {
   const touchIndexRef = useRef<number | null>(null);
   const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null);
 
-  const [originalPosition, setOriginalPosition] = useState<number | null>(null);
-
   const handleTouchStart = (index: number) => {
     
     setSelectedWordsIndexes([]);
@@ -44,10 +43,7 @@ const RenderText = (props: RenderTextProps) => {
     const newTimerId = setTimeout(() => {      
       if (index === touchIndexRef.current) {
 
-        const scrollY = window.scrollY; // 現在のスクロール位置を記録
-        setOriginalPosition(scrollY);
-        document.body.style.position = 'fixed';
-        document.body.style.top = `-${scrollY}px`;
+        disableBodyScroll(document.body);
 
         handleMouseDown();
         setStartNumber(index);
@@ -82,13 +78,8 @@ const RenderText = (props: RenderTextProps) => {
   const handleTouchEnd = () => {
     touchIndexRef.current = null;
     handleMouseUp();
-    
-    if (originalPosition !== null) {
-      document.body.style.position = '';
-      document.body.style.top = `-${originalPosition}px`;
-      window.scrollTo(0, originalPosition!);
-      setOriginalPosition(null);
-    }
+
+    enableBodyScroll(document.body);
 
     if (timerId) {
       clearTimeout(timerId);
