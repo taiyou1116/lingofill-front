@@ -42,7 +42,7 @@ function SidebarComponent() {
         onClick={() => handleCloseModal(flipShowSidebar)}>
       </div>
       <div 
-        className={`fixed z-20 w-2/3 md:w-1/3 lg:w-1/5 top-0 left-0 h-full bg-white dark:bg-gray-800 shadow-2xl transition-transform duration-300 transform ${showSidebar ? "translate-x-0" : "-translate-x-full"}`}
+        className={`fixed z-20 w-2/3 md:w-1/3 lg:w-1/5 top-0 left-0 h-full bg-white dark:bg-gray-800 transition-transform duration-300 transform ${showSidebar ? "translate-x-0" : "-translate-x-full"}`}
         onClick={handleStopPropagation}
       >
         <div className="flex flex-col gap-3">

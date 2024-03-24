@@ -171,8 +171,8 @@ const RenderText = (props: RenderTextProps) => {
   };
 
   return (
-    <div className=" pt-32">
-      <div className={` max-h-max p-3 rounded-md bg-white dark:bg-slate-600 dark:text-slate-300`}>
+    <div className=" pt-28">
+      <div className={`overflow-y-auto max-h-[calc(100vh-180px)] p-3 rounded-md bg-white dark:bg-slate-600 dark:text-slate-300`}>
         {sentences.map(renderSentence)}
         <TranslateModal selectedWordsIndexes={selectedWordsIndexes} selectedWords={selectedWords} />
       </div>

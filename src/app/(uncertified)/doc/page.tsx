@@ -5,7 +5,7 @@ import "@aws-amplify/ui-react/styles.css";
 import { Authenticator } from "@aws-amplify/ui-react";
 import { useState } from "react";
 import Image from "next/image";
-import { CloudUpload, Comment, Description, DevicesOther, Language, Launch, Psychology, RecordVoiceOver, Translate } from "@mui/icons-material";
+import { CloudUpload, Comment, Description, DevicesOther, Language, Launch, MoneyOff, Psychology, RecordVoiceOver, Translate } from "@mui/icons-material";
 import { Amplify } from "aws-amplify";
 import awsExports from "../../../aws-exports";
 import { Divider } from "@mui/material";
@@ -28,7 +28,7 @@ function Doc() {
   const divideUI = () => {
     if (deviceSize.width <= 425) {
       return(
-        <div>
+        <div className=" dark:text-gray-300">
           <DocumentHeader 
             setLogin={setLogin}
             buttonClass=" text-sm px-3 py-2"
@@ -123,6 +123,12 @@ function Doc() {
             text={<><div>Lingo Fillは、アカウントごとにオンライン上でテキストを保管します。</div>
             <div>同じアカウントを共有することで、友達と同じテキストを共有します。</div></>}
             img="/the-cloud.svg"
+          />
+          <DocumentDetailsMobile
+            title={<><MoneyOff style={{ fontSize: 40 }} />すべての機能が無料</>}
+            text={<><div>Lingo Fillは、これらすべての機能が無料で使えます。</div>
+            <div>使用してお金が発生することは一切ありません。</div></>}
+            img="/no_money.svg"
           />
         </div>
       )
@@ -224,6 +230,12 @@ function Doc() {
             <div>同じアカウントを共有することで、友達と同じテキストを共有します。</div></>}
             img="/the-cloud.svg"
           />
+          <DocumentDetailsMobile
+            title={<><MoneyOff style={{ fontSize: 40 }} />すべての機能が無料</>}
+            text={<><div>Lingo Fillは、これらすべての機能が無料で使えます。</div>
+            <div>使用してお金が発生することは一切ありません。</div></>}
+            img="/no_money.svg"
+          />
         </div>
       )
     } else {
@@ -323,6 +335,12 @@ function Doc() {
             text={<><div>Lingo Fillは、アカウントごとにオンライン上でテキストを保管します。</div>
             <div>同じアカウントを共有することで、友達と同じテキストを共有します。</div></>}
             img="/the-cloud.svg"
+          />
+          <DocumentDetails
+            title={<><MoneyOff style={{ fontSize: 40 }} />すべての機能が無料</>}
+            text={<><div>Lingo Fillは、これらすべての機能が無料で使えます。</div>
+            <div>使用してお金が発生することは一切ありません。</div></>}
+            img="/no_money.svg"
           />
         </div>
       )
