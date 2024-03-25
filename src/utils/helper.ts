@@ -125,6 +125,7 @@ export function truncateText(text: string | undefined, maxLength: number) {
   return text;
 }
 
+/**スペースのある言語か判別する @param text テキスト @param ln 言語 */
 export function splitTextToSegment(text: string, ln: string): string[] {
   if (judgeSpaceLanguage(ln)) {
     return text.split('\n').reduce((acc, line, index, array) => {

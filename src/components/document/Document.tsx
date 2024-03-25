@@ -8,55 +8,40 @@ import { oswald } from "@/store/fontStore";
 import { splitTextToSegment, truncateText } from "@/utils/helper";
 import InputDocument from "./InputDocument";
 import TranslateDocument from "./TranslateDocument";
-import StopAudio from "./header/StopAudio";
 import SelectLanguage from "./header/SelectLanguage";
 import SendDocumentDataButton from "./header/SendDocumentDataButton";
 import ThreeWayToggle from "./header/ThreeWayToggle";
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, LinearProgress, SelectChangeEvent, ThemeProvider, Tooltip } from "@mui/material";
-import { useThemeMode, useWindowSize } from "@/hooks/hooks";
-import {  MoreHoriz, VolumeMute, VolumeUp } from "@mui/icons-material";
+import { Box, LinearProgress } from "@mui/material";
+import { useWindowSize } from "@/hooks/hooks";
+import MoreSelectLanguage from "./header/MoreSelectLanguage";
+import ListenAudio from "./header/ListenAudio";
 
 function DocumentComponent() {
-  const { document, selectedMode, isLoading, isPlaying } = GrobalStore();
+  const { document, selectedMode, isLoading } = GrobalStore();
 
   const { t } = useTranslation();
   const { width } = useWindowSize();
   const isSm = width <= 425;
-  const theme = useThemeMode();
+  
   const [sentences, setSentences] = useState<string[]>([]);
-  const [ isSelectedReading, setIsSelectedReading ] = useState<boolean>(false);
+  const [isSelectedReading, setIsSelectedReading] = useState<boolean>(false);
 
+  // documentが変更されたら'textを変更'
   useEffect(() => {
     if (document === null) return;
-    const tempWords = splitTextToSegment(document.text, document.language);
-    setSentences(tempWords);
+    const splitedText = splitTextToSegment(document.text, document.language);
+    setSentences(splitedText);
   }, [document]);
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = (event: React.SyntheticEvent<unknown>, reason?: string) => {
-    if (reason !== 'backdropClick') {
-      setOpen(false);
-    }
-  };
 
   const renderContentByMode = () => {
     if (document === null) {
       return (
-        <div className=" dark:text-gray-300"> {t('document.chooseText')}</div>
+        <RenderEmptyState message={t('document.chooseText')} />
       )
     }
     if (isLoading) {
       return (
-        <div className=" flex h-full items-center justify-center">
-          <Box sx={{ width: '30%' }}>
-            <LinearProgress />
-          </Box>
-        </div>
+        <DocumentLoading />
       )
     }
     switch (selectedMode) {
@@ -72,12 +57,10 @@ function DocumentComponent() {
         return (
           <InputDocument />
         );
-      default:
-        return <div>不明なモードです。</div>;
     }
   }
 
-  const showToggle = () => {
+  const showDocumentHeader = () => {
     if (document === null) {
       return;
     }
@@ -87,50 +70,11 @@ function DocumentComponent() {
           <div className=" flex pt-5 px-3 items-center justify-between">
             <ThreeWayToggle />
             <div className=" flex items-center gap-1">
-              <div>  
-                <button onClick={handleClickOpen}><MoreHoriz style={{ fontSize: 35 }} className="bg-white border dark:border-gray-900 dark:text-gray-300  dark:bg-gray-900 rounded-lg p-1" /></button>
-                <ThemeProvider theme={theme}>                
-                  <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
-                    <DialogTitle>言語選択</DialogTitle>
-                    <DialogContent>
-                      <SelectLanguage />
-                    </DialogContent>
-                    <DialogActions>
-                      <Button onClick={handleClose}>Ok</Button>
-                    </DialogActions> 
-                  </Dialog>
-                </ThemeProvider>
-              </div>
-              <div className="bg-white border dark:border-gray-900 dark:bg-gray-900 rounded-lg p-1">
-                { (!isSelectedReading)
-                ?
-                  <Tooltip 
-                    title={t('document.header.aloud.onAloud')} 
-                    className=" cursor-pointer p-1 hover:rounded 
-                              dark:text-gray-300 
-                              hover:bg-gray-200 
-                              dark:hover:bg-gray-800" 
-                    onClick={() => setIsSelectedReading(true)}
-                  >
-                    <VolumeMute style={{ fontSize: 25 }} />
-                  </Tooltip>
-                :
-                  (!isPlaying)
-                  ? 
-                    <Tooltip 
-                      title={t('document.header.aloud.offAloud')} 
-                      className=" cursor-pointer p-1 rounded-md
-                                dark:text-gray-300 
-                                bg-gray-300 
-                                dark:bg-gray-600" 
-                      onClick={() => setIsSelectedReading(false)}
-                    >
-                      <VolumeUp style={{ fontSize: 25 }} />
-                    </Tooltip>
-                  :
-                    <StopAudio />
-                }
-              </div>
+              <MoreSelectLanguage />
+              <ListenAudio 
+                isSelectedReading={isSelectedReading}
+                setIsSelectedReading={setIsSelectedReading}
+              />
             </div>
             <SendDocumentDataButton />
           </div>
@@ -144,45 +88,10 @@ function DocumentComponent() {
             <ThreeWayToggle />
             <SelectLanguage />
             <div className=" flex gap-3 items-center">
-              <div className="bg-white border dark:border-gray-900 dark:bg-gray-900 rounded-lg p-1">
-                { (!isSelectedReading)
-              ?
-                <Tooltip 
-                  title={t('document.header.aloud.onAloud')} 
-                  className=" cursor-pointer p-1 hover:rounded 
-                            dark:text-gray-300 
-                            hover:bg-gray-200 
-                            dark:hover:bg-gray-800" 
-                  onClick={() => setIsSelectedReading(true)}
-                >
-                  <VolumeMute style={{ fontSize: 25 }} />
-                </Tooltip>
-              :
-                (!isPlaying)
-                ? 
-                  <Tooltip 
-                    title={t('document.header.aloud.offAloud')} 
-                    className=" cursor-pointer p-1 rounded-md
-                              dark:text-gray-300 
-                              bg-gray-300 
-                              dark:bg-gray-600" 
-                    onClick={() => setIsSelectedReading(false)}
-                  >
-                    <VolumeUp style={{ fontSize: 25 }} />
-                  </Tooltip>
-                :
-                  <StopAudio />
-              }
-              </div>
-              
-              {/* <div className=" flex gap-1 items-center bg-gray-900 rounded-lg p-1 text-gray-300 ">
-                <Tooltip title='アンダーラインを引く' className=" cursor-pointer p-1 hover:rounded hover:bg-gray-800">
-                  <FormatUnderlined style={{ fontSize: 25 }} />
-                </Tooltip>
-                <Tooltip title='アンダーラインの色を変える'>
-                  <Palette style={{ fontSize: 25 }}  className=" cursor-pointer hover:text-gray-500" />
-                </Tooltip>
-              </div> */}
+              <ListenAudio 
+                isSelectedReading={isSelectedReading}
+                setIsSelectedReading={setIsSelectedReading}
+              />
             </div>
           </div>
           <SendDocumentDataButton />
@@ -193,7 +102,7 @@ function DocumentComponent() {
 
   return (
     <div className="h-full p-1 md:p-5 bg-gray-100 dark:bg-gray-800">
-      { showToggle() }
+      { showDocumentHeader() }
       
       <div className=" h-5/6 pt-5">
       { renderContentByMode() }
@@ -203,3 +112,18 @@ function DocumentComponent() {
 }
 
 export default React.memo(DocumentComponent);
+
+const DocumentLoading = () => (
+  <div className="flex h-full items-center justify-center">
+    <Box sx={{ width: '30%' }}>
+      <LinearProgress />
+    </Box>
+  </div>
+);
+
+type RenderEmptyStateProps = {
+  message: string,
+}
+const RenderEmptyState: React.FC<RenderEmptyStateProps> = ({ message }) => (
+  <div className="dark:text-gray-300">{message}</div>
+);

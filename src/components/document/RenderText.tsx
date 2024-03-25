@@ -93,7 +93,7 @@ const RenderText = (props: RenderTextProps) => {
       return <br key={`br-${sentenceIndex}`} />;
     }
     
-    const Test = async (sentenceIndex: number) => {
+    const ListenText = async (sentenceIndex: number) => {
       if (!isSelectedReading) return;
       const newSentences = sentences.slice(sentenceIndex);
       const voice = getVoiceForLanguage(doc.language, voiceType);
@@ -117,7 +117,7 @@ const RenderText = (props: RenderTextProps) => {
           className={`break-all ${sentenceIndex === readingNumber ? ' text-yellow-300' : ''}`}
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
-          onClick={() => Test(sentenceIndex)}
+          onClick={() => ListenText(sentenceIndex)}
         >
           {words.map((word, wordIndex) => {
             const captureIndex = globalIndex;
