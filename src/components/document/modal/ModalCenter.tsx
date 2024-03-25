@@ -26,7 +26,7 @@ function ModalCenterComponent(props: ModalCenterProps) {
       {/* ModalWindow */}
       <div 
         onClick={handleStopPropagation} 
-        className={` fixed h-4/5 w-5/6  md:w-3/5  rounded-xl shadow-lg p-5 
+        className={` fixed h-5/6 w-full md:h-5/6 md:w-5/6 rounded-xl dark:shadow-black shadow-2xl p-5 
                      flex flex-col justify-start items-center gap-10 duration-300
                    bg-white 
                    dark:bg-gray-800 

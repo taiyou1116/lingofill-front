@@ -77,13 +77,13 @@ function SaveButton(props: Props) {
 
   return (
     <button 
-      className='px-4 py-1 md:px-4 md:py-2 rounded-md
+      className='px-2 py-1 md:px-4 md:py-2 rounded-md
                bg-lime-500
                text-gray-200
                hover:bg-lime-800'
       onClick={handleSaveButton}
     >
-      <div className=' flex gap-1 items-center'><Save />{t('document.modal.saveButton.save')}</div>
+      <div className=' flex gap-1 items-center md:text-base text-sm'><Save />{t('document.modal.saveButton.save')}</div>
     </button>
   )
 }

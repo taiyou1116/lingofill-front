@@ -35,10 +35,10 @@ function DeleteBlockButton(props: Props) {
 
   return (
     <button 
-      className=' text-gray-200 rounded-md bg-red-500 hover:bg-red-800 px-4 py-1 md:px-4 md:py-2 '
+      className=' text-gray-200 rounded-md bg-red-500 hover:bg-red-800 px-2 py-1 md:px-4 md:py-2 '
       onClick={deleteBlock}
     >
-      <div className=' flex gap-1 items-center'><AutoFixHigh /> {t('document.modal.deleteBlockButton.cancelBlock')}</div>
+      <div className=' flex gap-1 items-center md:text-base text-sm'><AutoFixHigh /> {t('document.modal.deleteBlockButton.cancelBlock')}</div>
     </button>
   )
 }

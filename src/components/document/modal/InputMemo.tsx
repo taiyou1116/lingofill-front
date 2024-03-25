@@ -26,10 +26,9 @@ function InputMemo(props: Props) {
 
   return (
     <div className=' w-full h-full flex flex-col gap-1'>
-      <div className=' flex gap-3'>
+      <div className=' flex md:flex-row flex-col gap-3'>
         <PasteButton 
           setUserInput={setUserInputMemo}
-          plceholder='document.modal.inputMemo.inputMemo'
         />
         { isGeneratingAIResponse
         ?

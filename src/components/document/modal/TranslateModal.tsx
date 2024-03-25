@@ -98,7 +98,7 @@ function TranslateModal(props: TranslateModalProps) {
           setDocuments={setDocuments}
           selectedWordsIndexes={selectedWordsIndexes}
         />
-        <button onClick={() => handleCloseModal(flipCenterModal)} >{t('document.modal.closeModal')}</button>
+        <button className=' md:text-base text-sm' onClick={() => handleCloseModal(flipCenterModal)} >{t('document.modal.closeModal')}</button>
       </div>
     </ModalCenter>
   )

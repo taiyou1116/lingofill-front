@@ -50,7 +50,7 @@ function ReadAndCopyContainer(props: Props) {
         </Tooltip>
       }
       
-      <span className={`selectedWordsContainer p-1 ${className}`}>
+      <span className={`selectedWordsContainer p-1 ${className} md:text-base text-sm`}>
         { words }
       </span>
     </div>
