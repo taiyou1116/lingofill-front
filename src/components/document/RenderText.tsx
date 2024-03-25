@@ -33,7 +33,6 @@ const RenderText = (props: RenderTextProps) => {
   const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null);
 
   const handleTouchStart = (index: number) => {
-    
     setSelectedWordsIndexes([]);
     touchIndexRef.current = index;
     // 以前のタイマーがあればクリア
@@ -109,6 +108,7 @@ const RenderText = (props: RenderTextProps) => {
       setReadingNumber(prevNumber => prevNumber + 1);
     };
 
+    // 1文の中のwords
     const words = doc.language && judgeSpaceLanguage(doc.language) ? sentence.split(' ') : sentence.split('');
 
     return (
@@ -128,8 +128,8 @@ const RenderText = (props: RenderTextProps) => {
               return (
                 <span
                   key={captureIndex}
-                  onClick={() => handleClick(captureIndex)} // captureIndex を使用
-                  onMouseMove={() => handleMouseMove(captureIndex)} // captureIndex を使用
+                  onClick={() => handleClick(captureIndex)}
+                  onMouseMove={() => handleMouseMove(captureIndex)}
                   onTouchMove={() => handleMouseMove(captureIndex)}
                   className={`select-none px-1 mx-0.5 cursor-pointer rounded-md
                     ${selectedWordsIndexes.includes(captureIndex) ? "bg-blue-300 dark:bg-blue-500" : "bg-slate-200 dark:bg-slate-800/50"}
@@ -148,7 +148,7 @@ const RenderText = (props: RenderTextProps) => {
               globalIndex++;
               return (
                 <span
-                  key={`${sentenceIndex}-${wordIndex}`}
+                  key={captureIndex}
                   className={`select-none cursor-pointer
                               ${doc.language !== 'ja' && doc.language !== 'zh' ? 'p-0.5' : ''} 
                               ${selectedWordsIndexes.includes(captureIndex) ? "bg-blue-300 dark:bg-blue-500" : "bg-transparent"}`}

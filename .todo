@@ -9,23 +9,24 @@ https://main.d5yypxcoba5g4.amplifyapp.com/
 Inputに改行合わせる
 - 理解する
 
+editに切り替えた時にチェックするロジック
+- memoTextが変更されない -> indexのみで管理すれば解消
+- 単語の削除による弊害 -> input時に単語の追加、削除の数を把握 -> editで各memoTextが何個動くか取得する。
+- input時に単語の追加、削除の数を把握 -> ???
+
+ひとまずindexのみで管理する
+
 最低限の要素
-- 編集済みのテキストのinput -> 重要
+- 編集済みのテキストのinput & block処理の削除
+- apiの回数制限
 - 説明のdoc -> i18n, 
-- block処理の削除
 - 課金 or 寄付
 - web広告
 
 実装
 - ロシア語のneuralエラー
-- 差分(変更した項目のみ)を送信 ... 着手
-- お気に入り登録、単語、熟語集(問題も) ... 中
-- web広告
+- 差分(変更した項目のみ)を送信
 - 下線
-
-- 読み上げ無限ループ
-- Documentも5つずつくらい取得する方がいいかも
-- 説明のdoc
 - lambdaがどうなっているのか確認
 - 音声のネットワークエラー
 - Bufferの理解
@@ -33,17 +34,3 @@ Inputに改行合わせる
 バグ
 テキスト作成 -> テキスト入力 -> タイトル編集
 Warning: SidebarDocuments contains an input of type text with both value and defaultValue props. Input elements must be either controlled or uncontrolled (specify either the value prop, or the defaultValue prop, but not both). Decide between using a controlled or uncontrolled input element and remove one of these props. More info: 
-音声bg途中で消える
-
-課金
-- AIで詳細を記入
-- Pollyの自然音声 -> nural, standardそれぞれ選ぶ
-
-ログイン、ログアウト系
-- ログイン後/docで何も表示されない -> ログイン情報があればログインする
-- ログアウトボタン押した絵と、特にリダイレクトされない -> リダイレクトエンドポイントの問題か？ プロバイダー使わないとなる
-- ログイン後/docでhomeにリダイレクトされない
-
-追加案
-- 初期例文もあり
-- 共有フォルダ
