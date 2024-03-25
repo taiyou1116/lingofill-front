@@ -1,6 +1,7 @@
 
 import React from 'react'
 import { useTranslation } from 'react-i18next';
+
 import { Tooltip } from '@mui/material';
 import { ContentPaste } from '@mui/icons-material';
 
@@ -9,8 +10,8 @@ type Props = {
 }
 
 function PasteButton(props: Props) {
-  const { t } = useTranslation();
   const { setUserInput } = props;
+  const { t } = useTranslation();
 
   const getClipboardText = async () => {
     const text = await navigator.clipboard.readText();
@@ -20,10 +21,14 @@ function PasteButton(props: Props) {
   return (
     <div className=' flex items-center gap-2 text-xs dark:text-gray-400'>
         {t('document.modal.inputMemo.inputMemo')}
-        <Tooltip title={t('document.modal.inputMemo.paste')} className=' cursor-pointer' onClick={getClipboardText}>
-          <ContentPaste style={{ fontSize: 20 }} className='hover:text-gray-300 
-                                                            dark:text-gray-300 
-                                                            dark:hover:text-gray-500' />
+        <Tooltip 
+          title={t('document.modal.inputMemo.paste')} 
+          className=' cursor-pointer' 
+          onClick={getClipboardText}
+        >
+          <ContentPaste 
+            style={{ fontSize: 20 }} 
+            className='hover:text-gray-300 dark:text-gray-300 dark:hover:text-gray-500' />
         </Tooltip>
       </div>
   )

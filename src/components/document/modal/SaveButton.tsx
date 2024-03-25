@@ -15,11 +15,10 @@ type Props = {
   setDocument: (document: Document | null) => void,
   documents: Document[],
   setDocuments: (documents: Document[]) => void,
-  selectedWords: string,
 }
 
 function SaveButton(props: Props) {
-  const { selectedWordsIndexes, userInputMemo, document, setDocument, documents, setDocuments, selectedWords } = props;
+  const { selectedWordsIndexes, userInputMemo, document, setDocument, documents, setDocuments } = props;
   const { flipCenterModal } = GrobalStore();
   const { t } = useTranslation();
 
@@ -37,10 +36,6 @@ function SaveButton(props: Props) {
     const existingTranslationIndex = newDocument.translations.findIndex(translation =>
       selectedWordsIndexes.some(index => translation.indexes.includes(index))
     );
-
-    // if (userInput === '') {
-    //   userInput = selectedWords;
-    // }
 
     if (existingTranslationIndex !== -1) {
       // 既存の翻訳を更新

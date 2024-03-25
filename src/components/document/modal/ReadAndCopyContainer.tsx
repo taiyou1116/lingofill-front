@@ -1,9 +1,11 @@
 
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import ReadingButton from './ReadingButton';
+
 import { Check, ContentCopy } from '@mui/icons-material'
 import { Tooltip } from '@mui/material'
-import ReadingButton from './ReadingButton';
 
 type Props = {
   sentences: string[],

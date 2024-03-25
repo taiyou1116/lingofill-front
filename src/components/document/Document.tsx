@@ -5,16 +5,20 @@ import React, { useEffect, useState } from "react";
 import { GrobalStore } from "@/store/grobalStore";
 import { useTranslation } from "react-i18next";
 import { oswald } from "@/store/fontStore";
+
+import { useWindowSize } from "@/hooks/hooks";
 import { splitTextToSegment, truncateText } from "@/utils/helper";
+
 import InputDocument from "./InputDocument";
 import TranslateDocument from "./TranslateDocument";
 import SelectLanguage from "./header/SelectLanguage";
 import SendDocumentDataButton from "./header/SendDocumentDataButton";
 import ThreeWayToggle from "./header/ThreeWayToggle";
-import { Box, LinearProgress } from "@mui/material";
-import { useWindowSize } from "@/hooks/hooks";
 import MoreSelectLanguage from "./header/MoreSelectLanguage";
 import ListenAudio from "./header/ListenAudio";
+
+import { Box, LinearProgress } from "@mui/material";
+
 
 function DocumentComponent() {
   const { document, selectedMode, isLoading } = GrobalStore();

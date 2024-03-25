@@ -2,7 +2,9 @@
 import React from 'react';
 import { GrobalStore } from '@/store/grobalStore';
 import { useTranslation } from 'react-i18next';
+
 import { updateText } from '@/utils/request';
+
 import { CheckCircle, CloudUpload } from '@mui/icons-material';
 
 function SendDocumentDataButton() {
@@ -52,7 +54,9 @@ function SendDocumentDataButton() {
                       flex gap-1 items-center rounded-lg py-2 px-4'
         >
           <CloudUpload style={{fontSize: 20}} className=' dark:text-gray-100' />
-          <span className=' dark:text-gray-300 text-xxs'>{t('document.header.sendDocumentDataButton.saveText')}</span>
+          <span className=' dark:text-gray-300 text-xxs'>
+            {t('document.header.sendDocumentDataButton.saveText')}
+          </span>
         </button>
       )
     }
@@ -62,11 +66,15 @@ function SendDocumentDataButton() {
     <div>
       { document?.isSynced 
       ? 
-       <div className=' bg-none py-2 px-4 flex gap-1 items-center'>
-        <CheckCircle className=' dark:text-gray-100' />
-        <span className=' dark:text-gray-300  text-xxs'>{t('document.header.sendDocumentDataButton.savedText')}</span>
-       </div>
-      : changeSendDataButton() }
+        <div className=' bg-none py-2 px-4 flex gap-1 items-center'>
+          <CheckCircle className=' dark:text-gray-100' />
+          <span className=' dark:text-gray-300  text-xxs'>
+            {t('document.header.sendDocumentDataButton.savedText')}
+          </span>
+        </div>
+      : 
+        changeSendDataButton() 
+      }
     </div>
   )
 }

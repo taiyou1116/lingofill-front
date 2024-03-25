@@ -1,9 +1,13 @@
-import { GrobalStore } from '@/store/grobalStore';
-import { stopAudio } from '@/utils/helper';
-import { StopCircle, VolumeMute, VolumeUp } from '@mui/icons-material'
-import { Tooltip } from '@mui/material'
+
 import React from 'react'
 import { useTranslation } from 'react-i18next';
+import { GrobalStore } from '@/store/grobalStore';
+
+import { stopAudio } from '@/utils/helper';
+
+import { StopCircle, VolumeMute, VolumeUp } from '@mui/icons-material'
+import { Tooltip } from '@mui/material'
+
 
 type Props = {
   isSelectedReading: boolean,

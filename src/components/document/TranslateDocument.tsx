@@ -1,9 +1,11 @@
 
 import React, { useEffect, useState } from "react";
 import { GrobalStore } from "@/store/grobalStore";
+
 import { judgeSpaceLanguage } from "@/utils/helper";
-import { Document } from "@/types/types";
 import RenderText from "./RenderText";
+
+import { Document } from "@/types/types";
 
 type Props = {
   document: Document | null,

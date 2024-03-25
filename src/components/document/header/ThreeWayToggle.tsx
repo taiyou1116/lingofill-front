@@ -1,12 +1,14 @@
+
 "use client"
 
 import React, { useState } from 'react';
 import { GrobalStore } from '@/store/grobalStore';
 import { useTranslation } from 'react-i18next';
 import { useThemeMode, useWindowSize } from '@/hooks/hooks';
-import { SelectedMode } from '@/types/types';
+
 import { TextSnippet, Translate } from '@mui/icons-material';
 import { ThemeProvider, ToggleButton, ToggleButtonGroup } from '@mui/material';
+import { SelectedMode } from '@/types/types';
 
 function ThreeWayToggle() {
   const { setSelectedMode } = GrobalStore();

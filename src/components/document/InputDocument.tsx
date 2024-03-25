@@ -2,7 +2,9 @@
 import React, { useEffect, useState } from 'react'
 import { GrobalStore } from '@/store/grobalStore';
 import { useTranslation } from 'react-i18next';
+
 import debounce from "lodash/debounce";
+
 import { Document } from '@/types/types';
 
 function InputDocument() {

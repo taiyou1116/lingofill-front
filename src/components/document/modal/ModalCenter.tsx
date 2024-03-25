@@ -1,8 +1,11 @@
+
 "use client"
 
 import React, { ReactNode } from 'react'
 import { GrobalStore } from '@/store/grobalStore';
+
 import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
+
 import "../../../app/globals.css";
 
 type ModalCenterProps = {
@@ -14,7 +17,10 @@ function ModalCenterComponent(props: ModalCenterProps) {
   const { showCenterModal, flipCenterModal } = GrobalStore();
 
   return (
-    <div className={` fixed z-10 inset-0 flex items-center justify-center ${showCenterModal ? '' : ' pointer-events-none'}`}>
+    <div 
+      className={` fixed z-10 inset-0 flex items-center justify-center 
+                   ${showCenterModal ? '' : ' pointer-events-none'}`}
+    >
       {/* 背景 */}
       <div 
         onClick={() => handleCloseModal(flipCenterModal)} 

@@ -1,11 +1,15 @@
-import { m_plus_rounded_1c } from "@/store/fontStore";
-import { Document } from "@/types/types";
-import { getVoiceForLanguage, judgeSpaceLanguage, processAndSpeak } from "@/utils/helper";
-import { Tooltip } from "@mui/material";
+
 import React, { useRef, useState } from "react";
-import TranslateModal from "./modal/TranslateModal";
+import { m_plus_rounded_1c } from "@/store/fontStore";
 import { GrobalStore } from "@/store/grobalStore";
+
+import { getVoiceForLanguage, judgeSpaceLanguage, processAndSpeak } from "@/utils/helper";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+
+import TranslateModal from "./modal/TranslateModal";
+
+import { Tooltip } from "@mui/material";
+import { Document } from "@/types/types";
 
 type RenderTextProps = {
   sentences: string[];

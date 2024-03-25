@@ -3,6 +3,7 @@ import React from 'react';
 import { GrobalStore } from '@/store/grobalStore';
 import { useTranslation } from 'react-i18next';
 import { useThemeMode } from '@/hooks/hooks';
+
 import { TrendingFlat } from '@mui/icons-material'
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, ThemeProvider } from '@mui/material'
 
@@ -54,7 +55,9 @@ function SelectLanguage() {
     <div className=" flex items-center">
       <ThemeProvider theme={theme}>
         <FormControl sx={{ m: 1, minWidth: 50 }} size="small">
-          <InputLabel id="demo-simple-select-label" className=' text-xs'>{t('document.header.selectLanguage.language')}</InputLabel>
+          <InputLabel id="demo-simple-select-label" className=' text-xs'>
+            {t('document.header.selectLanguage.language')}
+          </InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
@@ -78,7 +81,9 @@ function SelectLanguage() {
         </FormControl>
         <TrendingFlat className=" dark:text-gray-300" fontSize='small' />
         <FormControl sx={{ m: 1, minWidth: 50 }} size="small">
-          <InputLabel id="demo-simple-select-label" className=' text-xs'>{t('document.header.selectLanguage.translation')}</InputLabel>
+          <InputLabel id="demo-simple-select-label" className=' text-xs'>
+            {t('document.header.selectLanguage.translation')}
+          </InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
