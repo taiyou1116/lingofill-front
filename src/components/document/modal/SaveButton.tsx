@@ -10,7 +10,6 @@ import { leaveTranslation } from '@/utils/helper';
 
 type Props = {
   selectedWordsIndexes: number[],
-  userInputTranslation: string,
   userInputMemo: string,
   document: Document | null,
   setDocument: (document: Document | null) => void,
@@ -20,16 +19,16 @@ type Props = {
 }
 
 function SaveButton(props: Props) {
-  const { selectedWordsIndexes, userInputTranslation, userInputMemo, document, setDocument, documents, setDocuments, selectedWords } = props;
+  const { selectedWordsIndexes, userInputMemo, document, setDocument, documents, setDocuments, selectedWords } = props;
   const { flipCenterModal } = GrobalStore();
   const { t } = useTranslation();
 
   const handleSaveButton = () => {
-    handleTranslation(selectedWordsIndexes, userInputTranslation, userInputMemo);
+    handleTranslation(selectedWordsIndexes, userInputMemo);
     handleCloseModal(flipCenterModal);
   }
 
-  const handleTranslation = (selectedWordsIndexes: number[], userInput: string, userInputMemo: string) => {
+  const handleTranslation = (selectedWordsIndexes: number[], userInputMemo: string) => {
     if (!document) return;
 
     const newDocument = leaveTranslation(document, selectedWordsIndexes);
@@ -39,22 +38,20 @@ function SaveButton(props: Props) {
       selectedWordsIndexes.some(index => translation.indexes.includes(index))
     );
 
-    if (userInput === '') {
-      userInput = selectedWords;
-    }
+    // if (userInput === '') {
+    //   userInput = selectedWords;
+    // }
 
     if (existingTranslationIndex !== -1) {
       // 既存の翻訳を更新
       newDocument.translations[existingTranslationIndex] = {
         ...newDocument.translations[existingTranslationIndex],
-        translatedText: userInput,
         memo: userInputMemo,
       };
     } else {
       // 新しい翻訳を追加
       newDocument.translations.push({
         indexes: selectedWordsIndexes,
-        translatedText: userInput,
         memo: userInputMemo,
       });
     }

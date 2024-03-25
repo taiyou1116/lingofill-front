@@ -46,7 +46,7 @@ function TranslateDocument(props: Props) {
       setSelectedWords(translation.indexes.map((i) => words[i]).join(' '));
     } else {
       setSelectedWordsIndexes([index]);
-      setSelectedWords( words[index]);
+      setSelectedWords(words[index]);
     }
     flipCenterModal();
   };
@@ -126,6 +126,7 @@ function TranslateDocument(props: Props) {
       setSelectedWordsIndexes={setSelectedWordsIndexes}
       selectedWords={selectedWords}
       isSelectedReading={isSelectedReading}
+      words={words}
     />
   );
 }

@@ -24,7 +24,6 @@ function TranslateModal(props: TranslateModalProps) {
   const { document, setDocument, documents, setDocuments, translationExpression, flipCenterModal } = GrobalStore();
   const { t } = useTranslation();
   
-  const [userInputTranslation, setUserInputTranslation] = useState('');
   const [userInputMemo, setUserInputMemo] = useState('');
   const [translatedWords, setTranslatedWords] = useState('');
 
@@ -44,10 +43,8 @@ function TranslateModal(props: TranslateModalProps) {
     const translation = document.translations.find(translation => translation.indexes.includes(selectedWordsIndexes[0]));
 
     if (translation === undefined) {
-      setUserInputTranslation('');
       setUserInputMemo('');
     } else {
-      setUserInputTranslation(translation.translatedText);
       setUserInputMemo(translation.memo);
     }
     translateTextAsync();
@@ -83,7 +80,6 @@ function TranslateModal(props: TranslateModalProps) {
       <div className=' flex gap-3 w-full items-center justify-center'>
         <SaveButton 
           selectedWordsIndexes={selectedWordsIndexes}
-          userInputTranslation={userInputTranslation}
           userInputMemo={userInputMemo}
           document={document}
           setDocument={setDocument}

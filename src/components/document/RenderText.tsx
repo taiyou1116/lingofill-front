@@ -19,11 +19,12 @@ type RenderTextProps = {
   selectedWords: string
   isSelectedReading: boolean,
   setSelectedWordsIndexes: (selectedWordsIndexes: number[]) => void,
+  words: string[]
 }
 
 const RenderText = (props: RenderTextProps) => {
   const { sentences, readingNumber, doc, selectedWordsIndexes, selectedWords, isSelectedReading,
-          handleClick, handleMouseMove, handleMouseDown, handleMouseUp, setSelectedWordsIndexes } = props;
+          handleClick, handleMouseMove, handleMouseDown, handleMouseUp, setSelectedWordsIndexes, words } = props;
   const { voiceType, setReadingNumber, setIsPlaying, voiceRate } = GrobalStore();
 
   let globalIndex = 0;
@@ -86,30 +87,28 @@ const RenderText = (props: RenderTextProps) => {
     }
   };
 
+  // 場所移すかも
+  const ListenText = async (sentenceIndex: number) => {
+    if (!isSelectedReading) return;
+    const newSentences = sentences.slice(sentenceIndex);
+    const voice = getVoiceForLanguage(doc.language, voiceType);
+
+    await processAndSpeak(newSentences, voice, () => {
+      setReadingNumber(sentenceIndex);
+      setIsPlaying(true);
+    }, () => setIsPlaying(false), () => {
+      setReadingNumber(prevNumber => prevNumber + 1);
+    }, voiceType, voiceRate);
+  }
+
   const renderSentence = (sentence: string, sentenceIndex: number) => {
     if (sentence === '\n') {
       globalIndex++;
       return <br key={`br-${sentenceIndex}`} />;
     }
-    
-    const ListenText = async (sentenceIndex: number) => {
-      if (!isSelectedReading) return;
-      const newSentences = sentences.slice(sentenceIndex);
-      const voice = getVoiceForLanguage(doc.language, voiceType);
-
-      await processAndSpeak(newSentences, voice, () => {
-        setReadingNumber(sentenceIndex);
-        setIsPlaying(true);
-      }, () => setIsPlaying(false), () => {
-        plusOne();
-      }, voiceType, voiceRate);
-    }
-    const plusOne = () => {
-      setReadingNumber(prevNumber => prevNumber + 1);
-    };
 
     // 1文の中のwords
-    const words = doc.language && judgeSpaceLanguage(doc.language) ? sentence.split(' ') : sentence.split('');
+    const wordsOfSentence = doc.language && judgeSpaceLanguage(doc.language) ? sentence.split(' ') : sentence.split('');
 
     return (
       <React.Fragment key={sentenceIndex}>
@@ -119,7 +118,7 @@ const RenderText = (props: RenderTextProps) => {
           onMouseUp={handleMouseUp}
           onClick={() => ListenText(sentenceIndex)}
         >
-          {words.map((word, wordIndex) => {
+          {wordsOfSentence.map((word, wordIndex) => {
             const captureIndex = globalIndex;
             const translation = doc.translations.find(t => t.indexes.includes(captureIndex));
 
@@ -139,7 +138,7 @@ const RenderText = (props: RenderTextProps) => {
                     title={<div className={`text-sm ${m_plus_rounded_1c.className}`}
                     style={{ whiteSpace: 'pre-wrap' }}>{translation.memo}</div>}
                   >
-                    <span>{translation.translatedText}</span>
+                    <span>{translation.indexes.map((i) => words[i] + ' ')}</span>
                   </Tooltip>
                 </span>
               )

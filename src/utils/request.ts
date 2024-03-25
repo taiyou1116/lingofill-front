@@ -107,7 +107,6 @@ export async function getText(partition: string, sortKey: string) {
             indexes: t.M.indexes && Array.isArray(t.M.indexes.L)
               ? t.M.indexes.L.map((index: any) => parseInt(index.N, 10))
               : [],
-            translatedText: t.M.translatedText ? t.M.translatedText.S : "",
             memo: t.M.memo ? t.M.memo.S : "",
           }))
         : [],

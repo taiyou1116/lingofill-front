@@ -16,7 +16,6 @@ export type Document = {
 // 元の単語のindexと翻訳
 export type TranslationObj = {
     indexes: number[],
-    translatedText: string,
     memo: string,
 };
 
