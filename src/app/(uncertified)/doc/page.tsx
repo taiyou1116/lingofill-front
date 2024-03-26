@@ -21,7 +21,7 @@ Amplify.configure(awsExports);
 function Doc() {
   const [login, setLogin] = useState(false);
   const transferHomeRoute = () => {
-    window.open('https://main.d5yypxcoba5g4.amplifyapp.com/', '_blank');
+    window.open('https://www.lingo-fill.com/', '_blank');
   }
   const deviceSize = useWindowSize();
 

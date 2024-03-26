@@ -1,5 +1,5 @@
 
-import { AccountCircle, Help, Logout, Settings } from '@mui/icons-material'
+import { AccountCircle, Launch, Logout, Settings } from '@mui/icons-material'
 import { Divider, Menu, MenuItem, Tooltip } from '@mui/material'
 import Link from 'next/link'
 import React, { useState } from 'react'
@@ -13,7 +13,7 @@ function AcountMenu() {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const openNewDoc = () => {
-    window.open('https://main.d5yypxcoba5g4.amplifyapp.com/doc', '_blank');
+    window.open('https://www.lingo-fill.com/doc', '_blank');
   }
 
   return (
@@ -43,7 +43,7 @@ function AcountMenu() {
           </MenuItem>
         </Link>
         <MenuItem onClick={openNewDoc} className=" flex items-center gap-1">
-          <Help style={{fontSize: 20}} /> {t('header.howToUse')}
+          <Launch style={{fontSize: 20}} /> {t('header.howToUse')}
         </MenuItem>
         <Divider variant="middle" className=" py-1"/>
         <MenuItem className=" flex items-center gap-1 text-red-500">
