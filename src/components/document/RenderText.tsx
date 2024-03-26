@@ -7,7 +7,7 @@ import { judgeSpaceLanguage } from "@/utils/helper";
 import TranslateModal from "./modal/TranslateModal";
 
 import { Tooltip } from "@mui/material";
-import { Document } from "@/types/types";
+import { Document, TranslationObj } from "@/types/types";
 
 type RenderTextProps = {
   sentences: string[];
@@ -26,12 +26,13 @@ type RenderTextProps = {
   setSelectedWordsIndexes: (selectedWordsIndexes: number[]) => void,
   words: string[],
   listenText: (sentenceIndex: number) => void,
+  showMemoText: (translation: TranslationObj) => string,
 }
 
 const RenderText = (props: RenderTextProps) => {
-  const { sentences, readingNumber, doc, selectedWordsIndexes, selectedWords, words,
+  const { sentences, readingNumber, doc, selectedWordsIndexes, selectedWords,
           handleClick, handleMouseMove, handleMouseDown, handleMouseUp, 
-          handleTouchStart, handleTouchMove, handleTouchEnd, listenText,
+          handleTouchStart, handleTouchMove, handleTouchEnd, listenText, showMemoText,
   } = props;
 
   let globalIndex = 0;
@@ -48,7 +49,7 @@ const RenderText = (props: RenderTextProps) => {
     return (
       <React.Fragment key={sentenceIndex}>
         <span
-          className={`break-all ${sentenceIndex === readingNumber ? ' text-yellow-300' : ''}`}
+          className={`break-all ${sentenceIndex === readingNumber ? ' text-yellow-600 dark:text-yellow-300' : ''}`}
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
           onClick={() => listenText(sentenceIndex)}
@@ -75,7 +76,7 @@ const RenderText = (props: RenderTextProps) => {
                     title={<div className={`text-sm ${m_plus_rounded_1c.className}`}
                     style={{ whiteSpace: 'pre-wrap' }}>{translation.memo}</div>}
                   >
-                    <span>{translation.indexes.map((i) => words[i] + ' ')}</span>
+                    <span>{showMemoText(translation)}</span>
                   </Tooltip>
                 </span>
               )

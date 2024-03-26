@@ -52,7 +52,7 @@ function Setting() {
     </button>
     <div className=' flex flex-col justify-start items-center w-full h-full dark:bg-gray-800'>
       <div className=' text-lg dark:text-white'>設定</div>
-      <div className=' bg-gray-200 rounded-lg py-5 px-10 flex flex-col gap-10 w-11/12 md:w-3/6 dark:bg-gray-600'>
+      <div className=' bg-gray-200 border-2 border-gray-300 rounded-lg py-5 px-10 flex flex-col gap-10 w-11/12 md:w-3/6 dark:bg-gray-600'>
 
         <Divider />
         <div className=' dark:text-gray-300'>一般</div>

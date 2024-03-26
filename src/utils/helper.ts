@@ -109,12 +109,21 @@ export async function stopAudio() {
   }
 }
 
-/**スペースのある言語でtrueを返す */
+/**スペースのある言語でtrueを返す @param ln 言語 */
 export function judgeSpaceLanguage(ln: string | undefined) {
   if (ln === 'ja' || ln === 'zh') {
     return false;
   } else {
     return true;
+  }
+}
+
+/**string[]を一つのテキストにして返す @param ln 言語 @param nums インデックス配列 @params 全体の単語 */
+export function returnTextFromLn(ln: string | undefined, nums: number[], words: string[]) {
+  if (ln === 'ja' || ln === 'zh') {
+    return nums.map((i) => words[i]).join('');
+  } else {
+    return nums.map((i) => words[i]).join(' ');
   }
 }
 

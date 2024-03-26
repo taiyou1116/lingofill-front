@@ -2,10 +2,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { GrobalStore } from "@/store/grobalStore";
 
-import { getVoiceForLanguage, judgeSpaceLanguage, processAndSpeak } from "@/utils/helper";
+import { getVoiceForLanguage, judgeSpaceLanguage, processAndSpeak, returnTextFromLn } from "@/utils/helper";
 import RenderText from "./RenderText";
 
-import { Document } from "@/types/types";
+import { Document, TranslationObj } from "@/types/types";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 type Props = {
@@ -25,6 +25,9 @@ function TranslateDocument(props: Props) {
   const [selectedWords, setSelectedWords] = useState('hello');
   const [startDragIndex, setStartDragIndex] = useState<number | null>(null);
   const [ oldIndex, setOldIndex ] = useState<number | null>(null);
+  const [startNumber, setStartNumber] = useState<number>(-1);
+  const touchIndexRef = useRef<number | null>(null);
+  const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null);
   
   // 単語用 -> sentencesからさらに分割
   useEffect(() => {
@@ -46,7 +49,7 @@ function TranslateDocument(props: Props) {
     const translation = localDocument!.translations.find(translation => translation.indexes.includes(index));
     if (translation) {
       setSelectedWordsIndexes(translation.indexes);
-      setSelectedWords(translation.indexes.map((i) => words[i]).join(' '));
+      setSelectedWords(returnTextFromLn(localDocument?.language, translation.indexes, words));
     } else {
       setSelectedWordsIndexes([index]);
       setSelectedWords(words[index]);
@@ -108,17 +111,9 @@ function TranslateDocument(props: Props) {
     setStartDragIndex(null);
     if (selectedWordsIndexes.length > 0) {
       flipCenterModal();
-      if (localDocument?.language === 'ja' || localDocument?.language === 'zh') {
-        setSelectedWords(selectedWordsIndexes.map((i) => words[i]).join(''));
-      } else {
-        setSelectedWords(selectedWordsIndexes.map((i) => words[i]).join(' '));
-      }
+      setSelectedWords(returnTextFromLn(localDocument?.language, selectedWordsIndexes, words));
     }
   };
-
-  const [startNumber, setStartNumber] = useState<number>(-1);
-  const touchIndexRef = useRef<number | null>(null);
-  const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null);
 
   const handleTouchStart = (index: number) => {
     setSelectedWordsIndexes([]);
@@ -174,7 +169,6 @@ function TranslateDocument(props: Props) {
     }
   };
 
-  // 場所移すかも
   const listenText = async (sentenceIndex: number) => {
     if (!isSelectedReading) return;
     const newSentences = sentences.slice(sentenceIndex);
@@ -186,6 +180,21 @@ function TranslateDocument(props: Props) {
     }, () => setIsPlaying(false), () => {
       setReadingNumber(prevNumber => prevNumber + 1);
     }, voiceType, voiceRate);
+  }
+
+  const showMemoText = (translation: TranslationObj) => {
+    const text = translation.indexes.map((i, index) => {
+      
+      if (!judgeSpaceLanguage(localDocument?.language)) {
+        return words[i];
+      }
+      
+      if (translation.indexes.length === index + 1) {
+        return words[i];
+      }
+      return words[i] + ' ';
+    });
+    return text.join('');
   }
 
   return (
@@ -206,6 +215,7 @@ function TranslateDocument(props: Props) {
       isSelectedReading={isSelectedReading}
       words={words}
       listenText={listenText}
+      showMemoText={showMemoText}
     />
   );
 }
