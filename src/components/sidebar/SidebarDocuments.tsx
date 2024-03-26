@@ -2,7 +2,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import { GrobalStore } from '@/store/grobalStore';
-import { handleStopPropagation } from '@/utils/modal';
 import { getText } from '@/utils/request';
 import { createDate } from '@/utils/helper';
 import CreateNewDocument from './sidebarDocument/CreateNewDocument';
@@ -145,7 +144,7 @@ function SidebarDocuments(props: Props) {
                     </div>
                   </div>
                   
-                  <div onClick={handleStopPropagation} className=' flex gap-1 pl-1 items-center'>
+                  <div onClick={(e) => e.stopPropagation()} className=' flex gap-1 pl-1 items-center'>
                     { localDoc.isSynced ? '' : 
                       <UploadDocumentButton 
                         username={username}

@@ -5,7 +5,6 @@ import { GrobalStore } from '@/store/grobalStore';
 import SidebarDocuments from './SidebarDocuments';
 import { getCurrentUser } from 'aws-amplify/auth';
 import { getTitles } from '@/utils/request';
-import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
 import { Skeleton, Typography } from '@mui/material';
 import CreateNewDocumentButton from './siderbarParent/CreateNewDocumentButton';
 
@@ -38,14 +37,15 @@ function SidebarComponent() {
         className={`fixed z-20 inset-0 
                   bg-black bg-opacity-50 transition-opacity duration-300 
                   ${showSidebar ? "opacity-100" : "opacity-0 pointer-events-none"}`}
-        onClick={() => handleCloseModal(flipShowSidebar)}>
+        onClick={() => flipShowSidebar()}
+      >
       </div>
       <div 
         className={`fixed z-20 w-2/3 md:w-1/3 lg:w-1/5 top-0 left-0 h-full 
                   bg-white dark:bg-gray-800 
                     transition-transform duration-300 transform 
                   ${showSidebar ? "translate-x-0" : "-translate-x-full"}`}
-        onClick={handleStopPropagation}
+        onClick={(e) => e.stopPropagation()}
       >
         <div className="flex flex-col gap-3">
           <CreateNewDocumentButton 

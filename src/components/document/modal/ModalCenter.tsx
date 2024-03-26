@@ -4,8 +4,6 @@
 import React, { ReactNode } from 'react'
 import { GrobalStore } from '@/store/grobalStore';
 
-import { handleCloseModal, handleStopPropagation } from '@/utils/modal';
-
 import "../../../app/globals.css";
 
 type ModalCenterProps = {
@@ -23,7 +21,7 @@ function ModalCenterComponent(props: ModalCenterProps) {
     >
       {/* 背景 */}
       <div 
-        onClick={() => handleCloseModal(flipCenterModal)} 
+        onClick={() => flipCenterModal()} 
         className={` fixed h-screen w-screen shadow-2lg transition-opacity duration-300 
                    bg-black/50 
                    ${ showCenterModal ? 'opacity-100' : 'opacity-0 pointer-events-none' }`}
@@ -31,7 +29,7 @@ function ModalCenterComponent(props: ModalCenterProps) {
       </div>
       {/* ModalWindow */}
       <div 
-        onClick={handleStopPropagation} 
+        onClick={(e) => e.stopPropagation()} 
         className={` fixed h-5/6 w-full md:h-5/6 md:w-5/6 rounded-xl dark:shadow-black shadow-2xl p-5 
                      flex flex-col justify-start items-center gap-10 duration-300
                    bg-white 

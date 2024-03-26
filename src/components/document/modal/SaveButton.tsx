@@ -2,7 +2,6 @@
 import React from 'react'
 import { GrobalStore } from '@/store/grobalStore';
 import { useTranslation } from 'react-i18next';
-import { handleCloseModal } from '@/utils/modal';
 import { Document } from '@/types/types';
 import { Save } from '@mui/icons-material'
 import { leaveTranslation } from '@/utils/helper';
@@ -24,7 +23,7 @@ function SaveButton(props: Props) {
 
   const handleSaveButton = () => {
     handleTranslation(selectedWordsIndexes, userInputMemo);
-    handleCloseModal(flipCenterModal);
+    flipCenterModal();
   }
 
   const handleTranslation = (selectedWordsIndexes: number[], userInputMemo: string) => {

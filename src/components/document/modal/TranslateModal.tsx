@@ -5,7 +5,6 @@ import { GrobalStore } from '@/store/grobalStore';
 import { useTranslation } from 'react-i18next';
 
 import { splitTextToSegments } from '@/utils/helper';
-import { handleCloseModal } from '@/utils/modal';
 import { getTranslation } from '@/utils/request';
 import { Formality } from '@aws-sdk/client-translate';
 
@@ -94,7 +93,7 @@ function TranslateModal(props: TranslateModalProps) {
         />
         <button 
           className=' md:text-base text-sm' 
-          onClick={() => handleCloseModal(flipCenterModal)} 
+          onClick={() => flipCenterModal()} 
         >
           {t('document.modal.closeModal')}
         </button>

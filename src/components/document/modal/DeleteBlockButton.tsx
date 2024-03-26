@@ -3,7 +3,6 @@ import React from 'react'
 import { useTranslation } from 'react-i18next';
 import { GrobalStore } from '@/store/grobalStore';
 
-import { handleCloseModal } from '@/utils/modal';
 import { leaveTranslation } from '@/utils/helper';
 
 import { AutoFixHigh } from '@mui/icons-material';
@@ -32,7 +31,7 @@ function DeleteBlockButton(props: Props) {
     setDocuments(updatedDocuments);
     setDocument(updatedDocument);
 
-    handleCloseModal(flipCenterModal);
+    flipCenterModal();
   }
 
   return (
