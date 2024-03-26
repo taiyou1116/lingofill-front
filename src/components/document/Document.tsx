@@ -52,7 +52,7 @@ function DocumentComponent() {
       case 'edit':
         return (
           <TranslateDocument
-            document={document}
+            localDocument={document}
             sentences={sentences!}
             isSelectedReading={isSelectedReading}
           />
@@ -129,5 +129,5 @@ type RenderEmptyStateProps = {
   message: string,
 }
 const RenderEmptyState: React.FC<RenderEmptyStateProps> = ({ message }) => (
-  <div className="dark:text-gray-300">{message}</div>
+  <div className=" mt-16 dark:text-gray-300">{message}</div>
 );

@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import debounce from "lodash/debounce";
 
 import { Document } from '@/types/types';
+import { WarningOutlined } from '@mui/icons-material';
 
 function InputDocument() {
   const { document, setDocument, documents, setDocuments } = GrobalStore();
@@ -51,8 +52,14 @@ function InputDocument() {
 
   return (
     <div className=' pt-32'>
+      { document!.translations[0] === undefined 
+      ? ''
+      : <div className=' flex items-center gap-1 pb-1 text-xs md:text-sm dark:text-red-400'>
+          <WarningOutlined style={{ fontSize: 20 }}/>テキストを変更するとメモの位置が変更される可能性があります
+        </div>
+      } 
       <textarea
-        maxLength={15000}
+        maxLength={12000}
         className=" resize-none h-screen max-h-[calc(100vh-200px)] w-full p-3 origin-input rounded-md 
                   dark:bg-slate-600 dark:text-slate-300"
         placeholder={t('document.input')}
