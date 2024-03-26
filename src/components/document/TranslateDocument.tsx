@@ -1,23 +1,24 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { GrobalStore } from "@/store/grobalStore";
 
-import { judgeSpaceLanguage } from "@/utils/helper";
+import { getVoiceForLanguage, judgeSpaceLanguage, processAndSpeak } from "@/utils/helper";
 import RenderText from "./RenderText";
 
 import { Document } from "@/types/types";
+import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 type Props = {
-  document: Document | null,
+  localDocument: Document | null,
   sentences: string[],
   isSelectedReading: boolean,
 }
 
 function TranslateDocument(props: Props) {
-  const { document, sentences, isSelectedReading } = props;
+  const { localDocument, sentences, isSelectedReading } = props;
   const { showCenterModal, flipCenterModal, 
           selectedWordsIndexes, setSelectedWordsIndexes, 
-          readingNumber } = GrobalStore();
+          readingNumber, voiceType, setReadingNumber, setIsPlaying, voiceRate } = GrobalStore();
 
   const [words, setWords] = useState<string[]>([]);
   const [isDragging, setIsDragging] = useState(false);
@@ -27,10 +28,10 @@ function TranslateDocument(props: Props) {
   
   // 単語用 -> sentencesからさらに分割
   useEffect(() => {
-    if (document === null) return;
+    if (localDocument === null) return;
 
     let tempWords: string[];
-    if (judgeSpaceLanguage(document.language)) {
+    if (judgeSpaceLanguage(localDocument.language)) {
       tempWords = sentences.map((s) => s.split(" ")).flat();
     } else {
       tempWords = sentences.map((s) => s.split("")).flat();
@@ -42,7 +43,7 @@ function TranslateDocument(props: Props) {
   const handleClick = (index: number) => {
     if (showCenterModal || isSelectedReading) return;
 
-    const translation = document!.translations.find(translation => translation.indexes.includes(index));
+    const translation = localDocument!.translations.find(translation => translation.indexes.includes(index));
     if (translation) {
       setSelectedWordsIndexes(translation.indexes);
       setSelectedWords(translation.indexes.map((i) => words[i]).join(' '));
@@ -64,7 +65,7 @@ function TranslateDocument(props: Props) {
   
     if (startDragIndex === null) {
       // ドラッグ開始時にtranslation.indexesにindexが含まれているかチェック
-      const startTranslation = document!.translations.find(t => t.indexes.includes(index));
+      const startTranslation = localDocument!.translations.find(t => t.indexes.includes(index));
       if (startTranslation) {
         // 含まれている場合はそのindexes全体を選択
         setSelectedWordsIndexes(startTranslation.indexes);
@@ -83,7 +84,7 @@ function TranslateDocument(props: Props) {
   
       for (let i = minIndex; i <= maxIndex; i++) {
         // translation.indexes[0]のみではなく、indexes全体に含まれるかチェック
-        const translation = document!.translations.find(t => t.indexes.includes(i));
+        const translation = localDocument!.translations.find(t => t.indexes.includes(i));
         if (translation) {
           // 同じindexesを複数回追加しないようにチェック
           translation.indexes.forEach(index => {
@@ -107,7 +108,7 @@ function TranslateDocument(props: Props) {
     setStartDragIndex(null);
     if (selectedWordsIndexes.length > 0) {
       flipCenterModal();
-      if (document?.language === 'ja' || document?.language === 'zh') {
+      if (localDocument?.language === 'ja' || localDocument?.language === 'zh') {
         setSelectedWords(selectedWordsIndexes.map((i) => words[i]).join(''));
       } else {
         setSelectedWords(selectedWordsIndexes.map((i) => words[i]).join(' '));
@@ -115,20 +116,96 @@ function TranslateDocument(props: Props) {
     }
   };
 
+  const [startNumber, setStartNumber] = useState<number>(-1);
+  const touchIndexRef = useRef<number | null>(null);
+  const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null);
+
+  const handleTouchStart = (index: number) => {
+    setSelectedWordsIndexes([]);
+    touchIndexRef.current = index;
+    // 以前のタイマーがあればクリア
+    if (timerId) clearTimeout(timerId);
+  
+    // 0.5秒後に実行されるタイマーを設定
+    const newTimerId = setTimeout(() => {      
+      if (index === touchIndexRef.current) {
+
+        disableBodyScroll(document.body);
+
+        handleMouseDown();
+        setStartNumber(index);
+        setSelectedWordsIndexes([index]);
+      }
+    }, 500);
+    setTimerId(newTimerId);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLSpanElement>) => {
+    // タッチイベントのクライアント座標を取得
+    const touchX = e.touches[0].clientX;
+    const touchY = e.touches[0].clientY;
+  
+    // タッチポイントにある要素を取得
+    const elementUnderTouch = document.elementFromPoint(touchX, touchY) as HTMLSpanElement;
+  
+    // 要素からindexを取得（要素が正しく取得でき、data-index属性を持っている場合）
+    if (elementUnderTouch && elementUnderTouch.hasAttribute('data-index')) {
+      const newIndex = parseInt(elementUnderTouch.getAttribute('data-index')!, 10);
+
+      if (newIndex === startNumber) {
+        touchIndexRef.current = newIndex;
+        handleMouseMove(newIndex);
+      }
+      if (newIndex === touchIndexRef.current) return;
+        touchIndexRef.current = newIndex;
+        handleMouseMove(newIndex);
+      }
+  };
+
+  const handleTouchEnd = () => {
+    touchIndexRef.current = null;
+    handleMouseUp();
+
+    enableBodyScroll(document.body);
+
+    if (timerId) {
+      clearTimeout(timerId);
+      setTimerId(null);
+    }
+  };
+
+  // 場所移すかも
+  const listenText = async (sentenceIndex: number) => {
+    if (!isSelectedReading) return;
+    const newSentences = sentences.slice(sentenceIndex);
+    const voice = getVoiceForLanguage(localDocument!.language, voiceType);
+
+    await processAndSpeak(newSentences, voice, () => {
+      setReadingNumber(sentenceIndex);
+      setIsPlaying(true);
+    }, () => setIsPlaying(false), () => {
+      setReadingNumber(prevNumber => prevNumber + 1);
+    }, voiceType, voiceRate);
+  }
+
   return (
     <RenderText
       sentences={sentences}
       readingNumber={readingNumber}
-      doc={document!}
+      doc={localDocument!}
       handleClick={handleClick}
       handleMouseMove={handleMouseMove}
       handleMouseDown={handleMouseDown}
       handleMouseUp={handleMouseUp}
+      handleTouchStart={handleTouchStart}
+      handleTouchMove={handleTouchMove}
+      handleTouchEnd={handleTouchEnd}
       selectedWordsIndexes={selectedWordsIndexes}
       setSelectedWordsIndexes={setSelectedWordsIndexes}
       selectedWords={selectedWords}
       isSelectedReading={isSelectedReading}
       words={words}
+      listenText={listenText}
     />
   );
 }

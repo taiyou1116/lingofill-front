@@ -1,10 +1,8 @@
 
-import React, { useRef, useState } from "react";
+import React from "react";
 import { m_plus_rounded_1c } from "@/store/fontStore";
-import { GrobalStore } from "@/store/grobalStore";
 
-import { getVoiceForLanguage, judgeSpaceLanguage, processAndSpeak } from "@/utils/helper";
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+import { judgeSpaceLanguage } from "@/utils/helper";
 
 import TranslateModal from "./modal/TranslateModal";
 
@@ -19,91 +17,24 @@ type RenderTextProps = {
   handleMouseMove: (index: number) => void;
   handleMouseDown: () => void;
   handleMouseUp: () => void;
+  handleTouchStart: (index: number) => void,
+  handleTouchMove: (e: React.TouchEvent<HTMLSpanElement>) => void,
+  handleTouchEnd: () => void,
   selectedWordsIndexes: number[];
   selectedWords: string
   isSelectedReading: boolean,
   setSelectedWordsIndexes: (selectedWordsIndexes: number[]) => void,
-  words: string[]
+  words: string[],
+  listenText: (sentenceIndex: number) => void,
 }
 
 const RenderText = (props: RenderTextProps) => {
-  const { sentences, readingNumber, doc, selectedWordsIndexes, selectedWords, isSelectedReading,
-          handleClick, handleMouseMove, handleMouseDown, handleMouseUp, setSelectedWordsIndexes, words } = props;
-  const { voiceType, setReadingNumber, setIsPlaying, voiceRate } = GrobalStore();
+  const { sentences, readingNumber, doc, selectedWordsIndexes, selectedWords, words,
+          handleClick, handleMouseMove, handleMouseDown, handleMouseUp, 
+          handleTouchStart, handleTouchMove, handleTouchEnd, listenText,
+  } = props;
 
   let globalIndex = 0;
-  
-  const [startNumber, setStartNumber] = useState<number>(-1);
-  const touchIndexRef = useRef<number | null>(null);
-  const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null);
-
-  const handleTouchStart = (index: number) => {
-    setSelectedWordsIndexes([]);
-    touchIndexRef.current = index;
-    // 以前のタイマーがあればクリア
-    if (timerId) clearTimeout(timerId);
-  
-    // 0.5秒後に実行されるタイマーを設定
-    const newTimerId = setTimeout(() => {      
-      if (index === touchIndexRef.current) {
-
-        disableBodyScroll(document.body);
-
-        handleMouseDown();
-        setStartNumber(index);
-        setSelectedWordsIndexes([index]);
-      }
-    }, 500);
-    setTimerId(newTimerId);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent<HTMLSpanElement>) => {
-    // タッチイベントのクライアント座標を取得
-    const touchX = e.touches[0].clientX;
-    const touchY = e.touches[0].clientY;
-  
-    // タッチポイントにある要素を取得
-    const elementUnderTouch = document.elementFromPoint(touchX, touchY) as HTMLSpanElement;
-  
-    // 要素からindexを取得（要素が正しく取得でき、data-index属性を持っている場合）
-    if (elementUnderTouch && elementUnderTouch.hasAttribute('data-index')) {
-      const newIndex = parseInt(elementUnderTouch.getAttribute('data-index')!, 10);
-
-      if (newIndex === startNumber) {
-        touchIndexRef.current = newIndex;
-        handleMouseMove(newIndex);
-      }
-      if (newIndex === touchIndexRef.current) return;
-        touchIndexRef.current = newIndex;
-        handleMouseMove(newIndex);
-      }
-  };
-
-  const handleTouchEnd = () => {
-    touchIndexRef.current = null;
-    handleMouseUp();
-
-    enableBodyScroll(document.body);
-
-    if (timerId) {
-      clearTimeout(timerId);
-      setTimerId(null);
-    }
-  };
-
-  // 場所移すかも
-  const ListenText = async (sentenceIndex: number) => {
-    if (!isSelectedReading) return;
-    const newSentences = sentences.slice(sentenceIndex);
-    const voice = getVoiceForLanguage(doc.language, voiceType);
-
-    await processAndSpeak(newSentences, voice, () => {
-      setReadingNumber(sentenceIndex);
-      setIsPlaying(true);
-    }, () => setIsPlaying(false), () => {
-      setReadingNumber(prevNumber => prevNumber + 1);
-    }, voiceType, voiceRate);
-  }
 
   const renderSentence = (sentence: string, sentenceIndex: number) => {
     if (sentence === '\n') {
@@ -120,9 +51,9 @@ const RenderText = (props: RenderTextProps) => {
           className={`break-all ${sentenceIndex === readingNumber ? ' text-yellow-300' : ''}`}
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
-          onClick={() => ListenText(sentenceIndex)}
+          onClick={() => listenText(sentenceIndex)}
         >
-          {wordsOfSentence.map((word, wordIndex) => {
+          {wordsOfSentence.map((word) => {
             const captureIndex = globalIndex;
             const translation = doc.translations.find(t => t.indexes.includes(captureIndex));
 
@@ -135,7 +66,9 @@ const RenderText = (props: RenderTextProps) => {
                   onMouseMove={() => handleMouseMove(captureIndex)}
                   onTouchMove={() => handleMouseMove(captureIndex)}
                   className={`select-none px-1 mx-0.5 cursor-pointer rounded-md
-                    ${selectedWordsIndexes.includes(captureIndex) ? "bg-blue-300 dark:bg-blue-500" : "bg-slate-200 dark:bg-slate-800/50"}
+                    ${selectedWordsIndexes.includes(captureIndex) 
+                      ? "bg-blue-300 dark:bg-blue-500" 
+                      : "bg-slate-200 dark:bg-slate-800/50"}
                   `}
                 >
                   <Tooltip
@@ -154,7 +87,9 @@ const RenderText = (props: RenderTextProps) => {
                   key={captureIndex}
                   className={`select-none cursor-pointer
                               ${doc.language !== 'ja' && doc.language !== 'zh' ? 'p-0.5' : ''} 
-                              ${selectedWordsIndexes.includes(captureIndex) ? "bg-blue-300 dark:bg-blue-500" : "bg-transparent"}`}
+                              ${selectedWordsIndexes.includes(captureIndex) 
+                                ? "bg-blue-300 dark:bg-blue-500" 
+                                : "bg-transparent"}`}
                   onClick={() => handleClick(captureIndex)}
                   onMouseMove={() => handleMouseMove(captureIndex)}
                   onTouchStart={() => handleTouchStart(captureIndex)}
@@ -175,7 +110,10 @@ const RenderText = (props: RenderTextProps) => {
 
   return (
     <div className=" pt-28">
-      <div className={`overflow-y-auto overflow-x-hidden max-h-[calc(100vh-180px)] p-3 rounded-md bg-white dark:bg-slate-600 dark:text-slate-300`}>
+      <div 
+        className={`overflow-y-auto overflow-x-hidden max-h-[calc(100vh-180px)] p-3 rounded-md 
+                  bg-white dark:bg-slate-600 dark:text-slate-300`}
+      >
         {sentences.map(renderSentence)}
         <TranslateModal selectedWordsIndexes={selectedWordsIndexes} selectedWords={selectedWords} />
       </div>

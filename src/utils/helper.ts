@@ -2,11 +2,13 @@ import { Document, LanguageVoiceMap, VoiceType } from "@/types/types";
 import { Predictions } from "@aws-amplify/predictions";
 import { getAudio } from "./request";
 
+/**タイムスタンプから日付に変更 @param timestamp タイムスタンプ */
 export function createDate(timestamp: string) {
   const date = new Date(Number(timestamp));
   return date.toLocaleString();
 }
 
+/**テキストをtranslateLnに翻訳 @param text テキスト @param ln 言語 @param translateLn 翻訳言語 */
 export async function translateText(text: string, ln: string, translateLn : string) {
   try {
     const result = await Predictions.convert({
@@ -42,6 +44,7 @@ const languageVoiceMap: LanguageVoiceMap = {
   hi: ['Aditi', 'Kajal'],
 };
 
+/**言語からボイスを取得 @param languageCode 言語 @param voiceType 使用エンジン(default: standard) */
 export function getVoiceForLanguage(languageCode: string, voiceType: VoiceType): string {
   if (voiceType === 'neural') {
     return languageVoiceMap[languageCode][1];
@@ -52,16 +55,23 @@ export function getVoiceForLanguage(languageCode: string, voiceType: VoiceType):
 
 let audioStream: HTMLAudioElement;
 if (typeof window !== 'undefined') {
-  // 実行環境がクライアントサイドの場合のみAudioオブジェクトを初期化
   audioStream = new Audio();
 }
 
 export { audioStream };
 
-// translateDocumentでの再生(文章を1つずつ取得)
+/**文章を取得して一文ずつ再生
+ *  @param textSegments 文章 
+ *  @param voice ボイス 
+ *  @callback onPlay 再生前に発火するコールバック関数 
+ *  @callback onEnd すべての再生後に発火するコールバック関数 
+ *  @callback plusOne 終了時に発火するコールバック関数 
+ *  @param engine 使用するエンジン
+ *  @param voiceRate 再生速度
+ * */
 export async function processAndSpeak(
   textSegments: string[], voice: string, onPlay: () => void, onEnd: () => void, plusOne: () => void,
-  voiceType: string, voiceRate: string,
+  engine: string, voiceRate: string,
   ) {
   onPlay();
   if (audioStream !== undefined) {
@@ -73,7 +83,7 @@ export async function processAndSpeak(
   for (const segment of textSegments) {
     try {
       // Amazon Pollyへのリクエストを送信して音声データを取得
-      audioStream = await getAudio(segment, voice, voiceType, voiceRate + '%'); //初期値 standard 100%
+      audioStream = await getAudio(segment, voice, engine, voiceRate + '%'); //初期値 standard 100%
       await playAudioStream(audioStream);
       plusOne();
     } catch (error) {
@@ -125,41 +135,35 @@ export function truncateText(text: string | undefined, maxLength: number) {
   return text;
 }
 
-/**スペースのある言語か判別する @param text テキスト @param ln 言語 */
-export function splitTextToSegment(text: string, ln: string): string[] {
+/**言語によってスプリットを変える @param ln 言語 */
+function filterLanguage(ln: string) {
   if (judgeSpaceLanguage(ln)) {
-    return text.split('\n').reduce((acc, line, index, array) => {
-      // 文の終わり（. ? !）で分割し、空ではない結果だけをフィルターする
-      const sentences = line.match(/[^.!?]*[.!?]*/g)?.map(sentence => sentence.trim()).filter(sentence => sentence.length) || [];
-  
-      // 文ごとに結果に追加
-      acc.push(...sentences);
-  
-      // 最後の行以外には改行を追加
-      if (index < array.length - 1) {
-        acc.push('\n');
-      }
-  
-      return acc;
-    }, [] as string[]);
+    return /[^.!?]*[.!?]*/g;
   } else {
-    return text.split('\n').reduce((acc, line, index, array) => {
-      // 文の終わり（. ? !）で分割し、空ではない結果だけをフィルターする
-      const sentences = line.match(/[^。!?]*[。!?]*/g)?.map(sentence => sentence.trim()).filter(sentence => sentence.length) || [];
-  
-      // 文ごとに結果に追加
-      acc.push(...sentences);
-  
-      // 最後の行以外には改行を追加
-      if (index < array.length - 1) {
-        acc.push('\n');
-      }
-  
-      return acc;
-    }, [] as string[]);
+    return /[^。!?]*[。!?]*/g;
   }
 }
 
+/**スペースのある言語か判別する @param text テキスト @param ln 言語 */
+export function splitTextToSegment(text: string, ln: string): string[] {
+  return text.split('\n').reduce((acc, line, index, array) => {
+
+    // 文の終わり（. ? !）で分割し、空ではない結果だけをフィルターする
+    const sentences = line.match(filterLanguage(ln))?.map(sentence => sentence.trim()).filter(sentence => sentence.length) || [];
+
+    // 文ごとに結果に追加
+    acc.push(...sentences);
+
+    // 最後の行以外には改行を追加
+    if (index < array.length - 1) {
+      acc.push('\n');
+    }
+
+    return acc;
+  }, [] as string[]);
+}
+
+/**選択したTranslationを削除 @param document 現在のドキュメント @param selectedWordsIndexes 選択した単語のインデックス */
 export function leaveTranslation(document: Document, selectedWordsIndexes: number[]) {
   // 選択された単語、熟語以外のtranslation
   const leaveTranslations = document.translations.filter(
