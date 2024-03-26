@@ -12,6 +12,10 @@ function AcountMenu() {
   
   const [anchorEl, setAnchorEl] = useState(null);
 
+  const openNewDoc = () => {
+    window.open('https://main.d5yypxcoba5g4.amplifyapp.com/doc', '_blank');
+  }
+
   return (
     <>
       <div onClick={(event: any) => setAnchorEl(event.currentTarget)} className=" cursor-pointer">
@@ -38,11 +42,9 @@ function AcountMenu() {
             <Settings style={{fontSize: 20}} /> {t('header.setting')}
           </MenuItem>
         </Link>
-        <Link href='/doc'>
-          <MenuItem className=" flex items-center gap-1">
-            <Help style={{fontSize: 20}} /> {t('header.howToUse')}
-          </MenuItem>
-        </Link>
+        <MenuItem onClick={openNewDoc} className=" flex items-center gap-1">
+          <Help style={{fontSize: 20}} /> {t('header.howToUse')}
+        </MenuItem>
         <Divider variant="middle" className=" py-1"/>
         <MenuItem className=" flex items-center gap-1 text-red-500">
           <Logout style={{fontSize: 20}} /> <Acount />

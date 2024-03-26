@@ -5,10 +5,12 @@ import { GrobalStore } from '@/store/grobalStore';
 import { VoiceRate } from '@/types/types';
 import { Divider, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Switch, ThemeProvider } from '@mui/material'
 import { changeLanguage } from 'i18next';
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 function Setting() {
   const theme = useThemeMode();
+  const route = useRouter();
 
   const { language, setLanguage, 
           voiceType, setVoiceType, 
@@ -43,14 +45,18 @@ function Setting() {
   
   return (
     <ThemeProvider theme={theme}>
-    <div className=' flex flex-col justify-start items-center py-10 w-full h-full bg-gray-300 dark:bg-gray-800'>
+    <button 
+      onClick={() => route.push('/home')} 
+      className='dark:bg-gray-900 text-5xl dark:text-gray-100 rounded-3xl ml-5 mt-5 p-2'>
+        ←
+    </button>
+    <div className=' flex flex-col justify-start items-center w-full h-full dark:bg-gray-800'>
       <div className=' text-lg dark:text-white'>設定</div>
-      <div className=' bg-gray-200 rounded-lg py-5 px-10 flex flex-col gap-10 w-3/6 dark:bg-gray-600'>
+      <div className=' bg-gray-200 rounded-lg py-5 px-10 flex flex-col gap-10 w-11/12 md:w-3/6 dark:bg-gray-600'>
 
         <Divider />
         <div className=' dark:text-gray-300'>一般</div>
           <div className=' flex flex-col gap-3'>
-            <div className=' flex items-center justify-between dark:text-gray-300'>ダークモード <Switch /></div>
             <div className=' flex items-center justify-between dark:text-gray-300'>
               言語選択
                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
@@ -73,7 +79,7 @@ function Setting() {
           </div>
 
           <Divider />
-          <div className=' dark:text-yellow-300'>Lingo Fill Plus</div>
+          <div className=' dark:text-gray-300'>詳細な設定</div>
           <div className=' flex flex-col gap-3'>
             <div className=' flex items-center justify-between dark:text-gray-300'>自然な読み上げ 
               <Switch 
