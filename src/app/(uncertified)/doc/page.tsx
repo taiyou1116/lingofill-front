@@ -247,8 +247,8 @@ function Doc() {
       ?
         <Authenticator socialProviders={['google']} >
           <div className=" w-screen h-screen text-gray-300 flex flex-col gap-5 items-center justify-center">
-            <button onClick={transferHomeRoute} className=" bg-lime-600 py-4 px-8"><Launch /> 学習ページへ</button>
-            <button onClick={() => setLogin(false)}>ドキュメントへ</button>
+            <button onClick={transferHomeRoute} className=" bg-lime-600 py-4 px-8"><Launch /> {t('goLearn')}</button>
+            <button onClick={() => setLogin(false)}>{t('backDocument')}</button>
           </div>
         </Authenticator>
       : 

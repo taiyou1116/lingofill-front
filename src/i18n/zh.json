@@ -156,6 +156,23 @@
         "eight": "无限文本存储",
         "nine": "跨多个设备共享"
       }
-    }    
+    },
+    "settings": {
+      "setting": "设置",
+      "general": "一般",
+      "languageSelect": "语言选择",
+      "language": "语言",
+      "detail": "详细设置",
+      "aloud": "自然朗读",
+      "aloudSpeed": "朗读速度",
+      "speed": "速度",
+      "expression": "翻译表达",
+      "selectExpression": "选择表达",
+      "default": "默认",
+      "hardExpression": "正式表达",
+      "easyExpression": "简单表达"
+    },
+    "goLearn": "开始学习",
+    "backDocument": "返回文档"
   }
   

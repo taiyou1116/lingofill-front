@@ -156,6 +156,23 @@
         "eight": "असीमित टेक्स्ट संग्रहण",
         "nine": "एकाधिक उपकरणों में साझा करना"
       }
-    }        
+    },
+    "settings": {
+      "setting": "सेटिंग्स",
+      "general": "सामान्य",
+      "languageSelect": "भाषा चयन",
+      "language": "भाषा",
+      "detail": "विस्तृत सेटिंग्स",
+      "aloud": "प्राकृतिक उच्चारण",
+      "aloudSpeed": "उच्चारण गति",
+      "speed": "गति",
+      "expression": "अनुवाद अभिव्यक्ति",
+      "selectExpression": "अभिव्यक्ति चुनें",
+      "default": "डिफ़ॉल्ट",
+      "hardExpression": "औपचारिक अभिव्यक्ति",
+      "easyExpression": "सरल अभिव्यक्ति"
+    },
+    "goLearn": "सीखना शुरू करें",
+    "backDocument": "दस्तावेज़ पर वापस जाएं"
   }
   

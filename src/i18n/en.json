@@ -156,5 +156,22 @@
       "eight": "Unlimited text storage",
       "nine": "Sharing across multiple devices"
     }
-  }
+  },
+  "settings": {
+    "setting": "Settings",
+    "general": "General",
+    "languageSelect": "Language Selection",
+    "language": "Language",
+    "detail": "Detailed Settings",
+    "aloud": "Natural Read-Aloud",
+    "aloudSpeed": "Read-Aloud Speed",
+    "speed": "Speed",
+    "expression": "Translation Expression",
+    "selectExpression": "Select Expression",
+    "default": "Default",
+    "hardExpression": "Formal Expression",
+    "easyExpression": "Simple Expression"
+  },
+  "goLearn": "Start Learning",
+  "backDocument": "Back to Document"
 }

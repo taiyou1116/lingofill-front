@@ -8,10 +8,12 @@ import { handleLanguageChange } from '@/utils/i18nUtils';
 import { Divider, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Switch, ThemeProvider } from '@mui/material'
 import { useRouter } from 'next/navigation';
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 
 function Setting() {
   const theme = useThemeMode();
   const route = useRouter();
+  const { t } = useTranslation();
 
   const { language, setLanguage,
           voiceType, setVoiceType, 
@@ -46,21 +48,21 @@ function Setting() {
         ←
     </button>
     <div className=' flex flex-col justify-start items-center w-full h-full dark:bg-gray-800'>
-      <div className=' text-lg dark:text-white'>設定</div>
+      <div className=' text-lg dark:text-white'>{t('settings.setting')}</div>
       <div className=' bg-gray-200 border-2 border-gray-300 rounded-lg py-5 px-10 flex flex-col gap-10 w-11/12 md:w-3/6 dark:bg-gray-600'>
 
         <Divider />
-        <div className=' dark:text-gray-300'>一般</div>
+        <div className=' dark:text-gray-300'>{t('settings.general')}</div>
           <div className=' flex flex-col gap-3'>
             <div className=' flex items-center justify-between dark:text-gray-300'>
-              言語選択
+            {t('settings.languageSelect')}
                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                  <InputLabel id="demo-simple-select-label">言語</InputLabel>
+                  <InputLabel id="demo-simple-select-label">{t('settings.language')}</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={language}
-                    label={"言語"}
+                    label={t('settings.language')}
                     onChange={(event) => handleLanguageChange(event, setLanguage)}
                   >
                     <MenuItem value={'ja'}>日本語</MenuItem>
@@ -74,23 +76,23 @@ function Setting() {
           </div>
 
           <Divider />
-          <div className=' dark:text-gray-300'>詳細な設定</div>
+          <div className=' dark:text-gray-300'>{t('settings.detail')}</div>
           <div className=' flex flex-col gap-3'>
-            <div className=' flex items-center justify-between dark:text-gray-300'>自然な読み上げ 
+            <div className=' flex items-center justify-between dark:text-gray-300'>{t('settings.aloud')}
               <Switch 
                 onChange={handleVoiceTypeChange}
                 checked={voiceType === 'neural'}
               />
             </div>
             <div className=' flex items-center justify-between dark:text-gray-300'>
-              読み上げ速度
+            {t('settings.aloudSpeed')}
                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                  <InputLabel id="demo-simple-select-label">速度</InputLabel>
+                  <InputLabel id="demo-simple-select-label">{t('settings.speed')}</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={voiceRate}
-                    label={"速度"}
+                    label={t('settings.speed')}
                     onChange={handleVoiceRateChange}
                   >
                     <MenuItem value={'50'}>50%</MenuItem>
@@ -108,19 +110,19 @@ function Setting() {
                 </FormControl>
             </div>
             <div className=' flex items-center justify-between dark:text-gray-300'>
-              翻訳の表現
+            {t('settings.expression')}
                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                  <InputLabel id="demo-simple-select-label">表現を選択</InputLabel>
+                  <InputLabel id="demo-simple-select-label">{t('settings.selectExpression')}</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={translationExpression}
-                    label={"翻訳方法"}
+                    label={t('settings.selectExpression')}
                     onChange={handleExpressionLn}
                   >
-                    <MenuItem value={'NULL'}>デフォルト</MenuItem>
-                    <MenuItem value={'FORMAL'}>硬い表現</MenuItem>
-                    <MenuItem value={'INFORMAL'}>より自然な表現</MenuItem>
+                    <MenuItem value={'NULL'}>{t('settings.default')}</MenuItem>
+                    <MenuItem value={'FORMAL'}>{t('settings.hardExpression')}</MenuItem>
+                    <MenuItem value={'INFORMAL'}>{t('settings.easyExpression')}</MenuItem>
                   </Select>
                 </FormControl>
             </div>

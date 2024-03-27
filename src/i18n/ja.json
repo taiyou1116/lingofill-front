@@ -156,5 +156,22 @@
             "eight": "無制限のテキスト保存",
             "nine": "多端末での共有"
         }
-    }
+    },
+    "settings": {
+        "setting": "設定",
+        "general": "一般",
+        "languageSelect": "言語選択",
+        "language": "言語",
+        "detail": "詳細な設定",
+        "aloud": "自然な読み上げ",
+        "aloudSpeed": "読み上げ速度",
+        "speed": "速度",
+        "expression": "翻訳の表現",
+        "selectExpression": "表現を選択",
+        "default": "デフォルト",
+        "hardExpression": "硬い表現",
+        "easyExpression": "易しい表現"
+    },
+    "goLearn": "学習を始める",
+    "backDocument": "ドキュメントへ戻る"
 }

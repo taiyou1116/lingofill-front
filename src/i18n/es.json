@@ -156,6 +156,23 @@
         "eight": "Almacenamiento ilimitado de textos",
         "nine": "Compartir en múltiples dispositivos"
       }
-    }
+    },
+    "settings": {
+      "setting": "Configuración",
+      "general": "General",
+      "languageSelect": "Selección de Idioma",
+      "language": "Idioma",
+      "detail": "Configuración Detallada",
+      "aloud": "Lectura en Voz Alta Natural",
+      "aloudSpeed": "Velocidad de Lectura en Voz Alta",
+      "speed": "Velocidad",
+      "expression": "Expresión de Traducción",
+      "selectExpression": "Seleccionar Expresión",
+      "default": "Predeterminado",
+      "hardExpression": "Expresión Formal",
+      "easyExpression": "Expresión Simple"
+    },
+    "goLearn": "Comenzar a Aprender",
+    "backDocument": "Volver al Documento"
   }
   
