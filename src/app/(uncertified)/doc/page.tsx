@@ -15,171 +15,66 @@ import DocumentDetails from "@/components/uncertified/DocumentDetails";
 import DocumentHeader from "@/components/uncertified/DocumentHeader";
 import DocumentOverview from "@/components/uncertified/DocumentOverview";
 import DocumentDetailsMobile from "@/components/uncertified/DocumentDetailsMobile";
+import { useTranslation } from "react-i18next";
 
 Amplify.configure(awsExports);
 
 function Doc() {
   const [login, setLogin] = useState(false);
+  const { t } = useTranslation();
+
   const transferHomeRoute = () => {
     window.open('https://www.lingo-fill.com/', '_blank');
   }
   const deviceSize = useWindowSize();
 
   const divideUI = () => {
-    if (deviceSize.width <= 425) {
+    if (deviceSize.width <= 768) {
       return(
-        <div className=" dark:text-gray-300">
+        <div className=" text-sm">
           <DocumentHeader 
             setLogin={setLogin}
-            buttonClass=" text-sm px-3 py-2"
-          />
-          <div className=" flex flex-col justify-center items-center">
-            <h1 className=" text-3xl text-blue-500">
-              Lingo Fillとは
-            </h1>
-            <div className=" flex flex-col pt-12 px-6 gap-5">
-              <DocumentOverview className=" text-sm"/>
-            </div>
-            <Image src="/lingo_fill.png" width="720" height="450" alt='ロゴ' />
-          </div>
-
-          <Divider className=" mt-16"/>
-
-          <div className=" flex flex-col justify-center items-center mt-16 gap-3">
-            <h1 className=" text-base text-blue-500"><Description style={{ fontSize: 40 }} />使い方</h1>
-
-            <div className=" font-extrabold">①アカウントの作成</div>
-            <div className="flex flex-col gap-1 text-sm">
-              <div><span className=" font-extrabold">[始めての方]</span>からアカウントを作成もしくは、Googleでサインインします。</div>
-            </div>
-            <Image src="/signin.png" width="720" height="450" alt='ロゴ' />
-
-            <div className=" font-extrabold mt-20">②新規テキストの作成</div>
-            <div className="flex flex-col gap-1 text-sm">
-              <div>(1)新規テキストボタンをクリックします。</div>
-              <div>(2)テキストの名前をつけたら作成します。</div>
-            </div>
-            <Image src="/create_text.png" width="720" height="450" alt='ロゴ' />
-
-            <div className=" font-extrabold mt-20">③文章の入力</div>
-            <div className="flex flex-col gap-1 text-sm">
-              <div>(1)インターネット上から好きな文章をコピー(Command + C)します。</div>
-              <div>(2)そのまま先ほど作成した空のテキストにペースト(Command + V)します。</div>
-            </div>
-            <Image src="/paste.png" width="720" height="450" alt='ロゴ' />
-
-            <div className=" font-extrabold mt-20">④学習する</div>
-            <div className="flex flex-col gap-1 text-sm">
-              <div>・ 単語をタップ、熟語をスクロール選択して意味を確認します。</div>
-              <div>・ 用法、他の意味を知りたい場合はAIに使い方を聞きます。</div>
-              <div>・ 読み上げを使用して聞き取れないところを反復して聞きます。</div>
-              <div>・ メモを作成して、単語の用法、意味を保存しておきます。</div>
-            </div>
-            <Image src="/modal.png" width="720" height="450" alt='ロゴ' />
-          </div>
-
-          <Divider className=" mt-16"/>
-
-          <DocumentDetailsMobile
-            title={<><Language style={{ fontSize: 40 }} />多言語対応</>}
-            text={<><div>Lingo Fillはさまざまな言語に対応しています。</div>
-            <div>あなたの学びたい言語にも対応しているはずです。</div>
-            <div className=" text-sm">
-              対応言語: 日本語, English, Español, Français, Deutsch, Italiano, Português, Русский, عربي, 한국어, 中国語, हिंदी
-            </div></>}
-            img="/world.png"
-          />
-          <DocumentDetailsMobile
-            title={<><Translate style={{ fontSize: 40 }} />素早く正確な翻訳</>}
-            text={<><div>Lingo Fillはあなたの分からない単語、熟語を高速で翻訳します。</div>
-            <div>翻訳するには単語をクリック、熟語は複数選択するだけです。</div></>}
-            img="/translate.png"
-          />
-          <DocumentDetailsMobile
-            title={<><Psychology style={{ fontSize: 40 }} />AIによる補完</>}
-            text={<><div>Lingo Fillは、AIによる補完を提供します。</div>
-            <div>用法、意味の分からない単語、熟語は積極的にAIを使います。</div></>}
-            img="/wandering-mind.svg"
-          />
-          <DocumentDetailsMobile
-            title={<><RecordVoiceOver style={{ fontSize: 40 }} />音声読み上げ</>}
-            text={<><div>Lingo Fillは自然な音声を文章の好きな箇所から繰り返し聞くことができます。</div></>}
-            img="/speaker-1.svg"
-          />
-          <DocumentDetailsMobile
-            title={<><Comment style={{ fontSize: 40 }} />自分だけのメモの作成</>}
-            text={<><div>Lingo Fillは、用法、意味のメモをすぐに作成できます。</div>
-            <div>単語、熟語の意味、用法などは分からなくてもAIが教えてくれます。</div></>}
-            img="/Taking-Notes-2.svg"
-          />
-          <DocumentDetailsMobile
-            title={<><CloudUpload style={{ fontSize: 40 }} />無制限のテキスト保存</>}
-            text={<><div>Lingo Fillは、制限のないのテキスト保存が可能です。</div>
-            <div>オンライン上で保存するためあなたのデバイスを圧迫しません。</div></>}
-            img="/2108272.png"
-          />
-          <DocumentDetailsMobile
-            title={<><DevicesOther style={{ fontSize: 40 }} />多端末での共有</>}
-            text={<><div>Lingo Fillは、アカウントごとにオンライン上でテキストを保管します。</div>
-            <div>同じアカウントを共有することで、友達と同じテキストを共有します。</div></>}
-            img="/the-cloud.svg"
-          />
-          <DocumentDetailsMobile
-            title={<><MoneyOff style={{ fontSize: 40 }} />すべての機能が無料</>}
-            text={<><div>Lingo Fillは、これらすべての機能が無料で使えます。</div>
-            <div>使用してお金が発生することは一切ありません。</div></>}
-            img="/no_money.svg"
-          />
-        </div>
-      )
-    } else if (deviceSize.width <= 768) {
-      return(
-        <div>
-          <DocumentHeader 
-            setLogin={setLogin}
-            titleClass="text-2xl"
             buttonClass="px-3 py-2"
-            lingoFill="Lingo Fill"
           />
           <div className=" flex flex-col justify-center items-center">
-            <h1 className=" text-7xl text-blue-500">
-              Lingo Fillとは
+            <h1 className=" text-4xl md:text-7xl text-blue-500">
+              {t('explanation.WhatisLingoFill')}
             </h1>
             <div className=" flex flex-col pt-12 px-6 gap-5">
-              <DocumentOverview className="text-lg"/>
+              <DocumentOverview className="text-sm md:text-lg"/>
             </div>
             <Image src="/lingo_fill.png" width="720" height="450" alt='ロゴ' />
           </div>
 
           <Divider className=" mt-16"/>
 
-          <div className=" flex flex-col justify-center items-center mt-16 gap-3">
-            <h1 className=" text-5xl text-blue-500"><Description style={{ fontSize: 40 }} />使い方</h1>
+          <div className=" flex flex-col justify-center items-center mt-16 gap-3 dark:text-gray-300">
+            <h1 className=" text-5xl text-blue-500"><Description style={{ fontSize: 40 }} />{t('explanation.How to use')}</h1>
 
-            <div className=" font-extrabold text-lg">①アカウントの作成</div>
-            <div><span className=" font-extrabold">[始めての方]</span>からアカウントを作成もしくは、Googleでサインインします。</div>
+            <div className=" font-extrabold text-lg">{t('explanation.createAccount.title')}</div>
+            <div>{t('explanation.createAccount.one')}</div>
             <Image src="/signin.png" width="720" height="450" alt='ロゴ' />
 
-            <div className=" font-extrabold text-lg mt-20">②新規テキストの作成</div>
+            <div className=" font-extrabold text-lg mt-20">{t('explanation.createText.title')}</div>
             <div className="flex flex-col gap-1">
-              <div>(1)新規テキストボタンをクリックします。</div>
-              <div>(2)テキストの名前をつけたら作成します。</div>
+              <div>{t('explanation.createText.one')}</div>
+              <div>{t('explanation.createText.two')}</div>
             </div>
             <Image src="/create_text.png" width="720" height="450" alt='ロゴ' />
 
-            <div className=" font-extrabold text-lg mt-20">③文章の入力</div>
+            <div className=" font-extrabold text-lg mt-20">{t('explanation.inputText.title')}</div>
             <div className="flex flex-col gap-1">
-              <div>(1)インターネット上から好きな文章をコピー(Command + C)します。</div>
-              <div>(2)そのまま先ほど作成した空のテキストにペースト(Command + V)します。</div>
+              <div>{t('explanation.createText.one')}</div>
+              <div>{t('explanation.createText.two')}</div>
             </div>
             <Image src="/paste.png" width="720" height="450" alt='ロゴ' />
 
-            <div className=" font-extrabold text-lg mt-20">④学習する</div>
+            <div className=" font-extrabold text-lg mt-20">{t('explanation.learn.title')}</div>
             <div className="flex flex-col gap-1">
-              <div>・ 単語をタップ、熟語をスクロール選択して意味を確認します。</div>
-              <div>・ 用法、他の意味を知りたい場合はAIに使い方を聞きます。</div>
-              <div>・ 読み上げを使用して聞き取れないところを反復して聞きます。</div>
-              <div>・ メモを作成して、単語の用法、意味を保存しておきます。</div>
+              <div>{t('explanation.learn.one')}</div>
+              <div>{t('explanation.learn.two')}</div>
+              <div>{t('explanation.learn.three')}</div>
+              <div>{t('explanation.learn.four')}</div>
             </div>
             <Image src="/modal.png" width="720" height="450" alt='ロゴ' />
           </div>
@@ -187,53 +82,54 @@ function Doc() {
           <Divider className=" mt-16"/>
 
           <DocumentDetailsMobile
-            title={<><Language style={{ fontSize: 40 }} />多言語対応</>}
-            text={<><div>Lingo Fillはさまざまな言語に対応しています。</div>
-            <div>あなたの学びたい言語にも対応しているはずです。</div>
-            <div className=" text-sm">
-              対応言語: 日本語, English, Español, Français, Deutsch, Italiano, Português, Русский, عربي, 한국어, 中国語, हिंदी
-            </div></>}
+            title={<><Language style={{ fontSize: 40 }} />{t('explanation.multilingualSupport.title')}</>}
+            text=
+              {<>
+                <div>{t('explanation.multilingualSupport.one')}</div>
+                <div>{t('explanation.multilingualSupport.two')}</div>
+                <div className=" text-sm">{t('explanation.multilingualSupport.three')}</div>
+              </>}
             img="/world.png"
           />
           <DocumentDetailsMobile
-            title={<><Translate style={{ fontSize: 40 }} />素早く正確な翻訳</>}
-            text={<><div>Lingo Fillはあなたの分からない単語、熟語を高速で翻訳します。</div>
-            <div>翻訳するには単語をクリック、熟語は複数選択するだけです。</div></>}
+            title={<><Translate style={{ fontSize: 40 }} />{t('explanation.translation.title')}</>}
+            text={<><div>{t('explanation.translation.one')}</div>
+            <div>{t('explanation.translation.two')}</div></>}
             img="/translate.png"
           />
           <DocumentDetailsMobile
-            title={<><Psychology style={{ fontSize: 40 }} />AIによる補完</>}
-            text={<><div>Lingo Fillは、AIによる補完を提供します。</div>
-            <div>用法、意味の分からない単語、熟語は積極的にAIを使います。</div></>}
+            title={<><Psychology style={{ fontSize: 40 }} />{t('explanation.ai.title')}</>}
+            text={<><div>{t('explanation.ai.one')}</div>
+            <div>{t('explanation.ai.two')}</div></>}
             img="/wandering-mind.svg"
           />
           <DocumentDetailsMobile
-            title={<><RecordVoiceOver style={{ fontSize: 40 }} />音声読み上げ</>}
-            text={<><div>Lingo Fillは自然な音声を文章の好きな箇所から繰り返し聞くことができます。</div></>}
+            title={<><RecordVoiceOver style={{ fontSize: 40 }} />{t('explanation.audio.title')}</>}
+            text={<><div>{t('explanation.audio.one')}</div></>}
             img="/speaker-1.svg"
           />
           <DocumentDetailsMobile
-            title={<><Comment style={{ fontSize: 40 }} />自分だけのメモの作成</>}
-            text={<><div>Lingo Fillは、用法、意味のメモをすぐに作成できます。</div>
-            <div>単語、熟語の意味、用法などは分からなくてもAIが教えてくれます。</div></>}
+            title={<><Comment style={{ fontSize: 40 }} />{t('explanation.memo.title')}</>}
+            text={<><div>{t('explanation.memo.one')}</div>
+            <div>{t('explanation.memo.two')}</div></>}
             img="/Taking-Notes-2.svg"
           />
           <DocumentDetailsMobile
-            title={<><CloudUpload style={{ fontSize: 40 }} />無制限のテキスト保存</>}
-            text={<><div>Lingo Fillは、制限のないのテキスト保存が可能です。</div>
-            <div>オンライン上で保存するためあなたのデバイスを圧迫しません。</div></>}
+            title={<><CloudUpload style={{ fontSize: 40 }} />{t('explanation.text.title')}</>}
+            text={<><div>{t('explanation.text.one')}</div>
+            <div>{t('explanation.text.two')}</div></>}
             img="/2108272.png"
           />
           <DocumentDetailsMobile
-            title={<><DevicesOther style={{ fontSize: 40 }} />多端末での共有</>}
-            text={<><div>Lingo Fillは、アカウントごとにオンライン上でテキストを保管します。</div>
-            <div>同じアカウントを共有することで、友達と同じテキストを共有します。</div></>}
+            title={<><DevicesOther style={{ fontSize: 40 }} />{t('explanation.share.title')}</>}
+            text={<><div>{t('explanation.share.one')}</div>
+            <div>{t('explanation.share.two')}</div></>}
             img="/the-cloud.svg"
           />
           <DocumentDetailsMobile
-            title={<><MoneyOff style={{ fontSize: 40 }} />すべての機能が無料</>}
-            text={<><div>Lingo Fillは、これらすべての機能が無料で使えます。</div>
-            <div>使用してお金が発生することは一切ありません。</div></>}
+            title={<><MoneyOff style={{ fontSize: 40 }} />{t('explanation.free.title')}</>}
+            text={<><div>{t('explanation.free.one')}</div>
+            <div>{t('explanation.free.two')}</div></>}
             img="/no_money.svg"
           />
         </div>
@@ -250,7 +146,7 @@ function Doc() {
           <div className=" flex justify-center items-center">
             <div className=" flex flex-col pt-12 px-6 gap-5">
               <h1 className=" text-7xl text-blue-500">
-                Lingo Fillとは
+                {t('explanation.WhatisLingoFill')}
               </h1>
               <DocumentOverview className="text-lg"/>
             </div>
@@ -260,31 +156,31 @@ function Doc() {
           <Divider className=" mt-16"/>
 
           <div className=" flex flex-col justify-center items-center mt-16">
-            <h1 className=" text-5xl text-blue-500"><Description style={{ fontSize: 40 }} />使い方</h1>
+            <h1 className=" text-5xl text-blue-500"><Description style={{ fontSize: 40 }} />{t('explanation.How to use')}</h1>
             <div className=" flex flex-col gap-2">
               <DocumentUsage 
-                title="①アカウントの作成"
-                text={<div><span className=" font-extrabold">[始めての方]</span>からアカウントを作成もしくは、Googleでサインインします。</div>}
+                title={t('explanation.createAccount.title')}
+                text={<div>{t('explanation.createAccount.one')}</div>}
                 img="/signin.png"
               />
               <DocumentUsage 
-                title="②新規テキストの作成"
-                text={<><div>(1)新規テキストボタンをクリックします。</div>
-                      <div>(2)テキストの名前をつけたら作成します。</div></>}
+                title={t('explanation.createText.title')}
+                text={<><div>{t('explanation.createText.one')}</div>
+                <div>{t('explanation.createText.two')}</div></>}
                 img="/create_text.png"
               />
               <DocumentUsage 
-                title="③文章の入力"
-                text={<><div>(1)インターネット上から好きな文章をコピー(Command + C)します。</div>
-                <div>(2)そのまま先ほど作成した空のテキストにペースト(Command + V)します。</div></>}
+                title={t('explanation.inputText.title')}
+                text={<><div>{t('explanation.createText.one')}</div>
+                <div>{t('explanation.createText.two')}</div></>}
                 img="/paste.png"
               />
               <DocumentUsage 
-                title="④学習する"
-                text={<><div>- 単語をタップ、熟語をスクロール選択して意味を確認します。</div>
-                <div>- 用法、他の意味を知りたい場合はAIに使い方を聞きます。</div>
-                <div>- 読み上げを使用して聞き取れないところを反復して聞きます。</div>
-                <div>- メモを作成して、単語の用法、意味を保存しておきます。</div></>}
+                title={t('explanation.learn.title')}
+                text={<> <div>{t('explanation.learn.one')}</div>
+                <div>{t('explanation.learn.two')}</div>
+                <div>{t('explanation.learn.three')}</div>
+                <div>{t('explanation.learn.four')}</div></>}
                 img="/modal.png"
               />
             </div>
@@ -293,53 +189,51 @@ function Doc() {
           <Divider className=" mt-16"/>
 
           <DocumentDetails 
-            title={<><Language style={{ fontSize: 40 }} />多言語対応</>}
-            text={<><div>Lingo Fillはさまざまな言語に対応しています。</div>
-            <div>あなたの学びたい言語にも対応しているはずです。</div>
-            <div className=" text-sm">
-              対応言語: 日本語, English, Español, Français, Deutsch, Italiano, Português, Русский, عربي, 한국어, 中国語, हिंदी
-            </div></>}
+            title={<><Language style={{ fontSize: 40 }} />{t('explanation.multilingualSupport.title')}</>}
+            text={<><div>{t('explanation.multilingualSupport.one')}</div>
+            <div>{t('explanation.multilingualSupport.two')}</div>
+            <div className=" text-sm">{t('explanation.multilingualSupport.three')}</div></>}
             img="/world.png"
           />
           <DocumentDetails 
-            title={<><Translate style={{ fontSize: 40 }} />素早く正確な翻訳</>}
-            text={<><div>Lingo Fillはあなたの分からない単語、熟語を高速で翻訳します。</div>
-            <div>翻訳するには単語をクリック、熟語は複数選択するだけです。</div></>}
+            title={<><Translate style={{ fontSize: 40 }} />{t('explanation.translation.title')}</>}
+            text={<><div>{t('explanation.translation.one')}</div>
+            <div>{t('explanation.translation.two')}</div></>}
             img="/translate.png"
           />
           <DocumentDetails 
-            title={<><Psychology style={{ fontSize: 40 }} />AIによる補完</>}
-            text={<><div>Lingo Fillは、AIによる補完を提供します。</div>
-            <div>用法、意味の分からない単語、熟語は積極的にAIを使います。</div></>}
+            title={<><Psychology style={{ fontSize: 40 }} />{t('explanation.ai.title')}</>}
+            text={<><div>{t('explanation.ai.one')}</div>
+            <div>{t('explanation.ai.two')}</div></>}
             img="/wandering-mind.svg"
           />
           <DocumentDetails 
-            title={<><RecordVoiceOver style={{ fontSize: 40 }} />音声読み上げ</>}
-            text={<><div>Lingo Fillは自然な音声を文章の好きな箇所から繰り返し聞くことができます。</div></>}
+            title={<><RecordVoiceOver style={{ fontSize: 40 }} />{t('explanation.audio.title')}</>}
+            text={<><div>{t('explanation.audio.one')}</div></>}
             img="/speaker-1.svg"
           />
           <DocumentDetails 
-            title={<><Comment style={{ fontSize: 40 }} />自分だけのメモの作成</>}
-            text={<><div>Lingo Fillは、用法、意味のメモをすぐに作成できます。</div>
-            <div>単語、熟語の意味、用法などは分からなくてもAIが教えてくれます。</div></>}
+            title={<><Comment style={{ fontSize: 40 }} />{t('explanation.memo.title')}</>}
+            text={<><div>{t('explanation.memo.one')}</div>
+            <div>{t('explanation.memo.two')}</div></>}
             img="/Taking-Notes-2.svg"
           />
           <DocumentDetails 
-            title={<><CloudUpload style={{ fontSize: 40 }} />無制限のテキスト保存</>}
-            text={<><div>Lingo Fillは、制限のないのテキスト保存が可能です。</div>
-            <div>オンライン上で保存するためあなたのデバイスを圧迫しません。</div></>}
+            title={<><CloudUpload style={{ fontSize: 40 }} />{t('explanation.text.title')}</>}
+            text={<><div>{t('explanation.text.one')}</div>
+            <div>{t('explanation.text.two')}</div></>}
             img="/2108272.png"
           />
           <DocumentDetails 
-            title={<><DevicesOther style={{ fontSize: 40 }} />多端末での共有</>}
-            text={<><div>Lingo Fillは、アカウントごとにオンライン上でテキストを保管します。</div>
-            <div>同じアカウントを共有することで、友達と同じテキストを共有します。</div></>}
+            title={<><DevicesOther style={{ fontSize: 40 }} />{t('explanation.share.title')}</>}
+            text={<><div>{t('explanation.share.one')}</div>
+            <div>{t('explanation.share.two')}</div></>}
             img="/the-cloud.svg"
           />
           <DocumentDetails
-            title={<><MoneyOff style={{ fontSize: 40 }} />すべての機能が無料</>}
-            text={<><div>Lingo Fillは、これらすべての機能が無料で使えます。</div>
-            <div>使用してお金が発生することは一切ありません。</div></>}
+            title={<><MoneyOff style={{ fontSize: 40 }} />{t('explanation.free.title')}</>}
+            text={<><div>{t('explanation.free.one')}</div>
+            <div>{t('explanation.free.two')}</div></>}
             img="/no_money.svg"
           />
         </div>

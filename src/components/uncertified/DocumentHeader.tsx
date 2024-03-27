@@ -29,7 +29,7 @@ function DocumentHeader( props: Props) {
 
   return (
     <I18nextProvider i18n={i18n} defaultNS={"translation"}>
-    <div className="header-bg-height flex items-center justify-between shadow-md px-10 bg-white dark:bg-gray-600">
+    <div className=" h-28 md:h-20 flex items-center justify-between shadow-md md:px-10 mb-5 bg-white dark:bg-gray-600">
       <div className=" flex items-center">
         <Image src="LF.svg" width="60" height="60" alt='ロゴ' />
         <h1 className={` ${titleClass} ${oswald.className} `}>{ lingoFill } </h1>
@@ -38,12 +38,12 @@ function DocumentHeader( props: Props) {
         <ThemeProvider theme={theme}>
           <div className=' flex items-center justify-between dark:text-gray-300'>
             <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-              <InputLabel id="demo-simple-select-label">言語</InputLabel>
+              <InputLabel id="demo-simple-select-label">language</InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={language}
-                label={"言語"}
+                label={"language"}
                 onChange={(event) => handleLanguageChange(event, setLanguage)}
               >
                 <MenuItem value={'ja'}>日本語</MenuItem>
@@ -55,16 +55,18 @@ function DocumentHeader( props: Props) {
             </FormControl>
           </div>
         </ThemeProvider>
-        <button 
-          className={`bg-gray-200 rounded-md text-gray-800 ${buttonClass}`} 
-          onClick={transferHomeRoute}>
-          ログイン済みの方
-        </button>
-        <button 
-          className={` bg-blue-500 dark:bg-blue-800 rounded-md dark:text-white ${buttonClass}`} 
-          onClick={() => setLogin(true)}>
-          初めての方
-        </button>
+        <div className=' flex flex-col md:flex-row gap-3 text-xs md:text-base'>
+          <button 
+            className={`bg-gray-200 rounded-md text-gray-800 ${buttonClass}`} 
+            onClick={transferHomeRoute}>
+            {t('explanation.header.logined')}
+          </button>
+          <button 
+            className={` bg-blue-500 dark:bg-blue-800 rounded-md dark:text-white ${buttonClass}`} 
+            onClick={() => setLogin(true)}>
+            {t('explanation.header.newUser')}
+          </button>
+        </div>
       </div>
     </div>
     </I18nextProvider>

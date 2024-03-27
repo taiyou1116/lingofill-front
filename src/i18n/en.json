@@ -1,81 +1,160 @@
 {
-    "document": {
-      "chooseText": "Select or create a text.",
-      "input": "Paste the original text (Command⌘ + V)",
-  
-      "header": {
-        "selectLanguage": {
-          "language": "Language",
-          "translation": "Translation"
-        },
-        "sendDocumentDataButton": {
-          "saveText": "Save",
-          "savedText": "Saved"
-        },
-        "threeWayToggle": {
-          "edit": "Edit",
-          "input": "Input"
-        },
-        "aloud": {
-          "onAloud": "Turn on Read Aloud",
-          "offAloud": "Turn off Read Aloud"
-        }
+  "document": {
+    "chooseText": "Select or create a text.",
+    "input": "Paste the original text (Command⌘ + V)",
+
+    "header": {
+      "selectLanguage": {
+        "language": "Language",
+        "translation": "Translation"
       },
-      "modal": {
-        "deleteBlockButton": {
-          "cancelBlock": "Delete a note"
-        },
-        "inputBlock": {
-          "inputBlock": "Block Display",
-          "originalText": "Original Text",
-          "translation": "Translation",
-          "favorite": "Add to Favorites"
-        },
-        "inputMemo": {
-          "inputMemo": "Enter your note here (e.g., context, usage, translated text, etc.)",
-          "paste": "Paste from clipboard",
-          "generateAI": "Generate with AI",
-          "generatingAI": "Generating"
-        }, 
-        "readingButton": {
-          "readAloud": "Read Aloud",
-          "copy": "Copy", 
-          "copied": "Copied"
-        },
-        "saveButton": {
-          "save": "Create a note"
-        },
-        "closeModal": "Close"
+      "sendDocumentDataButton": {
+        "saveText": "Save",
+        "savedText": "Saved"
+      },
+      "threeWayToggle": {
+        "edit": "Edit",
+        "input": "Input"
+      },
+      "aloud": {
+        "onAloud": "Turn on Read Aloud",
+        "offAloud": "Turn off Read Aloud"
       }
+    },
+    "modal": {
+      "deleteBlockButton": {
+        "cancelBlock": "Delete a note"
+      },
+      "inputBlock": {
+        "inputBlock": "Block Display",
+        "originalText": "Original Text",
+        "translation": "Translation",
+        "favorite": "Add to Favorites"
+      },
+      "inputMemo": {
+        "inputMemo": "Enter your note here (e.g., context, usage, translated text, etc.)",
+        "paste": "Paste from clipboard",
+        "generateAI": "Generate with AI",
+        "generatingAI": "Generating"
+      }, 
+      "readingButton": {
+        "readAloud": "Read Aloud",
+        "copy": "Copy", 
+        "copied": "Copied"
+      },
+      "saveButton": {
+        "save": "Create a note"
+      },
+      "closeModal": "Close"
+    }
+  },
+  "header": {
+    "textList": "Text List",
+    "acountSetting": "Account Settings",
+    "acount": "Account",
+    "setting": "Settings",
+    "howToUse": "How to Use"
+  },
+  "sidebar": {
+    "textList": "Text List",
+    "deleteText": "Delete Text List",
+    "createNewText": "Create New Text"
+  },
+  "sidebarDocument": {
+    "more": "More",
+    "inputTextName": "Enter New Text Name",
+
+    "createNewDocument": {
+      "inputTextName": "Enter New Text Name"
+    },
+    "deleteTextButton": {
+      "deleteText": "Delete Text"
+    },
+    "editTitle": {
+      "editTitle": "Edit Title"
+    },
+    "uploadDocumentButton": {
+      "uploadDocument": "Save Changes"
+    }
+  },
+  "explanation": {
+    "WhatisLingoFill": "What is Lingo Fill?",
+    "How to use": "How to Use",
+    "createAccount": {
+      "title": "① Creating an Account",
+      "one": "Create an account through [For Beginners] or sign in with Google."
+    },
+    "createText": {
+      "title": "② Creating a New Text",
+      "one": "(1) Click the new text button.",
+      "two": "(2) Name your text and then create it."
+    },
+    "inputText": {
+      "title": "③ Entering the Text",
+      "one": "(1) Copy any text you like from the internet (Command + C).",
+      "two": "(2) Then paste it directly into the text you created earlier (Command + V)."
+    },
+    "learn": {
+      "title": "④ Learning",
+      "one": "- Tap on words or scroll to select phrases to check their meanings.",
+      "two": "- If you want to know the usage or other meanings, ask AI.",
+      "three": "- Use the read-aloud feature to repeatedly listen to parts you cannot catch.",
+      "four": "- Create notes to save the usage and meanings of words."
+    },
+    "multilingualSupport": {
+      "title": "Multilingual Support",
+      "one": "Lingo Fill supports various languages.",
+      "two": "It should support the language you want to learn.",
+      "three": "Supported languages: Japanese, English, Español, Français, Deutsch, Italiano, Português, Русский, عربي, 한국어, 中文, हिंदी"
+    },
+    "translation": {
+      "title": "Fast and Accurate Translation",
+      "one": "Lingo Fill quickly translates unknown words and phrases.",
+      "two": "To translate, simply click on a word or select multiple words for phrases."
+    },
+    "ai": {
+      "title": "AI Assistance",
+      "one": "Lingo Fill offers AI assistance.",
+      "two": "Use AI actively for words and phrases whose usage or meanings are unclear."
+    },
+    "audio": {
+      "title": "Voice Read-Out",
+      "one": "Lingo Fill allows you to listen to natural voice read-outs from any part of the text."
+    },
+    "memo": {
+      "title": "Creating Personal Notes",
+      "one": "Lingo Fill lets you quickly create notes on usage and meanings.",
+      "two": "Even if you don't understand the meanings or usages of words or phrases, AI will teach you."
+    },
+    "text": {
+      "title": "Unlimited Text Storage",
+      "one": "Lingo Fill allows for unlimited text storage.",
+      "two": "Your texts are stored online, so they won't take up space on your device."
+    },
+    "share": {
+      "title": "Sharing Across Multiple Devices",
+      "one": "Lingo Fill stores texts online for each account.",
+      "two": "By sharing the same account, you can share the same texts with friends."
+    },
+    "free": {
+      "title": "All Features Are Free",
+      "one": "All of these features in Lingo Fill are available for free.",
+      "two": "There is absolutely no charge for using them."
     },
     "header": {
-      "textList": "Text List",
-      "acountSetting": "Account Settings",
-      "acount": "Account",
-      "setting": "Settings",
-      "howToUse": "How to Use"
+      "logined": "For returning users",
+      "newUser": "For new users"
     },
-    "sidebar": {
-      "textList": "Text List",
-      "deleteText": "Delete Text List",
-      "createNewText": "Create New Text"
-    },
-    "sidebarDocument": {
-      "more": "More",
-      "inputTextName": "Enter New Text Name",
-  
-      "createNewDocument": {
-        "inputTextName": "Enter New Text Name"
-      },
-      "deleteTextButton": {
-        "deleteText": "Delete Text"
-      },
-      "editTitle": {
-        "editTitle": "Edit Title"
-      },
-      "uploadDocumentButton": {
-        "uploadDocument": "Save Changes"
-      }
+    "overview": {
+      "one": "A simple long-text focused language learning service.",
+      "two": "You can easily create your own language learning texts.",
+      "three": "Multilingual support",
+      "four": "Fast and accurate translation",
+      "five": "AI assistance",
+      "six": "Natural voice read-aloud",
+      "seven": "Creating personal notes",
+      "eight": "Unlimited text storage",
+      "nine": "Sharing across multiple devices"
     }
+  }
 }
-  

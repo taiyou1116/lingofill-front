@@ -76,6 +76,86 @@
       "uploadDocumentButton": {
         "uploadDocument": "Guardar Cambios"
       }
+    },
+    "explanation": {
+      "WhatisLingoFill": "¿Qué es Lingo Fill?",
+      "How to use": "Cómo Usar",
+      "createAccount": {
+        "title": "① Crear una Cuenta",
+        "one": "Cree una cuenta a través de [Para Principiantes] o inicie sesión con Google."
+      },
+      "createText": {
+        "title": "② Crear un Nuevo Texto",
+        "one": "(1) Haga clic en el botón de nuevo texto.",
+        "two": "(2) Nombre su texto y luego créelo."
+      },
+      "inputText": {
+        "title": "③ Ingresar el Texto",
+        "one": "(1) Copie cualquier texto que le guste de internet (Comando + C).",
+        "two": "(2) Luego péguelo directamente en el texto que creó anteriormente (Comando + V)."
+      },
+      "learn": {
+        "title": "④ Aprender",
+        "one": "- Toque las palabras o desplácese para seleccionar frases para verificar sus significados.",
+        "two": "- Si desea conocer el uso u otros significados, pregunte a la IA.",
+        "three": "- Use la función de lectura en voz alta para escuchar repetidamente partes que no puede captar.",
+        "four": "- Cree notas para guardar el uso y los significados de las palabras."
+      },
+      "multilingualSupport": {
+        "title": "Soporte Multilingüe",
+        "one": "Lingo Fill admite varios idiomas.",
+        "two": "Debe admitir el idioma que desea aprender.",
+        "three": "Idiomas soportados: Japonés, Inglés, Español, Francés, Alemán, Italiano, Portugués, Ruso, Árabe, Coreano, Chino, Hindi"
+      },
+      "translation": {
+        "title": "Traducción Rápida y Precisa",
+        "one": "Lingo Fill traduce rápidamente palabras y frases desconocidas.",
+        "two": "Para traducir, simplemente haga clic en una palabra o seleccione varias palabras para frases."
+      },
+      "ai": {
+        "title": "Asistencia de IA",
+        "one": "Lingo Fill ofrece asistencia de IA.",
+        "two": "Use la IA activamente para palabras y frases cuyo uso o significados no estén claros."
+      },
+      "audio": {
+        "title": "Lectura de Voz",
+        "one": "Lingo Fill le permite escuchar lecturas de voz natural desde cualquier parte del texto."
+      },
+      "memo": {
+        "title": "Creando Notas Personales",
+        "one": "Lingo Fill le permite crear rápidamente notas sobre el uso y significados.",
+        "two": "Incluso si no entiende los significados o usos de las palabras o frases, la IA le enseñará."
+      },
+      "text": {
+        "title": "Almacenamiento de Texto Ilimitado",
+        "one": "Lingo Fill permite un almacenamiento de texto ilimitado.",
+        "two": "Sus textos se almacenan en línea, por lo que no ocuparán espacio en su dispositivo."
+      },
+      "share": {
+        "title": "Compartir en Múltiples Dispositivos",
+        "one": "Lingo Fill almacena textos en línea para cada cuenta.",
+        "two": "Al compartir la misma cuenta, puede compartir los mismos textos con amigos."
+      },
+      "free": {
+        "title": "Todas las Características son Gratuitas",
+        "one": "Todas estas características en Lingo Fill están disponibles de forma gratuita.",
+        "two": "No hay absolutamente ningún cargo por usarlas."
+      },
+      "header": {
+        "logined": "Para usuarios registrados",
+        "newUser": "Para nuevos usuarios"
+      },
+      "overview": {
+        "one": "Un servicio de aprendizaje de idiomas enfocado en textos largos y simples.",
+        "two": "Puedes crear fácilmente tus propios textos para aprender idiomas.",
+        "three": "Soporte multilingüe",
+        "four": "Traducción rápida y precisa",
+        "five": "Asistencia por IA",
+        "six": "Lectura en voz natural",
+        "seven": "Creación de notas personales",
+        "eight": "Almacenamiento ilimitado de textos",
+        "nine": "Compartir en múltiples dispositivos"
+      }
     }
   }
   

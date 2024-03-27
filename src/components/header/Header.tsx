@@ -4,7 +4,7 @@
 import { GrobalStore } from "@/store/grobalStore";
 import { Toaster } from "react-hot-toast";
 import { useWindowSize } from "@/hooks/hooks";
-import { truncateText } from "@/utils/helper";
+import { truncateText } from "@/utils/textUtils";
 import TextList from "./TextList";
 import HomeLink from "./HomeLink";
 import AcountMenu from "./AcountMenu";
