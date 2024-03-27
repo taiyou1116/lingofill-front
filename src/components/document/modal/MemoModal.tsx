@@ -54,7 +54,7 @@ function TranslateModal(props: TranslateModalProps) {
   return (
     <ModalCenter>
       <div className=' w-full'>
-        <div className=' w-full flex flex-col justify-center items-center gap-3'>
+        <div className=' w-full flex flex-col justify-center items-center gap-3 dark:text-gray-300'>
           <div className=' flex gap-3 items-center justify-center'>
             <ReadAndCopyContainer 
               sentences={splitTextToSegments(selectedWords, document?.language)}
@@ -95,7 +95,7 @@ function TranslateModal(props: TranslateModalProps) {
           selectedWordsIndexes={selectedWordsIndexes}
         />
         <button 
-          className=' md:text-base text-sm' 
+          className=' md:text-base text-sm dark:text-gray-300' 
           onClick={() => flipCenterModal()} 
         >
           {t('document.modal.closeModal')}

@@ -5,9 +5,10 @@ import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 import { getVoiceForLanguage, processAndSpeak } from "@/utils/audioUtils";
 import { judgeSpaceLanguage, returnTextFromLn } from "@/utils/textUtils";
-import RenderText from "./RenderText";
+import RenderText from "./memo/RenderText";
 
 import { Document, TranslationObj } from "@/types/types";
+import MemoModal from "./modal/MemoModal";
 
 type Props = {
   localDocument: Document | null,
@@ -15,7 +16,7 @@ type Props = {
   isSelectedReading: boolean,
 }
 
-function TranslateDocument(props: Props) {
+function EditDocument(props: Props) {
   const { localDocument, sentences, isSelectedReading } = props;
   const { showCenterModal, flipCenterModal, 
           selectedWordsIndexes, setSelectedWordsIndexes, 
@@ -199,26 +200,30 @@ function TranslateDocument(props: Props) {
   }
 
   return (
-    <RenderText
-      sentences={sentences}
-      readingNumber={readingNumber}
-      doc={localDocument!}
-      handleClick={handleClick}
-      handleMouseMove={handleMouseMove}
-      handleMouseDown={handleMouseDown}
-      handleMouseUp={handleMouseUp}
-      handleTouchStart={handleTouchStart}
-      handleTouchMove={handleTouchMove}
-      handleTouchEnd={handleTouchEnd}
-      selectedWordsIndexes={selectedWordsIndexes}
-      setSelectedWordsIndexes={setSelectedWordsIndexes}
-      selectedWords={selectedWords}
-      isSelectedReading={isSelectedReading}
-      words={words}
-      listenText={listenText}
-      showMemoText={showMemoText}
-    />
+    <> 
+      <RenderText
+        sentences={sentences}
+        readingNumber={readingNumber}
+        doc={localDocument!}
+        eventHandlers={{
+          handleClick,
+          handleMouseMove,
+          handleMouseDown,
+          handleMouseUp,
+          handleTouchStart,
+          handleTouchMove,
+          handleTouchEnd,
+        }}
+        selectedWordsIndexes={selectedWordsIndexes}
+        setSelectedWordsIndexes={setSelectedWordsIndexes}
+        isSelectedReading={isSelectedReading}
+        words={words}
+        listenText={listenText}
+        showMemoText={showMemoText}
+      />
+      <MemoModal selectedWordsIndexes={selectedWordsIndexes} selectedWords={selectedWords} />
+    </>
   );
 }
 
-export default React.memo(TranslateDocument);
+export default React.memo(EditDocument);

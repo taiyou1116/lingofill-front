@@ -4,15 +4,10 @@ import { m_plus_rounded_1c } from "@/store/fontStore";
 
 import { judgeSpaceLanguage } from "@/utils/textUtils";
 
-import TranslateModal from "./modal/TranslateModal";
-
 import { Tooltip } from "@mui/material";
 import { Document, TranslationObj } from "@/types/types";
 
-type RenderTextProps = {
-  sentences: string[];
-  readingNumber?: number;
-  doc: Document;
+type EventHandlers = {
   handleClick: (index: number) => void;
   handleMouseMove: (index: number) => void;
   handleMouseDown: () => void;
@@ -20,19 +15,24 @@ type RenderTextProps = {
   handleTouchStart: (index: number) => void,
   handleTouchMove: (e: React.TouchEvent<HTMLSpanElement>) => void,
   handleTouchEnd: () => void,
+}
+
+type RenderTextProps = {
+  sentences: string[];
+  readingNumber?: number;
+  doc: Document;
+  eventHandlers: EventHandlers;
   selectedWordsIndexes: number[];
-  selectedWords: string
   isSelectedReading: boolean,
-  setSelectedWordsIndexes: (selectedWordsIndexes: number[]) => void,
   words: string[],
+  setSelectedWordsIndexes: (selectedWordsIndexes: number[]) => void,
   listenText: (sentenceIndex: number) => void,
   showMemoText: (translation: TranslationObj) => string,
 }
 
 const RenderText = (props: RenderTextProps) => {
-  const { sentences, readingNumber, doc, selectedWordsIndexes, selectedWords,
-          handleClick, handleMouseMove, handleMouseDown, handleMouseUp, 
-          handleTouchStart, handleTouchMove, handleTouchEnd, listenText, showMemoText,
+  const { sentences, readingNumber, doc, selectedWordsIndexes,
+          eventHandlers, listenText, showMemoText,
   } = props;
 
   let globalIndex = 0;
@@ -50,8 +50,8 @@ const RenderText = (props: RenderTextProps) => {
       <React.Fragment key={sentenceIndex}>
         <span
           className={`break-all ${sentenceIndex === readingNumber ? ' text-yellow-600 dark:text-yellow-300' : ''}`}
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
+          onMouseDown={eventHandlers.handleMouseDown}
+          onMouseUp={eventHandlers.handleMouseUp}
           onClick={() => listenText(sentenceIndex)}
         >
           {wordsOfSentence.map((word) => {
@@ -63,9 +63,9 @@ const RenderText = (props: RenderTextProps) => {
               return (
                 <span
                   key={captureIndex}
-                  onClick={() => handleClick(captureIndex)}
-                  onMouseMove={() => handleMouseMove(captureIndex)}
-                  onTouchMove={() => handleMouseMove(captureIndex)}
+                  onClick={() => eventHandlers.handleClick(captureIndex)}
+                  onMouseMove={() => eventHandlers.handleMouseMove(captureIndex)}
+                  onTouchMove={() => eventHandlers.handleMouseMove(captureIndex)}
                   className={`select-none px-1 mx-0.5 cursor-pointer rounded-md
                     ${selectedWordsIndexes.includes(captureIndex) 
                       ? "bg-blue-300 dark:bg-blue-500" 
@@ -80,7 +80,6 @@ const RenderText = (props: RenderTextProps) => {
                   </Tooltip>
                 </span>
               )
-              
             } else if (!translation) {
               globalIndex++;
               return (
@@ -91,12 +90,12 @@ const RenderText = (props: RenderTextProps) => {
                               ${selectedWordsIndexes.includes(captureIndex) 
                                 ? "bg-blue-300 dark:bg-blue-500" 
                                 : "bg-transparent"}`}
-                  onClick={() => handleClick(captureIndex)}
-                  onMouseMove={() => handleMouseMove(captureIndex)}
-                  onTouchStart={() => handleTouchStart(captureIndex)}
+                  onClick={() => eventHandlers.handleClick(captureIndex)}
+                  onMouseMove={() => eventHandlers.handleMouseMove(captureIndex)}
+                  onTouchStart={() => eventHandlers.handleTouchStart(captureIndex)}
                   data-index={captureIndex}
-                  onTouchMove={handleTouchMove}
-                  onTouchEnd={handleTouchEnd}
+                  onTouchMove={eventHandlers.handleTouchMove}
+                  onTouchEnd={eventHandlers.handleTouchEnd}
                 >
                   {word}
                 </span>
@@ -116,7 +115,6 @@ const RenderText = (props: RenderTextProps) => {
                   bg-white dark:bg-slate-600 dark:text-slate-300`}
       >
         {sentences.map(renderSentence)}
-        <TranslateModal selectedWordsIndexes={selectedWordsIndexes} selectedWords={selectedWords} />
       </div>
     </div>
   );

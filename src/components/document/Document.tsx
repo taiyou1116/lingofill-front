@@ -10,7 +10,7 @@ import { useWindowSize } from "@/hooks/hooks";
 import { splitTextToSegment, truncateText } from "@/utils/textUtils";
 
 import InputDocument from "./InputDocument";
-import TranslateDocument from "./TranslateDocument";
+import EditDocument from "./EditDocument";
 import SelectLanguage from "./header/SelectLanguage";
 import SendDocumentDataButton from "./header/SendDocumentDataButton";
 import ThreeWayToggle from "./header/ThreeWayToggle";
@@ -51,7 +51,7 @@ function DocumentComponent() {
     switch (selectedMode) {
       case 'edit':
         return (
-          <TranslateDocument
+          <EditDocument
             localDocument={document}
             sentences={sentences!}
             isSelectedReading={isSelectedReading}
