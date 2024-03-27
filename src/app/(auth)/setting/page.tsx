@@ -1,10 +1,11 @@
+
 'use client'
 
 import { useThemeMode } from '@/hooks/hooks';
 import { GrobalStore } from '@/store/grobalStore';
 import { VoiceRate } from '@/types/types';
+import { handleLanguageChange } from '@/utils/i18nUtils';
 import { Divider, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Switch, ThemeProvider } from '@mui/material'
-import { changeLanguage } from 'i18next';
 import { useRouter } from 'next/navigation';
 import React from 'react'
 
@@ -12,16 +13,10 @@ function Setting() {
   const theme = useThemeMode();
   const route = useRouter();
 
-  const { language, setLanguage, 
+  const { language, setLanguage,
           voiceType, setVoiceType, 
           voiceRate, setVoiceRate, 
           translationExpression, setTranslationExpression } = GrobalStore();
-
-  const handleLanguageChange = (event: SelectChangeEvent) => {
-    localStorage.setItem('language', event.target.value);
-    setLanguage(event.target.value);
-    changeLanguage(event.target.value);
-  };
 
   const handleVoiceTypeChange = () => {
     if (voiceType === 'standard') {
@@ -66,7 +61,7 @@ function Setting() {
                     id="demo-simple-select"
                     value={language}
                     label={"言語"}
-                    onChange={handleLanguageChange}
+                    onChange={(event) => handleLanguageChange(event, setLanguage)}
                   >
                     <MenuItem value={'ja'}>日本語</MenuItem>
                     <MenuItem value={'en'}>English</MenuItem>
@@ -121,7 +116,7 @@ function Setting() {
                     id="demo-simple-select"
                     value={translationExpression}
                     label={"翻訳方法"}
-                    onChange={(e) => handleExpressionLn(e)}
+                    onChange={handleExpressionLn}
                   >
                     <MenuItem value={'NULL'}>デフォルト</MenuItem>
                     <MenuItem value={'FORMAL'}>硬い表現</MenuItem>

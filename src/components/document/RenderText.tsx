@@ -2,7 +2,7 @@
 import React from "react";
 import { m_plus_rounded_1c } from "@/store/fontStore";
 
-import { judgeSpaceLanguage } from "@/utils/helper";
+import { judgeSpaceLanguage } from "@/utils/textUtils";
 
 import TranslateModal from "./modal/TranslateModal";
 

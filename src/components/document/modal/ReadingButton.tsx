@@ -2,7 +2,7 @@
 import React from 'react';
 import { GrobalStore } from '@/store/grobalStore';
 import { useTranslation } from 'react-i18next';
-import { getVoiceForLanguage, processAndSpeak } from '@/utils/helper';
+import { getVoiceForLanguage, processAndSpeak } from '@/utils/audioUtils';
 import { Tooltip } from '@mui/material'
 import { VolumeUp } from '@mui/icons-material'
 

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { GrobalStore } from '@/store/grobalStore';
 import { useTranslation } from 'react-i18next';
 
-import { splitTextToSegments } from '@/utils/helper';
+import { splitTextToSegments } from '@/utils/textUtils';
 import { getTranslation } from '@/utils/request';
 import { Formality } from '@aws-sdk/client-translate';
 
@@ -33,7 +33,10 @@ function TranslateModal(props: TranslateModalProps) {
     if (document === null) return;
 
     const translateTextAsync = async () => {
-      const translatedText = await getTranslation(selectedWords, document.language, document.translateLanguage, translationExpression as Formality );
+      const translatedText = await getTranslation(selectedWords, 
+                                                  document.language, 
+                                                  document.translateLanguage, 
+                                                  translationExpression as Formality );
       if (translatedText === undefined) return;
       setTranslatedWords(translatedText);
     }

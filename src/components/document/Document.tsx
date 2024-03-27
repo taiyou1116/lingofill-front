@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { oswald } from "@/store/fontStore";
 
 import { useWindowSize } from "@/hooks/hooks";
-import { splitTextToSegment, truncateText } from "@/utils/helper";
+import { splitTextToSegment, truncateText } from "@/utils/textUtils";
 
 import InputDocument from "./InputDocument";
 import TranslateDocument from "./TranslateDocument";

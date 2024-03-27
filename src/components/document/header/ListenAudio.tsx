@@ -3,7 +3,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next';
 import { GrobalStore } from '@/store/grobalStore';
 
-import { stopAudio } from '@/utils/helper';
+import { stopAudio } from '@/utils/audioUtils';
 
 import { StopCircle, VolumeMute, VolumeUp } from '@mui/icons-material'
 import { Tooltip } from '@mui/material'

@@ -4,8 +4,7 @@ import { GrobalStore } from '@/store/grobalStore';
 import { useTranslation } from 'react-i18next';
 import { Document } from '@/types/types';
 import { Save } from '@mui/icons-material'
-import { leaveTranslation } from '@/utils/helper';
-
+import { leaveTranslation } from '@/utils/textUtils';
 
 type Props = {
   selectedWordsIndexes: number[],

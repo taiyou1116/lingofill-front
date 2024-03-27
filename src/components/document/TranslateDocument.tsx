@@ -1,12 +1,13 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { GrobalStore } from "@/store/grobalStore";
+import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
-import { getVoiceForLanguage, judgeSpaceLanguage, processAndSpeak, returnTextFromLn } from "@/utils/helper";
+import { getVoiceForLanguage, processAndSpeak } from "@/utils/audioUtils";
+import { judgeSpaceLanguage, returnTextFromLn } from "@/utils/textUtils";
 import RenderText from "./RenderText";
 
 import { Document, TranslationObj } from "@/types/types";
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 type Props = {
   localDocument: Document | null,

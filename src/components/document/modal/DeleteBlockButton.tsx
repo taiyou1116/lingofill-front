@@ -3,7 +3,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next';
 import { GrobalStore } from '@/store/grobalStore';
 
-import { leaveTranslation } from '@/utils/helper';
+import { leaveTranslation } from '@/utils/textUtils';
 
 import { AutoFixHigh } from '@mui/icons-material';
 import { Document } from '@/types/types';
