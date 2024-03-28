@@ -9,8 +9,11 @@ https://main.d5yypxcoba5g4.amplifyapp.com/
 Inputに改行合わせる
 - 理解する
 
-すべてのButton変更
-propsの適切な渡し(callbackでいいところなど)
+usecallback, useMemoの理解
+マウスイベントをフックスにできるか
+-> RenderTextのメモ化 & フックス化
+dndkit
+
 ごちゃごちゃなclassNameの整理
 コンポーネントの型をFCに
 

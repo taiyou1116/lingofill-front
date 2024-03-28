@@ -1,11 +1,12 @@
 
 import React from "react";
 import { m_plus_rounded_1c } from "@/store/fontStore";
+import { GrobalStore } from "@/store/grobalStore";
 
 import { judgeSpaceLanguage } from "@/utils/textUtils";
 
 import { Tooltip } from "@mui/material";
-import { Document, TranslationObj } from "@/types/types";
+import { TranslationObj } from "@/types/types";
 
 type EventHandlers = {
   handleClick: (index: number) => void;
@@ -19,32 +20,30 @@ type EventHandlers = {
 
 type RenderTextProps = {
   sentences: string[];
-  readingNumber?: number;
-  doc: Document;
   eventHandlers: EventHandlers;
-  selectedWordsIndexes: number[];
   isSelectedReading: boolean,
   words: string[],
-  setSelectedWordsIndexes: (selectedWordsIndexes: number[]) => void,
   listenText: (sentenceIndex: number) => void,
   showMemoText: (translation: TranslationObj) => string,
 }
 
 const RenderText = (props: RenderTextProps) => {
-  const { sentences, readingNumber, doc, selectedWordsIndexes,
-          eventHandlers, listenText, showMemoText,
-  } = props;
+  const { sentences, eventHandlers, listenText, showMemoText } = props;
+  const { readingNumber, document, selectedWordsIndexes } = GrobalStore();
 
   let globalIndex = 0;
+  let newLine = '\n';
 
   const renderSentence = (sentence: string, sentenceIndex: number) => {
-    if (sentence === '\n') {
+    if (document === null) return;
+
+    if (sentence === newLine) {
       globalIndex++;
       return <br key={`br-${sentenceIndex}`} />;
     }
 
     // 1文の中のwords
-    const wordsOfSentence = doc.language && judgeSpaceLanguage(doc.language) ? sentence.split(' ') : sentence.split('');
+    const wordsOfSentence = document.language && judgeSpaceLanguage(document.language) ? sentence.split(' ') : sentence.split('');
 
     return (
       <React.Fragment key={sentenceIndex}>
@@ -56,7 +55,7 @@ const RenderText = (props: RenderTextProps) => {
         >
           {wordsOfSentence.map((word) => {
             const captureIndex = globalIndex;
-            const translation = doc.translations.find(t => t.indexes.includes(captureIndex));
+            const translation = document.translations.find(t => t.indexes.includes(captureIndex));
 
             if (translation && translation.indexes[0] === captureIndex) {
               globalIndex++;
@@ -86,7 +85,7 @@ const RenderText = (props: RenderTextProps) => {
                 <span
                   key={captureIndex}
                   className={`select-none cursor-pointer
-                              ${doc.language !== 'ja' && doc.language !== 'zh' ? 'p-0.5' : ''} 
+                              ${document.language !== 'ja' && document.language !== 'zh' ? 'p-0.5' : ''} 
                               ${selectedWordsIndexes.includes(captureIndex) 
                                 ? "bg-blue-300 dark:bg-blue-500" 
                                 : "bg-transparent"}`}
@@ -114,7 +113,7 @@ const RenderText = (props: RenderTextProps) => {
         className={`overflow-y-auto overflow-x-hidden max-h-[calc(100vh-180px)] p-3 rounded-md 
                   bg-white dark:bg-slate-600 dark:text-slate-300`}
       >
-        {sentences.map(renderSentence)}
+        {sentences.map((sentence, index) => renderSentence(sentence, index))}
       </div>
     </div>
   );

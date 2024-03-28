@@ -52,9 +52,9 @@ function InputDocument() {
 
   return (
     <div className=' pt-32'>
-      { document!.translations[0] === undefined 
-      ? ''
-      : <div className=' flex items-center gap-1 pb-1 text-xs md:text-sm dark:text-gray-300'>
+      { document!.translations[0] !== undefined 
+      ?? 
+        <div className=' flex items-center gap-1 pb-1 text-xs md:text-sm dark:text-gray-300'>
           <WarningOutlined style={{ fontSize: 20 }}/>テキストを変更するとメモの位置が変更される可能性があります
         </div>
       } 

@@ -20,7 +20,7 @@ function EditDocument(props: Props) {
   const { localDocument, sentences, isSelectedReading } = props;
   const { showCenterModal, flipCenterModal, 
           selectedWordsIndexes, setSelectedWordsIndexes, 
-          readingNumber, voiceType, setReadingNumber, setIsPlaying, voiceRate } = GrobalStore();
+          voiceType, setReadingNumber, setIsPlaying, voiceRate } = GrobalStore();
 
   const [words, setWords] = useState<string[]>([]);
   const [isDragging, setIsDragging] = useState(false);
@@ -203,8 +203,6 @@ function EditDocument(props: Props) {
     <> 
       <RenderText
         sentences={sentences}
-        readingNumber={readingNumber}
-        doc={localDocument!}
         eventHandlers={{
           handleClick,
           handleMouseMove,
@@ -214,8 +212,6 @@ function EditDocument(props: Props) {
           handleTouchMove,
           handleTouchEnd,
         }}
-        selectedWordsIndexes={selectedWordsIndexes}
-        setSelectedWordsIndexes={setSelectedWordsIndexes}
         isSelectedReading={isSelectedReading}
         words={words}
         listenText={listenText}

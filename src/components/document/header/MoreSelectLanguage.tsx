@@ -1,24 +1,22 @@
 
-import React, { useState } from 'react'
-import { useThemeMode } from '@/hooks/hooks';
+import React from 'react'
+import { useModal, useThemeMode } from '@/hooks/hooks';
 
 import SelectLanguage from './SelectLanguage'
+import Button from '@/components/ui/Button';
 
 import { MoreHoriz } from '@mui/icons-material'
 import { Dialog, DialogActions, DialogContent, DialogTitle, ThemeProvider } from '@mui/material'
-import Button from '@/components/ui/Button';
 
 function MoreSelectLanguage() {
     // 言語選択Modalの開閉
   const theme = useThemeMode();
-  const [open, setOpen] = useState(false);
-  const handleClickOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const { open, handleOpen, handleClose } = useModal();
   
   return (
     <div>  
       <Button
-        onClick={handleClickOpen}
+        onClick={handleOpen}
         baseUI='rounded-lg p-1 border'
         light='bg-white'
         dark='dark:border-gray-900 dark:text-gray-300 dark:bg-gray-900'
