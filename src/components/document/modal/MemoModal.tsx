@@ -8,6 +8,7 @@ import { splitTextToSegments } from '@/utils/textUtils';
 import { getTranslation } from '@/utils/request';
 import { Formality } from '@aws-sdk/client-translate';
 
+import Button from '@/components/ui/Button';
 import InputMemo from './InputMemo';
 import SaveButton from './SaveButton';
 import ModalCenter from './ModalCenter';
@@ -94,12 +95,13 @@ function TranslateModal(props: TranslateModalProps) {
           setDocuments={setDocuments}
           selectedWordsIndexes={selectedWordsIndexes}
         />
-        <button 
-          className=' md:text-base text-sm dark:text-gray-300' 
-          onClick={() => flipCenterModal()} 
+        <Button
+          onClick={() => flipCenterModal()}
+          baseUI=' md:text-base text-sm'
+          dark='dark:text-gray-300'
         >
           {t('document.modal.closeModal')}
-        </button>
+        </Button>
       </div>
     </ModalCenter>
   )

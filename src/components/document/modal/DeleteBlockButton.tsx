@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { GrobalStore } from '@/store/grobalStore';
 
 import { leaveTranslation } from '@/utils/textUtils';
+import Button from '@/components/ui/Button';
 
 import { AutoFixHigh } from '@mui/icons-material';
 import { Document } from '@/types/types';
@@ -35,15 +36,14 @@ function DeleteBlockButton(props: Props) {
   }
 
   return (
-    <button 
-      className=' text-gray-200 rounded-md bg-red-500 hover:bg-red-800 px-2 py-1 md:px-4 md:py-2 '
+    <Button
       onClick={deleteBlock}
+      baseUI='px-2 py-1 md:px-4 md:py-2 rounded-md text-sm flex gap-1 items-center md:text-base'
+      light='bg-red-500 hover:bg-red-800 text-gray-200'
     >
-      <div className=' flex gap-1 items-center md:text-base text-sm' >
-        <AutoFixHigh /> 
-        {t('document.modal.deleteBlockButton.cancelBlock')}
-      </div>
-    </button>
+      <AutoFixHigh /> 
+      {t('document.modal.deleteBlockButton.cancelBlock')}
+    </Button>
   )
 }
 

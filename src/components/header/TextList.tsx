@@ -9,10 +9,11 @@ function TextList() {
   const { t } = useTranslation();
   
   return (
-    <Tooltip title={t('header.textList')}>
-      <button onClick={flipShowSidebar}>
-        <Reorder style={{fontSize: 35}} className=" dark:text-gray-200" />
-      </button>
+    <Tooltip 
+      title={t('header.textList')}
+      onClick={flipShowSidebar}
+    >
+      <Reorder style={{fontSize: 35}} className=" dark:text-gray-200" />
     </Tooltip>
   )
 }

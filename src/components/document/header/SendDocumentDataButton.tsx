@@ -4,6 +4,7 @@ import { GrobalStore } from '@/store/grobalStore';
 import { useTranslation } from 'react-i18next';
 
 import { updateText } from '@/utils/request';
+import Button from '@/components/ui/Button';
 
 import { CheckCircle, CloudUpload } from '@mui/icons-material';
 
@@ -41,26 +42,6 @@ function SendDocumentDataButton() {
       setDocuments(newDocuments);
     }
   }
-
-  const changeSendDataButton = () => {
-    {
-      return (
-        <button 
-          onClick={() => updateDocuments()}
-          className=' bg-lime-400 
-                      dark:bg-lime-600  
-                      hover:bg-lime-500 
-                      dark:hover:bg-lime-700 
-                      flex gap-1 items-center rounded-lg py-2 px-4'
-        >
-          <CloudUpload style={{fontSize: 20}} className=' dark:text-gray-100' />
-          <span className=' dark:text-gray-300 text-xxs'>
-            {t('document.header.sendDocumentDataButton.saveText')}
-          </span>
-        </button>
-      )
-    }
-  }
  
   return ( 
     <div>
@@ -73,7 +54,17 @@ function SendDocumentDataButton() {
           </span>
         </div>
       : 
-        changeSendDataButton() 
+        <Button
+          onClick={() => updateDocuments()}
+          baseUI='flex gap-1 items-center rounded-lg py-2 px-4 text-xxs'
+          light='bg-lime-400 hover:bg-lime-500'
+          dark='dark:bg-lime-600 dark:hover:bg-lime-700 dark:text-gray-100'
+        >
+          <CloudUpload style={{fontSize: 20}} />
+          <span className=' dark:text-gray-300 '>
+            {t('document.header.sendDocumentDataButton.saveText')}
+          </span>
+        </Button>
       }
     </div>
   )

@@ -41,7 +41,7 @@ const MyApp = () => {
     <div className=" w-full h-screen flex flex-col items-center justify-center gap-2">
       <div className=" dark:text-gray-200">Loading</div>
       <Box sx={{ width: '30%' }}>
-          <LinearProgress />
+        <LinearProgress />
       </Box>
     </div>
   )

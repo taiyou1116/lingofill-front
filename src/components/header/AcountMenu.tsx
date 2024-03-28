@@ -18,11 +18,13 @@ function AcountMenu() {
 
   return (
     <>
-      <div onClick={(event: any) => setAnchorEl(event.currentTarget)} className=" cursor-pointer">
-        <Tooltip title={t('header.acountSetting')}>
-          <AccountCircle style={{fontSize: 35}} className=" dark:text-gray-200" />
-        </Tooltip>
-      </div>
+      <Tooltip 
+        title={t('header.acountSetting')}
+        onClick={(event: any) => setAnchorEl(event.currentTarget)}
+        className=" cursor-pointer dark:text-gray-200"
+      >
+        <AccountCircle style={{fontSize: 35}} />
+      </Tooltip>
       <Menu
         autoFocus={false}
         anchorEl={anchorEl}

@@ -3,11 +3,11 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import { generateMemoFromGPT4 } from '@/utils/request';
 
+import Button from '@/components/ui/Button';
 import PasteButton from './PasteButton';
 
 import { AutoAwesome } from '@mui/icons-material';
 import { CircularProgress } from '@mui/material';
-
 
 type Props = {
   userInputMemo: string,
@@ -40,13 +40,14 @@ function InputMemo(props: Props) {
             {t('document.modal.inputMemo.generatingAI')}<CircularProgress size={20} />
           </div>
         :
-          <button 
-            onClick={generateMemo} 
-            className=' py-1 px-2 text-sm flex gap-1 rounded-md border 
-                      border-gray-400 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-900 dark:bg-gray-600'
+          <Button 
+            onClick={generateMemo}
+            baseUI='py-1 px-2 text-sm flex gap-1 rounded-md border'
+            light='border-gray-400 hover:bg-gray-300'
+            dark='dark:text-gray-300 dark:bg-gray-600 dark:hover:bg-gray-900'
           >
             <AutoAwesome style={{ fontSize: 20 }} />{t('document.modal.inputMemo.generateAI')}
-          </button>
+          </Button>
         }
       </div>
       <textarea 

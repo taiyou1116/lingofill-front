@@ -32,8 +32,8 @@ function ListenAudio(props: Props) {
         <Tooltip
           title={t('document.header.aloud.onAloud')} 
           className=" cursor-pointer p-1 hover:rounded 
-                    dark:text-gray-300 
                     hover:bg-gray-200 
+                    dark:text-gray-300 
                     dark:hover:bg-gray-800" 
           onClick={() => setIsSelectedReading(true)}
         >
@@ -45,8 +45,8 @@ function ListenAudio(props: Props) {
           <Tooltip 
             title={t('document.header.aloud.offAloud')} 
             className=" cursor-pointer p-1 rounded-md
+                      bg-gray-300
                       dark:text-gray-300 
-                      bg-gray-300 
                       dark:bg-gray-600" 
             onClick={() => setIsSelectedReading(false)}
           >

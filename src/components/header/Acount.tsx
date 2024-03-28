@@ -1,8 +1,11 @@
+
 "use client"
 
-import '@aws-amplify/ui-react/styles.css';
 import { signOut } from 'aws-amplify/auth';
 import { useRouter } from 'next/navigation';
+import Button from '../ui/Button';
+
+import '@aws-amplify/ui-react/styles.css';
 
 function Acount() {
   const router = useRouter();
@@ -16,7 +19,7 @@ function Acount() {
   }
 
   return (
-    <button onClick={handleSignOut}>サインアウト</button>
+    <Button onClick={handleSignOut}>サインアウト</Button>
   )
 }
 

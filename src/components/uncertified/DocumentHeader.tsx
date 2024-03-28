@@ -9,6 +9,7 @@ import { I18nextProvider, useTranslation } from 'react-i18next';
 
 import { FormControl, InputLabel, MenuItem, Select, ThemeProvider } from '@mui/material';
 import { handleLanguageChange } from '@/utils/i18nUtils';
+import Button from '../ui/Button';
 
 type Props = {
   setLogin: (login: boolean) => void,
@@ -56,16 +57,21 @@ function DocumentHeader( props: Props) {
           </div>
         </ThemeProvider>
         <div className=' flex flex-col md:flex-row gap-3 text-xs md:text-base'>
-          <button 
-            className={`bg-gray-200 rounded-md text-gray-800 ${buttonClass}`} 
-            onClick={transferHomeRoute}>
+          <Button
+            onClick={transferHomeRoute}
+            baseUI={`rounded-md ${buttonClass}`}
+            light='bg-gray-200 text-gray-800'
+          >
             {t('explanation.header.logined')}
-          </button>
-          <button 
-            className={` bg-blue-500 dark:bg-blue-800 rounded-md dark:text-white ${buttonClass}`} 
-            onClick={() => setLogin(true)}>
+          </Button>
+          <Button
+            onClick={() => setLogin(true)}
+            baseUI={`rounded-md ${buttonClass}`}
+            light='bg-blue-500'
+            dark='dark:bg-blue-800 dark:text-white'
+          >
             {t('explanation.header.newUser')}
-          </button>
+          </Button>
         </div>
       </div>
     </div>
