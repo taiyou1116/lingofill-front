@@ -40,6 +40,7 @@ function DeleteBlockButton(props: Props) {
       onClick={deleteBlock}
       baseUI='px-2 py-1 md:px-4 md:py-2 rounded-md text-sm flex gap-1 items-center md:text-base'
       light='bg-red-500 hover:bg-red-800 text-gray-200'
+      dark='bg-red-500 hover:bg-red-800 text-gray-200'
     >
       <AutoFixHigh /> 
       {t('document.modal.deleteBlockButton.cancelBlock')}

@@ -10,9 +10,9 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = 
-({ onClick, baseUI = 'py-2 px-4 rounded-md', light = 'bg-gray-400', dark = 'dark:bg-gray-800', children }) => {
+({ onClick, baseUI = 'py-2 px-4 rounded-md', light = 'bg-gray-600 text-gray-300 hover:bg-gray-800', dark = 'dark:bg-gray-500', children }) => {
   return (
-    <button onClick={onClick} className={`${baseUI} ${light} ${dark}`}>
+    <button onClick={onClick} className={`cursor-pointer ${baseUI} ${light} ${dark}`}>
       {children}
     </button>
   );

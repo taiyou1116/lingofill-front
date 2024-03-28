@@ -13,7 +13,7 @@ function TextList() {
       title={t('header.textList')}
       onClick={flipShowSidebar}
     >
-      <Reorder style={{fontSize: 35}} className=" dark:text-gray-200" />
+      <Reorder style={{fontSize: 35}} className=" dark:text-gray-200 cursor-pointer" />
     </Tooltip>
   )
 }

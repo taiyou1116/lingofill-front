@@ -14,7 +14,7 @@ function CreateNewDocumentButton(props: Props) {
   const { setCreateNewDocument } = props;
   const { t } = useTranslation();
 
-  const tooltipBaseStyle = 'dark:text-gray-300 dark:border-gray-400 border-2 rounded-lg p-0.5 hover:border-slate-600 duration-150'
+  const tooltipBaseStyle = 'dark:text-gray-300 dark:border-gray-400 border-2 cursor-pointer rounded-lg p-0.5 hover:border-slate-600 duration-150'
 
   return (
     <div className=' flex justify-between w-full p-5 items-center'>
@@ -24,7 +24,7 @@ function CreateNewDocumentButton(props: Props) {
         className={tooltipBaseStyle}
         onClick={() => setCreateNewDocument(true)}
       >
-        <EditNote style={{fontSize: 25}}/>
+        <EditNote style={{fontSize: 35}}/>
       </Tooltip> 
     </div>
   )

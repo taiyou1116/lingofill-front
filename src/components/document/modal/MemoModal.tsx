@@ -97,8 +97,6 @@ function TranslateModal(props: TranslateModalProps) {
         />
         <Button
           onClick={() => flipCenterModal()}
-          baseUI=' md:text-base text-sm'
-          dark='dark:text-gray-300'
         >
           {t('document.modal.closeModal')}
         </Button>

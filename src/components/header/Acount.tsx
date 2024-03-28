@@ -3,7 +3,6 @@
 
 import { signOut } from 'aws-amplify/auth';
 import { useRouter } from 'next/navigation';
-import Button from '../ui/Button';
 
 import '@aws-amplify/ui-react/styles.css';
 
@@ -19,7 +18,7 @@ function Acount() {
   }
 
   return (
-    <Button onClick={handleSignOut}>サインアウト</Button>
+    <button onClick={handleSignOut}>サインアウト</button>
   )
 }
 

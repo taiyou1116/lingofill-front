@@ -71,6 +71,7 @@ function SaveButton(props: Props) {
       onClick={handleSaveButton}
       baseUI='flex items-center rounded-md gap-1 text-sm px-2 py-1 md:px-4 md:py-2 md:text-base '
       light='bg-lime-500 text-gray-200 hover:bg-lime-800'
+      dark='bg-lime-500 text-gray-200 hover:bg-lime-800'
     >
       <Save />{t('document.modal.saveButton.save')}
     </Button>

@@ -61,6 +61,7 @@ function DocumentHeader( props: Props) {
             onClick={transferHomeRoute}
             baseUI={`rounded-md ${buttonClass}`}
             light='bg-gray-200 text-gray-800'
+            dark='dark:text-gray-900'
           >
             {t('explanation.header.logined')}
           </Button>
