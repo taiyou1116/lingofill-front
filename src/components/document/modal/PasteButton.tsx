@@ -14,8 +14,12 @@ function PasteButton(props: Props) {
   const { t } = useTranslation();
 
   const getClipboardText = async () => {
-    const text = await navigator.clipboard.readText();
-    setUserInput(text);
+    try {
+      const text = await navigator.clipboard.readText();
+      setUserInput(text);
+    } catch(err) {
+      console.error('Failed to read clipboard contents: ', err);
+    } 
   }
 
   return (

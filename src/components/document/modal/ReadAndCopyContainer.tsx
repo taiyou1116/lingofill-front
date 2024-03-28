@@ -22,7 +22,7 @@ function ReadAndCopyContainer(props: Props) {
   const [copied, setCopied] = useState<boolean>(false);
 
   const CopyText = () => {
-    navigator.clipboard.writeText(words)
+    navigator.clipboard.writeText(words);
     setCopied(true);
     setTimeout(() => setCopied(false), 3000);
   }

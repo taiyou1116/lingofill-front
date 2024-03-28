@@ -20,12 +20,17 @@ function InputMemo(props: Props) {
   const { userInputMemo, setUserInputMemo, selectedWords, ln } = props;
   const [ isGeneratingAIResponse, setIsGeneratingAIResponse ] = useState<boolean>(false);
   const { t } = useTranslation();
-
+  
   const generateMemo = async () => {
     setIsGeneratingAIResponse(true);
-    const text: string = await generateMemoFromGPT4(selectedWords, ln!);
-    setIsGeneratingAIResponse(false);
-    setUserInputMemo(text);
+    try {
+      const text: string = await generateMemoFromGPT4(selectedWords, ln!);
+      setUserInputMemo(text);
+    } catch (error) {
+      console.error('Failed to generate memo: ', error);
+    } finally {
+      setIsGeneratingAIResponse(false);
+    }
   }
 
   return (

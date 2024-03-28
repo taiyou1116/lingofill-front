@@ -24,7 +24,7 @@ type TranslateModalProps = {
 
 function TranslateModal(props: TranslateModalProps) {
   const { selectedWordsIndexes, selectedWords } = props;
-  const { document, setDocument, documents, setDocuments, translationExpression, flipCenterModal } = GrobalStore();
+  const { document, translationExpression, flipCenterModal } = GrobalStore();
   const { t } = useTranslation();
   
   const [userInputMemo, setUserInputMemo] = useState('');
@@ -81,20 +81,9 @@ function TranslateModal(props: TranslateModalProps) {
       />
       <div className=' flex gap-3 w-full items-center justify-center'>
         <SaveButton 
-          selectedWordsIndexes={selectedWordsIndexes}
           userInputMemo={userInputMemo}
-          document={document}
-          setDocument={setDocument}
-          documents={documents}
-          setDocuments={setDocuments}
         />
-        <DeleteBlockButton 
-          document={document}
-          setDocument={setDocument}
-          documents={documents}
-          setDocuments={setDocuments}
-          selectedWordsIndexes={selectedWordsIndexes}
-        />
+        <DeleteBlockButton />
         <Button
           onClick={() => flipCenterModal()}
         >

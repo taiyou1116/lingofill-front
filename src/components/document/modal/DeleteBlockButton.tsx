@@ -1,26 +1,16 @@
 
 import React from 'react'
-import { useTranslation } from 'react-i18next';
 import { GrobalStore } from '@/store/grobalStore';
+import { useTranslation } from 'react-i18next';
 
 import { leaveTranslation } from '@/utils/textUtils';
 import Button from '@/components/ui/Button';
 
 import { AutoFixHigh } from '@mui/icons-material';
-import { Document } from '@/types/types';
 
-type Props = {
-  document: Document | null,
-  setDocument: (document: Document | null) => void,
-  documents: Document[],
-  setDocuments: (documents: Document[]) => void,
-  selectedWordsIndexes: number[],
-}
-
-function DeleteBlockButton(props: Props) {
-  const { document, setDocument, documents, setDocuments, selectedWordsIndexes } = props;
-  const { flipCenterModal } = GrobalStore();
+function DeleteBlockButton() {
   const { t } = useTranslation();
+  const { document, documents, setDocument, setDocuments, flipCenterModal, selectedWordsIndexes } = GrobalStore();
 
   const deleteBlock = () => {
     if (!document) return;
