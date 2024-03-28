@@ -16,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
-        <link rel="icon" href="/favicon_2.ico" />
+        <title>Lingo-Fill: Learn Languages Effectively</title>
+        <meta name="description" content="Join Lingo-Fill to discover a new way of learning languages with interactive courses and real-life practice." />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <body className={` ${m_plus_rounded_1c.className}`}>
         {children}
