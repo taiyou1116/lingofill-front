@@ -1,62 +1,34 @@
+
 "use client"
 
-import React from 'react';
-import "../../globals.css";
-import "@aws-amplify/ui-react/styles.css";
+import React, { useEffect } from "react";
+import { useGetLocalStorage } from "@/hooks/hooks";
+
 import { Amplify } from "aws-amplify";
 import awsExports from "../../../aws-exports";
-import { useEffect } from "react";
-
 import i18n from "@/i18n";
 import { I18nextProvider } from "react-i18next";
 import { changeLanguage } from 'i18next';
 import DocumentComponent from '@/components/document/Document';
-import { GrobalStore } from '@/store/grobalStore';
-import { VoiceRate, VoiceType } from '@/types/types';
+
+import "@aws-amplify/ui-react/styles.css";
+import "../../globals.css"
 
 Amplify.configure(awsExports);
 
 function Home() {
-  const { selectedWordsIndexes, setSelectedWordsIndexes, 
-          showCenterModal, 
-          setLanguage, 
-          setVoiceType, setVoiceRate,
-          setTranslationExpression } = GrobalStore();
 
-  // 言語選択 localStorageから取得
+  const { value: ln } = useGetLocalStorage('language', 'ja');
+  useGetLocalStorage('rate', '100');
+  useGetLocalStorage('voiceType', 'standard');
+  useGetLocalStorage('translationExpression', 'NULL');
+
   useEffect(() => {
-    const ln = localStorage.getItem('language');
-    const rate = localStorage.getItem('rate');
-    const voiceType = localStorage.getItem('voiceType');
-    const translationExpression = localStorage.getItem('translationExpression');
-    if (ln !== null) {
-      changeLanguage(ln);
-      setLanguage(ln);
-    } else {
-      localStorage.setItem('language', 'ja');
-    }
-    if (rate !== null) {
-      setVoiceRate(rate as VoiceRate);
-    }
-    if (voiceType !== null) {
-      setVoiceType(voiceType as VoiceType);
-    }
-    if (translationExpression !== null) {
-      setTranslationExpression(translationExpression);
-    }
-    
-  }, [setLanguage, setVoiceRate, setVoiceType, setTranslationExpression])
-
-  // 翻訳indexをリセット
-  const resetSelectedWordsIndexes = () => {
-    if (showCenterModal) return;
-    if (selectedWordsIndexes.length !== 0) {
-      setSelectedWordsIndexes([]);
-    }
-  }
+    changeLanguage(ln);
+  }, [ln])
 
   return (
-    <div className=" h-full" onMouseDown={resetSelectedWordsIndexes} >
+    <div className=" h-full" >
       <I18nextProvider i18n={i18n} defaultNS={"translation"}>
         <DocumentComponent />
       </I18nextProvider>

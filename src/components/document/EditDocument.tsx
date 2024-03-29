@@ -9,6 +9,7 @@ import RenderText from "./memo/RenderText";
 
 import { Document, TranslationObj } from "@/types/types";
 import MemoModal from "./modal/MemoModal";
+import { useModal } from "@/hooks/hooks";
 
 type Props = {
   localDocument: Document | null,
@@ -18,9 +19,9 @@ type Props = {
 
 function EditDocument(props: Props) {
   const { localDocument, sentences, isSelectedReading } = props;
-  const { showCenterModal, flipCenterModal, 
+  const { 
           selectedWordsIndexes, setSelectedWordsIndexes, 
-          voiceType, setReadingNumber, setIsPlaying, voiceRate } = GrobalStore();
+          setReadingNumber, setIsPlaying } = GrobalStore();
 
   const [words, setWords] = useState<string[]>([]);
   const [isDragging, setIsDragging] = useState(false);
@@ -30,6 +31,8 @@ function EditDocument(props: Props) {
   const [startNumber, setStartNumber] = useState<number>(-1);
   const touchIndexRef = useRef<number | null>(null);
   const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null);
+
+  const { open: showCenterModal, handleOpen, handleClose  } = useModal();
   
   // 単語用 -> sentencesからさらに分割
   useEffect(() => {
@@ -56,7 +59,7 @@ function EditDocument(props: Props) {
       setSelectedWordsIndexes([index]);
       setSelectedWords(words[index]);
     }
-    flipCenterModal();
+    handleOpen();
   };
 
   const handleMouseDown = () => {
@@ -112,7 +115,7 @@ function EditDocument(props: Props) {
     setIsDragging(false);
     setStartDragIndex(null);
     if (selectedWordsIndexes.length > 0) {
-      flipCenterModal();
+      handleOpen();
       setSelectedWords(returnTextFromLn(localDocument?.language, selectedWordsIndexes, words));
     }
   };
@@ -173,6 +176,10 @@ function EditDocument(props: Props) {
 
   const listenText = async (sentenceIndex: number) => {
     if (!isSelectedReading) return;
+
+    const voiceType = localStorage.getItem('voiceType') || 'standard';
+    const voiceRate = localStorage.getItem('voiceRate') || '100';
+
     const newSentences = sentences.slice(sentenceIndex);
     const voice = getVoiceForLanguage(localDocument!.language, voiceType);
 
@@ -217,7 +224,12 @@ function EditDocument(props: Props) {
         listenText={listenText}
         showMemoText={showMemoText}
       />
-      <MemoModal selectedWordsIndexes={selectedWordsIndexes} selectedWords={selectedWords} />
+      <MemoModal 
+        selectedWordsIndexes={selectedWordsIndexes} 
+        selectedWords={selectedWords} 
+        showCenterModal={showCenterModal}
+        handleClose={handleClose}
+      />
     </>
   );
 }

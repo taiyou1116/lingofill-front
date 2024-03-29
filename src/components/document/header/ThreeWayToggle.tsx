@@ -1,8 +1,7 @@
 
 "use client"
 
-import React, { useState } from 'react';
-import { GrobalStore } from '@/store/grobalStore';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useThemeMode, useWindowSize } from '@/hooks/hooks';
 
@@ -10,24 +9,25 @@ import { TextSnippet, Translate } from '@mui/icons-material';
 import { ThemeProvider, ToggleButton, ToggleButtonGroup } from '@mui/material';
 import { SelectedMode } from '@/types/types';
 
-function ThreeWayToggle() {
-  const { setSelectedMode } = GrobalStore();
+type Props = {
+  selectedMode: SelectedMode;
+  setSelectedMode: React.Dispatch<React.SetStateAction<SelectedMode>>;
+};
+
+function ThreeWayToggle(props: Props) {
+  const { selectedMode, setSelectedMode } = props;
   const { t } = useTranslation();
   const theme = useThemeMode();
 
   const { width } = useWindowSize();
   const isSm = width <= 768;
 
-  const [selectedMode, setSelectedModeLocal] = useState<SelectedMode>('input');
-
   const handleModeChange = (
     event: React.MouseEvent<HTMLElement>,
     newMode: SelectedMode,
   ) => {
-    setSelectedModeLocal(newMode);
-    if (newMode) {
-      setSelectedMode(newMode);
-    }
+    
+    setSelectedMode(newMode);
   };
   
   return (

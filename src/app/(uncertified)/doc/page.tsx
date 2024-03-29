@@ -1,32 +1,36 @@
-"use client"
 
-import "../../globals.css";
-import "@aws-amplify/ui-react/styles.css";
-import { Authenticator } from "@aws-amplify/ui-react";
+"use client"
 import { useState } from "react";
 import Image from "next/image";
-import { CloudUpload, Comment, Description, DevicesOther, Language, Launch, MoneyOff, Psychology, RecordVoiceOver, Translate } from "@mui/icons-material";
+import { useWindowSize } from "@/hooks/hooks";
+import { useTranslation } from "react-i18next";
+
+import { Authenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
 import awsExports from "../../../aws-exports";
-import { Divider } from "@mui/material";
-import { useWindowSize } from "@/hooks/hooks";
+
 import DocumentUsage from "@/components/uncertified/DocumentUsage";
 import DocumentDetails from "@/components/uncertified/DocumentDetails";
 import DocumentHeader from "@/components/uncertified/DocumentHeader";
 import DocumentOverview from "@/components/uncertified/DocumentOverview";
 import DocumentDetailsMobile from "@/components/uncertified/DocumentDetailsMobile";
-import { useTranslation } from "react-i18next";
+
+import { Divider } from "@mui/material";
+import { CloudUpload, Comment, Description, DevicesOther, Language, Launch, MoneyOff, Psychology, RecordVoiceOver, Translate } from "@mui/icons-material";
+import "@aws-amplify/ui-react/styles.css";
+import "../../globals.css";
 
 Amplify.configure(awsExports);
 
 function Doc() {
-  const [login, setLogin] = useState(false);
   const { t } = useTranslation();
+  const deviceSize = useWindowSize();
+  
+  const [login, setLogin] = useState(false);
 
   const transferHomeRoute = () => {
     window.open('https://www.lingo-fill.com/', '_blank');
   }
-  const deviceSize = useWindowSize();
 
   const divideUI = () => {
     if (deviceSize.width <= 768) {

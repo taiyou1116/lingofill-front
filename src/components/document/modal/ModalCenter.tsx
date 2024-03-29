@@ -2,17 +2,16 @@
 "use client"
 
 import React, { ReactNode } from 'react'
-import { GrobalStore } from '@/store/grobalStore';
-
 import "../../../app/globals.css";
 
 type ModalCenterProps = {
   children: ReactNode,
+  showCenterModal: boolean,
+  closeModal: () => void,
 }
 
 function ModalCenterComponent(props: ModalCenterProps) {
-  const { children } = props;
-  const { showCenterModal, flipCenterModal } = GrobalStore();
+  const { children, showCenterModal, closeModal } = props;
 
   return (
     <div 
@@ -21,7 +20,7 @@ function ModalCenterComponent(props: ModalCenterProps) {
     >
       {/* 背景 */}
       <div 
-        onClick={() => flipCenterModal()} 
+        onClick={closeModal} 
         className={` fixed h-screen w-screen shadow-2lg transition-opacity duration-300 
                    bg-black/50 
                    ${ showCenterModal ? 'opacity-100' : 'opacity-0 pointer-events-none' }`}

@@ -11,11 +11,14 @@ import { Document, TranslationObj } from '@/types/types';
 
 type Props = {
   userInputMemo: string,
+  closeModal: () => void,
 }
 
-const SaveButton: React.FC<Props> = ({ userInputMemo }) => {
+const SaveButton: React.FC<Props> = (props: Props) => {
+  const { userInputMemo, closeModal } = props;
+
   const { t } = useTranslation();
-  const { selectedWordsIndexes, flipCenterModal, document, documents, setDocument, setDocuments } = GrobalStore();
+  const { selectedWordsIndexes, document, documents, setDocument, setDocuments } = GrobalStore();
 
   const updateTranslation = (translations: TranslationObj[], selectedWordsIndexes: number[], userInputMemo: string) => {
     const existingTranslationIndex = translations.findIndex(translation =>
@@ -66,7 +69,7 @@ const SaveButton: React.FC<Props> = ({ userInputMemo }) => {
     setDocuments(updatedDocuments);
     setDocument(updatedDocument);
 
-    flipCenterModal();
+    closeModal();
   };
 
   return (

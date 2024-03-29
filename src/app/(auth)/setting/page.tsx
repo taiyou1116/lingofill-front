@@ -1,43 +1,46 @@
 
 'use client'
-
-import { useThemeMode } from '@/hooks/hooks';
-import { GrobalStore } from '@/store/grobalStore';
-import { VoiceRate } from '@/types/types';
-import { handleLanguageChange } from '@/utils/i18nUtils';
-import { Divider, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Switch, ThemeProvider } from '@mui/material'
-import { useRouter } from 'next/navigation';
 import React from 'react'
+import { useRouter } from 'next/navigation';
+import { useGetLocalStorage, useThemeMode } from '@/hooks/hooks';
+
 import { useTranslation } from 'react-i18next';
+
+import { Divider, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Switch, ThemeProvider } from '@mui/material'
+import { changeLanguage } from 'i18next';
 
 function Setting() {
   const theme = useThemeMode();
   const route = useRouter();
   const { t } = useTranslation();
+  
+  const { value: ln, setValue: setLn } = useGetLocalStorage('language', 'ja');
+  const { value: voiceRate, setValue: setVoiceRate } = useGetLocalStorage('rate', '100');
+  const { value: voiceType, setValue: setvoiceType } = useGetLocalStorage('voiceType', 'standard');
+  const { value: translationExpression, setValue: setTranslationExpression } = useGetLocalStorage('translationExpression', 'NULL');
 
-  const { language, setLanguage,
-          voiceType, setVoiceType, 
-          voiceRate, setVoiceRate, 
-          translationExpression, setTranslationExpression } = GrobalStore();
+  const handleLanguageChange = (event: SelectChangeEvent) => {
+    localStorage.setItem('language', event.target.value)
+    setLn(event.target.value);
+    changeLanguage(event.target.value);
+  }
 
   const handleVoiceTypeChange = () => {
-    if (voiceType === 'standard') {
-      setVoiceType('neural');
-      localStorage.setItem('voiceType', 'neural');
-    } else {
-      setVoiceType('standard');
-      localStorage.setItem('voiceType', 'standard');
-    }
+    (voiceType === 'standard') 
+    ? localStorage.setItem('voiceType', 'neural')
+    : localStorage.setItem('voiceType', 'standard')
+
+    setvoiceType(voiceType === 'standard' ? 'neural' : 'standard');
   };
 
   const handleVoiceRateChange = (event: SelectChangeEvent) => {
     localStorage.setItem('rate', event.target.value);
-    setVoiceRate(event.target.value as VoiceRate);
+    setVoiceRate(event.target.value);
   };
 
-  const handleExpressionLn = (e: SelectChangeEvent) => {
-    setTranslationExpression(e.target.value);
-    localStorage.setItem('translationExpression', e.target.value);
+  const handleExpressionLn = (event: SelectChangeEvent) => {
+    localStorage.setItem('translationExpression', event.target.value);
+    setTranslationExpression(event.target.value);
   };
   
   return (
@@ -61,9 +64,9 @@ function Setting() {
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    value={language}
+                    value={ln}
                     label={t('settings.language')}
-                    onChange={(event) => handleLanguageChange(event, setLanguage)}
+                    onChange={handleLanguageChange}
                   >
                     <MenuItem value={'ja'}>日本語</MenuItem>
                     <MenuItem value={'en'}>English</MenuItem>

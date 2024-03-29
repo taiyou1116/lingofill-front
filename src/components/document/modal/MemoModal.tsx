@@ -20,11 +20,13 @@ import "../../../app/globals.css";
 type TranslateModalProps = {
   selectedWordsIndexes: number[],
   selectedWords: string,
+  showCenterModal: boolean,
+  handleClose: () => void,
 }
 
 function TranslateModal(props: TranslateModalProps) {
-  const { selectedWordsIndexes, selectedWords } = props;
-  const { document, translationExpression, flipCenterModal } = GrobalStore();
+  const { selectedWordsIndexes, selectedWords, showCenterModal, handleClose } = props;
+  const { document, setSelectedWordsIndexes } = GrobalStore();
   const { t } = useTranslation();
   
   const [userInputMemo, setUserInputMemo] = useState('');
@@ -32,6 +34,8 @@ function TranslateModal(props: TranslateModalProps) {
 
   useEffect(() => {
     if (document === null) return;
+
+    const translationExpression = localStorage.getItem('translationExpression');
 
     const translateTextAsync = async () => {
       const translatedText = await getTranslation(selectedWords, 
@@ -52,8 +56,16 @@ function TranslateModal(props: TranslateModalProps) {
     translateTextAsync();
   }, [selectedWords])
 
+  const closeModal = () => {
+    setSelectedWordsIndexes([]);
+    handleClose();
+  }
+
   return (
-    <ModalCenter>
+    <ModalCenter
+      showCenterModal={showCenterModal}
+      closeModal={closeModal}
+    >
       <div className=' w-full'>
         <div className=' w-full flex flex-col justify-center items-center gap-3 dark:text-gray-300'>
           <div className=' flex gap-3 items-center justify-center'>
@@ -82,10 +94,13 @@ function TranslateModal(props: TranslateModalProps) {
       <div className=' flex gap-3 w-full items-center justify-center'>
         <SaveButton 
           userInputMemo={userInputMemo}
+          closeModal={closeModal}
         />
-        <DeleteBlockButton />
+        <DeleteBlockButton 
+          closeModal={closeModal}
+        />
         <Button
-          onClick={() => flipCenterModal()}
+          onClick={closeModal}
         >
           {t('document.modal.closeModal')}
         </Button>

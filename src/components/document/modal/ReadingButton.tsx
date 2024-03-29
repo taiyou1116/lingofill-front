@@ -14,11 +14,14 @@ type Props = {
 
 function ReadingButton(props: Props) {
   const { sentences, ln, shouldIncrement } = props;
-  const { setIsPlaying, setReadingNumber, voiceType, voiceRate } = GrobalStore();
+  const { setIsPlaying, setReadingNumber } = GrobalStore();
 
   const { t } = useTranslation();
 
   const listenTexts = async (selectedWords: string[]) => {
+    const voiceType = localStorage.getItem('voiceType') || 'standard';
+    const voiceRate = localStorage.getItem('voiceRate') || '100';
+    
     const voice = getVoiceForLanguage(ln, voiceType);
 
     await processAndSpeak(selectedWords, voice, () => {

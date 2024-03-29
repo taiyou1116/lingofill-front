@@ -8,9 +8,14 @@ import Button from '@/components/ui/Button';
 
 import { AutoFixHigh } from '@mui/icons-material';
 
-function DeleteBlockButton() {
+type Props = {
+  closeModal: () => void,
+}
+
+function DeleteBlockButton(props: Props) {
+  const { closeModal } = props;
   const { t } = useTranslation();
-  const { document, documents, setDocument, setDocuments, flipCenterModal, selectedWordsIndexes } = GrobalStore();
+  const { document, documents, setDocument, setDocuments, selectedWordsIndexes } = GrobalStore();
 
   const deleteBlock = () => {
     if (!document) return;
@@ -22,7 +27,7 @@ function DeleteBlockButton() {
     setDocuments(updatedDocuments);
     setDocument(updatedDocument);
 
-    flipCenterModal();
+    closeModal();
   }
 
   return (

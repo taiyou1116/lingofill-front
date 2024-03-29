@@ -53,9 +53,9 @@ function ListenAudio(props: Props) {
             <VolumeUp style={{ fontSize: 25 }} />
           </Tooltip>
         :
-        <Tooltip title='止める' className=' cursor-pointer' onClick={StopReading}>
-          <StopCircle style={{fontSize: 20}} className=' dark:text-gray-300' />
-        </Tooltip>
+          <Tooltip title='止める' className=' cursor-pointer' onClick={StopReading}>
+            <StopCircle style={{fontSize: 20}} className=' dark:text-gray-300' />
+          </Tooltip>
       }
     </div>
   )

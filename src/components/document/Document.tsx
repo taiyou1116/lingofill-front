@@ -18,10 +18,11 @@ import MoreSelectLanguage from "./header/MoreSelectLanguage";
 import ListenAudio from "./header/ListenAudio";
 
 import { Box, LinearProgress } from "@mui/material";
+import { SelectedMode } from "@/types/types";
 
 
 function DocumentComponent() {
-  const { document, selectedMode, isLoading } = GrobalStore();
+  const { document, isLoading } = GrobalStore();
 
   const { t } = useTranslation();
   const { width } = useWindowSize();
@@ -29,6 +30,7 @@ function DocumentComponent() {
   
   const [sentences, setSentences] = useState<string[]>([]);
   const [isSelectedReading, setIsSelectedReading] = useState<boolean>(false);
+  const [selectedMode, setSelectedMode] = useState<SelectedMode>('input');
 
   // documentが変更されたら'textを変更'
   useEffect(() => {
@@ -38,41 +40,33 @@ function DocumentComponent() {
   }, [document]);
 
   const renderContentByMode = () => {
-    if (document === null) {
+    if (document === null) return <RenderEmptyState message={t('document.chooseText')} />;
+    if (isLoading) return <DocumentLoading />;
+
+    if (selectedMode === 'edit') {
       return (
-        <RenderEmptyState message={t('document.chooseText')} />
-      )
-    }
-    if (isLoading) {
-      return (
-        <DocumentLoading />
-      )
-    }
-    switch (selectedMode) {
-      case 'edit':
-        return (
-          <EditDocument
-            localDocument={document}
-            sentences={sentences!}
-            isSelectedReading={isSelectedReading}
-          />
-        );
-      case 'input':
-        return (
-          <InputDocument />
-        );
+        <EditDocument
+          localDocument={document}
+          sentences={sentences!}
+          isSelectedReading={isSelectedReading}
+        />
+      );
+    } else {
+      return <InputDocument />;
     }
   }
 
   const showDocumentHeader = () => {
-    if (document === null) {
-      return;
-    }
+    if (document === null) return;
+    
     if (isSm) {
       return (
         <div className="fixed pt-10 mt-6 pb-3 flex flex-col w-full bg-gray-100/95 dark:bg-gray-800/95">
           <div className=" flex pt-5 px-3 items-center justify-between">
-            <ThreeWayToggle />
+            <ThreeWayToggle 
+              selectedMode={selectedMode}
+              setSelectedMode={setSelectedMode}
+            />
             <div className=" flex items-center gap-1">
               <MoreSelectLanguage />
               <ListenAudio 
@@ -89,7 +83,10 @@ function DocumentComponent() {
         <div className=" fixed pt-10 pb-3 w-full bg-gray-100/95 dark:bg-gray-800/95 mt-6 pr-10 flex items-center justify-between">
           <div className=" flex gap-5 items-center">
             <h1 className={` dark:text-gray-100 text-xxs  ${oswald.className}`}>{ truncateText(document?.title, 20)}</h1>
-            <ThreeWayToggle />
+            <ThreeWayToggle 
+              selectedMode={selectedMode}
+              setSelectedMode={setSelectedMode}
+            />
             <SelectLanguage />
             <div className=" flex gap-3 items-center">
               <ListenAudio 

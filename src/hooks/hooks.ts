@@ -1,7 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { createTheme, useMediaQuery } from "@mui/material";
+import { getCurrentUser } from 'aws-amplify/auth';
 
+/**システムに合わせたテーマモードモード @returns テーマ */
 export function useThemeMode() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
@@ -18,7 +20,7 @@ export function useThemeMode() {
   return theme;
 }
 
-/** 端末ごとにUIを変更する */
+/** 端末ごとにUIを変更する @returns ウィンドウサイズ */
 export function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
     width: 0,
@@ -42,6 +44,7 @@ export function useWindowSize() {
   return windowSize;
 }
 
+/** Modal開閉のhooks  */
 export function useModal() {
   const [open, setOpen] = useState(false);
 
@@ -54,4 +57,41 @@ export function useModal() {
   };
 
   return { open, handleOpen, handleClose };
+}
+
+/**localStorageに値があれば取得 なければデフォルトの値を格納後取得 */
+export function useGetLocalStorage(key: string, defaultValue: string) {
+  const [value, setValue] = useState<string>('');
+
+  useEffect(() => {
+    const item = localStorage.getItem(key);
+    if (item !== null) {
+      setValue(item);
+    } else {
+      localStorage.setItem(key, defaultValue);
+      setValue(defaultValue);
+    }
+  }, []);
+
+  return { value, setValue };
+}
+
+export function useGetUser() {
+
+  const [username, setUsername] = useState<string>('');
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const { username } = await getCurrentUser();
+        setUsername(username);
+      } catch (e) {
+        console.log(e);
+        setUsername('');
+      }
+    };
+    getUser();
+  }, []);
+
+  return username;
 }
