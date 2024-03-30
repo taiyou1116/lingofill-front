@@ -1,7 +1,10 @@
-import { Document } from '@/types/types'
-import { ModeEdit } from '@mui/icons-material'
+
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+
+import { ModeEdit } from '@mui/icons-material'
+import { Document } from '@/types/types'
+
 
 type Props = {
   documents: Document[],

@@ -76,6 +76,7 @@ export function useGetLocalStorage(key: string, defaultValue: string) {
   return { value, setValue };
 }
 
+/**ユーザー情報を返す, なければ空の情報を返す */
 export function useGetUser() {
 
   const [username, setUsername] = useState<string>('');
@@ -94,4 +95,11 @@ export function useGetUser() {
   }, []);
 
   return username;
+}
+
+/**useState(T)のカスタムフック @param initialValue 初期値 */
+export const useStateGeneric = <T>(initialValue: T) => {
+  const [value, setValue] = useState(initialValue);
+
+  return { value, setValue }
 }

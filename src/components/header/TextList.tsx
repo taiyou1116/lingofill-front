@@ -1,8 +1,10 @@
-import { GrobalStore } from '@/store/grobalStore';
-import { Reorder } from '@mui/icons-material'
-import { Tooltip } from '@mui/material'
+
 import React from 'react'
 import { useTranslation } from 'react-i18next';
+import { GrobalStore } from '@/store/grobalStore';
+
+import { Reorder } from '@mui/icons-material'
+import { Tooltip } from '@mui/material'
 
 function TextList() {
   const {flipShowSidebar} = GrobalStore();

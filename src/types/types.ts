@@ -20,7 +20,7 @@ export type TranslationObj = {
 };
 
 // モード
-export type SelectedMode = 'preview' | 'edit' | 'input';
+export type SelectedMode = 'edit' | 'input';
 
 // アプリ全体で共有する状態の型
 export type state = {
@@ -36,23 +36,19 @@ export type state = {
     // 選択中のドキュメント
     document: Document | null,
     setDocument: (document: Document | null) => void,
-
-    selectedWordsIndexes: number[],
-    setSelectedWordsIndexes: (selectedWordsIndexes: number[]) => void,
-
-    // サーバーからの取得状態
-    isLoading: boolean,
-    setIsLoading: (state: boolean) => void,
-
-    isPlaying: boolean,
-    setIsPlaying: (state: boolean) => void;
-
-    readingNumber: number,
-    setReadingNumber: (value: number | ((prevNumber: number) => number)) => void;
 }
 
 export type LanguageVoiceMap = {
     [languageCode: string]: string[];
 }
 
-export type UpdateFunction = (prevNumber: number) => number;
+export type DocumentState = {
+    document: Document | null;
+    setDocument: (document: Document) => void;
+};
+
+// useStateの型を汎用的にする
+export type UseStateGeneric<T> = {
+    value: T;
+    setValue: React.Dispatch<React.SetStateAction<T>>;
+};

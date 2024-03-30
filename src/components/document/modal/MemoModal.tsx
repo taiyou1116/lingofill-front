@@ -19,14 +19,17 @@ import "../../../app/globals.css";
 
 type TranslateModalProps = {
   selectedWordsIndexes: number[],
+  setSelectedWordsIndexes: (indexes: number[]) => void,
   selectedWords: string,
   showCenterModal: boolean,
   handleClose: () => void,
+  setPlaying: React.Dispatch<React.SetStateAction<boolean>>,
+  setReadingNumber: React.Dispatch<React.SetStateAction<number>>,
 }
 
 function TranslateModal(props: TranslateModalProps) {
-  const { selectedWordsIndexes, selectedWords, showCenterModal, handleClose } = props;
-  const { document, setSelectedWordsIndexes } = GrobalStore();
+  const { selectedWordsIndexes, setSelectedWordsIndexes, selectedWords, showCenterModal, handleClose, setPlaying, setReadingNumber } = props;
+  const { document } = GrobalStore();
   const { t } = useTranslation();
   
   const [userInputMemo, setUserInputMemo] = useState('');
@@ -74,6 +77,8 @@ function TranslateModal(props: TranslateModalProps) {
               ln={document!.language}
               shouldIncrement={false}
               words={selectedWords}
+              setIsPlaying={setPlaying}
+              setReadingNumber={setReadingNumber}
             />
             <ReadAndCopyContainer 
               sentences={splitTextToSegments(translatedWords, document?.translateLanguage)}
@@ -81,6 +86,8 @@ function TranslateModal(props: TranslateModalProps) {
               shouldIncrement={false}
               words={translatedWords}
               className='bg-gray-200 dark:bg-gray-900'
+              setIsPlaying={setPlaying}
+              setReadingNumber={setReadingNumber}
             />
           </div>
         </div>
@@ -95,9 +102,11 @@ function TranslateModal(props: TranslateModalProps) {
         <SaveButton 
           userInputMemo={userInputMemo}
           closeModal={closeModal}
+          selectedWordsIndexes={selectedWordsIndexes}
         />
         <DeleteBlockButton 
           closeModal={closeModal}
+          selectedWordsIndexes={selectedWordsIndexes}
         />
         <Button
           onClick={closeModal}

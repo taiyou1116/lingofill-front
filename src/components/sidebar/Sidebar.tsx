@@ -1,12 +1,15 @@
+
 "use client"
 
 import React, { useEffect, useState } from 'react';
 import { GrobalStore } from '@/store/grobalStore';
-import SidebarDocuments from './SidebarDocuments';
+
 import { getCurrentUser } from 'aws-amplify/auth';
 import { getTitles } from '@/utils/request';
-import { Skeleton, Typography } from '@mui/material';
+import SidebarDocuments from './SidebarDocuments';
 import CreateNewDocumentButton from './siderbarParent/CreateNewDocumentButton';
+
+import { Skeleton, Typography } from '@mui/material';
 
 function SidebarComponent() {
   const { showSidebar, flipShowSidebar, documents, setDocuments, username, setUsername } = GrobalStore(); 
@@ -14,6 +17,16 @@ function SidebarComponent() {
   const [createNewDocument, setCreateNewDocument] = useState<boolean>(false);
   const [documentLoading, setDocumentLoading] = useState<boolean>(false);
 
+  // tailwindcss classes
+  const sidebarBgClass = 
+    `fixed z-20 inset-0 bg-black bg-opacity-50 transition-opacity duration-300 
+    ${showSidebar ? "opacity-100" : "opacity-0 pointer-events-none"}`
+    ;
+  const sidebarClass = 
+    `fixed z-20 w-2/3 md:w-1/3 lg:w-1/5 top-0 left-0 h-full bg-white dark:bg-gray-800 transition-transform duration-300 transform 
+    ${showSidebar ? "translate-x-0" : "-translate-x-full"}`
+    ;
+  
   // documentsはsidebarで受け取るように変更
   useEffect(() => {
     const fetchData = async () => {
@@ -33,25 +46,12 @@ function SidebarComponent() {
 
   return (
     <div>
-      <div 
-        className={`fixed z-20 inset-0 
-                  bg-black bg-opacity-50 transition-opacity duration-300 
-                  ${showSidebar ? "opacity-100" : "opacity-0 pointer-events-none"}`}
-        onClick={() => flipShowSidebar()}
-      >
-      </div>
-      <div 
-        className={`fixed z-20 w-2/3 md:w-1/3 lg:w-1/5 top-0 left-0 h-full 
-                  bg-white dark:bg-gray-800 
-                    transition-transform duration-300 transform 
-                  ${showSidebar ? "translate-x-0" : "-translate-x-full"}`}
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className={sidebarBgClass} onClick={flipShowSidebar} />
+      <div className={sidebarClass} onClick={(e) => e.stopPropagation()} >
         <div className="flex flex-col gap-3">
           <CreateNewDocumentButton 
             setCreateNewDocument={setCreateNewDocument}
           />
-
           { documentLoading 
           ?
             <Typography variant="h3" className='px-3'>

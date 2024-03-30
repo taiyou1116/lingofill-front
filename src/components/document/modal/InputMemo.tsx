@@ -20,7 +20,12 @@ function InputMemo(props: Props) {
   const { userInputMemo, setUserInputMemo, selectedWords, ln } = props;
   const [ isGeneratingAIResponse, setIsGeneratingAIResponse ] = useState<boolean>(false);
   const { t } = useTranslation();
-  
+
+  const textareaClass = `
+    border p-1 h-full w-full resize-none rounded-md 
+    border-stone-900 dark:bg-gray-800 dark:border-gray-400 dark:text-gray-100`
+    ;
+
   const generateMemo = async () => {
     setIsGeneratingAIResponse(true);
     try {
@@ -57,11 +62,7 @@ function InputMemo(props: Props) {
       </div>
       <textarea 
         maxLength={1000}
-        className=' border p-1 h-full w-full resize-none rounded-md 
-                  border-stone-900 
-                  dark:bg-gray-800 
-                  dark:border-gray-400 
-                  dark:text-gray-100' 
+        className={textareaClass}
         value={userInputMemo}
         onChange={(e) => setUserInputMemo(e.target.value)}
       />

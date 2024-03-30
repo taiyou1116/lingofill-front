@@ -1,18 +1,19 @@
 
+import React, { useState } from 'react'
+import Link from 'next/link'
+
+import { useTranslation } from 'react-i18next'
+import Acount from './Acount'
+
 import { AccountCircle, Launch, Logout, Settings } from '@mui/icons-material'
 import { Divider, Menu, MenuItem, Tooltip } from '@mui/material'
-import Link from 'next/link'
-import React, { useState } from 'react'
-import Acount from './Acount'
-import { useTranslation } from 'react-i18next'
 
 function AcountMenu() {
 
   const { t } = useTranslation();
-  
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const openNewDoc = () => {
+  const openNewWindowDoc = () => {
     window.open('https://www.lingo-fill.com/doc', '_blank');
   }
 
@@ -44,7 +45,7 @@ function AcountMenu() {
             <Settings style={{fontSize: 20}} /> {t('header.setting')}
           </MenuItem>
         </Link>
-        <MenuItem onClick={openNewDoc} className=" flex items-center gap-1">
+        <MenuItem onClick={openNewWindowDoc} className=" flex items-center gap-1">
           <Launch style={{fontSize: 20}} /> {t('header.howToUse')}
         </MenuItem>
         <Divider variant="middle" className=" py-1"/>

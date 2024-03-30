@@ -18,12 +18,19 @@ type Props = {
 
 function SidebarDocuments(props: Props) {
   const { createNewDocument, setCreateNewDocument, documents, flipShowSidebar } = props;
-  const { username, setIsLoading, setDocument, setDocuments, document } = GrobalStore();
+  const { username, setDocument, setDocuments, document } = GrobalStore();
   const { t } = useTranslation();
 
   const [inputNameIndex, setInputNameIndex] = useState<number>(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const [input, setInput] = useState<string>('');
+
+  // tailwindcss classes
+  const sidebarDocumentClass = (index: number) =>
+    `border-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-500 dark:hover:bg-gray-900 
+    border-b-2 h-full w-full py-4 px-2 cursor-pointer duration-100 
+    ${ document?.sortKey === documents[index].sortKey ?? " border-2 border-gray-900 dark:border-gray-500"}`
+    ;
 
   useEffect(() => {
     if (inputNameIndex !== -1 && inputRef.current) {
@@ -40,15 +47,26 @@ function SidebarDocuments(props: Props) {
     flipShowSidebar();
     // 1回目だけサーバーから取得 -> textがないとき
     if (documents[index].text !== '' || documents[index].isNew === true) {
-      setIsLoading(false);
       setDocument(documents[index]);
       return;
     }
-    setIsLoading(true);
 
     try {
+      const emptyDocument: Document = {
+        sortKey: '',
+        title: '',
+        text: '',
+        translations: [],
+        language: '',
+        translateLanguage: '',
+        updatedAt: '',
+        isNew: false,
+        isSynced: false,
+        isDelete: false,
+      }
+      setDocument(emptyDocument);
+
       const data = await getText(username, documents[index].sortKey);
-      setIsLoading(false);
       const updateDocuments = documents.map((document) => {
         if (document.sortKey === data.sortKey) {
           return {
@@ -111,9 +129,7 @@ function SidebarDocuments(props: Props) {
             <div 
               key={index} 
               onClick={() => openSentence(index)}
-              className={`border-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-500 dark:hover:bg-gray-900 
-                            border-b-2 h-full w-full py-4 px-2 cursor-pointer duration-100 
-                            ${ document?.sortKey === documents[index].sortKey ? " border-2 border-gray-900 dark:border-gray-500" : ""}`}
+              className={sidebarDocumentClass(index)}
             >
               { inputNameIndex === index
               ?

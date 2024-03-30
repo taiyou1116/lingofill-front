@@ -1,6 +1,7 @@
-import { Document } from '@/types/types';
+
 import React from 'react'
 import { useTranslation } from 'react-i18next';
+import { Document } from '@/types/types';
 
 type Props = {
   documents: Document[],

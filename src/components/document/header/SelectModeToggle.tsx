@@ -7,15 +7,15 @@ import { useThemeMode, useWindowSize } from '@/hooks/hooks';
 
 import { TextSnippet, Translate } from '@mui/icons-material';
 import { ThemeProvider, ToggleButton, ToggleButtonGroup } from '@mui/material';
-import { SelectedMode } from '@/types/types';
+import { SelectedMode, UseStateGeneric } from '@/types/types';
 
 type Props = {
-  selectedMode: SelectedMode;
-  setSelectedMode: React.Dispatch<React.SetStateAction<SelectedMode>>;
+  selectModeState: UseStateGeneric<SelectedMode>,
 };
 
-function ThreeWayToggle(props: Props) {
-  const { selectedMode, setSelectedMode } = props;
+function SelectModeToggle(props: Props) {
+  const { selectModeState } = props;
+  const { value: selectedMode, setValue: setSelectedMode } = selectModeState;
   const { t } = useTranslation();
   const theme = useThemeMode();
 
@@ -74,4 +74,4 @@ function ThreeWayToggle(props: Props) {
   );
 }
 
-export default React.memo(ThreeWayToggle);
+export default React.memo(SelectModeToggle);

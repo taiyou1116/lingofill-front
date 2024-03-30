@@ -17,6 +17,7 @@ type Props = {
 function DeleteTextButton(props: Props) {
   const { username, documents, setDocument,setDocuments, index, document, handleClose } = props;
   const { t } = useTranslation();
+  
   const deleteTextButton = async (index: number) => {
     try {
       await deleteText(username, documents[index].sortKey);

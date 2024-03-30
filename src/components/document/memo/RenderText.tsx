@@ -6,7 +6,7 @@ import { GrobalStore } from "@/store/grobalStore";
 import { judgeSpaceLanguage } from "@/utils/textUtils";
 
 import { Tooltip } from "@mui/material";
-import { TranslationObj } from "@/types/types";
+import { Document, TranslationObj } from "@/types/types";
 
 type EventHandlers = {
   handleClick: (index: number) => void;
@@ -25,11 +25,33 @@ type RenderTextProps = {
   words: string[],
   listenText: (sentenceIndex: number) => void,
   showMemoText: (translation: TranslationObj) => string,
+  selectedWordsIndexes: number[],
+  readingNumber: number,
 }
 
 const RenderText = (props: RenderTextProps) => {
-  const { sentences, eventHandlers, listenText, showMemoText } = props;
-  const { readingNumber, document, selectedWordsIndexes } = GrobalStore();
+  const { sentences, eventHandlers, listenText, showMemoText, selectedWordsIndexes, readingNumber } = props;
+  const { document } = GrobalStore();
+
+  const textBgClass = `
+    overflow-y-auto overflow-x-hidden max-h-[calc(100vh-180px)] 
+    p-3 rounded-md bg-white dark:bg-slate-600 dark:text-slate-300`
+    ;
+
+  const memoClass = (captureIndex: number) => `
+    select-none px-1 mx-0.5 cursor-pointer rounded-md
+    ${selectedWordsIndexes.includes(captureIndex) 
+    ? "bg-blue-300 dark:bg-blue-500" 
+    : "bg-slate-200 dark:bg-slate-800/50"}`
+    ;
+
+  const textClass = (document: Document, captureIndex: number) => `
+    select-none cursor-pointer
+    ${document.language !== 'ja' && document.language !== 'zh' ? 'p-0.5' : ''} 
+    ${selectedWordsIndexes.includes(captureIndex) 
+    ? "bg-blue-300 dark:bg-blue-500" 
+    : "bg-transparent"}`
+    ;
 
   let globalIndex = 0;
   let newLine = '\n';
@@ -43,12 +65,14 @@ const RenderText = (props: RenderTextProps) => {
     }
 
     // 1文の中のwords
-    const wordsOfSentence = document.language && judgeSpaceLanguage(document.language) ? sentence.split(' ') : sentence.split('');
+    const wordsOfSentence = document.language && judgeSpaceLanguage(document.language) 
+      ? sentence.split(' ') 
+      : sentence.split('');
 
     return (
       <React.Fragment key={sentenceIndex}>
         <span
-          className={`break-all ${sentenceIndex === readingNumber ? ' text-yellow-600 dark:text-yellow-300' : ''}`}
+          className={`break-all ${sentenceIndex === readingNumber ?? ' text-yellow-600 dark:text-yellow-300'}`}
           onMouseDown={eventHandlers.handleMouseDown}
           onMouseUp={eventHandlers.handleMouseUp}
           onClick={() => listenText(sentenceIndex)}
@@ -65,11 +89,7 @@ const RenderText = (props: RenderTextProps) => {
                   onClick={() => eventHandlers.handleClick(captureIndex)}
                   onMouseMove={() => eventHandlers.handleMouseMove(captureIndex)}
                   onTouchMove={() => eventHandlers.handleMouseMove(captureIndex)}
-                  className={`select-none px-1 mx-0.5 cursor-pointer rounded-md
-                    ${selectedWordsIndexes.includes(captureIndex) 
-                      ? "bg-blue-300 dark:bg-blue-500" 
-                      : "bg-slate-200 dark:bg-slate-800/50"}
-                  `}
+                  className={memoClass(captureIndex)}
                 >
                   <Tooltip
                     title={<div className={`text-sm ${m_plus_rounded_1c.className}`}
@@ -84,17 +104,13 @@ const RenderText = (props: RenderTextProps) => {
               return (
                 <span
                   key={captureIndex}
-                  className={`select-none cursor-pointer
-                              ${document.language !== 'ja' && document.language !== 'zh' ? 'p-0.5' : ''} 
-                              ${selectedWordsIndexes.includes(captureIndex) 
-                                ? "bg-blue-300 dark:bg-blue-500" 
-                                : "bg-transparent"}`}
+                  className={textClass(document, captureIndex)}
                   onClick={() => eventHandlers.handleClick(captureIndex)}
                   onMouseMove={() => eventHandlers.handleMouseMove(captureIndex)}
                   onTouchStart={() => eventHandlers.handleTouchStart(captureIndex)}
-                  data-index={captureIndex}
                   onTouchMove={eventHandlers.handleTouchMove}
                   onTouchEnd={eventHandlers.handleTouchEnd}
+                  data-index={captureIndex}
                 >
                   {word}
                 </span>
@@ -109,10 +125,7 @@ const RenderText = (props: RenderTextProps) => {
 
   return (
     <div className=" pt-28">
-      <div 
-        className={`overflow-y-auto overflow-x-hidden max-h-[calc(100vh-180px)] p-3 rounded-md 
-                  bg-white dark:bg-slate-600 dark:text-slate-300`}
-      >
+      <div className={textBgClass}>
         {sentences.map((sentence, index) => renderSentence(sentence, index))}
       </div>
     </div>

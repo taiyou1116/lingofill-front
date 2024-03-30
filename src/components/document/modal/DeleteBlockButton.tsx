@@ -10,12 +10,13 @@ import { AutoFixHigh } from '@mui/icons-material';
 
 type Props = {
   closeModal: () => void,
+  selectedWordsIndexes: number[],
 }
 
 function DeleteBlockButton(props: Props) {
-  const { closeModal } = props;
+  const { closeModal, selectedWordsIndexes } = props;
   const { t } = useTranslation();
-  const { document, documents, setDocument, setDocuments, selectedWordsIndexes } = GrobalStore();
+  const { document, documents, setDocument, setDocuments } = GrobalStore();
 
   const deleteBlock = () => {
     if (!document) return;

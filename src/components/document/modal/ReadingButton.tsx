@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { GrobalStore } from '@/store/grobalStore';
 import { useTranslation } from 'react-i18next';
 import { getVoiceForLanguage, processAndSpeak } from '@/utils/audioUtils';
+
 import { Tooltip } from '@mui/material'
 import { VolumeUp } from '@mui/icons-material'
 
@@ -10,11 +10,12 @@ type Props = {
   sentences: string[],
   ln: string,
   shouldIncrement: boolean,
+  setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>,
+  setReadingNumber: React.Dispatch<React.SetStateAction<number>>,
 }
 
 function ReadingButton(props: Props) {
-  const { sentences, ln, shouldIncrement } = props;
-  const { setIsPlaying, setReadingNumber } = GrobalStore();
+  const { sentences, ln, shouldIncrement, setIsPlaying, setReadingNumber } = props;
 
   const { t } = useTranslation();
 

@@ -10,11 +10,18 @@ import { WarningOutlined } from '@mui/icons-material';
 
 function InputDocument() {
   const { document, setDocument, documents, setDocuments } = GrobalStore();
-
   const { t } = useTranslation();
+
   const [inputText, setInputText] = useState(document!.text);
 
-  // デバウンスされた関数を作成
+  useEffect(() => {
+    updateDocumentsDebounced();
+
+    return () => {
+      updateDocumentsDebounced.cancel();
+    };
+  }, [inputText]);
+  
   const updateDocumentsDebounced = debounce(() => {
     if (!document) return;
 
@@ -30,14 +37,6 @@ function InputDocument() {
     );
     setDocuments(updatedDocuments);
   }, 1000);
-
-  useEffect(() => {
-    updateDocumentsDebounced();
-
-    return () => {
-      updateDocumentsDebounced.cancel();
-    };
-  }, [inputText]);
   
   const inputOriginalText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputText(e.target.value);

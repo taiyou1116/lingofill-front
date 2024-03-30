@@ -1,49 +1,31 @@
-import { useStore } from "./store";
 
+import { useStore } from "./store";
 
 export const GrobalStore = () => {
   const { 
+    username, setUsername, 
+    showSidebar, flipShowSidebar, 
     document, setDocument, 
     documents, setDocuments, 
-    showSidebar, flipShowSidebar, 
-    selectedWordsIndexes, setSelectedWordsIndexes,
-    isLoading, setIsLoading, 
-    username, setUsername, 
-    isPlaying, setIsPlaying, 
-    readingNumber, setReadingNumber,
+
   } = useStore(state => ({
-    document: state.document,
-    setDocument: state.setDocument,
-    documents: state.documents,
-    setDocuments: state.setDocuments,
+    username: state.username,
+    setUsername: state.setUsername,
 
     showSidebar: state.showSidebar,
     flipShowSidebar: state.flipShowSidebar,
 
-    selectedWordsIndexes: state.selectedWordsIndexes,
-    setSelectedWordsIndexes: state.setSelectedWordsIndexes,
-
-    isLoading: state.isLoading,
-    setIsLoading: state.setIsLoading,
-
-    username: state.username,
-    setUsername: state.setUsername,
-
-    isPlaying: state.isPlaying,
-    setIsPlaying: state.setIsPlaying,
-
-    readingNumber: state.readingNumber,
-    setReadingNumber: state.setReadingNumber,
+    document: state.document,
+    setDocument: state.setDocument,
+    
+    documents: state.documents,
+    setDocuments: state.setDocuments,
   }));
 
   return { 
+    username, setUsername, 
+    showSidebar, flipShowSidebar, 
     document, setDocument, 
     documents, setDocuments, 
-    showSidebar, flipShowSidebar, 
-    selectedWordsIndexes, setSelectedWordsIndexes,
-    isLoading, setIsLoading, 
-    username, setUsername, 
-    isPlaying, setIsPlaying, 
-    readingNumber, setReadingNumber,
   };
 }

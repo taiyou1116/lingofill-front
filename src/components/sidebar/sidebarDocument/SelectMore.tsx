@@ -15,10 +15,10 @@ type Props = {
 
 function SelectMore(props: Props) {
   const { index, setInput, setInputNameIndex } = props;
-
   const { t } = useTranslation();
   const { username, setDocument, setDocuments, document, documents } = GrobalStore();
   const theme = useThemeMode();
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [activeMenuIndex, setActiveMenuIndex] = useState<null | number>(null);
 

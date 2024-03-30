@@ -1,13 +1,12 @@
 
 import React, { useEffect, useRef, useState } from "react";
-import { GrobalStore } from "@/store/grobalStore";
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 import { getVoiceForLanguage, processAndSpeak } from "@/utils/audioUtils";
 import { judgeSpaceLanguage, returnTextFromLn } from "@/utils/textUtils";
 import RenderText from "./memo/RenderText";
 
-import { Document, TranslationObj } from "@/types/types";
+import { Document, TranslationObj, UseStateGeneric } from "@/types/types";
 import MemoModal from "./modal/MemoModal";
 import { useModal } from "@/hooks/hooks";
 
@@ -15,24 +14,30 @@ type Props = {
   localDocument: Document | null,
   sentences: string[],
   isSelectedReading: boolean,
+  setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>,
+  readingNumberState: UseStateGeneric<number>,
 }
 
+// handleMouseMoveの処理見直す
+
 function EditDocument(props: Props) {
-  const { localDocument, sentences, isSelectedReading } = props;
-  const { 
-          selectedWordsIndexes, setSelectedWordsIndexes, 
-          setReadingNumber, setIsPlaying } = GrobalStore();
+  const { localDocument, sentences, isSelectedReading, setIsPlaying, readingNumberState } = props;
+  const { open: showCenterModal, handleOpen, handleClose } = useModal();
+  const { value: readingNumber, setValue: setReadingNumber  } = readingNumberState;
 
   const [words, setWords] = useState<string[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const [selectedWords, setSelectedWords] = useState('hello');
+
+  // マウス処理
   const [startDragIndex, setStartDragIndex] = useState<number | null>(null);
   const [ oldIndex, setOldIndex ] = useState<number | null>(null);
-  const [startNumber, setStartNumber] = useState<number>(-1);
+
+  // タッチ処理
   const touchIndexRef = useRef<number | null>(null);
   const [timerId, setTimerId] = useState<NodeJS.Timeout | null>(null);
 
-  const { open: showCenterModal, handleOpen, handleClose  } = useModal();
+  const [selectedWordsIndexes, setSelectedWordsIndexes] = useState<number[]>([]);
   
   // 単語用 -> sentencesからさらに分割
   useEffect(() => {
@@ -133,7 +138,7 @@ function EditDocument(props: Props) {
         disableBodyScroll(document.body);
 
         handleMouseDown();
-        setStartNumber(index);
+        setStartDragIndex(index);
         setSelectedWordsIndexes([index]);
       }
     }, 500);
@@ -152,7 +157,7 @@ function EditDocument(props: Props) {
     if (elementUnderTouch && elementUnderTouch.hasAttribute('data-index')) {
       const newIndex = parseInt(elementUnderTouch.getAttribute('data-index')!, 10);
 
-      if (newIndex === startNumber) {
+      if (newIndex === startDragIndex) {
         touchIndexRef.current = newIndex;
         handleMouseMove(newIndex);
       }
@@ -209,7 +214,6 @@ function EditDocument(props: Props) {
   return (
     <> 
       <RenderText
-        sentences={sentences}
         eventHandlers={{
           handleClick,
           handleMouseMove,
@@ -219,16 +223,22 @@ function EditDocument(props: Props) {
           handleTouchMove,
           handleTouchEnd,
         }}
+        sentences={sentences}
         isSelectedReading={isSelectedReading}
         words={words}
         listenText={listenText}
         showMemoText={showMemoText}
+        selectedWordsIndexes={selectedWordsIndexes}
+        readingNumber={readingNumber}
       />
       <MemoModal 
         selectedWordsIndexes={selectedWordsIndexes} 
+        setSelectedWordsIndexes={setSelectedWordsIndexes}
         selectedWords={selectedWords} 
         showCenterModal={showCenterModal}
         handleClose={handleClose}
+        setPlaying={setIsPlaying}
+        setReadingNumber={setReadingNumber}
       />
     </>
   );

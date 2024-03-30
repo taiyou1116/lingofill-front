@@ -1,23 +1,28 @@
 
 import React from 'react'
 import { useTranslation } from 'react-i18next';
-import { GrobalStore } from '@/store/grobalStore';
-
 import { stopAudio } from '@/utils/audioUtils';
 
 import { StopCircle, VolumeMute, VolumeUp } from '@mui/icons-material'
 import { Tooltip } from '@mui/material'
-
+import { UseStateGeneric } from '@/types/types';
 
 type Props = {
-  isSelectedReading: boolean,
-  setIsSelectedReading: React.Dispatch<React.SetStateAction<boolean>>,
+  isSelectedReadingState: UseStateGeneric<boolean>,
+  isPlayingState: UseStateGeneric<boolean>,
+  setReadingNumber: React.Dispatch<React.SetStateAction<number>>
 }
 
 function ListenAudio(props: Props) {
-  const { isSelectedReading, setIsSelectedReading } = props;
-  const { isPlaying, setIsPlaying, setReadingNumber } = GrobalStore();
+  const { isSelectedReadingState, isPlayingState, setReadingNumber } = props;
+  const { value: isSelectedReading, setValue: setIsSelectedReading } = isSelectedReadingState;
+  const { value: isPlaying, setValue: setIsPlaying } = isPlayingState;
   const { t } = useTranslation();
+
+  const TooltipClass = ` 
+    cursor-pointer p-1 hover:rounded hover:bg-gray-200 
+    dark:text-gray-300 dark:hover:bg-gray-800 `
+    ;
   
   const StopReading = () => {
     setIsPlaying(false);
@@ -31,10 +36,7 @@ function ListenAudio(props: Props) {
       ?
         <Tooltip
           title={t('document.header.aloud.onAloud')} 
-          className=" cursor-pointer p-1 hover:rounded 
-                    hover:bg-gray-200 
-                    dark:text-gray-300 
-                    dark:hover:bg-gray-800" 
+          className={TooltipClass}
           onClick={() => setIsSelectedReading(true)}
         >
           <VolumeMute style={{ fontSize: 25 }} />
@@ -44,10 +46,7 @@ function ListenAudio(props: Props) {
         ? 
           <Tooltip 
             title={t('document.header.aloud.offAloud')} 
-            className=" cursor-pointer p-1 rounded-md
-                      bg-gray-300
-                      dark:text-gray-300 
-                      dark:bg-gray-600" 
+            className={TooltipClass}
             onClick={() => setIsSelectedReading(false)}
           >
             <VolumeUp style={{ fontSize: 25 }} />
