@@ -8,19 +8,15 @@ import { judgeSpaceLanguage } from "@/utils/textUtils";
 import { Tooltip } from "@mui/material";
 import { Document, TranslationObj } from "@/types/types";
 
-type EventHandlers = {
-  handleClick: (index: number) => void;
-  handleMouseMove: (index: number) => void;
-  handleMouseDown: () => void;
-  handleMouseUp: () => void;
+type RenderTextProps = {
+  handleClick: (index: number) => void,
+  handleMouseDown: () => void,
+  handleMouseMove: (index: number) => void,
+  handleMouseUp: () => void,
   handleTouchStart: (index: number) => void,
   handleTouchMove: (e: React.TouchEvent<HTMLSpanElement>) => void,
   handleTouchEnd: () => void,
-}
-
-type RenderTextProps = {
   sentences: string[];
-  eventHandlers: EventHandlers;
   isSelectedReading: boolean,
   words: string[],
   listenText: (sentenceIndex: number) => void,
@@ -30,7 +26,7 @@ type RenderTextProps = {
 }
 
 const RenderText = (props: RenderTextProps) => {
-  const { sentences, eventHandlers, listenText, showMemoText, selectedWordsIndexes, readingNumber } = props;
+  const { handleClick, handleMouseDown, handleMouseMove, handleMouseUp, handleTouchStart, handleTouchMove, handleTouchEnd, sentences, listenText, showMemoText, selectedWordsIndexes, readingNumber } = props;
   const { document } = GrobalStore();
 
   const textBgClass = `
@@ -72,9 +68,9 @@ const RenderText = (props: RenderTextProps) => {
     return (
       <React.Fragment key={sentenceIndex}>
         <span
-          className={`break-all ${sentenceIndex === readingNumber ?? ' text-yellow-600 dark:text-yellow-300'}`}
-          onMouseDown={eventHandlers.handleMouseDown}
-          onMouseUp={eventHandlers.handleMouseUp}
+          className={`break-all ${sentenceIndex === readingNumber ? ' text-yellow-600 dark:text-yellow-300' : ''}`}
+          onMouseDown={handleMouseDown}
+          onMouseUp={handleMouseUp}
           onClick={() => listenText(sentenceIndex)}
         >
           {wordsOfSentence.map((word) => {
@@ -86,9 +82,9 @@ const RenderText = (props: RenderTextProps) => {
               return (
                 <span
                   key={captureIndex}
-                  onClick={() => eventHandlers.handleClick(captureIndex)}
-                  onMouseMove={() => eventHandlers.handleMouseMove(captureIndex)}
-                  onTouchMove={() => eventHandlers.handleMouseMove(captureIndex)}
+                  onClick={() => handleClick(captureIndex)}
+                  onMouseMove={() => handleMouseMove(captureIndex)}
+                  onTouchMove={() =>handleMouseMove(captureIndex)}
                   className={memoClass(captureIndex)}
                 >
                   <Tooltip
@@ -105,11 +101,11 @@ const RenderText = (props: RenderTextProps) => {
                 <span
                   key={captureIndex}
                   className={textClass(document, captureIndex)}
-                  onClick={() => eventHandlers.handleClick(captureIndex)}
-                  onMouseMove={() => eventHandlers.handleMouseMove(captureIndex)}
-                  onTouchStart={() => eventHandlers.handleTouchStart(captureIndex)}
-                  onTouchMove={eventHandlers.handleTouchMove}
-                  onTouchEnd={eventHandlers.handleTouchEnd}
+                  onClick={() => handleClick(captureIndex)}
+                  onMouseMove={() => handleMouseMove(captureIndex)}
+                  onTouchStart={() => handleTouchStart(captureIndex)}
+                  onTouchMove={handleTouchMove}
+                  onTouchEnd={handleTouchEnd}
                   data-index={captureIndex}
                 >
                   {word}
@@ -123,10 +119,12 @@ const RenderText = (props: RenderTextProps) => {
     );
   };
 
+  const renderText = sentences.map((sentence, index) => renderSentence(sentence, index));
+
   return (
     <div className=" pt-28">
       <div className={textBgClass}>
-        {sentences.map((sentence, index) => renderSentence(sentence, index))}
+        {renderText}
       </div>
     </div>
   );

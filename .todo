@@ -1,39 +1,18 @@
-amplify-auth -> https://docs.amplify.aws/javascript/build-a-backend/auth/manage-user-session/
 
-https://main.d5yypxcoba5g4.amplifyapp.com/
+学び
+- usecallback, useMemoの理解
+- lambdaがどうなっているのか確認
+- Bufferの理解
 
-疲れた時: 
-ライブラリ作成
-- 言語系の何か
-
-Inputに改行合わせる
-- 理解する
-
-EditDocument後回しにした
-selectUILanguage作成
-
-usecallback, useMemoの理解
-マウスイベントをフックスにできるか
--> RenderTextのメモ化 & フックス化
-dndkit
-
-最低限の要素
-- 編集済みのテキストのinput
-- apiの回数制限
-- 課金 or 寄付
-- web広告
+追加要素
+- selectUILanguage作成
+- dndkit
+- 差分(変更した項目のみ)を送信
 
 気になるところ
 - Header操作が遅い
 
-実装
-- ロシア語のneuralエラー
-- 差分(変更した項目のみ)を送信
-- 下線
-- lambdaがどうなっているのか確認
-- 音声のネットワークエラー
-- Bufferの理解
-
 バグ
-テキスト作成 -> テキスト入力 -> タイトル編集
+- ロシア語のneuralエラー
+- テキスト作成 -> テキスト入力 -> タイトル編集
 Warning: SidebarDocuments contains an input of type text with both value and defaultValue props. Input elements must be either controlled or uncontrolled (specify either the value prop, or the defaultValue prop, but not both). Decide between using a controlled or uncontrolled input element and remove one of these props. More info: 
